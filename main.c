@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 22:24:15 by taekang           #+#    #+#             */
-/*   Updated: 2020/10/05 04:42:00 by taekang          ###   ########.fr       */
+/*   Updated: 2020/10/06 04:11:55 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,24 @@ void	ft_strchr_test(int argc, const char *argv[])
 	}
 }
 
+void	ft_strnstr_test(int argc, const char *argv[])
+{
+	printf("############# ft_stnstr_test ###################\n");
+
+	if (argc < 3)
+		printf("strnstr please call .. => [ strnstr haystack needle ]");
+
+		char *self = ft_strnstr(argv[2], argv[3], 5);
+		char *lib = strnstr(argv[2], argv[3], 5);
+		char *result = "true";
+
+		if (self != lib)
+			result = "fail";
+
+		printf("haystack : [ %s ], needle : [ %s ],  self =>  %s , lib => %s, success : %s\n", argv[2], argv[3],  self, lib, result);
+
+}
+
 int		main(int argc, const char *argv[])
 {
 
@@ -146,12 +164,17 @@ int		main(int argc, const char *argv[])
 		{
 			ft_strchr_test(argc, argv);
 		}
+		else if (strcmp(call, "strnstr") == 0)
+		{
+			ft_strnstr_test(argc, argv);
+		}
 		else if (strcmp(call, "all") == 0)
 		{
 			ft_strlen_test(argc, argv);
 			ft_strlcat_test(argc, argv);			
 			ft_strlcpy_test(argc, argv);
 			ft_strchr_test(argc, argv);
+			ft_strnstr_test(argc, argv);
 		}
 		else {
 			printf("please call func\n");
