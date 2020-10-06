@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 22:24:15 by taekang           #+#    #+#             */
-/*   Updated: 2020/10/06 04:11:55 by taekang          ###   ########.fr       */
+/*   Updated: 2020/10/06 08:14:56 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,6 +138,43 @@ void	ft_strnstr_test(int argc, const char *argv[])
 
 }
 
+void	ft_strncmp_test(int argc, const char *argv[])
+{
+	printf("############# ft_stncmp_test ###################\n");
+
+	if (argc < 3)
+		printf("strncmp please call .. => [ strnstr haystack needle ]");
+
+		int self = ft_strncmp(argv[2], argv[3], 5);
+		int lib = strncmp(argv[2], argv[3], 5);
+		char *result = "true";
+
+		if (self != lib)
+			result = "fail";
+
+		printf("s1 : [ %s ], s2 : [ %s ],  self =>  %d , lib => %d, success : %s\n", argv[2], argv[3],  self, lib, result);
+
+}
+
+void	ft_atoi_test(int argc, const char *argv[])
+{
+	printf("############# ft_atoi_test ###################\n");
+
+
+	for (int i = 2; i < argc; i++) {
+	
+		int	self = ft_atoi(argv[i]);
+		int lib = atoi(argv[i]);
+		char *result = "true";
+
+		if (self != lib)
+			result = "fail";
+
+		printf("word : [ %s ], self =>  %d , lib => %d, success : %s\n", argv[i], self, lib, result);
+
+	}
+}
+
 int		main(int argc, const char *argv[])
 {
 
@@ -168,6 +205,14 @@ int		main(int argc, const char *argv[])
 		{
 			ft_strnstr_test(argc, argv);
 		}
+		else if (strcmp(call, "strncmp") == 0)
+		{
+			ft_strncmp_test(argc, argv);
+		}
+		else if (strcmp(call, "atoi") == 0)
+		{
+			ft_atoi_test(argc, argv);
+		}
 		else if (strcmp(call, "all") == 0)
 		{
 			ft_strlen_test(argc, argv);
@@ -175,9 +220,11 @@ int		main(int argc, const char *argv[])
 			ft_strlcpy_test(argc, argv);
 			ft_strchr_test(argc, argv);
 			ft_strnstr_test(argc, argv);
+			ft_strncmp_test(argc, argv);
+			ft_atoi_test(argc, argv);
 		}
 		else {
-			printf("please call func\n");
+			printf("Please Call Func..Or Check Func Name !! \n");
 		}
 	}
 	
