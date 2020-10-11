@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 22:12:31 by taekang           #+#    #+#             */
-/*   Updated: 2020/10/08 02:17:10 by taekang          ###   ########.fr       */
+/*   Updated: 2020/10/11 14:41:19 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,7 @@ void	*ft_memmove(void *dst, const void *src, size_t len);
 void	*ft_memchr(const void *s, int c, size_t n);
 int		ft_memcmp(const void *s1, const void *s2, size_t n);
 char	*ft_strrchr(const char *s, int c);
+char	*ft_substr(char const *s, unsigned int start, size_t len);
+char	*ft_strjoin(char const *s1, char const *s2);
 
 #endif

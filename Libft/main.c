@@ -5,10 +5,11 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: taekang <taekang@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/28 22:24:15 by taekang           #+#    #+#             */
-/*   Updated: 2020/10/06 08:14:56 by taekang          ###   ########.fr       */
+/*   Created: 2020/10/11 13:13:20 by taekang           #+#    #+#             */
+/*   Updated: 2020/10/11 14:43:57 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include <stdlib.h>
 #include <string.h>
@@ -87,14 +88,15 @@ void	ft_strlcpy_test(int argc, const char *argv[])
 	printf("############# ft_strlcpy_test ###################\n");
 	for (int i = 2; i < argc; i++) {
 	
-		size_t self = ft_strlcpy(dest, argv[i], 5);
-		size_t lib = strlcpy(dest2, argv[i], 5);
+		size_t size = 5;
+		size_t self = ft_strlcpy(dest, argv[i], size);
+		size_t lib = strlcpy(dest2, argv[i], size);
 		char *result = "true";
 
 		if (self != lib)
 			result = "fail";
 
-		printf("src : [ %s ], result : [ %s ],  self =>  %zu , lib => %zu, success : %s\n", argv[i], dest, self, lib, result);
+		printf("src : [ %s ], result : [ %s ], size : [ %zu ],  self =>  %zu , lib => %zu, success : %s\n", argv[i], dest2, size, self, lib, result);
 
 	}
 
@@ -175,6 +177,33 @@ void	ft_atoi_test(int argc, const char *argv[])
 	}
 }
 
+void	ft_substr_test(int argc, const char *argv[])
+{
+	if (argc < 4) {
+		printf("ft_substr please call => ./a.out [src start len]\n");
+		return ;
+	}
+	
+	printf("############# ft_substr_test ###################\n");
+	
+		unsigned int start = atoi(argv[3]);
+		size_t len = atoi(argv[4]);
+	//	size_t len = 5;	
+		char *result = ft_substr(argv[2], start, len);
+		printf("ft_substr(%s, %d, %zu) : %s\n", argv[1], start, len, result);
+}
+
+void	ft_strjoin_test(int argc, const char *argv[])
+{
+	if(argc < 4) { 
+		printf("ft_strjoin pleas call => ./a.out [s1 s2]\n");
+		return ;
+	}
+
+	char *result = ft_strjoin(argv[2], argv[3]);
+	printf("s1 : [ %s ], s2 : [ %s ], result : [ %s ]\n", argv[2] , argv[3], result);
+}
+
 int		main(int argc, const char *argv[])
 {
 
@@ -212,6 +241,14 @@ int		main(int argc, const char *argv[])
 		else if (strcmp(call, "atoi") == 0)
 		{
 			ft_atoi_test(argc, argv);
+		}
+		else if (strcmp(call, "substr") == 0)
+		{
+			ft_substr_test(argc, argv);
+		}
+		else if (strcmp(call, "strjoin") == 0)
+		{
+			ft_strjoin_test(argc, argv);
 		}
 		else if (strcmp(call, "all") == 0)
 		{
