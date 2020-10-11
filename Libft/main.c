@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/11 13:13:20 by taekang           #+#    #+#             */
-/*   Updated: 2020/10/11 14:43:57 by taekang          ###   ########.fr       */
+/*   Updated: 2020/10/11 15:45:22 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,11 +199,23 @@ void	ft_strjoin_test(int argc, const char *argv[])
 		printf("ft_strjoin pleas call => ./a.out [s1 s2]\n");
 		return ;
 	}
+	printf("############# ft_strjoin_test ###################\n");
 
 	char *result = ft_strjoin(argv[2], argv[3]);
 	printf("s1 : [ %s ], s2 : [ %s ], result : [ %s ]\n", argv[2] , argv[3], result);
 }
 
+void	ft_strtrim_test(int argc, const char *argv[])
+{
+	if(argc < 4) { 
+		printf("ft_strtrim pleas call => ./a.out [s1 set]\n");
+		return ;
+	}
+	printf("############# ft_strtrim_test ###################\n");
+
+	char *result = ft_strtrim(argv[2], argv[3]);
+	printf("s1 : [ %s ], set : [ %s ], result : [ %s ]\n", argv[2] , argv[3], result);
+}
 int		main(int argc, const char *argv[])
 {
 
@@ -249,6 +261,10 @@ int		main(int argc, const char *argv[])
 		else if (strcmp(call, "strjoin") == 0)
 		{
 			ft_strjoin_test(argc, argv);
+		}
+		else if (strcmp(call, "strtrim") == 0)
+		{
+			ft_strtrim_test(argc, argv);
 		}
 		else if (strcmp(call, "all") == 0)
 		{
