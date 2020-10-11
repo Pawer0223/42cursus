@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 22:24:15 by taekang           #+#    #+#             */
-/*   Updated: 2020/10/03 19:52:26 by taekang          ###   ########.fr       */
+/*   Updated: 2020/10/06 08:14:56 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,102 @@ void	ft_strlcat_test(int argc, const char *argv[])
 	free(dest2);
 }
 
+void	ft_strlcpy_test(int argc, const char *argv[])
+{
+	int len = 100 * sizeof(char);
+	char *dest = (char *)malloc(len);
+	char *dest2 = (char *)malloc(len);
+
+	printf("############# ft_strlcpy_test ###################\n");
+	for (int i = 2; i < argc; i++) {
+	
+		size_t self = ft_strlcpy(dest, argv[i], 5);
+		size_t lib = strlcpy(dest2, argv[i], 5);
+		char *result = "true";
+
+		if (self != lib)
+			result = "fail";
+
+		printf("src : [ %s ], result : [ %s ],  self =>  %zu , lib => %zu, success : %s\n", argv[i], dest, self, lib, result);
+
+	}
+
+	free(dest);
+	free(dest2);
+}
+
+void	ft_strchr_test(int argc, const char *argv[])
+{
+
+	printf("############# ft_strchr_test ###################\n");
+	for (int i = 2; i < argc; i++) {
+	
+		char *self = ft_strchr(argv[i], 'a');
+		char *lib = strchr(argv[i], 'a');
+		char *result = "true";
+
+		if (self != lib)
+			result = "fail";
+
+		printf("word : [ %s ], self =>  %s , lib => %s, success : %s\n", argv[i], self, lib, result);
+
+	}
+}
+
+void	ft_strnstr_test(int argc, const char *argv[])
+{
+	printf("############# ft_stnstr_test ###################\n");
+
+	if (argc < 3)
+		printf("strnstr please call .. => [ strnstr haystack needle ]");
+
+		char *self = ft_strnstr(argv[2], argv[3], 5);
+		char *lib = strnstr(argv[2], argv[3], 5);
+		char *result = "true";
+
+		if (self != lib)
+			result = "fail";
+
+		printf("haystack : [ %s ], needle : [ %s ],  self =>  %s , lib => %s, success : %s\n", argv[2], argv[3],  self, lib, result);
+
+}
+
+void	ft_strncmp_test(int argc, const char *argv[])
+{
+	printf("############# ft_stncmp_test ###################\n");
+
+	if (argc < 3)
+		printf("strncmp please call .. => [ strnstr haystack needle ]");
+
+		int self = ft_strncmp(argv[2], argv[3], 5);
+		int lib = strncmp(argv[2], argv[3], 5);
+		char *result = "true";
+
+		if (self != lib)
+			result = "fail";
+
+		printf("s1 : [ %s ], s2 : [ %s ],  self =>  %d , lib => %d, success : %s\n", argv[2], argv[3],  self, lib, result);
+
+}
+
+void	ft_atoi_test(int argc, const char *argv[])
+{
+	printf("############# ft_atoi_test ###################\n");
+
+
+	for (int i = 2; i < argc; i++) {
+	
+		int	self = ft_atoi(argv[i]);
+		int lib = atoi(argv[i]);
+		char *result = "true";
+
+		if (self != lib)
+			result = "fail";
+
+		printf("word : [ %s ], self =>  %d , lib => %d, success : %s\n", argv[i], self, lib, result);
+
+	}
+}
 
 int		main(int argc, const char *argv[])
 {
@@ -97,13 +193,38 @@ int		main(int argc, const char *argv[])
 		{
 			ft_strlcat_test(argc, argv);			
 		}
+		else if (strcmp(call, "strlcpy") == 0)
+		{
+			ft_strlcpy_test(argc, argv);
+		}
+		else if (strcmp(call, "strchr") == 0)
+		{
+			ft_strchr_test(argc, argv);
+		}
+		else if (strcmp(call, "strnstr") == 0)
+		{
+			ft_strnstr_test(argc, argv);
+		}
+		else if (strcmp(call, "strncmp") == 0)
+		{
+			ft_strncmp_test(argc, argv);
+		}
+		else if (strcmp(call, "atoi") == 0)
+		{
+			ft_atoi_test(argc, argv);
+		}
 		else if (strcmp(call, "all") == 0)
 		{
 			ft_strlen_test(argc, argv);
 			ft_strlcat_test(argc, argv);			
+			ft_strlcpy_test(argc, argv);
+			ft_strchr_test(argc, argv);
+			ft_strnstr_test(argc, argv);
+			ft_strncmp_test(argc, argv);
+			ft_atoi_test(argc, argv);
 		}
 		else {
-			printf("please call func\n");
+			printf("Please Call Func..Or Check Func Name !! \n");
 		}
 	}
 	
