@@ -6,33 +6,22 @@
 /*   By: taekang <taekang@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/11 16:44:55 by taekang           #+#    #+#             */
-/*   Updated: 2020/10/14 17:11:37 by taekang          ###   ########.fr       */
+/*   Updated: 2020/10/15 00:27:00 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
-
-void	ft_print(char **result)
-{
-	int i = 0;
-	while (result[i])
-	{
-		printf("result[%d] : %s\n", i, result[i]);
-		i++;
-	}
-}
 
 size_t		get_cnt(char const *s, char c)
 {
-	int i;
-	size_t cnt;
-	size_t len;
+	int		i;
+	size_t	cnt;
+	size_t	len;
 
 	len = ft_strlen(s);
 	i = 0;
 	cnt = 2;
-	while(s[i])
+	while (s[i])
 	{
 		if (s[i] == c)
 			cnt++;
@@ -43,64 +32,54 @@ size_t		get_cnt(char const *s, char c)
 	return (cnt);
 }
 
-void	mem_free(char **result, int seq)
-{
-	while (seq - 1 >= 0)
-	{
-		free(result[seq - 1]);
-		seq--;
-	}
-	free(result);
-}
-
-char	*add_str(char **result, int seq, char *src, size_t n)
+int			add_str(char **result, int seq, char *src, size_t n)
 {
 	char *dst;
 
+	if (n <= 1)
+		return (1);
 	if (!(dst = (char *)malloc(sizeof(char) * n)))
 	{
-		mem_free(result, seq);
+		while (seq - 1 >= 0)
+		{
+			free(result[seq - 1]);
+			seq--;
+		}
+		free(result);
 		return (0);
 	}
 	ft_strlcpy(dst, src, n);
 	result[seq] = dst;
-	return (dst);
+	return (1);
 }
 
-int		set_result(char **result, char const *s, char c)
+int			set_result(char **result, char const *s, char c, int seq)
 {
-	int		start;
-	int		end;
-	int		seq;
-	char	*src;
+	int		l;
+	int		r;
 
-	seq = 0;
-	start = 0;
-	end = 0;
-	src = (char *)s;
-	while (src[end])
+	l = 0;
+	r = 0;
+	while (s[r])
 	{
-		if (src[end] == c)
+		if (s[r] == c)
 		{
-			if (end - start > 0)
-			{
-				if (!add_str(result, seq, src + start, (end - start + 1)))
-					return (0);
+			if (!add_str(result, seq, (char *)(s + l), (r - l + 1)))
+				return (0);
+			if (r - l > 0)
 				seq++;
-			}
-			start = end + 1;
+			l = r + 1;
 		}
-		end++;
+		r++;
 	}
-	if (end - start > 0)
-	{
-		if(!add_str(result, seq, src + start, (end - start + 1)))
-			return (0);
-	}
-	return (seq + 1);
+	if (!add_str(result, seq, (char *)(s + l), (r - l + 1)))
+		return (0);
+	if (r - l > 0)
+		seq++;
+	return (seq);
 }
 
-char	**ft_split(char const *s, char c)
+char		**ft_split(char const *s, char c)
 {
 	char	**result;
 	size_t	cnt;
@@ -113,26 +92,9 @@ char	**ft_split(char const *s, char c)
 		return (0);
 	if (cnt != 1)
 	{
-		if (!(seq = set_result(result, s, c)))
+		if (!(seq = set_result(result, s, c, 0)))
 			return (0);
 	}
 	result[seq] = 0;
 	return (result);
-}
-
-
-void	call(int argc, char *argv[])
-{
-	char c;
-	char **result;
-
-	c = *argv[2];
-	result = ft_split(argv[1], c);
-	ft_print(result);
-}
-
-int		main(int argc, char *argv[])
-{
-	call(argc, argv);
-	return (0);
 }
