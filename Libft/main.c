@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/11 13:13:20 by taekang           #+#    #+#             */
-/*   Updated: 2020/10/11 15:45:22 by taekang          ###   ########.fr       */
+/*   Updated: 2020/10/15 00:28:28 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,16 @@
 #include <unistd.h>
 #include <string.h>
 #include "libft.h"
+
+void	ft_two_print(char **result)
+{
+	int i = 0;
+	while (result[i])
+	{
+		printf("result[%d] : [%s]\n", i, result[i]);
+		i++;
+	}
+}
 
 void	ft_print(int n)
 {
@@ -216,6 +226,27 @@ void	ft_strtrim_test(int argc, const char *argv[])
 	char *result = ft_strtrim(argv[2], argv[3]);
 	printf("s1 : [ %s ], set : [ %s ], result : [ %s ]\n", argv[2] , argv[3], result);
 }
+
+void	ft_split_test(int argc, const char *argv[])
+{
+	if(argc < 4) { 
+		printf("ft_split pleas call => ./a.out [str c]\n");
+		return ;
+	}
+
+	
+	char c;
+	char **result;
+
+	c = *argv[3];
+	result = ft_split(argv[2], c);
+
+	printf("############# ft_split_test ###################\n");
+	printf("##### s1 : [%s], c : [%c] #####\n", argv[2] , c);
+
+	ft_two_print(result);
+}
+
 int		main(int argc, const char *argv[])
 {
 
@@ -265,6 +296,10 @@ int		main(int argc, const char *argv[])
 		else if (strcmp(call, "strtrim") == 0)
 		{
 			ft_strtrim_test(argc, argv);
+		}
+		else if (strcmp(call, "split") == 0)
+		{
+			ft_split_test(argc, argv);
 		}
 		else if (strcmp(call, "all") == 0)
 		{
