@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/11 13:13:20 by taekang           #+#    #+#             */
-/*   Updated: 2020/10/15 00:28:28 by taekang          ###   ########.fr       */
+/*   Updated: 2020/10/15 14:29:05 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -247,6 +247,17 @@ void	ft_split_test(int argc, const char *argv[])
 	ft_two_print(result);
 }
 
+void	ft_itoa_test(int argc, const char *argv[])
+{
+	int n;
+
+	n = ft_atoi(argv[2]);
+	char *result = ft_itoa(n);
+
+	printf("############# ft_itoa_test ###################\n");
+	printf("##### n(ft_atoi apply..) : [%d], itoa Result : [%s] #####\n", n, result);
+}
+
 int		main(int argc, const char *argv[])
 {
 
@@ -300,6 +311,10 @@ int		main(int argc, const char *argv[])
 		else if (strcmp(call, "split") == 0)
 		{
 			ft_split_test(argc, argv);
+		}
+		else if (strcmp(call, "itoa") == 0)
+		{
+			ft_itoa_test(argc, argv);
 		}
 		else if (strcmp(call, "all") == 0)
 		{

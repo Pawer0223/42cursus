@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/11 16:44:55 by taekang           #+#    #+#             */
-/*   Updated: 2020/10/15 00:27:00 by taekang          ###   ########.fr       */
+/*   Updated: 2020/10/15 14:25:03 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,6 @@ char		**ft_split(char const *s, char c)
 {
 	char	**result;
 	size_t	cnt;
-	int		i;
 	int		seq;
 
 	seq = 0;
