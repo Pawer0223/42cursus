@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/11 13:13:20 by taekang           #+#    #+#             */
-/*   Updated: 2020/10/15 14:29:05 by taekang          ###   ########.fr       */
+/*   Updated: 2020/10/15 19:23:19 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -258,6 +258,38 @@ void	ft_itoa_test(int argc, const char *argv[])
 	printf("##### n(ft_atoi apply..) : [%d], itoa Result : [%s] #####\n", n, result);
 }
 
+void	ft_putchar_test(int argc, const char *argv[])
+{
+	char c = argv[2][0];
+	int fd = atoi(&argv[3][0]);
+
+	printf("############# ft_putchar_test ###################\n");
+	ft_putchar_fd(c, fd);
+}
+
+void	ft_putstr_test(int argc, const char *argv[])
+{
+	int fd = atoi(&argv[3][0]);
+
+	printf("############# ft_putstr_test ###################\n");
+	ft_putstr_fd((char *)argv[2], fd);
+}
+void	ft_putendl_test(int argc, const char *argv[])
+{
+	int fd = atoi(&argv[3][0]);
+
+	printf("############# ft_put with end line _test ###################\n");
+	ft_putendl_fd((char *)argv[2], fd);
+}
+void	ft_putnbr_test(int argc, const char *argv[])
+{
+	int  n = atoi(&argv[2][0]);
+	int fd = atoi(&argv[3][0]);
+
+	printf("############# ft_putnbr_test ###################\n");
+	ft_putnbr_fd(n, fd);
+}
+
 int		main(int argc, const char *argv[])
 {
 
@@ -315,6 +347,22 @@ int		main(int argc, const char *argv[])
 		else if (strcmp(call, "itoa") == 0)
 		{
 			ft_itoa_test(argc, argv);
+		}
+		else if (strcmp(call, "putchar") == 0)
+		{
+			ft_putchar_test(argc, argv);
+		}
+		else if (strcmp(call, "putstr") == 0)
+		{
+			ft_putstr_test(argc, argv);
+		}
+		else if (strcmp(call, "putendl") == 0)
+		{
+			ft_putendl_test(argc, argv);
+		}
+		else if (strcmp(call, "putnbr") == 0)
+		{
+			ft_putnbr_test(argc, argv);
 		}
 		else if (strcmp(call, "all") == 0)
 		{
