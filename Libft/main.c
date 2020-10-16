@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/11 13:13:20 by taekang           #+#    #+#             */
-/*   Updated: 2020/10/16 15:41:17 by taekang          ###   ########.fr       */
+/*   Updated: 2020/10/16 18:58:38 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -307,6 +307,53 @@ void	ft_strmapi_test(const char *argv[])
 	printf("origin : [%s], result : [%s]\n", s, result);
 }
 
+void	ft_lstnew_test(int argc, const char *argv[])
+{
+	if (argc < 3)
+		printf("ft_lstnew plaese call... ==> lstnew [str]\n");
+	char *str = (char *)argv[2];
+
+	t_list *t = ft_lstnew(str);
+
+	printf("############# ft_lstnew_test ###################\n");
+	printf("t->content : [%s]\n", (char *)t->content);
+}
+
+void	print_list(t_list **lst)
+{
+	int i = 0;
+
+	t_list *t = lst[0];
+	
+	while (t)
+	{
+		printf("lst[%d]->content:[%s]\n",i,t->content);
+		t = t->next;
+		i++;
+	}
+}
+
+void	ft_add_front_test(int argc, const char *argv[])
+{
+	if (argc < 3)
+		printf("ft_lstadd_front plaese call... ==> ft_lstadd_front [new]\n");
+
+	t_list *new = ft_lstnew((char *)argv[2]);
+
+	t_list **lst = (t_list **)malloc(sizeof(t_list));
+	t_list *t1 = ft_lstnew("first");
+	t_list *t2 = ft_lstnew("second");
+	t1->next = t2;
+	lst[0] = t1;
+
+	printf("### ft_lstadd_front Before..###\n");
+	print_list(lst);
+
+	ft_lstadd_front(lst, new);
+	printf("### ft_lstadd_front After..###\n");
+	print_list(lst);
+}
+
 int		main(int argc, const char *argv[])
 {
 
@@ -385,15 +432,13 @@ int		main(int argc, const char *argv[])
 		{
 			ft_strmapi_test(argv);
 		}
-		else if (strcmp(call, "all") == 0)
+		else if (strcmp(call, "lstnew") == 0)
 		{
-			ft_strlen_test(argc, argv);
-			ft_strlcat_test(argc, argv);			
-			ft_strlcpy_test(argc, argv);
-			ft_strchr_test(argc, argv);
-			ft_strnstr_test(argc, argv);
-			ft_strncmp_test(argc, argv);
-			ft_atoi_test(argc, argv);
+			ft_lstnew_test(argc, argv);
+		}
+		else if (strcmp(call, "lstadd_front") == 0)
+		{
+			ft_add_front_test(argc, argv);
 		}
 		else {
 			printf("Please Call Func..Or Check Func Name !! \n");
