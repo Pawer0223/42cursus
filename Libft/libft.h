@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 22:12:31 by taekang           #+#    #+#             */
-/*   Updated: 2020/10/15 19:06:36 by taekang          ###   ########.fr       */
+/*   Updated: 2020/10/16 14:46:41 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,6 @@ void	ft_putchar_fd(char c, int fd);
 void	ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 
 #endif
