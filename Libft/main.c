@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/11 13:13:20 by taekang           #+#    #+#             */
-/*   Updated: 2020/10/16 18:58:38 by taekang          ###   ########.fr       */
+/*   Updated: 2020/10/17 17:58:55 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,32 @@ void	ft_two_print(char **result)
 	}
 }
 
-void	ft_print(int n)
+void	print_list(t_list **lst)
 {
-	char c;
+	int i = 0;
 
-	if (n >= 10)
-		ft_print(n / 10);
+	t_list *t = lst[0];
+	
+	while (t)
+	{
+		printf("lst[%d]->content:[%s]\n",i,t->content);
+		t = t->next;
+		i++;
+	}
+}
 
-	c = n % 10 + '0';
-	write(1, &c, 1);
+void	print_list2(t_list *t)
+{
+	if (!t)
+		printf("is Null !\n");
+
+	while (t)
+	{
+		// printf("t->next addr : %p\n", t->next);
+		// printf("t->content .. %p\n", t->content);
+		printf("t->content:%s , t->next addr : %p\n",(char *)t->content, t->next);
+		t = t->next;
+	}
 }
 
 void	ft_strlen_test(int argc, const char *argv[])
@@ -319,20 +336,6 @@ void	ft_lstnew_test(int argc, const char *argv[])
 	printf("t->content : [%s]\n", (char *)t->content);
 }
 
-void	print_list(t_list **lst)
-{
-	int i = 0;
-
-	t_list *t = lst[0];
-	
-	while (t)
-	{
-		printf("lst[%d]->content:[%s]\n",i,t->content);
-		t = t->next;
-		i++;
-	}
-}
-
 void	ft_add_front_test(int argc, const char *argv[])
 {
 	if (argc < 3)
@@ -349,16 +352,167 @@ void	ft_add_front_test(int argc, const char *argv[])
 	printf("### ft_lstadd_front Before..###\n");
 	print_list(lst);
 
+	printf("### front add [%s]\n", argv[2]);
 	ft_lstadd_front(lst, new);
 	printf("### ft_lstadd_front After..###\n");
 	print_list(lst);
 }
 
+void	ft_add_back_test(int argc, const char *argv[])
+{
+	if (argc < 3)
+		printf("ft_lstadd_back plaese call... ==> ft_lstadd_front [new]\n");
+
+	t_list *new = ft_lstnew((char *)argv[2]);
+
+	t_list **lst = (t_list **)malloc(sizeof(t_list));
+	t_list *t1 = ft_lstnew("first");
+	t_list *t2 = ft_lstnew("second");
+	t1->next = t2;
+	lst[0] = t1;
+
+	printf("### ft_lstadd_back Before..###\n");
+	print_list(lst);
+	printf("### front back [%s]\n", argv[2]);
+	ft_lstadd_back(lst, new);
+	printf("### ft_lstadd_back After..###\n");
+	print_list(lst);
+}
+void	ft_lstsize_test()
+{
+	printf("############# ft_lstsize_test ###################\n");
+
+	t_list *t1 = ft_lstnew("one");
+	t_list *t2 = ft_lstnew("two");
+	t_list *t3 = ft_lstnew("three");
+	t_list *t4 = ft_lstnew("four");
+
+	t1->next = t2;
+	t2->next = t3;
+	t3->next = t4;
+
+	printf("expact.. is [4] => result .. is [%d]\n", ft_lstsize(t1));
+	printf("expact.. is [2] => result .. is [%d]\n", ft_lstsize(t3));
+	printf("expact.. is [1] => result .. is [%d]\n", ft_lstsize(t4));
+	printf("expact.. is [0] => result .. is [%d]\n", ft_lstsize(0));
+
+}
+
+void	ft_lstlast_test()
+{
+	printf("############# ft_lstlast_test ###################\n");
+
+	t_list *t1 = ft_lstnew("one");
+	t_list *t2 = ft_lstnew("two");
+	t_list *t3 = ft_lstnew("three");
+	t_list *t4 = ft_lstnew("four");
+	t_list *t5 = ft_lstnew("five");
+	t_list *t6 = ft_lstnew("six");
+	t_list *t7 = ft_lstnew("seven");
+
+	t1->next = t2;
+	t2->next = t3;
+	t3->next = t4;
+	t6->next = t7;
+
+	printf("expact.. is [four] => result .. is [%s]\n", ft_lstlast(t1)->content);
+	printf("expact.. is [five] => result .. is [%s]\n", ft_lstlast(t5)->content);
+	printf("expact.. is [seven] => result .. is [%s]\n", ft_lstlast(t6)->content);
+
+}
+
+void	del(void *t)
+{
+	printf("[%s] is delete.... \n", (char *)t);
+	free(t);
+}
+
+
+void	ft_lstdelone_test()
+{
+	
+	printf("############# ft_lstdelone_test ###################\n");
+
+	char *str1 = (char *)malloc(4);
+	char *str2 = (char *)malloc(4);
+	char *str3 = (char *)malloc(6);
+	
+	ft_strlcpy(str1, "one", 4);
+	ft_strlcpy(str2, "two", 4);
+	ft_strlcpy(str3, "three", 6);
+
+	t_list *t1 = ft_lstnew(str1);
+	t_list *t2 = ft_lstnew(str2);
+	t_list *t3 = ft_lstnew(str3);
+
+	t1->next = t2;
+	t2->next = t3;
+	printf("####### before #######\n");
+	print_list2(t1);
+
+	ft_lstdelone(t2,del);
+	printf("####### After #######\n");
+	print_list2(t1);
+}
+
+void	ft_lstclear_test()
+{
+	printf("############# ft_lstclear_test ###################\n");
+
+	char *str1 = (char *)malloc(4);
+	char *str2 = (char *)malloc(4);
+	char *str3 = (char *)malloc(6);
+
+	ft_strlcpy(str1, "one", 4);
+	ft_strlcpy(str2, "two", 4);
+	ft_strlcpy(str3, "three", 6);
+
+	t_list **list = (t_list **)malloc(sizeof(t_list));
+	t_list *t1 = ft_lstnew(str1);
+	t_list *t2 = ft_lstnew(str2);
+	t_list *t3 = ft_lstnew(str3);
+
+	t1->next = t2;
+	t2->next = t3;
+	list[0] = t1;
+
+	printf("####### before #######\n");
+	print_list(list);
+	// print_list2(t1);
+
+	ft_lstclear(list,del);
+	printf("####### After #######\n");
+	print_list(list);
+	// print_list2(t1);
+
+}
 int		main(int argc, const char *argv[])
 {
 
 	if (argc <= 2) {
-		printf("please input [func_name, arguments]");
+
+		const char *call = argv[1];
+
+		if (strcmp(call, "lstsize") == 0)
+		{
+			ft_lstsize_test();
+		}
+		else if (strcmp(call, "lstlast") == 0)
+		{
+			ft_lstlast_test();
+		}
+		else if (strcmp(call, "lstdelone") == 0)
+		{
+			ft_lstdelone_test();
+		}
+		else if (strcmp(call, "lstclear") == 0)
+		{
+			ft_lstclear_test();
+		}
+		else
+		{
+			printf("please input [func_name, arguments]");
+		}
 	}
 	else if (argc > 2) {
 
@@ -439,6 +593,10 @@ int		main(int argc, const char *argv[])
 		else if (strcmp(call, "lstadd_front") == 0)
 		{
 			ft_add_front_test(argc, argv);
+		}
+		else if (strcmp(call, "lstadd_back") == 0)
+		{
+			ft_add_back_test(argc, argv);
 		}
 		else {
 			printf("Please Call Func..Or Check Func Name !! \n");
