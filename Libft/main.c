@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/11 13:13:20 by taekang           #+#    #+#             */
-/*   Updated: 2020/10/17 18:55:46 by taekang          ###   ########.fr       */
+/*   Updated: 2020/10/17 19:50:22 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -523,6 +523,35 @@ void	ft_lstiter_test()
 	ft_lstiter(t7, iter_test);
 }
 
+void	*f(void *s)
+{
+	printf("call func .. %s\n", (char *)s);
+	return (s);
+}
+
+void	ft_lstmap_test()
+{
+
+	printf("############# ft_lstmap_test ###################\n");
+
+	t_list *t1 = ft_lstnew("one");
+	t_list *t2 = ft_lstnew("two");
+	t_list *t3 = ft_lstnew("three");
+	t_list *t4 = ft_lstnew("four");
+	t_list *t5 = ft_lstnew("five");
+	t_list *t6 = ft_lstnew("six");
+	t_list *t7 = ft_lstnew("seven");
+
+	t1->next = t2;
+	t2->next = t3;
+	t3->next = t4;
+	t4->next = t5;
+	t5->next = t6;
+	t6->next = t7;
+	
+	ft_lstmap(t1, f, del);
+
+}
 int		main(int argc, const char *argv[])
 {
 
@@ -549,6 +578,10 @@ int		main(int argc, const char *argv[])
 		else if (strcmp(call, "lstiter") == 0)
 		{
 			ft_lstiter_test();
+		}
+		else if (strcmp(call, "lstmap") == 0)
+		{
+			ft_lstmap_test();
 		}
 		else
 		{
