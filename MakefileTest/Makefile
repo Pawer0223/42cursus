@@ -1,0 +1,27 @@
+.SUFFIXES : .c .o
+
+OBJECTS = main.o\
+		  read.o\
+		  write.o
+SRCS = $(OBJECTS:.o=.c)
+
+CC = gcc
+CFLAGS = -Wall -Wextra -Werror
+TAESAN = trgt
+
+print :
+		echo "### SRCS ###"
+		echo $(SRCS)
+
+$(TAESAN) : $(OBJECTS)
+		$(CC) -o $(TAESAN) $(OBJECTS)
+
+clean :
+		rm -rf $(OBJECTS) $(TAESAN)
+
+all : $(TAESAN)
+
+main.o : main.c 
+read.o : read.c
+write.o: write.c
+
