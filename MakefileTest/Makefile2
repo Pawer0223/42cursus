@@ -20,3 +20,7 @@ clean :
 		rm -rf $(OBJECTS) $(TAESAN)
 
 all : $(TAESAN)
+
+main.o : main.c 
+read.o : read.c
+write.o: write.c
