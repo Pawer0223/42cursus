@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 04:02:04 by taekang           #+#    #+#             */
-/*   Updated: 2020/10/18 17:18:14 by taekang          ###   ########.fr       */
+/*   Updated: 2020/10/18 19:45:37 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,7 @@ char	*ft_strchr(const char *s, int c)
 			return (result + i);
 		i++;
 	}
+	if (result[i] == (char)c)
+		return (result + i);
 	return (0);
 }
