@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/11 13:13:20 by taekang           #+#    #+#             */
-/*   Updated: 2020/10/17 19:50:22 by taekang          ###   ########.fr       */
+/*   Updated: 2020/10/19 15:23:00 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -241,7 +241,7 @@ void	ft_strtrim_test(int argc, const char *argv[])
 	printf("############# ft_strtrim_test ###################\n");
 
 	char *result = ft_strtrim(argv[2], argv[3]);
-	printf("s1 : [ %s ], set : [ %s ], result : [ %s ]\n", argv[2] , argv[3], result);
+	printf("s1 : [%s], set : [%s], result : [%s]\n", argv[2] , argv[3], result);
 }
 
 void	ft_split_test(int argc, const char *argv[])

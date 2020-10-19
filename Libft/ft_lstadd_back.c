@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/16 19:23:49 by taekang           #+#    #+#             */
-/*   Updated: 2020/10/16 19:35:36 by taekang          ###   ########.fr       */
+/*   Updated: 2020/10/19 17:15:45 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,11 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 
 	if (!lst || !new)
 		return ;
-	last = ft_lstlast(lst[0]);
-	last->next = new;
+	if (!*lst)
+		*lst = new;
+	else
+	{
+		last = ft_lstlast(lst[0]);
+		last->next = new;
+	}
 }

@@ -5,38 +5,59 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: taekang <taekang@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/11 15:14:28 by taekang           #+#    #+#             */
-/*   Updated: 2020/10/11 16:22:02 by taekang          ###   ########.fr       */
+/*   Created: 2020/10/19 16:51:51 by taekang           #+#    #+#             */
+/*   Updated: 2020/10/19 17:02:01 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+int		is_possible(char c, char *set)
+{
+	while (*set)
+	{
+		if (*set == c)
+			return (1);
+		set++;
+	}
+	return (0);
+}
+
+int		get_start(char const *s1, char *set)
+{
+	int		i;
+	char	*char_s1;
+
+	char_s1 = (char *)s1;
+	i = 0;
+	while (s1[i] && is_possible(char_s1[i], set))
+		i++;
+	return (i);
+}
+
+int		get_end(char const *s1, char *set, int r, int l)
+{
+	char *char_s1;
+
+	char_s1 = (char *)s1;
+	while (s1[r] && r >= l && is_possible(char_s1[r], set))
+		r--;
+	return (r);
+}
+
 char	*ft_strtrim(char const *s1, char const *set)
 {
 	char	*result;
-	int		len;
-	int		set_len;
 	int		start;
-	int		i;
+	int		end;
+	int		len;
 
 	len = ft_strlen(s1);
-	set_len = ft_strlen(set);
-	start = 0;
-	i = 0;
-	if (!(result = (char *)malloc(sizeof(char) * (len + 1))))
+	end = len;
+	start = get_start(s1, (char *)set);
+	end = get_end(s1, (char *)set, len - 1, start);
+	if (!(result = (char *)malloc(sizeof(char) * (end - start + 2))))
 		return (0);
-	if (set_len)
-	{
-		while (s1[start] && start < len)
-		{
-			while (ft_strnstr((s1 + start), set, set_len))
-				start += set_len;
-			result[i] = s1[start];
-			i++;
-			start++;
-		}
-	}
-	result[i] = '\0';
+	ft_strlcpy(result, s1 + start, (end - start + 2));
 	return (result);
 }

@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 01:58:05 by taekang           #+#    #+#             */
-/*   Updated: 2020/10/08 02:17:13 by taekang          ###   ########.fr       */
+/*   Updated: 2020/10/19 00:53:41 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,12 @@ char	*ft_strrchr(const char *s, int c)
 	i = 0;
 	while (result[i])
 		i++;
+	if (!c)
+		return (result + i);
 	i--;
 	while (i >= 0)
 	{
-		if (result[i] == c)
+		if (result[i] == (char)c)
 			return (result + i);
 		i--;
 	}

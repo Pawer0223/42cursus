@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/15 18:43:34 by taekang           #+#    #+#             */
-/*   Updated: 2020/10/15 19:24:10 by taekang          ###   ########.fr       */
+/*   Updated: 2020/10/19 14:47:33 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	ft_putnbr_fd(int n, int fd)
 		num *= -1;
 	}
 	if (num >= 0 && num < 10)
-		ft_putchar_fd('0' + n, fd);
+		ft_putchar_fd('0' + num, fd);
 	else
 	{
 		ft_putnbr_fd(num / 10, fd);
