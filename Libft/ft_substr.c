@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/11 12:04:00 by taekang           #+#    #+#             */
-/*   Updated: 2020/10/19 20:10:34 by taekang          ###   ########.fr       */
+/*   Updated: 2020/10/19 20:22:41 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	char	*src;
 
 	if (!s)
-		return (0); 
+		return (0);
 	src = (char *)s;
 	if (!(dst = (char *)malloc(sizeof(char) * (len + 1))))
 	{

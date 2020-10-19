@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/11 16:44:55 by taekang           #+#    #+#             */
-/*   Updated: 2020/10/15 14:25:03 by taekang          ###   ########.fr       */
+/*   Updated: 2020/10/19 20:19:17 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,8 @@ char		**ft_split(char const *s, char c)
 	size_t	cnt;
 	int		seq;
 
+	if (!s)
+		return (0);
 	seq = 0;
 	cnt = get_cnt(s, c);
 	if (!(result = (char **)malloc(sizeof(char *) * cnt)))

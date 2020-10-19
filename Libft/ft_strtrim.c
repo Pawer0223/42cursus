@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/19 16:51:51 by taekang           #+#    #+#             */
-/*   Updated: 2020/10/19 17:02:01 by taekang          ###   ########.fr       */
+/*   Updated: 2020/10/19 20:18:02 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ char	*ft_strtrim(char const *s1, char const *set)
 	int		end;
 	int		len;
 
+	if (!s1 || !set)
+		return (0);
 	len = ft_strlen(s1);
 	end = len;
 	start = get_start(s1, (char *)set);
