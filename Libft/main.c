@@ -1,16 +1,19 @@
 #include "libft.h"
 #include <stdio.h>
+#include <string.h>
 
-int		main()
+int		main(int argc, char *argv[])
 {
-	char src[10] ="12345";
-//	void *dst = (void *)malloc(0);
-	const void *dst = (void *)malloc(0);
-	// ft_memcpy(dst, "123", 3);
-	ft_memcpy(src, dst, 3);
+	int r = argc;
+	r++;
 
-	printf("dst : %s\n", (char *)dst);
+	char *s = argv[1];
+	printf("input : %s\n", s);
 
+	char *dst = (char *)malloc(0);
+	size_t dstsize = 3;
+	ft_strlcpy(dst, NULL, dstsize);
+	printf("dest : [%s]\n", dst);
 
 	return (0);
 }
