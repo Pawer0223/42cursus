@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/07 15:29:43 by taekang           #+#    #+#             */
-/*   Updated: 2020/10/19 19:09:34 by taekang          ###   ########.fr       */
+/*   Updated: 2020/10/21 16:22:29 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	*ft_memcpy(void *dst, const void *src, size_t n)
 	const char	*str_src;
 	size_t		i;
 
-	if (!dst && !src)
+	if ((!dst && !src) || dst == src)
 		return (0);
 	str_dst = (char *)dst;
 	str_src = (const char *)src;
