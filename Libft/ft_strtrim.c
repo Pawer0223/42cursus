@@ -6,12 +6,13 @@
 /*   By: taekang <taekang@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/19 16:51:51 by taekang           #+#    #+#             */
-/*   Updated: 2020/10/19 20:18:02 by taekang          ###   ########.fr       */
+/*   Updated: 2020/10/22 19:18:06 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+#include <stdio.h>
 int		is_possible(char c, char *set)
 {
 	while (*set)
@@ -58,6 +59,10 @@ char	*ft_strtrim(char const *s1, char const *set)
 	end = len;
 	start = get_start(s1, (char *)set);
 	end = get_end(s1, (char *)set, len - 1, start);
+
+
+	printf("start: %d, end: %d\n", start, end);
+
 	if (!(result = (char *)malloc(sizeof(char) * (end - start + 2))))
 		return (0);
 	ft_strlcpy(result, s1 + start, (end - start + 2));
