@@ -1,4 +1,4 @@
-# Libft
+# [Libft](https://github.com/Pawer0223/42cursus/tree/main/Libft)
 
 ## [ part1 ] libc 함수 직접구현
 - 함수는 원본과 동일한 프로토타입 및 기능을 수행해야 한다. (man page 참조)
