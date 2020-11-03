@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2020-11-03T08:24:37.519Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.111 Safari/537.36" etag="w9UrEw0iJPnLAdazKr6E" version="13.8.8" type="github">
+<mxfile host="app.diagrams.net" modified="2020-11-03T09:06:33.145Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.111 Safari/537.36" etag="rmMDyZjwBJzLh6E2ZqkX" version="13.8.8" type="github">
   <diagram id="C5RBs43oDa-KdzZeNtuy" name="Page-1">
-    <mxGraphModel dx="1093" dy="1962" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1545" dy="1963" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="WIyWlLk6GJQsqaUBKTNV-0" />
         <mxCell id="WIyWlLk6GJQsqaUBKTNV-1" parent="WIyWlLk6GJQsqaUBKTNV-0" />
@@ -243,7 +243,21 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="HWznGPXGOaG3OOnh7ew8-118" value="1. 서식 자료형에 따른 va_arg매크로 실행.&lt;br&gt;=&amp;gt; 길이에서 check된 경우 분기처리 !!&lt;br&gt;&lt;br&gt;2. 지수 표기법(e, E)또는 16진수(x, X)의 경우&amp;nbsp;&lt;br&gt;&lt;br&gt;2. 각 자료형에 맞는 to Ascii함수 호출하여 char *로 저장&amp;nbsp;&lt;br&gt;=&amp;gt; 실수의 경우 끊어서 읽는방법 찾자..&lt;br&gt;=&amp;gt; 지수 표기법 (e, E)와 16진수 (x, X) 경우 변환해서 저장&lt;br&gt;&lt;br&gt;=&amp;gt; to Ascii하려면 len 구해서 =&amp;gt; 동적할당 후 =&amp;gt; char * 저장.&lt;br&gt;=&amp;gt; 숫자의 경우는 음수부호도 같이 처리.&lt;br&gt;&lt;br&gt;=&amp;gt; flag가 있는 경우에는 동적할당 크기를 +1 해서 부호가 들어갈 자리를 만들어주어야 한다 !" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
-          <mxGeometry x="1170" y="850" width="380" height="180" as="geometry" />
+          <mxGeometry x="1200" y="880" width="380" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="HWznGPXGOaG3OOnh7ew8-129" value="자료형에 따라 가변인수의 크기를 구한다.&lt;br&gt;(문자형, 정수형, 실수형)" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="617.87" y="750" width="250.76" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="HWznGPXGOaG3OOnh7ew8-130" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;jettySize=auto;orthogonalLoop=1;fontSize=11;endArrow=block;endFill=0;endSize=8;strokeWidth=1;shadow=0;labelBackgroundColor=none;exitX=0.5;exitY=0;exitDx=0;exitDy=0;dashed=1;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="HWznGPXGOaG3OOnh7ew8-40">
+          <mxGeometry y="10" relative="1" as="geometry">
+            <mxPoint as="offset" />
+            <mxPoint x="753.25" y="990" as="sourcePoint" />
+            <mxPoint x="743" y="820" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="743" y="840" />
+              <mxPoint x="743" y="840" />
+            </Array>
+          </mxGeometry>
         </mxCell>
       </root>
     </mxGraphModel>
