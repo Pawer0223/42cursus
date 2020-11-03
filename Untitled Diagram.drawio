@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2020-11-03T10:36:48.595Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.111 Safari/537.36" etag="Qtl9mngvezx_vKbqORaw" version="13.8.8" type="github">
+<mxfile host="app.diagrams.net" modified="2020-11-03T10:38:18.842Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.111 Safari/537.36" etag="Ypl65pqcOJyPgzMNnbsZ" version="13.8.8" type="github">
   <diagram id="C5RBs43oDa-KdzZeNtuy" name="Page-1">
     <mxGraphModel dx="1545" dy="1963" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -349,11 +349,11 @@
         <mxCell id="HWznGPXGOaG3OOnh7ew8-219" value="정밀도 크기 &amp;gt; 가변길이 크기" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
           <mxGeometry x="961.25" y="28" width="210" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="HWznGPXGOaG3OOnh7ew8-222" value="[ Max - 정밀도 ] &amp;lt;= (범위) &amp;lt; [ Max - 가변길이 크기 ]&lt;br&gt;범위만큼 padding을 0으로 채운다." style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+        <mxCell id="HWznGPXGOaG3OOnh7ew8-222" value="[ Max - 정밀도 ]이상 ~ [ Max - 가변길이 크기 ] 미만&lt;br&gt;범위만큼 padding을 0으로 채운다." style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
           <mxGeometry x="1345" y="28" width="300" height="58" as="geometry" />
         </mxCell>
-        <mxCell id="HWznGPXGOaG3OOnh7ew8-224" value="Max -&amp;nbsp;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
-          <mxGeometry x="960" y="-120" width="210" height="60" as="geometry" />
+        <mxCell id="HWznGPXGOaG3OOnh7ew8-224" value="[ Max - 가변길이 크기 ]이상 ~ Max 미만까지 가변길이 채운다." style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="897.5" y="-130" width="335" height="60" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
