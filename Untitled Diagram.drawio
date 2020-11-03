@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2020-11-03T09:06:33.145Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.111 Safari/537.36" etag="rmMDyZjwBJzLh6E2ZqkX" version="13.8.8" type="github">
+<mxfile host="app.diagrams.net" modified="2020-11-03T09:17:00.716Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.111 Safari/537.36" etag="fa2YO1HWrGobmWvJbQRc" version="13.8.8" type="github">
   <diagram id="C5RBs43oDa-KdzZeNtuy" name="Page-1">
     <mxGraphModel dx="1545" dy="1963" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -258,6 +258,68 @@
               <mxPoint x="743" y="840" />
             </Array>
           </mxGeometry>
+        </mxCell>
+        <mxCell id="HWznGPXGOaG3OOnh7ew8-131" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;jettySize=auto;orthogonalLoop=1;fontSize=11;endArrow=block;endFill=0;endSize=8;strokeWidth=1;shadow=0;labelBackgroundColor=none;exitX=0.5;exitY=0;exitDx=0;exitDy=0;dashed=1;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry y="10" relative="1" as="geometry">
+            <mxPoint as="offset" />
+            <mxPoint x="743" y="750" as="sourcePoint" />
+            <mxPoint x="742.75" y="700" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="742.75" y="720" />
+              <mxPoint x="742.75" y="720" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="HWznGPXGOaG3OOnh7ew8-133" value="동적할당 크기를 지정한다.&lt;br&gt;정밀도 크기 &amp;lt;-&amp;gt; 폭 크기 &amp;lt;-&amp;gt; 가변인자 크기&lt;br&gt;중 Max값으로 지정한다." style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="617.87" y="630" width="250.76" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="HWznGPXGOaG3OOnh7ew8-135" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;jettySize=auto;orthogonalLoop=1;fontSize=11;endArrow=block;endFill=0;endSize=8;strokeWidth=1;shadow=0;labelBackgroundColor=none;exitX=0.5;exitY=0;exitDx=0;exitDy=0;dashed=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" target="HWznGPXGOaG3OOnh7ew8-136">
+          <mxGeometry y="10" relative="1" as="geometry">
+            <mxPoint as="offset" />
+            <mxPoint x="743" y="630" as="sourcePoint" />
+            <mxPoint x="742.75" y="580" as="targetPoint" />
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="HWznGPXGOaG3OOnh7ew8-136" value="동적할당 후, padding과 가변인자를 채운다." style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="617.87" y="520" width="250.76" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="HWznGPXGOaG3OOnh7ew8-137" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;jettySize=auto;orthogonalLoop=1;fontSize=11;endArrow=block;endFill=0;endSize=8;strokeWidth=1;shadow=0;labelBackgroundColor=none;exitX=0.5;exitY=0;exitDx=0;exitDy=0;dashed=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" target="HWznGPXGOaG3OOnh7ew8-139">
+          <mxGeometry y="10" relative="1" as="geometry">
+            <mxPoint as="offset" />
+            <mxPoint x="743" y="520" as="sourcePoint" />
+            <mxPoint x="743.25" y="480" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="743" y="510" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="HWznGPXGOaG3OOnh7ew8-143" value="No" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;endArrow=block;endFill=0;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="HWznGPXGOaG3OOnh7ew8-139">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="970" y="445" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="HWznGPXGOaG3OOnh7ew8-144" value="Yes" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;endArrow=block;endFill=0;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="HWznGPXGOaG3OOnh7ew8-139">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="742" y="320" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="HWznGPXGOaG3OOnh7ew8-139" value="flag가 존재하는가?" style="rhombus;whiteSpace=wrap;html=1;shadow=0;fontFamily=Helvetica;fontSize=12;align=center;strokeWidth=1;spacing=6;spacingTop=-4;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="617.87" y="410" width="248.63" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="HWznGPXGOaG3OOnh7ew8-145" value="" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="970" y="410" width="250.76" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="HWznGPXGOaG3OOnh7ew8-149" value="Yes" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;endArrow=block;endFill=0;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="HWznGPXGOaG3OOnh7ew8-148">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="960" y="285" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="HWznGPXGOaG3OOnh7ew8-148" value="flag가 &#39;+&#39; or &#39; &#39;(space)인 경우" style="rhombus;whiteSpace=wrap;html=1;shadow=0;fontFamily=Helvetica;fontSize=12;align=center;strokeWidth=1;spacing=6;spacingTop=-4;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="618.94" y="250" width="248.63" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="HWznGPXGOaG3OOnh7ew8-150" value="0번째 idx를 부호로 채운다.&lt;br&gt;음수: &#39;-&#39;로 채운다.&lt;br&gt;양수: flag가 &#39; &#39;이면 &#39; &#39;로, &#39;+&#39;이면 &#39;+&#39;로 채운다." style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="961.62" y="250" width="250.76" height="70" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
