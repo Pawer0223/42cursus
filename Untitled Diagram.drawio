@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2020-11-03T07:29:17.870Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.111 Safari/537.36" etag="bZI72Og6K1h9-l4-OyKe" version="13.8.8" type="github">
+<mxfile host="app.diagrams.net" modified="2020-11-03T08:24:37.519Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.111 Safari/537.36" etag="w9UrEw0iJPnLAdazKr6E" version="13.8.8" type="github">
   <diagram id="C5RBs43oDa-KdzZeNtuy" name="Page-1">
-    <mxGraphModel dx="1545" dy="794" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1093" dy="1962" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="WIyWlLk6GJQsqaUBKTNV-0" />
         <mxCell id="WIyWlLk6GJQsqaUBKTNV-1" parent="WIyWlLk6GJQsqaUBKTNV-0" />
@@ -102,7 +102,7 @@
             <Array as="points" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="HWznGPXGOaG3OOnh7ew8-31" value="출력수행" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+        <mxCell id="HWznGPXGOaG3OOnh7ew8-31" value="서식을 저장 후&lt;br&gt;출력수행" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
           <mxGeometry x="335" y="1130" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="HWznGPXGOaG3OOnh7ew8-33" value="Yes" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;jettySize=auto;orthogonalLoop=1;fontSize=11;endArrow=block;endFill=0;endSize=8;strokeWidth=1;shadow=0;labelBackgroundColor=none;entryX=1;entryY=0.5;entryDx=0;entryDy=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="HWznGPXGOaG3OOnh7ew8-0" target="HWznGPXGOaG3OOnh7ew8-6">
@@ -133,8 +133,8 @@
             <mxPoint x="260" y="890" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="HWznGPXGOaG3OOnh7ew8-40" value="1. 서식 자료형에 따른 va_arg매크로 실행.&lt;br&gt;=&amp;gt; 길이에서 check된 경우 분기처리 !!&lt;br&gt;&lt;br&gt;2. 각 자료형에 맞는 to Ascii함수 호출하여 char *로 저장&amp;nbsp;&lt;br&gt;=&amp;gt; 실수의 경우 끊어서 읽는방법 찾자..&lt;br&gt;=&amp;gt; 지수 표기법 (e, E)와 16진수 (x, X) 경우 변환해서 저장&lt;br&gt;&lt;br&gt;=&amp;gt; to Ascii하려면 len 구해서 =&amp;gt; 동적할당 후 =&amp;gt; char * 저장.&lt;br&gt;=&amp;gt; 숫자의 경우는 음수부호도 같이 처리." style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
-          <mxGeometry x="553.25" y="780" width="380" height="160" as="geometry" />
+        <mxCell id="HWznGPXGOaG3OOnh7ew8-40" value="자료형을 지정하여 가변인자를 받아온다.&lt;br&gt;서식 자료형에 따른 va_arg매크로 실행.&lt;br&gt;=&amp;gt; 길이가 있는경우는 분기하여 처리" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="617.87" y="870" width="250.76" height="70" as="geometry" />
         </mxCell>
         <mxCell id="HWznGPXGOaG3OOnh7ew8-42" value="" style="endArrow=block;html=1;dashed=1;endFill=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="HWznGPXGOaG3OOnh7ew8-31" target="HWznGPXGOaG3OOnh7ew8-47">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
@@ -156,30 +156,30 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="HWznGPXGOaG3OOnh7ew8-49" value="서식 자료형에 따른&lt;br&gt;가변인자 받기위한 자료형 check" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
-          <mxGeometry x="1033" y="990" width="154" height="60" as="geometry" />
+          <mxGeometry x="1010" y="990" width="154" height="60" as="geometry" />
         </mxCell>
         <mxCell id="HWznGPXGOaG3OOnh7ew8-50" value="&lt;font style=&quot;font-size: 12px&quot;&gt;width 있는가 ?&lt;/font&gt;" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
-          <mxGeometry x="678.25" y="660" width="130" height="80" as="geometry" />
+          <mxGeometry x="1760" y="440" width="130" height="80" as="geometry" />
         </mxCell>
         <mxCell id="HWznGPXGOaG3OOnh7ew8-54" value="&lt;span style=&quot;font-size: 11px&quot;&gt;flag가 있는가?&lt;/span&gt;" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
-          <mxGeometry x="678.25" y="280.63000000000005" width="130" height="80" as="geometry" />
+          <mxGeometry x="1114.13" y="-59.36999999999995" width="130" height="80" as="geometry" />
         </mxCell>
         <mxCell id="HWznGPXGOaG3OOnh7ew8-56" value="No" style="endArrow=block;html=1;dashed=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;endFill=0;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="HWznGPXGOaG3OOnh7ew8-54">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="742.75" y="270.00000000000006" as="sourcePoint" />
-            <mxPoint x="743.25" y="180.00000000000006" as="targetPoint" />
+            <mxPoint x="1178.63" y="-69.99999999999994" as="sourcePoint" />
+            <mxPoint x="1179.13" y="-159.99999999999994" as="targetPoint" />
             <Array as="points" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="HWznGPXGOaG3OOnh7ew8-57" value="" style="endArrow=block;html=1;dashed=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;endFill=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="HWznGPXGOaG3OOnh7ew8-50" target="HWznGPXGOaG3OOnh7ew8-54">
+        <mxCell id="HWznGPXGOaG3OOnh7ew8-57" value="" style="endArrow=block;html=1;dashed=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;endFill=0;entryX=0.498;entryY=1;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="HWznGPXGOaG3OOnh7ew8-50" target="HWznGPXGOaG3OOnh7ew8-116">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="753.25" y="820" as="sourcePoint" />
-            <mxPoint x="743" y="470" as="targetPoint" />
+            <mxPoint x="1835" y="600" as="sourcePoint" />
+            <mxPoint x="1824.75" y="240" as="targetPoint" />
             <Array as="points" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="HWznGPXGOaG3OOnh7ew8-84" value="&#39;-&#39;인 경우&lt;br&gt;: 음수면 0번째에 &#39;-&#39; 삽입&lt;br&gt;start를 1로 지정&lt;br&gt;&lt;br&gt;&#39;+&#39;인 경우&lt;br&gt;양수일 때, +기호를 붙여준다.&lt;br&gt;( -는 이미 붙여놓으니깐, +만 붙이면 됨)&lt;br&gt;폭(width) - 출력대상 크기 위치에 부호 삽입&lt;br&gt;양수일 때는 start를 [ 폭(width) - 출력대상 크기 + 1]로 지정&lt;br&gt;&lt;br&gt;&#39;#&#39;인 경우&lt;br&gt;서식문자 x, X인 경우 앞에 0x or 0X를 붙여준다.&lt;br&gt;&lt;br&gt;&#39; &#39;(space)인 경우&lt;br&gt;start를 [ 폭 - 출력대상 크기]로 지정&lt;br&gt;&lt;br&gt;0인 경우&lt;br&gt;우측 정렬 및 padding 0채우기 해야함으로..&lt;br&gt;[폭 - 출력대상 크기 - 1]까지 0으로 채운다.&lt;br&gt;&lt;br&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
-          <mxGeometry x="991.5" y="180" width="398.5" height="281.25" as="geometry" />
+        <mxCell id="HWznGPXGOaG3OOnh7ew8-84" value="&#39;-&#39;인 경우&lt;br&gt;: 음수면 0번째에 &#39;-&#39; 삽입&lt;br&gt;start를 1로 지정&lt;br&gt;&lt;br&gt;&#39;+&#39;인 경우&lt;br&gt;양수일 때, +기호를 붙여준다.&lt;br&gt;( -는 이미 붙여놓으니깐, +만 붙이면 됨)&lt;br&gt;폭(width) - 출력대상 크기 위치에 부호 삽입&lt;br&gt;양수일 때는 start를 [ 폭(width) - 출력대상 크기 + 1]로 지정&lt;br&gt;&lt;br&gt;&#39;#&#39;인 경우&lt;br&gt;서식문자 x, X인 경우 앞에 0x or 0X를 붙여준다.&lt;br&gt;&lt;br&gt;&#39; &#39;(space)인 경우&lt;br&gt;start를 [ 폭 - 출력대상 크기 + 1]로 지정&lt;br&gt;=&amp;gt; 양수의 경우 &#39; &#39;를 써야 함 !!&lt;br&gt;&lt;br&gt;0인 경우&lt;br&gt;우측 정렬 및 padding 0채우기 해야함으로..&lt;br&gt;[폭 - 출력대상 크기 - 1]까지 0으로 채운다.&lt;br&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="1427.38" y="-160" width="398.5" height="281.25" as="geometry" />
         </mxCell>
         <mxCell id="HWznGPXGOaG3OOnh7ew8-95" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;jettySize=auto;orthogonalLoop=1;fontSize=11;endArrow=block;endFill=0;endSize=8;strokeWidth=1;shadow=0;labelBackgroundColor=none;exitX=0.5;exitY=0;exitDx=0;exitDy=0;dashed=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="HWznGPXGOaG3OOnh7ew8-47" target="HWznGPXGOaG3OOnh7ew8-40">
           <mxGeometry y="10" relative="1" as="geometry">
@@ -191,46 +191,59 @@
         <mxCell id="HWznGPXGOaG3OOnh7ew8-97" value="Yes" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;jettySize=auto;orthogonalLoop=1;fontSize=11;endArrow=block;endFill=0;endSize=8;strokeWidth=1;shadow=0;labelBackgroundColor=none;exitX=1;exitY=0.5;exitDx=0;exitDy=0;dashed=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="HWznGPXGOaG3OOnh7ew8-54" target="HWznGPXGOaG3OOnh7ew8-84">
           <mxGeometry y="10" relative="1" as="geometry">
             <mxPoint as="offset" />
-            <mxPoint x="818.25" y="478.1300000000001" as="sourcePoint" />
-            <mxPoint x="878.25" y="300.13000000000005" as="targetPoint" />
+            <mxPoint x="1254.13" y="138.1300000000001" as="sourcePoint" />
+            <mxPoint x="1314.13" y="-39.86999999999995" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="HWznGPXGOaG3OOnh7ew8-108" value="" style="endArrow=block;html=1;dashed=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;endFill=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="HWznGPXGOaG3OOnh7ew8-40" target="HWznGPXGOaG3OOnh7ew8-50">
+        <mxCell id="HWznGPXGOaG3OOnh7ew8-108" value="" style="endArrow=block;html=1;dashed=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;endFill=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" target="HWznGPXGOaG3OOnh7ew8-50">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="753.25" y="670" as="sourcePoint" />
-            <mxPoint x="753.25" y="620" as="targetPoint" />
+            <mxPoint x="1825" y="550" as="sourcePoint" />
+            <mxPoint x="1835" y="400" as="targetPoint" />
             <Array as="points" />
           </mxGeometry>
         </mxCell>
         <mxCell id="HWznGPXGOaG3OOnh7ew8-109" value="Yes" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;jettySize=auto;orthogonalLoop=1;fontSize=11;endArrow=block;endFill=0;endSize=8;strokeWidth=1;shadow=0;labelBackgroundColor=none;dashed=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" target="HWznGPXGOaG3OOnh7ew8-111" source="HWznGPXGOaG3OOnh7ew8-50">
           <mxGeometry y="10" relative="1" as="geometry">
             <mxPoint as="offset" />
-            <mxPoint x="810" y="700" as="sourcePoint" />
-            <mxPoint x="1033" y="700" as="targetPoint" />
+            <mxPoint x="1891.75" y="480" as="sourcePoint" />
+            <mxPoint x="2114.75" y="480" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="HWznGPXGOaG3OOnh7ew8-111" value="width &amp;gt; char *변환한 가변인자의 크기" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
-          <mxGeometry x="1033" y="630" width="237" height="140" as="geometry" />
+          <mxGeometry x="2114.75" y="410" width="237" height="140" as="geometry" />
         </mxCell>
         <mxCell id="HWznGPXGOaG3OOnh7ew8-112" value="Yes" style="endArrow=block;html=1;dashed=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;endFill=0;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="HWznGPXGOaG3OOnh7ew8-111">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="1420" y="770" as="sourcePoint" />
-            <mxPoint x="1410" y="700" as="targetPoint" />
+            <mxPoint x="2501.75" y="550" as="sourcePoint" />
+            <mxPoint x="2491.75" y="480" as="targetPoint" />
             <Array as="points" />
           </mxGeometry>
         </mxCell>
         <mxCell id="HWznGPXGOaG3OOnh7ew8-113" value="width만큼 동적할당" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
-          <mxGeometry x="1410" y="670" width="120" height="60" as="geometry" />
+          <mxGeometry x="2491.75" y="450" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="HWznGPXGOaG3OOnh7ew8-114" value="No" style="endArrow=block;html=1;dashed=1;endFill=0;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="1152" y="630" as="sourcePoint" />
-            <mxPoint x="1152" y="570" as="targetPoint" />
+            <mxPoint x="2233.75" y="410" as="sourcePoint" />
+            <mxPoint x="2233.75" y="350" as="targetPoint" />
             <Array as="points" />
           </mxGeometry>
         </mxCell>
         <mxCell id="HWznGPXGOaG3OOnh7ew8-115" value="char *크기만큼 동적할당" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
-          <mxGeometry x="1082.25" y="510" width="138.5" height="60" as="geometry" />
+          <mxGeometry x="2164" y="290" width="138.5" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="HWznGPXGOaG3OOnh7ew8-116" value="정밀도(.) 있는가?" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="1760" y="150" width="130" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="HWznGPXGOaG3OOnh7ew8-117" value="Yes" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;jettySize=auto;orthogonalLoop=1;fontSize=11;endArrow=block;endFill=0;endSize=8;strokeWidth=1;shadow=0;labelBackgroundColor=none;dashed=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="HWznGPXGOaG3OOnh7ew8-116">
+          <mxGeometry y="10" relative="1" as="geometry">
+            <mxPoint as="offset" />
+            <mxPoint x="1900" y="490" as="sourcePoint" />
+            <mxPoint x="2124.75" y="190" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="HWznGPXGOaG3OOnh7ew8-118" value="1. 서식 자료형에 따른 va_arg매크로 실행.&lt;br&gt;=&amp;gt; 길이에서 check된 경우 분기처리 !!&lt;br&gt;&lt;br&gt;2. 지수 표기법(e, E)또는 16진수(x, X)의 경우&amp;nbsp;&lt;br&gt;&lt;br&gt;2. 각 자료형에 맞는 to Ascii함수 호출하여 char *로 저장&amp;nbsp;&lt;br&gt;=&amp;gt; 실수의 경우 끊어서 읽는방법 찾자..&lt;br&gt;=&amp;gt; 지수 표기법 (e, E)와 16진수 (x, X) 경우 변환해서 저장&lt;br&gt;&lt;br&gt;=&amp;gt; to Ascii하려면 len 구해서 =&amp;gt; 동적할당 후 =&amp;gt; char * 저장.&lt;br&gt;=&amp;gt; 숫자의 경우는 음수부호도 같이 처리.&lt;br&gt;&lt;br&gt;=&amp;gt; flag가 있는 경우에는 동적할당 크기를 +1 해서 부호가 들어갈 자리를 만들어주어야 한다 !" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="1170" y="850" width="380" height="180" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
