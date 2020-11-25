@@ -1,0 +1,16 @@
+﻿  소스의 유효성을 검사하는 중
+  소스를 '127.0.0.1'(으)로 원격으로 복사하는 중
+  아키텍처의 유효성을 검사하는 중
+  아키텍처의 유효성을 검사하는 중
+  원격 빌드를 시작하는 중
+  소스를 컴파일하는 중:
+  ft_global.c
+  ft_printf.c
+  ft_atoi.c
+  ft_isdigit.c
+  ft_strlcpy.c
+  ft_strlen.c
+  ft_substr.c
+  main.c
+  개체를 연결하는 중
+  Printf.vcxproj -> C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\bin\x64\Debug\Printf.out

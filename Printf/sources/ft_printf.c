@@ -27,15 +27,15 @@ void	check_flag(const char c)
 
 void	check_width(const char *format)
 {
-	int		start;
-	char	*num;
+	int	start;
+	char			*num;
 
 	start = g_i;
 	while (format[g_i] && ft_isdigit(format[g_i]))
 		g_i++;
 	if (start != g_i)
 	{
-		num = ft_substr(format, start, g_i - start);
+		num = ft_substr(format, (unsigned int)start, (size_t)(g_i - start));
 		printf("nums is :[%s]\n",num);
 		g_info->width = ft_atoi(num);
 		free(num);
@@ -51,8 +51,8 @@ void	format_write(const char *format)
 		check_flag(format[g_i]);
 	if (format[++g_i])
 		check_width(format);
-	if (format[g_i] == '.')
-		check_pre_len(format);
+	//if (format[g_i] == '.')
+		//check_pre_len(format);
 }
 void	start(const char *format, ...)
 {
