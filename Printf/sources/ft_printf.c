@@ -13,59 +13,126 @@
 #include "printf.h"
 #include "libft.h"
 
-void	check_flag(const char c)
+int			malloc_input_num(long long n)
 {
-	if (c == '-' || c == '+' || c == ' ' || c == '#' || c == '0')
-		g_info->flag = c;
-	else if(c == '%')
+	int		len;
+	char	isMinus;
+
+	len = (n <= 0 || g_info->sign_exist == 'Y') ? 1 : 0;
+	isMinus = n < 0 ? 'Y' : 'N';
+	if (n < 0)
+		g_info->sign_exist = 'Y';
+	while (n != 0)
 	{
-		char percent= '%';
-		write(1, &percent, 1);
+		n /= 10;
+		len++;
 	}
-	printf("flag:[%c]\n",g_info->flag);
+	if (!(g_info->input = (char*)malloc(sizeof(char) * (size_t)(len + 1))))
+		return (0);
+	g_info->input[len] = 0;
+	if (isMinus == 'Y')
+		g_info->input[0] = '-';
+	else if (g_info->sign_exist == 'Y')
+		g_info->input[0] = g_info->flag;
+	return (len);
 }
 
-void	check_width(const char *format)
+void			set_input_num(long long n, int idx)
 {
-	int	start;
-	char			*num;
+	long long nmg;
+	if (n != 0)
+	{
+		set_input_num((n / 10), (idx - 1));
+		nmg = n % 10;
+		if (nmg < 0)
+			nmg *= -1;
+		g_info->input[idx] = '0' + nmg;
+	}
+}
 
-	start = g_i;
-	while (format[g_i] && ft_isdigit(format[g_i]))
+void		write_di(const char *format)
+{
+	long long	n;
+	int			len;
+
+	n = 0;
+	if (g_info->length)
+	{
+		if (ft_strncmp(g_info->length, "l", 3) == 0)
+			n = va_arg(*(g_info->ap), long int);
+		else if (ft_strncmp(g_info->length, "ll", 3) == 0)
+			n = va_arg(*(g_info->ap), long long int);
+		else if (ft_strncmp(g_info->length, "h", 3) == 0)
+			n = va_arg(*(g_info->ap), short int);
+		else if (ft_strncmp(g_info->length, "hh", 3) == 0)
+			n = va_arg(*(g_info->ap), signed char);
+	}
+	else
+		n = va_arg(*(g_info->ap), int);
+	if (!(len = malloc_input_num(n)))
+		return (0);
+	set_input_num(n, len - 1);
+}
+
+int		write_format(const char *format)
+{
+	char c;
+	c = g_info->specifier;
+
+	if (c == 'd' || c == 'i')
+		write_di(format);
+	//else if (c == 'u' || c == 'x' || c == 'x')
+	//	write_di(format);
+	//else if (c == 'c')
+	//	write_di(format);
+	//else if (c == 's')
+	//	write_di(format);
+	//else if (c == 'p')
+	//	write_di(format);
+	//else if (c == 'n')
+	//	write_di(format);
+	//else if (c == 'f' || c == 'g' || c == 'e')
+	//	write_di(format);
+}
+/* input format_check */
+int		check_format(const char *format)
+{
+	if (format[++g_i] && check_flag(format[g_i]))
 		g_i++;
-	if (start != g_i)
+	if (!format[g_i] || !check_size(format, 1))
+		return (0);
+	if (format[g_i] == '.')
 	{
-		num = ft_substr(format, (unsigned int)start, (size_t)(g_i - start));
-		printf("nums is :[%s]\n",num);
-		g_info->width = ft_atoi(num);
-		free(num);
+		g_i++;
+		if (check_size(format, 2))
+			return (0);
 	}
-	printf("g_info->width : %d\n", g_info->width);
+	if (!format[g_i] || !check_len(format))
+		return (0);
+	if (!format[g_i] || !check_spec(format))
+		return (0);
+	if (!write_format(format))
+		return (0);
+	return (1);
 }
 
-void	format_write(const char *format)
-{
-	printf("\nformat_write\n");
-
-	if (format[++g_i])
-		check_flag(format[g_i]);
-	if (format[++g_i])
-		check_width(format);
-	//if (format[g_i] == '.')
-		//check_pre_len(format);
-}
-void	start(const char *format, ...)
+int			ft_printf(const char *format, ...)
 {
 	va_list 		ap;
 
-	printf("input format is : [%s]\n", format);
+	printf("### input format is : [%s] ### \n", format);
 	va_start(ap, format);
 	init_g(&ap);
 	while (format[g_i])
 	{
 		if (format[g_i] == '%')
 		{
-			format_write(format);
+			if (!check_format(format))
+			{
+				free_g();
+				return (0);
+			}
+			struct_print();
 			clear_g();
 		}
 		else

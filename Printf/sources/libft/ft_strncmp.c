@@ -1,28 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_substr.c                                        :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: taekang <taekang@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/11 12:04:00 by taekang           #+#    #+#             */
-/*   Updated: 2020/10/23 14:13:47 by taekang          ###   ########.fr       */
+/*   Created: 2020/10/06 07:10:06 by taekang           #+#    #+#             */
+/*   Updated: 2020/10/08 01:55:03 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	char	*dst;
+	size_t			i;
+	unsigned char	*str1;
+	unsigned char	*str2;
 
-	if (!s)
-		return (0);
-	if (!(dst = (char *)malloc(sizeof(char) * (len + 1))))
-		return (0);
-	if (start >= ft_strlen(s))
-		ft_strlcpy(dst, "", 2);
-	else
-		ft_strlcpy(dst, (s + start), len + 1);
-	return (dst);
+	str1 = (unsigned char *)s1;
+	str2 = (unsigned char *)s2;
+	i = 0;
+	while (i < n)
+	{
+		if (str1[i] != str2[i] || !str1[i] || !str2[i])
+			return (str1[i] - str2[i]);
+		i++;
+	}
+	return (0);
 }

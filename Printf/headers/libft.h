@@ -22,5 +22,5 @@ char	*ft_substr(char const *s, unsigned int start, size_t len);
 int		ft_isdigit(int c);
 size_t	ft_strlcpy(char *dest, const char *src, size_t dstsize);
 size_t	ft_strlen(const char *s);
-
+int		ft_strncmp(const char* s1, const char* s2, size_t n);
 #endif

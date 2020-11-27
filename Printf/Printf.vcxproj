@@ -103,12 +103,14 @@
     <ClInclude Include="headers\printf.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="sources\ft_check.c" />
     <ClCompile Include="sources\ft_global.c" />
     <ClCompile Include="sources\ft_printf.c" />
     <ClCompile Include="sources\libft\ft_atoi.c" />
     <ClCompile Include="sources\libft\ft_isdigit.c" />
     <ClCompile Include="sources\libft\ft_strlcpy.c" />
     <ClCompile Include="sources\libft\ft_strlen.c" />
+    <ClCompile Include="sources\libft\ft_strncmp.c" />
     <ClCompile Include="sources\libft\ft_substr.c" />
     <ClCompile Include="sources\test\main.c" />
   </ItemGroup>
