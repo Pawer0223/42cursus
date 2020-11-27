@@ -4,8 +4,6 @@
 /* flag exist = return 0 else return 1 */
 int			check_flag(const char c)
 {
-	if (c == ' ' || c == '+')
-		g_info->sign_exist = 'Y';
 	if (c == '-' || c == '+' || c == ' ' || c == '#' || c == '0')
 		g_info->flag = c;
 	else if (c == '%')
@@ -63,10 +61,8 @@ int			check_len(const char *format)
 	return (1);
 }
 /* specifier exist return 1 else return 0 */
-int			check_spec(const char *format)
+int			check_spec(char c)
 {
-	char c;
-	c = format[g_i];
 	if (c == 'c' || c == 's' || c == 'p' || c == 'd' || c == 'i'
 		|| c == 'u' || c == 'x' || c == 'X' || c == 'n' || c == 'f'
 		|| c == 'g' || c == 'e')
@@ -76,17 +72,4 @@ int			check_spec(const char *format)
 		return (1);
 	}
 	return (0);
-}
-
-void		struct_print()
-{
-	printf("\n\n ################# Struc Info Print Start ############# \n");
-	printf("length : [%s], ", g_info->length);
-	printf("flag : [%c], ", g_info->flag);
-	printf("specifier : [%c], ", g_info->specifier);
-	printf("width : [%d], ", g_info->width);
-	printf("precision_len : [%d] ,", g_info->precision_len);
-	printf("sign_exist : [%c] ,", g_info->sign_exist);
-	printf("input : [%s]\n", g_info->input);
-	printf("################# Struc Info Print End############# \n");
 }

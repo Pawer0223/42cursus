@@ -22,7 +22,7 @@ int		init_g(va_list *ap)
 	g_info->input = 0;
 	g_info->width = -1;
 	g_info->precision_len = -1;
-	g_info->sign_exist = 'N';
+	g_info->input = 0;
 	g_i = 0;
 	return (1);
 }
@@ -30,23 +30,27 @@ void	clear_g()
 {
 	if (g_info->length)
 		free(g_info->length);
-	if (g_info->input) {
-		printf("remove input : [%s]\n", g_info->input);
-		free(g_info->input);
-	}
+	if (g_info->input)
+		free_input(g_info->input);
 	g_info->length = 0;
 	g_info->input = 0;
 	g_info->flag = 0;
 	g_info->width = -1;
 	g_info->precision_len = -1;
-	g_info->sign_exist = 'N';
+}
+
+void	free_input(t_input	*input)
+{
+	if (input->str)
+		free(input->str);
+	free(input);
 }
 void	free_g(void)
 {
 	if (g_info->length)
 		free(g_info->length);
 	if (g_info->input)
-		free(g_info->input);
+		free_input(g_info->input);
 	va_end(*g_info->ap);
 	free(g_info);
 }
