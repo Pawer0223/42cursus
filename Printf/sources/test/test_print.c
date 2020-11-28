@@ -20,6 +20,12 @@ void		t_printf_print()
 void		t_input_print()
 {
 	t_input *input = g_info->input;
+
+	if (!input)
+	{
+		printf("input is not init\n");
+		return;
+	}
 	printf("\n\n ################# Input ############# \n");
 	printf("str : [%s], ", input->str);
 	printf("sign : [%c], ", input->sign);

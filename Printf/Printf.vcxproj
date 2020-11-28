@@ -104,8 +104,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sources\ft_check.c" />
+    <ClCompile Include="sources\ft_format_write.c" />
     <ClCompile Include="sources\ft_global.c" />
-    <ClCompile Include="sources\ft_write_di.c" />
+    <ClCompile Include="sources\ft_set_di.c" />
     <ClCompile Include="sources\ft_printf.c" />
     <ClCompile Include="sources\libft\ft_atoi.c" />
     <ClCompile Include="sources\libft\ft_bzero.c" />

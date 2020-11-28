@@ -13,65 +13,75 @@
 #include "printf.h"
 #include "libft.h"
 
-void			fill_str(char *str, long long n, int idx)
+void			fill_str(char *str, long long n, int idx, char sign)
 {
 	long long nmg;
 
 	if (n != 0)
 	{
-		fill_str(str, (n / 10), (idx - 1));
+		fill_str(str, (n / 10), (idx - 1), sign);
 		nmg = n % 10;
 		if (nmg < 0)
 			nmg *= -1;
 		str[idx] = ('0' + nmg);
 	}
+	else
+	{
+		if (sign && idx >= 0)
+			str[idx--] = sign;
+		while (idx >= 0)
+			str[idx--] = '0';
+	}
 }
 
 void			set_input_sign(t_input *input, long long n)
 {
-	if (g_info->specifier == ' ' || g_info->specifier == '+')
-		input->sign = g_info->specifier;
+	if (g_info->flag == ' ' || g_info->flag == '+')
+		input->sign = g_info->flag;
 	else if (n < 0)
 		input->sign = '-';
 	else
 		input->sign = 0;
 }
 
-int				get_num_len(t_input *input, long long n)
+int				setlen_retsize(t_input *input, long long n)
 {
 	int	len;
-
-	len = (n <= 0 || input->sign) ? 1 : 0;
+	
+	len = 0;
 	while (n != 0)
 	{
 		n /= 10;
 		len++;
 	}
+	input->len = len;
+	if (n <= 0 || input->sign)
+		len++;
+	if (g_info->precision_len > len)
+		return (g_info->precision_len);
 	return (len);
 }
 
-int				set_input(long long n)
+int				set_num_input(long long n)
 {
 	t_input		*input;
 	char		*str;
-	int			len;
+	int			size;
 
 	if (!(input = (t_input *)(malloc(sizeof(t_input)))))
 		return (0);
 	set_input_sign(input, n);
-	len = get_num_len(input, n);
-	if (!(str = (char *)malloc(sizeof(char) * (len + 1))))
+	size = setlen_retsize(input, n);
+	if (!(str = (char *)malloc(sizeof(char) * (size + 1))))
 		return (0);
-	input->len = len;
-	str[0] = input->sign;
-	str[len] = 0;
-	fill_str(str, n , len - 1);
+	str[size] = 0;
+	fill_str(str, n , size - 1, input->sign);
 	input->str = str;
 	g_info->input = input;
 	return (1);
 }
 
-int				ft_write_di()
+int				ft_set_di()
 {
 	long long	n;
 
@@ -89,6 +99,7 @@ int				ft_write_di()
 	}
 	else
 		n = va_arg(*(g_info->ap), int);
-	if (!set_input(n))
+	if (!set_num_input(n))
 		return (0);
+	return (1);
 }

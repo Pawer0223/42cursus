@@ -48,7 +48,7 @@ int				check_size(const char* format, int type);
 int				check_len(const char* format);
 int				check_spec(char c);
 /* write specifier (d, i) funcs */
-int				ft_write_di();
+int				ft_set_di();
 /* remove !!! for Test .. */
 void			all_print();
 void			t_printf_print();

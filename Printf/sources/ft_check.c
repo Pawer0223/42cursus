@@ -5,14 +5,17 @@
 int			check_flag(const char c)
 {
 	if (c == '-' || c == '+' || c == ' ' || c == '#' || c == '0')
+	{
 		g_info->flag = c;
+		g_i++;
+	}
 	else if (c == '%')
 	{
 		char percent = '%';
 		write(1, &percent, 1);
-	}
-	else
+		g_i++;
 		return (0);
+	}
 	return (1);
 }
 /* type1 = set width, type2 = set precision_len */
