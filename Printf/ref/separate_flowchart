@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2020-11-29T05:04:46.221Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.66 Safari/537.36" etag="qzfDJ8SbvThiEGb4AaM9" version="13.10.2" type="github">
+<mxfile host="app.diagrams.net" modified="2020-11-29T05:07:43.875Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.66 Safari/537.36" etag="1jk5IEWnkeSvs-JrRbg4" version="13.10.2" type="github">
   <diagram id="IiU8mu9iWVWjcpE46ev8" name="Page-1">
-    <mxGraphModel dx="3773" dy="3935" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="9075" dy="6810" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -440,18 +440,7 @@
             <mxPoint x="4762" y="460" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="Am2JBDlyG6pjrl0g9-4q-526" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;dashed=1;endArrow=classic;endFill=1;strokeColor=#001DBC;strokeWidth=3;fontSize=20;fillColor=#0050ef;" edge="1" parent="1">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="3150" y="630" as="sourcePoint" />
-            <mxPoint x="4312" y="-1230" as="targetPoint" />
-            <Array as="points">
-              <mxPoint x="3150" y="130" />
-              <mxPoint x="3880" y="130" />
-              <mxPoint x="3880" y="-1230" />
-            </Array>
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="Am2JBDlyG6pjrl0g9-4q-529" value="&lt;div style=&quot;font-size: 20px&quot;&gt;&lt;ul&gt;&lt;li&gt;flag가 0일 때 padding은 0이다.&lt;/li&gt;&lt;li&gt;But, 정밀도가 있을때는 ignore나서 &#39; &#39;로 채움&lt;/li&gt;&lt;li&gt;flag가 &#39;-&#39;인 경우에는 input출력 -&amp;gt; padding을 &#39; &#39;로 출력&lt;/li&gt;&lt;li&gt;&#39;-&#39;가 아니면 padding출력 후 문자열 출력.&lt;/li&gt;&lt;li&gt;여기서 ! padding출력 크기는 [너비 - 입력정수 크기]이다.&lt;/li&gt;&lt;li&gt;&lt;br&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.document2;whiteSpace=wrap;size=0.25;dashed=1;strokeColor=#CC0000;align=left;" vertex="1" parent="1">
+        <mxCell id="Am2JBDlyG6pjrl0g9-4q-529" value="&lt;div style=&quot;font-size: 20px&quot;&gt;&lt;ul&gt;&lt;li&gt;flag가 0일 때 padding은 0이다.&lt;/li&gt;&lt;li&gt;But, 정밀도가 있을때는 ignore나서 &#39; &#39;로 채움&lt;/li&gt;&lt;li&gt;flag가 &#39;-&#39;인 경우에는 input출력 -&amp;gt; padding을 &#39; &#39;로 출력&lt;/li&gt;&lt;li&gt;&#39;-&#39;가 아니면 padding출력 후 문자열 출력.&lt;/li&gt;&lt;li&gt;여기서 padding은 [너비 - 출력문자 크기]만큼 출력한다.&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.document2;whiteSpace=wrap;size=0.25;dashed=1;strokeColor=#CC0000;align=left;" vertex="1" parent="1">
           <mxGeometry x="5039" y="845" width="601" height="315" as="geometry" />
         </mxCell>
       </root>
