@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2020-11-29T04:34:35.874Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.66 Safari/537.36" etag="i6Sgr464fH79yO067FPU" version="13.10.2" type="github">
+<mxfile host="app.diagrams.net" modified="2020-11-29T05:04:46.221Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.66 Safari/537.36" etag="qzfDJ8SbvThiEGb4AaM9" version="13.10.2" type="github">
   <diagram id="IiU8mu9iWVWjcpE46ev8" name="Page-1">
-    <mxGraphModel dx="2189" dy="3652" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="3773" dy="3935" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -290,49 +290,54 @@
         <mxCell id="Am2JBDlyG6pjrl0g9-4q-455" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;dashed=1;endArrow=classic;endFill=1;strokeColor=#001DBC;strokeWidth=3;fontSize=20;fillColor=#0050ef;" edge="1" parent="1" source="Am2JBDlyG6pjrl0g9-4q-432" target="Am2JBDlyG6pjrl0g9-4q-444">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="3102" y="120" />
+              <mxPoint x="3140" y="120" />
+              <mxPoint x="3870" y="120" />
+              <mxPoint x="3870" y="-1240" />
             </Array>
           </mxGeometry>
+        </mxCell>
+        <mxCell id="Am2JBDlyG6pjrl0g9-4q-512" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;endArrow=classic;endFill=1;strokeColor=#000000;strokeWidth=1;fontSize=20;" edge="1" parent="1" source="Am2JBDlyG6pjrl0g9-4q-432" target="Am2JBDlyG6pjrl0g9-4q-511">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="Am2JBDlyG6pjrl0g9-4q-432" value="&lt;span style=&quot;font-size: 20px&quot;&gt;ft_set_di&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;" vertex="1" parent="1">
           <mxGeometry x="3017" y="620" width="230" height="120" as="geometry" />
         </mxCell>
         <mxCell id="Am2JBDlyG6pjrl0g9-4q-443" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=20;" edge="1" parent="1" source="Am2JBDlyG6pjrl0g9-4q-444" target="Am2JBDlyG6pjrl0g9-4q-447">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="3741.499999999999" y="230" as="targetPoint" />
+            <mxPoint x="4461.499999999999" y="-1130" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="Am2JBDlyG6pjrl0g9-4q-444" value="&lt;span style=&quot;font-size: 20px&quot;&gt;ft_set_di&lt;/span&gt;" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.start_1;whiteSpace=wrap;" vertex="1" parent="1">
-          <mxGeometry x="3582" y="80" width="319" height="80" as="geometry" />
+          <mxGeometry x="4302" y="-1280" width="319" height="80" as="geometry" />
         </mxCell>
         <mxCell id="Am2JBDlyG6pjrl0g9-4q-470" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;endArrow=classic;endFill=1;strokeColor=#000000;strokeWidth=1;fontSize=20;" edge="1" parent="1" source="Am2JBDlyG6pjrl0g9-4q-447" target="Am2JBDlyG6pjrl0g9-4q-461">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="Am2JBDlyG6pjrl0g9-4q-447" value="&lt;div&gt;&lt;span style=&quot;font-size: 20px&quot;&gt;va_arg 수행&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;font-size: 20px&quot;&gt;( 길이여부에 따라 자료형 결정 )&lt;/span&gt;&lt;span style=&quot;font-size: 20px&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;align=center;" vertex="1" parent="1">
-          <mxGeometry x="3580" y="280" width="323" height="107.5" as="geometry" />
+          <mxGeometry x="4300" y="-1080" width="323" height="107.5" as="geometry" />
         </mxCell>
         <mxCell id="Am2JBDlyG6pjrl0g9-4q-449" value="&lt;div style=&quot;font-size: 20px&quot;&gt;&lt;ul&gt;&lt;li&gt;&lt;font color=&quot;#ff3333&quot;&gt;va_arg수행한 결과는 가장 큰 자료형 long long으로 받는다.&lt;/font&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.document2;whiteSpace=wrap;size=0.25;dashed=1;strokeColor=#CC0000;align=left;" vertex="1" parent="1">
-          <mxGeometry x="4095" y="62.5" width="421" height="115" as="geometry" />
+          <mxGeometry x="4815" y="-1297.5" width="421" height="115" as="geometry" />
         </mxCell>
         <mxCell id="Am2JBDlyG6pjrl0g9-4q-451" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=20;dashed=1;strokeColor=#CC0000;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="Am2JBDlyG6pjrl0g9-4q-447" target="Am2JBDlyG6pjrl0g9-4q-449">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="3994.999999999999" y="172.5" as="sourcePoint" />
-            <mxPoint x="4172.970000000001" y="67.5" as="targetPoint" />
+            <mxPoint x="4714.999999999999" y="-1187.5" as="sourcePoint" />
+            <mxPoint x="4892.970000000001" y="-1292.5" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="Am2JBDlyG6pjrl0g9-4q-473" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;endArrow=classic;endFill=1;strokeColor=#000000;strokeWidth=1;fontSize=20;" edge="1" parent="1" source="Am2JBDlyG6pjrl0g9-4q-461" target="Am2JBDlyG6pjrl0g9-4q-472">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="Am2JBDlyG6pjrl0g9-4q-461" value="&lt;span style=&quot;font-size: 20px&quot;&gt;sign 저장&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;align=center;" vertex="1" parent="1">
-          <mxGeometry x="3580" y="510" width="323" height="107.5" as="geometry" />
+          <mxGeometry x="4300" y="-850" width="323" height="107.5" as="geometry" />
         </mxCell>
         <mxCell id="Am2JBDlyG6pjrl0g9-4q-463" value="&lt;div style=&quot;font-size: 20px&quot;&gt;&lt;ul&gt;&lt;li&gt;음수의 경우 &#39;-&#39;&lt;/li&gt;&lt;li&gt;flag가 &#39; &#39;또는 &#39;+&#39;의 경우 flag와 동일하게&lt;/li&gt;&lt;li&gt;없다면 null(0)&lt;/li&gt;&lt;li&gt;&lt;font color=&quot;#ff3333&quot;&gt;※ 여기서 음수조건을 가장 먼저봐야 함. 비교 기준이 가변인자 n과 flag 2개이다. 따라서 음수를 1순위로 보고, 음수가 아니라면 flag를 확인해서 체크하도록 해야 함.&lt;/font&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.document2;whiteSpace=wrap;size=0.25;dashed=1;strokeColor=#CC0000;align=left;" vertex="1" parent="1">
-          <mxGeometry x="4095" y="440" width="555" height="270" as="geometry" />
+          <mxGeometry x="4815" y="-920" width="555" height="270" as="geometry" />
         </mxCell>
         <mxCell id="Am2JBDlyG6pjrl0g9-4q-464" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=20;dashed=1;strokeColor=#CC0000;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="Am2JBDlyG6pjrl0g9-4q-461" target="Am2JBDlyG6pjrl0g9-4q-463">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="3903.000000000001" y="796.25" as="sourcePoint" />
-            <mxPoint x="4020" y="640" as="targetPoint" />
+            <mxPoint x="4623.000000000001" y="-563.75" as="sourcePoint" />
+            <mxPoint x="4740" y="-720" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="Am2JBDlyG6pjrl0g9-4q-465" value="&lt;ul style=&quot;font-size: 20px&quot;&gt;&lt;li&gt;&lt;span style=&quot;font-size: 20px&quot;&gt;포맷을 검사하면서&amp;nbsp;&lt;/span&gt;전역변수에 저장한다.&lt;/li&gt;&lt;li&gt;서식문자가 나오기전에 문자열이 종료시 false&lt;/li&gt;&lt;li&gt;너비 및 길이 구하면서 substr하면서 동적할당 실패시 false&lt;/li&gt;&lt;li&gt;길이(length) 동적할당 실패시 false&lt;/li&gt;&lt;li&gt;올바르지 않은 서식문자이면 false&amp;nbsp;&lt;/li&gt;&lt;/ul&gt;" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.document2;whiteSpace=wrap;size=0.25;dashed=1;strokeColor=#CC0000;align=left;" vertex="1" parent="1">
@@ -345,22 +350,109 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="Am2JBDlyG6pjrl0g9-4q-467" value="&lt;div style=&quot;font-size: 20px&quot;&gt;&lt;ul&gt;&lt;li&gt;서식문자 d, i의 가변인자를 받아 input 정보를 저장한다.&lt;/li&gt;&lt;li&gt;input 정보를 담을 구조체 포인터 동적할당&lt;/li&gt;&lt;li&gt;t_input 멤버에 char *동적할당.&lt;/li&gt;&lt;li&gt;동적할당 실패시 false(0) return&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.document2;whiteSpace=wrap;size=0.25;dashed=1;strokeColor=#CC0000;align=left;" vertex="1" parent="1">
-          <mxGeometry x="3880" y="-360" width="421" height="270" as="geometry" />
+          <mxGeometry x="4600" y="-1720" width="421" height="270" as="geometry" />
         </mxCell>
         <mxCell id="Am2JBDlyG6pjrl0g9-4q-468" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=20;dashed=1;strokeColor=#CC0000;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;exitPerimeter=0;" edge="1" parent="1" source="Am2JBDlyG6pjrl0g9-4q-444" target="Am2JBDlyG6pjrl0g9-4q-467">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="3680.000000000001" y="-123.75" as="sourcePoint" />
-            <mxPoint x="3872" y="-330" as="targetPoint" />
+            <mxPoint x="4400.000000000001" y="-1483.75" as="sourcePoint" />
+            <mxPoint x="4592" y="-1690" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="Am2JBDlyG6pjrl0g9-4q-475" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;endArrow=classic;endFill=1;strokeColor=#000000;strokeWidth=1;fontSize=20;" edge="1" parent="1" source="Am2JBDlyG6pjrl0g9-4q-472" target="Am2JBDlyG6pjrl0g9-4q-474">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="Am2JBDlyG6pjrl0g9-4q-472" value="&lt;span style=&quot;font-size: 20px&quot;&gt;정수 n의 길이(len) 저장 및&lt;br&gt;동적할당 될 크기를 return&lt;br&gt;&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;align=center;" vertex="1" parent="1">
-          <mxGeometry x="3580" y="930" width="323" height="107.5" as="geometry" />
+        <mxCell id="Am2JBDlyG6pjrl0g9-4q-477" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;endArrow=classic;endFill=1;strokeColor=#000000;strokeWidth=1;fontSize=20;" edge="1" parent="1" source="Am2JBDlyG6pjrl0g9-4q-472" target="Am2JBDlyG6pjrl0g9-4q-476">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="Am2JBDlyG6pjrl0g9-4q-474" value="&lt;div style=&quot;font-size: 20px&quot;&gt;&lt;ul&gt;&lt;li&gt;input정보의 크기는, 순수하게 입력 정수의 크기만을 저장한다. (마지막 padding출력시 실제 크기를 기준으로 비교 하기위해서 )&lt;/li&gt;&lt;li&gt;동적할당 크기는, 정밀도 길이와 [ 정수 n의 길이 + 부호크기 ]를 비교한다.&lt;/li&gt;&lt;li&gt;&lt;span&gt;d, i 서식문자에서 정밀도가 존재한다면, 실제 빈공간을 0으로 채워주기 위함이다. (정밀도가 n보다 클 때)&lt;/span&gt;&lt;br&gt;&lt;/li&gt;&lt;li&gt;return 된 값에 null공간을 + 1하여 동적할당.&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.document2;whiteSpace=wrap;size=0.25;dashed=1;strokeColor=#CC0000;align=left;" vertex="1" parent="1">
-          <mxGeometry x="4095" y="760" width="615" height="300" as="geometry" />
+        <mxCell id="Am2JBDlyG6pjrl0g9-4q-472" value="&lt;span style=&quot;font-size: 20px&quot;&gt;input을 표현할 len를 저장 및 return&lt;br&gt;&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;align=center;" vertex="1" parent="1">
+          <mxGeometry x="4300" y="-430" width="323" height="107.5" as="geometry" />
+        </mxCell>
+        <mxCell id="Am2JBDlyG6pjrl0g9-4q-474" value="&lt;div style=&quot;font-size: 20px&quot;&gt;&lt;ul&gt;&lt;li&gt;input의 크기는, 정밀도 길이와 [ 정수 n의 길이 + 부호크기 ]를 비교한다.&lt;/li&gt;&lt;li&gt;&lt;span&gt;d, i 서식문자에서 정밀도가 존재한다면, 빈공간을 0으로 채워주기 위함이다. (정밀도가 n보다 클 때)&lt;/span&gt;&lt;br&gt;&lt;/li&gt;&lt;li&gt;return 된 값에 null공간을 + 1하여 동적할당.&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.document2;whiteSpace=wrap;size=0.25;dashed=1;strokeColor=#CC0000;align=left;" vertex="1" parent="1">
+          <mxGeometry x="4815" y="-600" width="615" height="300" as="geometry" />
+        </mxCell>
+        <mxCell id="Am2JBDlyG6pjrl0g9-4q-479" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;endArrow=classic;endFill=1;strokeColor=#000000;strokeWidth=1;fontSize=20;" edge="1" parent="1" source="Am2JBDlyG6pjrl0g9-4q-476" target="Am2JBDlyG6pjrl0g9-4q-478">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Am2JBDlyG6pjrl0g9-4q-481" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;endArrow=classic;endFill=1;strokeColor=#000000;strokeWidth=1;fontSize=20;" edge="1" parent="1" source="Am2JBDlyG6pjrl0g9-4q-476" target="Am2JBDlyG6pjrl0g9-4q-480">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Am2JBDlyG6pjrl0g9-4q-476" value="&lt;span style=&quot;font-size: 20px&quot;&gt;char *동적할당 및 출력대상 저장&lt;br&gt;&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;align=center;" vertex="1" parent="1">
+          <mxGeometry x="4300" y="-110" width="323" height="107.5" as="geometry" />
+        </mxCell>
+        <mxCell id="Am2JBDlyG6pjrl0g9-4q-478" value="&lt;div style=&quot;font-size: 20px&quot;&gt;&lt;ul&gt;&lt;li&gt;동적할당 실패시 return false(0)&lt;/li&gt;&lt;li&gt;입력 문자 n을 해석하여 char *공간에 채워준다.&lt;/li&gt;&lt;li&gt;동적할당 된 크기가 문자 n보다 크다면 앞에 0을 채워준다.(정밀도)&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.document2;whiteSpace=wrap;size=0.25;dashed=1;strokeColor=#CC0000;align=left;" vertex="1" parent="1">
+          <mxGeometry x="4815" y="-240" width="645" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="Am2JBDlyG6pjrl0g9-4q-480" value="&lt;span style=&quot;font-size: 20px&quot;&gt;전역변수에 input정보 저장&lt;br&gt;&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;align=center;" vertex="1" parent="1">
+          <mxGeometry x="4300" y="90" width="323" height="107.5" as="geometry" />
+        </mxCell>
+        <mxCell id="Am2JBDlyG6pjrl0g9-4q-516" value="Yes" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;endFill=1;strokeColor=#000000;strokeWidth=1;fontSize=20;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="Am2JBDlyG6pjrl0g9-4q-511" target="Am2JBDlyG6pjrl0g9-4q-517">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="3880" y="679.9999999999991" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Am2JBDlyG6pjrl0g9-4q-511" value="is True ?" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.decision;whiteSpace=wrap;fontSize=20;" vertex="1" parent="1">
+          <mxGeometry x="3402" y="620" width="319" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="Am2JBDlyG6pjrl0g9-4q-513" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;endFill=1;strokeColor=#005700;fontSize=20;entryX=0.25;entryY=1;entryDx=0;entryDy=0;fillColor=#008a00;dashed=1;strokeWidth=3;exitX=0.5;exitY=0;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="Am2JBDlyG6pjrl0g9-4q-511" target="Am2JBDlyG6pjrl0g9-4q-233">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1110.0000000000005" y="270" as="targetPoint" />
+            <mxPoint x="2242" y="390.1428571428578" as="sourcePoint" />
+            <Array as="points">
+              <mxPoint x="3561" y="410" />
+              <mxPoint x="704" y="410" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Am2JBDlyG6pjrl0g9-4q-514" value="No" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=20;" vertex="1" connectable="0" parent="Am2JBDlyG6pjrl0g9-4q-513">
+          <mxGeometry x="-0.9139" y="-1" relative="1" as="geometry">
+            <mxPoint x="-1.06" y="67.14" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Am2JBDlyG6pjrl0g9-4q-525" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;endArrow=classic;endFill=1;strokeColor=#000000;strokeWidth=1;fontSize=20;" edge="1" parent="1" source="Am2JBDlyG6pjrl0g9-4q-517" target="Am2JBDlyG6pjrl0g9-4q-520">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Am2JBDlyG6pjrl0g9-4q-517" value="&lt;span style=&quot;font-size: 20px&quot;&gt;ft_format_write&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="3880" y="620" width="230" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="Am2JBDlyG6pjrl0g9-4q-519" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=20;" edge="1" parent="1" source="Am2JBDlyG6pjrl0g9-4q-520" target="Am2JBDlyG6pjrl0g9-4q-521">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="4631.499999999999" y="1020" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Am2JBDlyG6pjrl0g9-4q-520" value="&lt;span style=&quot;font-size: 20px&quot;&gt;ft_format_write&lt;/span&gt;" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.start_1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="4472" y="870" width="319" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="Am2JBDlyG6pjrl0g9-4q-521" value="&lt;span style=&quot;font-size: 20px&quot;&gt;flag에 따른 padding 출력&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;align=center;" vertex="1" parent="1">
+          <mxGeometry x="4470" y="1070" width="323" height="107.5" as="geometry" />
+        </mxCell>
+        <mxCell id="Am2JBDlyG6pjrl0g9-4q-522" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=20;dashed=1;strokeColor=#CC0000;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="Am2JBDlyG6pjrl0g9-4q-521" target="Am2JBDlyG6pjrl0g9-4q-529">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="4884.999999999999" y="962.5" as="sourcePoint" />
+            <mxPoint x="4900" y="930" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Am2JBDlyG6pjrl0g9-4q-523" value="&lt;div style=&quot;font-size: 20px&quot;&gt;&lt;ul&gt;&lt;li&gt;저장 된 input과 포맷정보를 해석하여 결과를 write 수행한다.&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.document2;whiteSpace=wrap;size=0.25;dashed=1;strokeColor=#CC0000;align=left;" vertex="1" parent="1">
+          <mxGeometry x="4770" y="430" width="421" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="Am2JBDlyG6pjrl0g9-4q-524" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=20;dashed=1;strokeColor=#CC0000;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;exitPerimeter=0;" edge="1" parent="1" source="Am2JBDlyG6pjrl0g9-4q-520" target="Am2JBDlyG6pjrl0g9-4q-523">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="4570.000000000001" y="666.25" as="sourcePoint" />
+            <mxPoint x="4762" y="460" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Am2JBDlyG6pjrl0g9-4q-526" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;dashed=1;endArrow=classic;endFill=1;strokeColor=#001DBC;strokeWidth=3;fontSize=20;fillColor=#0050ef;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="3150" y="630" as="sourcePoint" />
+            <mxPoint x="4312" y="-1230" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="3150" y="130" />
+              <mxPoint x="3880" y="130" />
+              <mxPoint x="3880" y="-1230" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Am2JBDlyG6pjrl0g9-4q-529" value="&lt;div style=&quot;font-size: 20px&quot;&gt;&lt;ul&gt;&lt;li&gt;flag가 0일 때 padding은 0이다.&lt;/li&gt;&lt;li&gt;But, 정밀도가 있을때는 ignore나서 &#39; &#39;로 채움&lt;/li&gt;&lt;li&gt;flag가 &#39;-&#39;인 경우에는 input출력 -&amp;gt; padding을 &#39; &#39;로 출력&lt;/li&gt;&lt;li&gt;&#39;-&#39;가 아니면 padding출력 후 문자열 출력.&lt;/li&gt;&lt;li&gt;여기서 ! padding출력 크기는 [너비 - 입력정수 크기]이다.&lt;/li&gt;&lt;li&gt;&lt;br&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.document2;whiteSpace=wrap;size=0.25;dashed=1;strokeColor=#CC0000;align=left;" vertex="1" parent="1">
+          <mxGeometry x="5039" y="845" width="601" height="315" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
