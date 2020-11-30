@@ -13,7 +13,7 @@
 #include "printf.h"
 #include "libft.h"
 
-void			fill_str_di(char *str, long long n, int idx, char sign)
+void			fill_str_di(char* str, long long n, int idx, char sign)
 {
 	long long nmg;
 
@@ -35,7 +35,7 @@ void			fill_str_di(char *str, long long n, int idx, char sign)
 	}
 }
 
-void			set_di_sign(t_input *input, long long n)
+void			set_di_sign(t_input* input, long long n)
 {
 	if (n < 0)
 		input->sign = '-';
@@ -45,11 +45,11 @@ void			set_di_sign(t_input *input, long long n)
 		input->sign = 0;
 }
 
-int				setlen_retsize_di(t_input *input, long long n)
+int				setlen_retsize_di(t_input* input, long long n)
 {
 	int	len;
 	long long org = n;
-	
+
 	len = 0;
 	while (n != 0)
 	{
@@ -66,24 +66,24 @@ int				setlen_retsize_di(t_input *input, long long n)
 
 int				set_di_input(long long n)
 {
-	t_input		*input;
-	char		*str;
+	t_input* input;
+	char* str;
 	int			size;
 
-	if (!(input = (t_input *)(malloc(sizeof(t_input)))))
+	if (!(input = (t_input*)(malloc(sizeof(t_input)))))
 		return (0);
 	set_di_sign(input, n);
 	size = setlen_retsize_di(input, n);
-	if (!(str = (char *)malloc(sizeof(char) * (size + 1))))
+	if (!(str = (char*)malloc(sizeof(char) * (size + 1))))
 		return (0);
 	str[size] = 0;
-	fill_str_di(str, n , size - 1, input->sign);
+	fill_str_di(str, n, size - 1, input->sign);
 	input->str = str;
 	g_info->input = input;
 	return (1);
 }
 
-int				ft_set_di(char *length)
+int				ft_set_di(char* length)
 {
 	long long	n;
 

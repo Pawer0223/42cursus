@@ -11,87 +11,19 @@
 /* ************************************************************************** */
 
 #include "printf.h"
-#include "libft.h"
 
-void	write_padding(char padding, int end)
+int			is_percent(char c)
 {
-	int i;
-	i = 0;
-	//printf("end is .. [%d]\n", end);
-	while (i < end)
+	if (c == '%')
 	{
-		write(1, &padding, 1);
-		i++;
-	}
-}
-
-void		ft_format_write(char flag)
-{
-	int		end;
-	char	padding;
-	t_input	*input;
-	
-	padding= ' ';
-	// 0 이면서 , 정밀도가 없을 때 padding 0으로채우기
-	if (flag == '0' && g_info->precision_len == -1)
-		padding = '0';
-	input = g_info->input;
-	end = (g_info->width - input->len);
-	if (flag == '-')
-	{
-		ft_putstr_fd(input->str, 1);
-		write_padding(' ', end);
-	}
-	else
-	{
-		write_padding(padding, end);
-		ft_putstr_fd(input->str, 1);
-	}
-}
-
-int		set_input(char spec)
-{
-	if (spec == 'd' || spec == 'i')
-		ft_set_di();
-	//else if (c == 'u' || c == 'x' || c == 'x')
-	//	write_di(format);
-	//else if (c == 'c')
-	//	write_di(format);
-	//else if (c == 's')
-	//	write_di(format);
-	//else if (c == 'p')
-	//	write_di(format);
-	//else if (c == 'n')
-	//	write_di(format);
-	//else if (c == 'f' || c == 'g' || c == 'e')
-	//	write_di(format);
-	return (1);
-}
-/* input format_check */
-int		check_format(const char *format)
-{
-	if (format[++g_i] && !check_flag(format[g_i]))
-		return (1);
-	if (!format[g_i] || !check_size(format, 1))
-		return (0);
-	if (format[g_i] == '.')
-	{
-		g_info->precision_len = 0;
+		write(1, &c, 1);
 		g_i++;
-		if (!check_size(format, 2))
-			return (0);
+		return (1);
 	}
-	if (!format[g_i] || !check_len(format))
-		return (0);
-	if (!format[g_i] || !check_spec(format[g_i]))
-		return (0);
-	if (!set_input(g_info->specifier))
-		return (0);
-	ft_format_write(g_info->flag);
-	return (1);
+	return (0);
 }
 
-int			ft_printf(const char *format, ...)
+int			ft_printf(const char* format, ...)
 {
 	va_list 		ap;
 
@@ -102,13 +34,17 @@ int			ft_printf(const char *format, ...)
 	{
 		if (format[g_i] == '%')
 		{
-			if (!check_format(format))
+			if (!is_percent(format[++g_i]))
 			{
-				free_g();
-				return (0);
+				if (!check_format(format) || !ft_set_input_filter(g_info -> specifier))
+				{
+					free_g();
+					return (0);
+				}
+				ft_format_write(g_info->flag);
+				//all_print();
+				clear_g();
 			}
-			// all_print();
-			clear_g();
 		}
 		else
 		{

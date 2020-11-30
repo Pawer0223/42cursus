@@ -43,12 +43,14 @@ void			clear_g(void);
 void			free_g(void);
 void			free_input(t_input* input);
 /* check funcs */
-int				check_flag(const char c);
-int				check_size(const char* format, int type);
-int				check_len(const char* format);
-int				check_spec(char c);
-/* write specifier (d, i) funcs */
-int				ft_set_di();
+int				check_format(const char* format);
+/* set_input_filter */
+int				ft_set_input_filter(char spec);
+/* set input , specifier (d, i) */
+int				ft_set_di(char *length);
+int				ft_set_ux(char* length);
+/* format write*/
+void			ft_format_write(char flag);
 /* remove !!! for Test .. */
 void			all_print();
 void			t_printf_print();

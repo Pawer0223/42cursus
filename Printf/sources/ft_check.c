@@ -2,21 +2,13 @@
 #include "libft.h"
 
 /* flag exist = return 0 else return 1 */
-int			check_flag(const char c)
+void			check_flag(const char c)
 {
 	if (c == '-' || c == '+' || c == ' ' || c == '#' || c == '0')
 	{
 		g_info->flag = c;
 		g_i++;
 	}
-	else if (c == '%')
-	{
-		char percent = '%';
-		write(1, &percent, 1);
-		g_i++;
-		return (0);
-	}
-	return (1);
 }
 /* type1 = set width, type2 = set precision_len */
 int			check_size(const char *format, int type)
@@ -75,4 +67,23 @@ int			check_spec(char c)
 		return (1);
 	}
 	return (0);
+}
+
+/* input format_check */
+int		check_format(const char* format)
+{
+	check_flag(format[g_i]);
+	if (!format[g_i] || !check_size(format, 1))
+		return (0);
+	if (format[g_i] == '.')
+	{
+		g_info->precision_len = 0;
+		if (!format[++g_i] || !check_size(format, 2))
+			return (0);
+	}
+	if (!format[g_i] || !check_len(format))
+		return (0);
+	if (!format[g_i] || !check_spec(format[g_i]))
+		return (0);
+	return (1);
 }
