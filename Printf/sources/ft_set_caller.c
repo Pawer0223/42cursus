@@ -35,6 +35,5 @@ int				ft_set_ux(char* length, char spec)
 	if (spec == 'u')
 		return set_u_input(n);
 	else
-		printf("is x or X\n");
-		//return set_x_input(n);
+		return set_x_input(n);
 }

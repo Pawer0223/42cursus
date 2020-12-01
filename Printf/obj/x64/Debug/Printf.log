@@ -4,14 +4,29 @@
   아키텍처의 유효성을 검사하는 중
   원격 빌드를 시작하는 중
   소스를 컴파일하는 중:
+  ft_set_di.c
+C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_di.c(23,9): warning : conversion to ‘int’ from ‘long long int’ may alter its value [-Wconversion]
+C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_di.c(23,9): warning :    nmg = n % 10;
+C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_di.c(23,9): warning :          ^
+C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_di.c(26,14): warning : conversion to ‘char’ from ‘int’ may alter its value [-Wconversion]
+C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_di.c(26,14): warning :    str[idx] = ('0' + nmg);
+C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_di.c(26,14): warning :               ^
+C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_di.c(79,41): warning : conversion to ‘long unsigned int’ from ‘int’ may change the sign of the result [-Wsign-conversion]
+C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_di.c(79,41): warning :   if (!(str = (char*)malloc(sizeof(char) * (size + 1))))
+C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_di.c(79,41): warning :                                          ^
   ft_set_u.c
 C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_u.c(21,14): warning : conversion to ‘char’ from ‘long long unsigned int’ may alter its value [-Wconversion]
 C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_u.c(21,14): warning :    str[idx] = ('0' + (n % 10));
 C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_u.c(21,14): warning :               ^
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_u.c(55,41): warning : conversion to ‘long unsigned int’ from ‘int’ may change the sign of the result [-Wsign-conversion]
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_u.c(55,41): warning :   if (!(str = (char*)malloc(sizeof(char) * (size + 1))))
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_u.c(55,41): warning :                                          ^
-  main.c
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\test\main.c(9,5): warning : implicit declaration of function ‘ft_printf’; did you mean ‘fprintf’? [-Wimplicit-function-declaration]
+C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_u.c(56,41): warning : conversion to ‘long unsigned int’ from ‘int’ may change the sign of the result [-Wsign-conversion]
+C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_u.c(56,41): warning :   if (!(str = (char*)malloc(sizeof(char) * (size + 1))))
+C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_u.c(56,41): warning :                                          ^
+  ft_set_x.c
+C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_x.c(33,14): warning : conversion to ‘char’ from ‘int’ may alter its value [-Wconversion]
+C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_x.c(33,14): warning :    str[idx] = nmg;
+C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_x.c(33,14): warning :               ^~~
+C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_x.c(73,41): warning : conversion to ‘long unsigned int’ from ‘int’ may change the sign of the result [-Wsign-conversion]
+C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_x.c(73,41): warning :   if (!(str = (char*)malloc(sizeof(char) * (size + 1))))
+C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_x.c(73,41): warning :                                          ^
   개체를 연결하는 중
   Printf.vcxproj -> C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\bin\x64\Debug\Printf.out

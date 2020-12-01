@@ -89,6 +89,47 @@ void    u_test()
     ft_printf("%%5.3u =>[%5.3u]\n", 0);
 }
 
+void    x_test()
+{
+    printf("######### x test #########\n");
+    printf("### 1 ###\n");
+    printf   ("%%x =>[%x]\n", 10);
+    ft_printf("%%x =>[%x]\n", 10);
+    printf("### 2 ###\n");
+    printf   ("%% x =>[% x]\n", 10);
+    ft_printf("%% x =>[% x]\n", 10);
+    printf("### 3 ###\n");
+    printf   ("%%+x =>[%+x]\n", 10);
+    ft_printf("%%+x =>[%+x]\n", 10);
+    printf("### 4 ###\n");
+    printf   ("%%5.3x =>[%5.3x]\n", 10);
+    ft_printf("%%5.3x =>[%5.3x]\n", 10);
+    printf("### 5 ###\n");
+    printf   ("%%#x =>[%#x]\n", 10);
+    ft_printf("%%#x =>[%#x]\n", 10);
+    printf("### 6 ###\n");
+    printf   ("%%#5x =>[%#5x]\n", 10);
+    ft_printf("%%#5x =>[%#5x]\n", 10);
+    printf("### 7 ###\n");
+    printf   ("%%#.5x =>[%#.5x]\n", 10);
+    ft_printf("%%#.5x =>[%#.5x]\n", 10);
+    printf("### 8 ###\n");
+    printf   ("%%#.5X =>[%#.5X]\n", 10);
+    ft_printf("%%#.5X =>[%#.5X]\n", 10);
+
+    printf("### 9 ###\n");
+    printf   ("%%#X =>[%#X]\n", -1);
+    ft_printf("%%#X =>[%#X]\n", -1);
+
+    printf("### 10 ###\n");
+    printf   ("%%20.50x =>[%#.5x]\n", UINT_MAX);
+    ft_printf("%%20.50x =>[%#.5x]\n", UINT_MAX);
+
+    printf("### 11 ###\n");
+    printf   ("%%#x =>[%#x]\n", UINT_MAX + 1);
+    ft_printf("%%#x =>[%#x]\n", UINT_MAX + 1);
+}
+
 
 
 int		main(void)
@@ -107,6 +148,7 @@ int		main(void)
     printf("################ [ TEST START, up is Real Printf , down is My Printf ] ################\n");
     di_test();
     u_test();
+    x_test();
 	return (0);
 
 }

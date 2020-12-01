@@ -15,7 +15,7 @@
 
 void			fill_str_di(char *str, long long n, int idx, char sign)
 {
-	long long nmg;
+	int nmg;
 
 	if (n != 0)
 	{
@@ -47,9 +47,10 @@ void			set_di_sign(t_input *input, long long n)
 
 int				setlen_di(t_input *input, long long n)
 {
-	int	len;
-	long long org = n;
+	int			len;
+	long long	org;
 	
+	org = n;
 	len = 0;
 	while (n != 0)
 	{
@@ -77,8 +78,8 @@ int				set_di_input(long long n)
 	size = setlen_di(input, n);
 	if (!(str = (char*)malloc(sizeof(char) * (size + 1))))
 		return (0);
+	input->str = str;
 	str[size] = 0;
 	fill_str_di(str, n , size - 1, input->sign);
-	input->str = str;
 	return (1);
 }

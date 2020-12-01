@@ -51,12 +51,12 @@ int				set_u_input(unsigned long long n)
 
 	if (!(input = (t_input*)(malloc(sizeof(t_input)))))
 		return (0);
+	g_info->input = input;
 	size = setlen_u(input, n);
 	if (!(str = (char*)malloc(sizeof(char) * (size + 1))))
 		return (0);
+	input->str = str;
 	str[size] = 0;
 	fill_str_u(str, n, size - 1);
-	input->str = str;
-	g_info->input = input;
 	return (1);
 }
