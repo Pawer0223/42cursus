@@ -19,7 +19,7 @@ void			fill_str_di(char *str, long long n, int idx, char sign)
 
 	if (n != 0)
 	{
-		fill_str(str, (n / 10), (idx - 1), sign);
+		fill_str_di(str, (n / 10), (idx - 1), sign);
 		nmg = n % 10;
 		if (nmg < 0)
 			nmg *= -1;
@@ -45,7 +45,7 @@ void			set_di_sign(t_input *input, long long n)
 		input->sign = 0;
 }
 
-int				setlen_retsize_di(t_input *input, long long n)
+int				setlen_di(t_input *input, long long n)
 {
 	int	len;
 	long long org = n;
@@ -72,36 +72,13 @@ int				set_di_input(long long n)
 
 	if (!(input = (t_input *)(malloc(sizeof(t_input)))))
 		return (0);
+	g_info->input = input;
 	set_di_sign(input, n);
-	size = setlen_retsize_di(input, n);
-	if (!(str = (char *)malloc(sizeof(char) * (size + 1))))
+	size = setlen_di(input, n);
+	if (!(str = (char*)malloc(sizeof(char) * (size + 1))))
 		return (0);
 	str[size] = 0;
 	fill_str_di(str, n , size - 1, input->sign);
 	input->str = str;
-	g_info->input = input;
-	return (1);
-}
-
-int				ft_set_di(char *length)
-{
-	long long	n;
-
-	n = 0;
-	if (length)
-	{
-		if (ft_strncmp(length, "l", 3) == 0)
-			n = va_arg(*(g_info->ap), long int);
-		else if (ft_strncmp(length, "ll", 3) == 0)
-			n = va_arg(*(g_info->ap), long long int);
-		else if (ft_strncmp(length, "h", 3) == 0)
-			n = va_arg(*(g_info->ap), short int);
-		else if (ft_strncmp(length, "hh", 3) == 0)
-			n = va_arg(*(g_info->ap), signed char);
-	}
-	else
-		n = va_arg(*(g_info->ap), int);
-	if (!set_di_input(n))
-		return (0);
 	return (1);
 }

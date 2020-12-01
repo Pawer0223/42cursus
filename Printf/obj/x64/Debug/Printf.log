@@ -4,37 +4,14 @@
   아키텍처의 유효성을 검사하는 중
   원격 빌드를 시작하는 중
   소스를 컴파일하는 중:
-  ft_set_ux.c
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_ux.c(26,14): warning : conversion to ‘char’ from ‘long long int’ may alter its value [-Wconversion]
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_ux.c(26,14): warning :    str[idx] = ('0' + nmg);
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_ux.c(26,14): warning :               ^
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_ux.c(75,2): warning : implicit declaration of function ‘set_input_sign’; did you mean ‘set_input_sign2’? [-Wimplicit-function-declaration]
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_ux.c(75,2): warning :   set_input_sign(input, n);
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_ux.c(75,2): warning :   ^~~~~~~~~~~~~~
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_ux.c(75,2): warning :   set_input_sign2
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_ux.c(76,9): warning : implicit declaration of function ‘setlen_retsize’; did you mean ‘setlen_retsize2’? [-Wimplicit-function-declaration]
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_ux.c(76,9): warning :   size = setlen_retsize(input, n);
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_ux.c(76,9): warning :          ^~~~~~~~~~~~~~
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_ux.c(76,9): warning :          setlen_retsize2
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_ux.c(77,41): warning : conversion to ‘long unsigned int’ from ‘int’ may change the sign of the result [-Wsign-conversion]
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_ux.c(77,41): warning :   if (!(str = (char*)malloc(sizeof(char) * (size + 1))))
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_ux.c(77,41): warning :                                          ^
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_ux.c(80,2): warning : implicit declaration of function ‘fill_str’; did you mean ‘fill_str2’? [-Wimplicit-function-declaration]
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_ux.c(80,2): warning :   fill_str(str, n, size - 1, input->sign);
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_ux.c(80,2): warning :   ^~~~~~~~
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_ux.c(80,2): warning :   fill_str2
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_ux.c(104,7): warning : implicit declaration of function ‘set_num_input’; did you mean ‘set_ux_input’? [-Wimplicit-function-declaration]
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_ux.c(104,7): warning :   if (!set_num_input(n))
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_ux.c(104,7): warning :        ^~~~~~~~~~~~~
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_ux.c(104,7): warning :        set_ux_input
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_ux.c(98,30): warning : ‘short int’ is promoted to ‘int’ when passed through ‘...’
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_ux.c(98,30): warning :     n = va_arg(*(g_info->ap), short int);
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_ux.c(98,30): warning :                               ^
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_ux.c(98,30): message : (so you should pass ‘int’ not ‘short int’ to ‘va_arg’)
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_ux.c(98,30): message : if this code is reached, the program will abort
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_ux.c(100,30): warning : ‘signed char’ is promoted to ‘int’ when passed through ‘...’
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_ux.c(100,30): warning :     n = va_arg(*(g_info->ap), signed char);
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_ux.c(100,30): warning :                               ^
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_ux.c(100,30): message : if this code is reached, the program will abort
+  ft_set_u.c
+C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_u.c(21,14): warning : conversion to ‘char’ from ‘long long unsigned int’ may alter its value [-Wconversion]
+C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_u.c(21,14): warning :    str[idx] = ('0' + (n % 10));
+C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_u.c(21,14): warning :               ^
+C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_u.c(55,41): warning : conversion to ‘long unsigned int’ from ‘int’ may change the sign of the result [-Wsign-conversion]
+C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_u.c(55,41): warning :   if (!(str = (char*)malloc(sizeof(char) * (size + 1))))
+C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_u.c(55,41): warning :                                          ^
+  main.c
+C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\test\main.c(9,5): warning : implicit declaration of function ‘ft_printf’; did you mean ‘fprintf’? [-Wimplicit-function-declaration]
   개체를 연결하는 중
   Printf.vcxproj -> C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\bin\x64\Debug\Printf.out
