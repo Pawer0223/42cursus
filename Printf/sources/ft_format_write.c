@@ -20,7 +20,7 @@ void	write_padding(char padding, int end)
 	// printf("end is .. [%d]\n", end);
 	while (i < end)
 	{
-		write(1, &padding, 1);
+		ft_putchar_fd(padding, 1);
 		i++;
 	}
 }

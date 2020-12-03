@@ -1,6 +1,6 @@
 #include "printf.h"
 
-int				ft_set_di(char* length)
+int				ft_set_di(char	*length)
 {
 	long long	n;
 
@@ -17,7 +17,7 @@ int				ft_set_di(char* length)
 	return set_di_input(n);
 }
 
-int				ft_set_ux(char* length, char spec)
+int				ft_set_ux(char	*length, char spec)
 {
 	unsigned long long	n;
 
@@ -38,20 +38,36 @@ int				ft_set_ux(char* length, char spec)
 		return set_x_input(n);
 }
 
-int				ft_set_c(char* length)
+int				ft_set_c(char	*length)
 {
-	wint_t lc;
-	char c;
-	
-	// ¾ÆÀÌ°Å VA_ARG Çü½Â°İÀ¸·Î ´Ù int·Î ÇØ¾ßÇÏ´Â °©´Ù..
+	int c;
+
+	c = va_arg(*(g_info->ap), int);
 	if (length && ft_strncmp(length, "l", 3) == 0)
 	{
-		lc = va_arg(*(g_info->ap), wint_t);
-		// return set_di_input(n);
+		printf(" ¾î¶»°Ô wide char¸¦ ´Ù·ê ¼ö ÀÖÀ»±î..\n");
+		// return set_uni_input(c);
+		return (0);
+	}
+	else
+		return set_ascii_input(c);
+}
+
+int				ft_set_s(char	*length)
+{
+	char	*str;
+	wchar_t	*wstr;
+
+	if (length && ft_strncmp(length, "l", 3) == 0)
+	{
+		printf(" ¾î¶»°Ô wide char ¹®ÀÚ¿­À» ´Ù·ê ¼ö ÀÖÀ»±î..\n");
+		wstr = va_arg(*(g_info->ap), wchar_t *);
+		// return set_uni_input(wstr);
+		return (0);
 	}
 	else
 	{
-		c = va_arg(*(g_info->ap), int);
+		str = va_arg(*(g_info->ap), char *);
+		return set_str_input(str);
 	}
-	return (0);
 }

@@ -42,18 +42,22 @@ int				g_i;
 int				init_g(va_list *ap);
 void			clear_g(void);
 void			free_g(void);
-void			free_input(t_input* input);
+void			free_input(t_input	*input);
 /* check funcs */
-int				check_format(const char* format);
+int				check_format(const char	*format);
 /* set_input_filter */
 int				ft_set_input_filter(char spec);
 /* set input caller funcs */
-int				ft_set_di(char	* ength);
-int				ft_set_ux(char* length, char spec);
+int				ft_set_di(char	*length);
+int				ft_set_ux(char	*length, char spec);
+int				ft_set_c(char	*length);
+int				ft_set_s(char	*length);
 /* set input funcs */
 int				set_di_input(long long n);
 int				set_u_input(unsigned long long n);
 int				set_x_input(unsigned long long n);
+int				set_ascii_input(int n);
+int				set_str_input(char *input_str);
 /* format write*/
 void			ft_format_write(char flag);
 /* common */

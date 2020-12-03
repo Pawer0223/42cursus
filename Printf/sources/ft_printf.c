@@ -11,12 +11,13 @@
 /* ************************************************************************** */
 
 #include "printf.h"
+#include "libft.h"
 
 int			is_percent(char c)
 {
 	if (c == '%')
 	{
-		write(1, &c, 1);
+		ft_putchar_fd(c, 1);
 		g_i++;
 		return (1);
 	}
@@ -42,13 +43,13 @@ int			ft_printf(const char* format, ...)
 					return (0);
 				}
 				ft_format_write(g_info->flag);
-			//	all_print();
+				// all_print();
 				clear_g();
 			}
 		}
 		else
 		{
-			write(1, format + g_i, 1);
+			ft_putchar_fd(format[g_i], 1);
 			g_i++;
 		}
 	}

@@ -1,11 +1,13 @@
 C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_check.c|637422600571966552|~/projects/Printf|
+C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_ascii.c|637426194516097602|~/projects/Printf|
 C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_com.c|637426009877234623|~/projects/Printf|
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_format_write.c|637422560643667855|~/projects/Printf|
+C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_format_write.c|637426110060278557|~/projects/Printf|
 C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_global.c|637420892271771351|~/projects/Printf|
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_caller.c|637425174171149328|~/projects/Printf|
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_input_filter.c|637425253808419144|~/projects/Printf|
+C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_caller.c|637426208698799248|~/projects/Printf|
+C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_input_filter.c|637426190092663880|~/projects/Printf|
 C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_di.c|637425990358401861|~/projects/Printf|
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_printf.c|637425352243506336|~/projects/Printf|
+C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_printf.c|637426212239864672|~/projects/Printf|
+C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_str.c|637426212972145938|~/projects/Printf|
 C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_u.c|637425991411385305|~/projects/Printf|
 C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_x.c|637426010232793564|~/projects/Printf|
 C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\libft\ft_atoi.c|637419140274635466|~/projects/Printf|
@@ -51,7 +53,7 @@ C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\libft\ft_strtrim.c
 C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\libft\ft_substr.c|637419204800542420|~/projects/Printf|
 C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\libft\ft_tolower.c|637419140274465909|~/projects/Printf|
 C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\libft\ft_toupper.c|637419140274475898|~/projects/Printf|
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\test\main.c|637426006160895223|~/projects/Printf|
+C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\test\main.c|637426210336069835|~/projects/Printf|
 C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\test\test_print.c|637420892586968245|~/projects/Printf|
 C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\headers\libft.h|637419140274495844|~/projects/Printf|
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\headers\printf.h|637425990548124382|~/projects/Printf|
+C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\headers\printf.h|637426211077935461|~/projects/Printf|

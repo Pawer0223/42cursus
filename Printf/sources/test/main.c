@@ -255,15 +255,74 @@ void    x_test()
     ft_printf("%%+.x => [%+.x]\n", 0);
 
 }
+void        test_lc()
+{
+    wchar_t ws1[20] = L"Hello, world!";
+    wprintf(L"%d\n", wcslen(ws1));
+    wprintf(L"%S\n", ws1);
+}
 
+void        c_test()
+{
+    printf("######### c test #########\n");
+    for (int i = 1; i < 257; i++)
+    {
+        if (i == 27) // 27은 esc라서 종료 되네..
+            continue;
+        printf("### %d ###\n",i);
+        printf("[%c]\n", i);
+        ft_printf("[%c]\n", i);
+    }
 
+    printf("### etc 1 ###\n");
+     printf("%%c =>[%+10.c]\n", 'b');
+     ft_printf("%%c =>[%+10.c]\n", 'b');
+     printf("### etc 2 ###\n");
+     printf("%%-10.c =>[%-10.c]\n", 'b');
+     ft_printf("%%-10.c =>[%-10.c]\n", 'b');
+     printf("### etc 3 ###\n");
+     printf("%%10.c =>[%#10.c]\n", 'b');
+     ft_printf("%%10.c =>[%#10.c]\n", 'b');
+     printf("### etc 4 ###\n");
+     printf("%% 10c =>[% 10.c]\n", 'b');
+     ft_printf("%% 10c =>[% 10.c]\n", 'b');
+     printf("### etc 5 ###\n");
+     printf("%%.100c =>[%-.100c]\n", 'b');
+     ft_printf("%%.100c =>[%-.100c]\n", 'b');
+     printf("### etc 6 ###\n");
+     printf("%%c =>[%c]\n", 256);
+     ft_printf("%%c =>[%c]\n", 256);
+
+}
+
+void        s_test()
+{
+    printf("######### s test #########\n");
+    printf("### 1 ###\n");
+    printf("%%s =>[%s]\n", "안녕하세요");
+    ft_printf("%%s =>[%s]\n", "안녕하세요");
+    printf("### 2 ###\n");
+    printf("%%.2s =>[%10.1s]\n", "abcdefg");
+    ft_printf("%%.2s =>[%10.1s]\n", "abcdefg");
+    printf("### 3 ###\n");
+    printf("%%10.5s =>[%10.5s]\n", "123456789");
+    ft_printf("%%10.5s =>[%10.5s]\n", "123456789");
+    printf("### 4 ###\n");
+    printf("%%.s =>[%.s]\n", "abc");
+    ft_printf("%%.s =>[%.s]\n", "abc");
+    printf("### 5 ###\n");
+    printf("%%10.s =>[%10.s]\n", "defg");
+    ft_printf("%%10.s =>[%10.s]\n", "defg");
+}
 
 int		main(void)
 {
     printf("################ [ TEST START, up is Real Printf , down is My Printf ] ################\n");
     // di_test();
     // u_test();
-    x_test();
+    // x_test();
+    // c_test();
+    s_test();
 	return (0);
 
 }

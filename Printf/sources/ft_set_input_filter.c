@@ -6,10 +6,10 @@ int		ft_set_input_filter(char spec)
 		ft_set_di(g_info->length);
 	else if (spec == 'u' || spec == 'x' || spec == 'X')
 		ft_set_ux(g_info->length, spec);
-	//else if (spec == 'c')
-	//	ft_set_c(g_info->length);
-	//else if (c == 's')
-	//	write_di(format);
+	else if (spec == 'c')
+		ft_set_c(g_info->length);
+	else if (spec == 's')
+		ft_set_s(g_info->length);
 	//else if (c == 'p')
 	//	write_di(format);
 	//else if (c == 'n')
