@@ -42,7 +42,7 @@ int			ft_printf(const char* format, ...)
 					return (0);
 				}
 				ft_format_write(g_info->flag);
-				//all_print();
+			//	all_print();
 				clear_g();
 			}
 		}

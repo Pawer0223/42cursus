@@ -16,6 +16,7 @@
 #include <stdarg.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <wchar.h>
 // remove !!!!
 #include <stdio.h>
 
@@ -55,6 +56,8 @@ int				set_u_input(unsigned long long n);
 int				set_x_input(unsigned long long n);
 /* format write*/
 void			ft_format_write(char flag);
+/* common */
+void			fill_is_zero(t_input* input, int idx);
 /* remove !!! for Test .. */
 void			all_print();
 void			t_printf_print();

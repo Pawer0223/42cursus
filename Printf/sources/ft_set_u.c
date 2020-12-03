@@ -13,18 +13,17 @@
 #include "printf.h"
 #include "libft.h"
 
-void			fill_str_u(char* str, unsigned long long n, int idx)
+void			fill_str_u(t_input* input, long long n, int idx)
 {
-	if (n != 0)
+	if (n == 0)
+		fill_is_zero(input, idx--);
+	while (idx >= 0 && n != 0)
 	{
-		fill_str_u(str, (n / 10), (idx - 1));
-		str[idx] = ('0' + (n % 10));
+		input->str[idx--] = '0' + (n % 10);
+		n /= 10;
 	}
-	else
-	{
-		while (idx >= 0)
-			str[idx--] = '0';
-	}
+	while (idx >= 0)
+		input->str[idx--] = '0';
 }
 
 int				setlen_u(t_input* input, unsigned long long n)
@@ -56,7 +55,7 @@ int				set_u_input(unsigned long long n)
 	if (!(str = (char*)malloc(sizeof(char) * (size + 1))))
 		return (0);
 	input->str = str;
-	str[size] = 0;
-	fill_str_u(str, n, size - 1);
+	str[size--] = 0;
+	fill_str_u(input, n, size);
 	return (1);
 }

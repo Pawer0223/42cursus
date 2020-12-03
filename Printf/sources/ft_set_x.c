@@ -13,15 +13,17 @@
 #include "printf.h"
 #include "libft.h"
 
-void			fill_str_x(char* str, unsigned long long n, int idx)
+void			fill_str_x(t_input *input, unsigned long long n, int idx)
 {
 	int		end;
 	int		nmg;
 	char	aA;
-	
-	if (n != 0)
+
+	if (n == 0)
+		fill_is_zero(input, idx--);
+	end = (g_info->flag == '#' && n != 0) ? 2 : 0;
+	while (idx >= 0 && n != 0)
 	{
-		fill_str_x(str, (n / 16), (idx - 1));
 		nmg = n % 16;
 		if (nmg >= 10)
 		{
@@ -30,14 +32,11 @@ void			fill_str_x(char* str, unsigned long long n, int idx)
 		}
 		else
 			nmg = '0' + nmg;
-		str[idx] = nmg;
+		input->str[idx--] = nmg;
+		n /= 16;
 	}
-	else
-	{
-		end = (g_info->flag == '#') ? 2 : 0;
-		while (idx >= end)
-			str[idx--] = '0';
-	}
+	while (idx >= end)
+		input->str[idx--] = '0';
 }
 
 int				setlen_x(t_input* input, unsigned long long n)
@@ -73,12 +72,10 @@ int				set_x_input(unsigned long long n)
 	if (!(str = (char*)malloc(sizeof(char) * (size + 1))))
 		return (0);
 	input->str = str;
-	str[size] = 0;
+	str[size--] = 0;
 	str[0] = '0';
-	if (n == 0)
-		return (1);
-	if (g_info->flag == '#')
+	if (g_info->flag == '#' && n != 0)
 		str[1] = g_info->specifier;
-	fill_str_x(str, n, size - 1);
+	fill_str_x(input, n, size);
 	return (1);
 }

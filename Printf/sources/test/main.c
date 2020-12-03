@@ -51,6 +51,52 @@ void	di_test()
     printf("### 15 ###\n");
     printf   ("%%.3d =>[%.3d]\n", 0);
     ft_printf("%%.3d =>[%.3d]\n", 0);
+    printf("### 16 ###\n");
+    printf   ("%%i =>[%i]\n", INT_MAX + 100);
+    ft_printf("%%i =>[%i]\n", INT_MAX + 100);
+    printf("### 17 ###\n");
+    printf("%%d =>[%d]\n", UINT_MAX);
+    ft_printf("%%d =>[%d]\n", UINT_MAX);
+    printf("### 18 ###\n");
+    printf   ("%%.d =>[%.d]\n", 0);
+    ft_printf("%%.d =>[%.d]\n", 0);
+    printf("### 19 ###\n");
+    printf   ("%%.d =>[%.d]\n", 1);
+    ft_printf("%%.d =>[%.d]\n", 1);
+    printf("### 20 ###\n");
+    printf   ("%%d => [%d]\n", 0);
+    ft_printf("%%d => [%d]\n", 0);
+    printf("### 21 ###\n");
+    printf   ("%%0d => [%0d]\n", 0);
+    ft_printf("%%0d => [%0d]\n", 0);
+    printf("### 22 ###\n");
+    printf   ("%%.d => [%.d]\n", 0);
+    ft_printf("%%.d => [%.d]\n", 0);
+    printf("### 23 ###\n");
+    printf   ("%%10.d => [%10.d]\n", 0);
+    ft_printf("%%10.d => [%10.d]\n", 0);
+    printf("### 24 ###\n");
+    printf   ("%%.0d => [%.0d]\n", 0);
+    ft_printf("%%.0d => [%.0d]\n", 0);
+    printf("### 25 ###\n");
+    printf   ("%%.3d => [%.3d]\n", 0);
+    ft_printf("%%.3d => [%.3d]\n", 0);
+    printf("### 26 ###\n");
+    printf   ("%%.1d => [%.1d]\n", 0);
+    ft_printf("%%.1d => [%.1d]\n", 0);
+    printf("### 27 ###\n");
+    printf   ("%% d => [% d]\n", 0);
+    ft_printf("%% d => [% d]\n", 0);
+    printf("### 28 ###\n");
+    printf   ("%%-d => [%-d]\n", 0);
+    ft_printf("%%-d => [%-d]\n", 0);
+    printf("### 29 ###\n");
+    printf   ("%%+d => [%+d]\n", 0);
+    ft_printf("%%+d => [%+d]\n", 0);
+    printf("### 30 ###\n");
+    printf   ("%%+.d => [%+.d]\n", 0);
+    ft_printf("%%+.d => [%+.d]\n", 0);
+    
 }
 
 void    u_test()
@@ -87,6 +133,49 @@ void    u_test()
     printf("### 10 ###\n");
     printf   ("%%5.3u =>[%5.3u]\n", 0);
     ft_printf("%%5.3u =>[%5.3u]\n", 0);
+    printf("### 11 ###\n");
+    printf("%%.u =>[%.u]\n", 0);
+    ft_printf("%%.u =>[%.u]\n", 0);
+    printf("### 12 ###\n");
+    printf("%%.u =>[%.u]\n", 1);
+    ft_printf("%%.u =>[%.u]\n", 1);
+    printf("### 13 ###\n");
+    printf("%%u => [%u]\n", 0);
+    ft_printf("%%u => [%u]\n", 0);
+    printf("### 14 ###\n");
+    printf("%%0u => [%0u]\n", 0);
+    ft_printf("%%0u => [%0u]\n", 0);
+    printf("### 15 ###\n");
+    printf("%%.u => [%.u]\n", 0);
+    ft_printf("%%.u => [%.u]\n", 0);
+    printf("### 16 ###\n");
+    printf("%%10.u => [%10.u]\n", 0);
+    ft_printf("%%10.u => [%10.u]\n", 0);
+    printf("### 17 ###\n");
+    printf("%%.0u => [%.0u]\n", 0);
+    ft_printf("%%.0u => [%.0u]\n", 0);
+    printf("### 18 ###\n");
+    printf("%%.3u => [%.3u]\n", 0);
+    ft_printf("%%.3u => [%.3u]\n", 0);
+    printf("### 19 ###\n");
+    printf("%%.1u => [%.1u]\n", 0);
+    ft_printf("%%.1u => [%.1u]\n", 0);
+    printf("### 20 ###\n");
+    printf("%% u => [% u]\n", 0);
+    ft_printf("%% u => [% u]\n", 0);
+    printf("### 21 ###\n");
+    printf("%%-u => [%-u]\n", 0);
+    ft_printf("%%-u => [%-u]\n", 0);
+    printf("### 22 ###\n");
+    printf("%%+u => [%+u]\n", 0);
+    ft_printf("%%+u => [%+u]\n", 0);
+    printf("### 23 ###\n");
+    printf("%%+.u => [%+.u]\n", 0);
+    ft_printf("%%+.u => [%+.u]\n", 0);
+    printf("### 24 ###\n");
+    printf   ("%%u =>[%u], %%20u =>[%20u], %%.20u =>[%.20u], %%15.20u =>[%15.20u], %%20.15u =>[%20.15u], %%u =>[%u], %% u =>[% u], %%+u =>[%+u], %%-10u =>[%-10u], %%5.3u =>[%5.3u]\n", a, a, a, a, a, -10, +123, -456, 0, 0);
+    ft_printf("%%u =>[%u], %%20u =>[%20u], %%.20u =>[%.20u], %%15.20u =>[%15.20u], %%20.15u =>[%20.15u], %%u =>[%u], %% u =>[% u], %%+u =>[%+u], %%-10u =>[%-10u], %%5.3u =>[%5.3u]\n", a, a, a, a, a, -10, +123, -456, 0, 0);
+
 }
 
 void    x_test()
@@ -116,38 +205,64 @@ void    x_test()
     printf("### 8 ###\n");
     printf   ("%%#.5X =>[%#.5X]\n", 10);
     ft_printf("%%#.5X =>[%#.5X]\n", 10);
-
     printf("### 9 ###\n");
     printf   ("%%#X =>[%#X]\n", -1);
     ft_printf("%%#X =>[%#X]\n", -1);
-
     printf("### 10 ###\n");
     printf   ("%%20.50x =>[%#.5x]\n", UINT_MAX);
     ft_printf("%%20.50x =>[%#.5x]\n", UINT_MAX);
-
     printf("### 11 ###\n");
     printf   ("%%#x =>[%#x]\n", UINT_MAX + 1);
     ft_printf("%%#x =>[%#x]\n", UINT_MAX + 1);
+    printf("### 12 ###\n");
+    printf("%%.x =>[%.x]\n", 0);
+    ft_printf("%%.x =>[%.x]\n", 0);
+    printf("### 13 ###\n");
+    printf("%%.x =>[%.x]\n", 1);
+    ft_printf("%%.x =>[%.x]\n", 1);
+    printf("### 14 ###\n");
+    printf("%%x => [%x]\n", 0);
+    ft_printf("%%x => [%x]\n", 0);
+    printf("### 15 ###\n");
+    printf("%%0x => [%0x]\n", 0);
+    ft_printf("%%0x => [%0x]\n", 0);
+    printf("### 16 ###\n");
+    printf("%%.x => [%.x]\n", 0);
+    ft_printf("%%.x => [%.x]\n", 0);
+    printf("### 17 ###\n");
+    printf("%%10.x => [%10.x]\n", 0);
+    ft_printf("%%10.x => [%10.x]\n", 0);
+    printf("### 18 ###\n");
+    printf("%%.0x => [%.0x]\n", 0);
+    ft_printf("%%.0x => [%.0x]\n", 0);
+    printf("### 19 ###\n");
+    printf("%%.3x => [%.3x]\n", 0);
+    ft_printf("%%.3x => [%.3x]\n", 0);
+    printf("### 20 ###\n");
+    printf("%%.1x => [%.1x]\n", 0);
+    ft_printf("%%.1x => [%.1x]\n", 0);
+    printf("### 21 ###\n");
+    printf("%% x => [% x]\n", 0);
+    ft_printf("%% x => [% x]\n", 0);
+    printf("### 22 ###\n");
+    printf("%%-x => [%-x]\n", 0);
+    ft_printf("%%-x => [%-x]\n", 0);
+    printf("### 23 ###\n");
+    printf("%%+x => [%+x]\n", 0);
+    ft_printf("%%+x => [%+x]\n", 0);
+    printf("### 24 ###\n");
+    printf("%%+.x => [%+.x]\n", 0);
+    ft_printf("%%+.x => [%+.x]\n", 0);
+
 }
 
 
 
 int		main(void)
 {
-	// ft_printf("num1[%10ld], str is [%lls], char is [%hc], float is [%hhf]", 1, "str", 'a', 0.123);
-	// ft_printf("test");
-	
-	
-	// ft_printf("num check 1 => [%lld] , 2 => [% d] , 3 => [%+lld]", 123, +6403, 456); // possible
-	// ft_printf("num check 1 => [%lld] , 2 => [% d] , 3 => [%+lld]", LLONG_MIN, +6403, LLONG_MAX);
-	//int zeroI = 0;
-	//float zeroF = 0;
-	// zeroI : [], zeroF : [0]
-	// ft_printf("zeroI : [%.d], zeroF : [%.f]", zeroI, zeroF);
-    
     printf("################ [ TEST START, up is Real Printf , down is My Printf ] ################\n");
-    di_test();
-    u_test();
+    // di_test();
+    // u_test();
     x_test();
 	return (0);
 

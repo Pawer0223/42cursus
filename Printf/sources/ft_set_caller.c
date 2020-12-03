@@ -37,3 +37,21 @@ int				ft_set_ux(char* length, char spec)
 	else
 		return set_x_input(n);
 }
+
+int				ft_set_c(char* length)
+{
+	wint_t lc;
+	char c;
+	
+	// 아이거 VA_ARG 형승격으로 다 int로 해야하는 갑다..
+	if (length && ft_strncmp(length, "l", 3) == 0)
+	{
+		lc = va_arg(*(g_info->ap), wint_t);
+		// return set_di_input(n);
+	}
+	else
+	{
+		c = va_arg(*(g_info->ap), int);
+	}
+	return (0);
+}
