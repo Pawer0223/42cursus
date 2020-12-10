@@ -105,13 +105,16 @@
   <ItemGroup>
     <ClCompile Include="sources\ft_check.c" />
     <ClCompile Include="sources\ft_set_ascii.c" />
+    <ClCompile Include="sources\ft_set_caller2.c" />
     <ClCompile Include="sources\ft_set_com.c" />
     <ClCompile Include="sources\ft_format_write.c" />
     <ClCompile Include="sources\ft_global.c" />
     <ClCompile Include="sources\ft_set_caller.c" />
+    <ClCompile Include="sources\ft_set_f.c" />
     <ClCompile Include="sources\ft_set_input_filter.c" />
     <ClCompile Include="sources\ft_set_di.c" />
     <ClCompile Include="sources\ft_printf.c" />
+    <ClCompile Include="sources\ft_set_p.c" />
     <ClCompile Include="sources\ft_set_str.c" />
     <ClCompile Include="sources\ft_set_u.c" />
     <ClCompile Include="sources\ft_set_x.c" />

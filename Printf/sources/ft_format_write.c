@@ -21,6 +21,7 @@ void	write_padding(char padding, int end)
 	while (i < end)
 	{
 		ft_putchar_fd(padding, 1);
+		g_w_cnt++;
 		i++;
 	}
 }
@@ -29,7 +30,7 @@ void		ft_format_write(char flag)
 {
 	int		end;
 	char	padding;
-	t_input* input;
+	t_input	*input;
 
 	padding = ' ';
 	// 0 이면서 , 정밀도가 없을 때 padding 0으로채우기
@@ -47,4 +48,5 @@ void		ft_format_write(char flag)
 		write_padding(padding, end);
 		ft_putstr_fd(input->str, 1);
 	}
+	g_w_cnt += ft_strlen(input->str);
 }

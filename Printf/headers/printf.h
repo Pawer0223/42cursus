@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   printf.h                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: taekang <taekang@student.42seoul.k>        +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/23 17:55:57 by taekang           #+#    #+#             */
-/*   Updated: 2020/11/23 17:56:03 by taekang          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef PRINTF_H
 # define PRINTF_H
 
@@ -38,6 +26,7 @@ typedef struct	s_printf
 }				t_printf;
 t_printf 		*g_info;
 int				g_i;
+long long		g_w_cnt;
 /* global funcs */
 int				init_g(va_list *ap);
 void			clear_g(void);
@@ -52,10 +41,13 @@ int				ft_set_di(char	*length);
 int				ft_set_ux(char	*length, char spec);
 int				ft_set_c(char	*length);
 int				ft_set_s(char	*length);
+void			ft_set_n(char	*length);
+int				ft_set_p();
 /* set input funcs */
 int				set_di_input(long long n);
 int				set_u_input(unsigned long long n);
 int				set_x_input(unsigned long long n);
+int				set_p_input(unsigned long long n);
 int				set_ascii_input(int n);
 int				set_str_input(char *input_str);
 /* format write*/

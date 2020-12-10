@@ -71,3 +71,11 @@ int				ft_set_s(char	*length)
 		return set_str_input(str);
 	}
 }
+
+int				ft_set_p(h)
+{
+	unsigned long long n;
+
+	n = va_arg(*(g_info->ap), void *);
+	return set_p_input(n);
+}

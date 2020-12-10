@@ -4,19 +4,16 @@
   아키텍처의 유효성을 검사하는 중
   원격 빌드를 시작하는 중
   소스를 컴파일하는 중:
-  ft_printf.c
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_printf.c(57,1): warning : control reaches end of non-void function [-Wreturn-type]
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_printf.c(57,1): warning :  }
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_printf.c(57,1): warning :  ^
-  ft_set_str.c
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_str.c(14,33): warning : conversion to ‘size_t {aka long unsigned int}’ from ‘int’ may change the sign of the result [-Wsign-conversion]
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_str.c(14,33): warning :    str = ft_substr(input_str, 0, g_info->precision_len);
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_str.c(14,33): warning :                                  ^~~~~~
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_str.c(19,15): warning : conversion to ‘int’ from ‘size_t {aka long unsigned int}’ may alter its value [-Wconversion]
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_str.c(19,15): warning :   input->len = ft_strlen(str);
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_str.c(19,15): warning :                ^~~~~~~~~
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_str.c(8,7): warning : unused variable ‘len’ [-Wunused-variable]
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_str.c(8,7): warning :   int  len;
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_str.c(8,7): warning :        ^~~
+  main.c
+C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\test\main.c(17,5): warning : implicit declaration of function ‘ft_printf’; did you mean ‘fprintf’? [-Wimplicit-function-declaration]
+C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\test\main.c(63,39): warning : integer overflow in expression [-Woverflow]
+C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\test\main.c(63,39): warning :      printf   ("%%i =>[%i]\n", INT_MAX + 100);
+C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\test\main.c(63,39): warning :                                        ^
+C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\test\main.c(64,39): warning : integer overflow in expression [-Woverflow]
+C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\test\main.c(64,39): warning :      ft_printf("%%i =>[%i]\n", INT_MAX + 100);
+C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\test\main.c(64,39): warning :                                        ^
+C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\test\main.c(568,22): warning : conversion to ‘int’ from ‘double’ may alter its value [-Wfloat-conversion]
+C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\test\main.c(568,22): warning :                  n += pow(2, expoCnt);
+C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\test\main.c(568,22): warning :                       ^~~
   개체를 연결하는 중
   Printf.vcxproj -> C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\bin\x64\Debug\Printf.out

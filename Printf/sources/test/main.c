@@ -1,5 +1,13 @@
 #include "printf.h"
 #include <limits.h>
+#include <math.h>
+
+void    sprintf_test()
+{
+    double n = 1.2345;
+    char buf[10];
+    sprintf(buf, "%f", n);
+}
 
 void	di_test()
 {
@@ -315,6 +323,297 @@ void        s_test()
     ft_printf("%%10.s =>[%10.s]\n", "defg");
 }
 
+void        p_test()
+{
+    printf("######### p test #########\n");
+
+    // 32비트는 4, 64비트는 8로 표현.
+    // 즉 사용할 수 있는 메모리 공간의 크기가 64비트가 훨씬많음
+
+    // 32비트는 주소가 최대 16진수 8자리
+    // 64비트는 주소가 최대 16진수 16자리로 표현 가능하다.
+    // because 1바이트는 2개의 16진수를 표현할 수 있으니깐.
+    int a = 0;
+    unsigned long long num = (unsigned long long) & a;
+
+    printf("address size : %ld\n", sizeof(&a));
+    printf("서식지정자 p는 linux에서  높은 자릿수의 0은 생략 008AF7FC는 0x8af7fc 와같이\n");
+    printf("### 1 ###\n");
+    printf("%%p =>[%p], %%lld =>[%lld]\n", &a, num);
+    ft_printf("%%p =>[%p], %%lld =>[%lld]\n", &a, num);
+    printf("### 2 ###\n");
+    printf("%%-20p =>[%-20p]\n", &a);
+    ft_printf("%%-20p =>[%-20p]\n", &a);
+    printf("### 3 ###\n");
+    printf("%%20p =>[%20p]\n", &a);
+    ft_printf("%%20p =>[%20p]\n", &a);
+    printf("### 4 ###\n");
+    printf("%%.5p =>[%.5p]\n", &a);
+    ft_printf("%%.5p =>[%.5p]\n", &a);
+    printf("### 5 ###\n");
+    printf("%% p =>[% p]\n", &a);
+    ft_printf("%% p =>[% p]\n", &a);
+    printf("### 6 ###\n");
+    printf("%%+p =>[%+p]\n", &a);
+    ft_printf("%%+p =>[%+p]\n", &a);
+    printf("### 7 ###\n");
+    printf("%%#p =>[%#p]\n", &a);
+    ft_printf("%%#p =>[%#p]\n", &a);
+    printf("### 8 ###\n");
+    printf("%%p =>[%p]\n", -1);
+    ft_printf("%%p =>[%p]\n", -1);
+    printf("### 9 ###\n");
+    printf("%%p =>[%p]\n", 0);
+    ft_printf("%%p =>[%p]\n", 0);
+    printf("### 10 ###\n");
+    printf("%%p =>[%10p]\n", 0);
+    ft_printf("%%p =>[%10p]\n", 0);
+    printf("### 11 ###\n");
+    printf("%%.3p =>[%.3p]\n", 256);
+    ft_printf("%%.3p =>[%.3p]\n", 256);
+}
+
+void        n_test()
+{
+    printf("######### n test #########\n");
+    int num;
+    char c;
+    printf("### 1 ###\n");
+    printf("123%n6789\n", &num); // 123456789
+    ft_printf("123%n6789\n", &num); // 123456789
+    printf("### 2 ###\n");
+    printf("num : %d\n", num); // 3 , 123까지 출력했응께
+    ft_printf("num : %d\n", num); // 3 , 123까지 출력했응께
+    printf("### 3 ###\n");
+    printf("a%n\n", &num); // 123456789
+    ft_printf("a%n\n", &num); // 123456789
+    printf("### 4 ###\n");
+    printf("num : %d\n", num); // 5 , a출력
+    ft_printf("num : %d\n", num); // 5 , a출력
+    printf("### 5 ###\n");
+    printf("ㄱ밥%n6789\n", &num); // 16789
+    ft_printf("ㄱ밥%n6789\n", &num); // 16789
+    printf("### 6 ###\n");
+    printf("num : %d\n", num); // 1
+    ft_printf("num : %d\n", num); // 1
+    printf("### 7 ###\n");
+    printf("0%hhn6789\n", &c);
+    ft_printf("0%hhn6789\n", &c);
+    printf("### 8 ###\n");
+    printf("0123456789%hhn6789\n", &num);
+    ft_printf("0123456789%hhn6789\n", &num);
+    printf("### 9 ###\n");
+    printf("num : %d\n", num);
+    ft_printf("num : %d\n", num);
+    printf("### 10 ###\n");
+    printf("c : %d\n", c);
+    ft_printf("c : %d\n", c);
+    int n1;
+    int n2;
+    int n3;
+    printf("### 11 ###\n");
+    printf("a%n,ab%n,abc%n\n", &n1, &n2, &n3);
+    ft_printf("a%n,ab%n,abc%n\n", &n1, &n2, &n3);
+    printf("### 12 ###\n");
+    printf("n1 :%d, n2:%d, n3:%d\n", n1, n2, n3);
+    ft_printf("n1 :%d, n2:%d, n3:%d\n", n1, n2, n3);
+    int n4;
+    printf("### 13 ###\n");
+    printf("abcd%d%d%n\n", 100, 2000, &n4);
+    ft_printf("abcd%d%d%n\n", 100, 2000, &n4);
+    printf("### 14 ###\n");
+    printf("n4 is %d\n", n4);
+    ft_printf("n4 is %d\n", n4);
+    printf("### 15 ###\n");
+    printf("abcd%20.10d%d%n\n", 100, 2000, &n4);
+    ft_printf("abcd%20.10d%d%n\n", 100, 2000, &n4);
+    printf("### 16 ###\n");
+    printf("n4 is %d\n", n4);
+    ft_printf("n4 is %d\n", n4);
+}
+
+void        test_one_bit_oper()
+{
+
+    for (int i = 0; i < 10; i++) {
+       // printf("%d\n", 1 << i);
+         printf("1 << %d => %d\n", i, (1 << i)); // 1은 00001이다 왼쪽으로 1bit씩 옮기면서 &연산을통해 해당 bit의 수를 알아낼 수 있다.
+    }
+}
+
+void        x_bit_test()
+{
+    long long  a = 100;
+
+    char* ptr;
+
+    ptr = (char*)&a;
+
+    for (int i = 0; i < sizeof(long long); i++) {
+        char n = *(ptr + i);
+        printf("%d byte hexa value : %d\n", i + 1, n);
+    }
+
+    printf("%x\n", a);
+}
+
+void        float_bit_test()
+{
+    float d = 10.0f;
+
+    unsigned char* ptr;
+    ptr = (unsigned char*)&d;
+    int j = 0;
+    for (int i = sizeof(float) - 1; i >= 0; i--) {
+        //for (int j = 0; j < 8; j++)
+        //{
+        //    printf("%d", (*(ptr + i) >> j) & dif);
+        //}
+        for (j = 7; j >= 0; j--)
+            printf("%d", (*(ptr + i) >> j) & 0x01); // 8765 4321 이렇게 있으면 8을 1로보내서 1하고 & 연산 함.
+        printf(" ");
+    }
+
+    /*
+        unsigned int ptr;
+        ptr = &d;
+        ptr = *(unsigned int *)&d;
+        printf("ptr is : %d\n", ptr);
+        int size = sizeof(float);
+
+        for (int i = size * 8 - 1; i >= 0; i--) {
+            printf("%d", (ptr & (1 << i)) ? 1 : 0);
+            if (i % 8 == 0)
+                printf(" ");
+        }
+      */
+
+    //long long temp;
+    //temp = d;
+    //// fail case
+    //printf("\n#Fail Case 1, just Temp : %ld\n", temp); // 값이 저장 됨.
+    //for (int i = size * 8 - 1; i >= 0; i--) {
+    //    printf("%d", (temp & (1 << i)) ? 1 : 0);
+    //    if (i % 8 == 0)
+    //        printf(" ");
+    //}
+    //temp = &d;
+    //printf("\nFail Case 2, Temp Addres Save.. : %ld\n", temp); // 얘도 주소를 해석하는듯..
+    //for (int i = size * 8 - 1; i >= 0; i--) {
+    //    printf("%d", (temp & (1 << i)) ? 1 : 0);
+    //    if (i % 8 == 0)
+    //        printf(" ");
+    //}
+
+    //temp = (unsigned int*)&d;
+    //printf("\nFail Case 3, Temp Addres Save.. with Type Promotion : %ld\n", temp); // 얘도 2랑 차이없네.
+    //for (int i = size * 8 - 1; i >= 0; i--) {
+    //    printf("%d", (temp & (1 << i)) ? 1 : 0);
+    //    if (i % 8 == 0)
+    //        printf(" ");
+    //}
+
+    //temp = *(long long*)&d;
+    //printf("\nnFail Case 4, Type Promotion and reverse ref: %ld\n", temp); // 얘도 안되네...
+    //for (int i = size * 8 - 1; i >= 0; i--) {
+    //    printf("%d", (temp & (1 << i)) ? 1 : 0);
+    //    if (i % 8 == 0)
+    //        printf(" ");
+    //}
+
+
+    //for (int i = size; i > 0; i--) // 몇 byte인지
+    //{
+    //    for (int j = i * 8 - 1; j >= (i - 1) * 8; j--) // 1byte에 해당하는 이진수 출력
+    //    {
+    //        printf("%d", (ptr & (1 << j)) ? 1 : 0);
+    //    }
+    //    printf(" ");
+    //}
+
+    /*for (int i = sizeof(float) - 1; i >= 0; i--) {
+        printf("%x , %d\n", *(ptr + i), *(ptr + i));
+    }*/
+
+    //printf("a is %f, b is %f\n", a , b);
+}
+
+void        double_bit_test2()
+{
+    double a = 0.12;
+    unsigned char* ptr;
+    ptr = (unsigned char*)&a;
+
+    // sign bit , 1
+    // exponent , 11
+    // mantissa , 52
+    int bias = 1023;
+
+    int len = sizeof(double) - 1;
+    int sign;
+    int j;
+    
+    sign = ((*(ptr + len) >> 7) & 0x01) == 0 ? 1 : -1;
+    
+    int expoCnt = 10;
+    int n = 0;
+    // 8, 7 byte에서 sign과 exponent 추출
+    // 지수에 해당하는 n 구하기.
+    for (int i = len; i >= len - 1; i--) {
+        for (j = 7; j >= 0; j--) {
+            if (i == len && j == 7)
+                continue; 
+            int bit = (*(ptr + i) >> j) & 0x01;
+            if (bit == 1)
+                n += pow(2, expoCnt);
+            expoCnt--;
+            if (expoCnt == -1)
+                break;
+        }
+    }
+    printf("sign : [%d]\n", sign);
+    printf("n : [%d - %d]\n",n, bias);
+    printf("j : %d\n", j);
+    n -= bias;
+    j--;
+
+    double mantissa = 1;
+    int matCnt = -1;
+    int cnt = 0;
+    // mantissa 추출하기
+    for (int i = len - 1; i >= 0; i--) {
+        for (int k = j; k >= 0; k--) {
+            int bit = (*(ptr + i) >> j) & 0x01;
+            if (bit == 1)
+                mantissa += pow(2, matCnt);
+            matCnt--;
+            cnt++;
+        }
+        j = 7;
+    }
+    printf("cnt is %d \n", cnt);
+    printf("mantissa : %f , cnt .. %d\n", mantissa, matCnt);
+    double result = sign * pow(2, n) * mantissa;
+    printf("result is : %.20f\n", result);
+    double b = 0.12;
+    printf("%%0.20 is : %.20f\n", b);
+
+}
+
+void        double_bit_test()
+{
+    double a = 0.12;
+    unsigned char* ptr;
+    ptr = (unsigned char*)&a;
+    int j = 0;
+    for (int i = sizeof(double) - 1; i >= 0; i--) {
+        for (j = 7; j >= 0; j--) {
+            printf("%d", (*(ptr + i) >> j) & 0x01); // 8765 4321 이렇게 있으면 8을 1로보내서 1하고 & 연산 함.
+        }
+        printf(" ");
+    }
+}
+
 int		main(void)
 {
     printf("################ [ TEST START, up is Real Printf , down is My Printf ] ################\n");
@@ -322,7 +621,13 @@ int		main(void)
     // u_test();
     // x_test();
     // c_test();
-    s_test();
+    // s_test();
+    // p_test();
+    // n_test();
+    // float_bit_test();
+    double_bit_test2();
+    // test_one_bit_oper();
+    // x_bit_test();
 	return (0);
 
 }

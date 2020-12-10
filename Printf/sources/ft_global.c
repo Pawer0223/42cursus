@@ -24,6 +24,7 @@ int		init_g(va_list *ap)
 	g_info->precision_len = -1;
 	g_info->input = 0;
 	g_i = 0;
+	g_w_cnt = 0;
 	return (1);
 }
 void	clear_g()
