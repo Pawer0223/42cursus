@@ -538,9 +538,15 @@ void        float_bit_test()
     //printf("a is %f, b is %f\n", a , b);
 }
 
-void        double_bit_test2()
+void        double_bit_test3(double a)
 {
-    double a = 0.12;
+    long long precison_len = 6;
+
+
+}
+
+void        double_bit_test2(double a)
+{
     unsigned char* ptr;
     ptr = (unsigned char*)&a;
 
@@ -583,7 +589,7 @@ void        double_bit_test2()
     // mantissa 추출하기
     for (int i = len - 1; i >= 0; i--) {
         for (int k = j; k >= 0; k--) {
-            int bit = (*(ptr + i) >> j) & 0x01;
+            int bit = (*(ptr + i) >> k) & 0x01;
             if (bit == 1)
                 mantissa += pow(2, matCnt);
             matCnt--;
@@ -594,15 +600,17 @@ void        double_bit_test2()
     printf("cnt is %d \n", cnt);
     printf("mantissa : %f , cnt .. %d\n", mantissa, matCnt);
     double result = sign * pow(2, n) * mantissa;
-    printf("result is : %.20f\n", result);
-    double b = 0.12;
-    printf("%%0.20 is : %.20f\n", b);
-
+    printf("result is : %f\n", result);
+    printf("just is : %f\n", a);
+    printf("result %%.20f is : %.20f\n", result);
+    printf("%%0.20 is : %.20f\n", a);
 }
 
-void        double_bit_test()
+void        double_bit_test(double a)
 {
-    double a = 0.12;
+    double test = pow(2, -52);
+    printf("test : [%.20e]\n", test);
+    printf("### bit Check Start ### \n");
     unsigned char* ptr;
     ptr = (unsigned char*)&a;
     int j = 0;
@@ -612,6 +620,7 @@ void        double_bit_test()
         }
         printf(" ");
     }
+    printf("### bit Check End ### \n");
 }
 
 int		main(void)
@@ -625,7 +634,9 @@ int		main(void)
     // p_test();
     // n_test();
     // float_bit_test();
-    double_bit_test2();
+    double a = 1.23456789;
+    double_bit_test(a);
+    double_bit_test2(a);
     // test_one_bit_oper();
     // x_bit_test();
 	return (0);

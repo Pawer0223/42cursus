@@ -12,8 +12,8 @@ C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\test\main.c(63,39)
 C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\test\main.c(64,39): warning : integer overflow in expression [-Woverflow]
 C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\test\main.c(64,39): warning :      ft_printf("%%i =>[%i]\n", INT_MAX + 100);
 C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\test\main.c(64,39): warning :                                        ^
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\test\main.c(568,22): warning : conversion to ‘int’ from ‘double’ may alter its value [-Wfloat-conversion]
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\test\main.c(568,22): warning :                  n += pow(2, expoCnt);
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\test\main.c(568,22): warning :                       ^~~
+C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\test\main.c(567,22): warning : conversion to ‘int’ from ‘double’ may alter its value [-Wfloat-conversion]
+C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\test\main.c(567,22): warning :                  n += pow(2, expoCnt);
+C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\test\main.c(567,22): warning :                       ^~~
   개체를 연결하는 중
   Printf.vcxproj -> C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\bin\x64\Debug\Printf.out
