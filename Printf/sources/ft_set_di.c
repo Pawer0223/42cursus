@@ -51,7 +51,7 @@ int				setlen_di(t_input *input, long long n)
 	return (len);
 }
 
-void			set_di_sign(t_input* input, long long n)
+void			set_di_sign(t_input *input, long long n)
 {
 	if (n < 0)
 		input->sign = '-';

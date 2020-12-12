@@ -12,8 +12,14 @@ C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\test\main.c(63,39)
 C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\test\main.c(64,39): warning : integer overflow in expression [-Woverflow]
 C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\test\main.c(64,39): warning :      ft_printf("%%i =>[%i]\n", INT_MAX + 100);
 C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\test\main.c(64,39): warning :                                        ^
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\test\main.c(567,22): warning : conversion to ‘int’ from ‘double’ may alter its value [-Wfloat-conversion]
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\test\main.c(567,22): warning :                  n += pow(2, expoCnt);
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\test\main.c(567,22): warning :                       ^~~
+C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\test\main.c(543,15): warning : unused variable ‘precison_len’ [-Wunused-variable]
+C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\test\main.c(543,15): warning :      long long precison_len = 6;
+C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\test\main.c(543,15): warning :                ^~~~~~~~~~~~
+C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\test\main.c(574,22): warning : conversion to ‘int’ from ‘double’ may alter its value [-Wfloat-conversion]
+C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\test\main.c(574,22): warning :                  n += pow(2, expoCnt);
+C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\test\main.c(574,22): warning :                       ^~~
+C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\test\main.c(702,12): warning : unused variable ‘a’ [-Wunused-variable]
+C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\test\main.c(702,12): warning :      double a = -123.45;
+C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\test\main.c(702,12): warning :             ^
   개체를 연결하는 중
   Printf.vcxproj -> C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\bin\x64\Debug\Printf.out

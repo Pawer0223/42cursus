@@ -623,6 +623,64 @@ void        double_bit_test(double a)
     printf("### bit Check End ### \n");
 }
 
+void        f_test()
+{
+    printf("######### f test #########\n");
+
+    double a = -123.45;
+    double b = 0.6789;
+    printf("### 1 ###\n");
+    printf("%%.3f=>[%.3f]\n", a);
+    ft_printf("%%.3f=>[%.3f]\n", a);
+    printf("### 2 ###\n");
+    printf("%%.5f=>[%.5f]\n", a);
+    ft_printf("%%.5f=>[%.5f]\n", a);
+    printf("### 3 ###\n");
+    printf("%%.f=>[%.f]\n", a);
+    ft_printf("%%.f=>[%.f]\n", a);
+    printf("### 4 ###\n");
+    printf("%%.0f=>[%.0f]\n", a);
+    ft_printf("%%.0f=>[%.0f]\n", a);
+
+    // printf("%%.-5f=>[%.-5f]\n", a); // error
+    printf("### 5 ###\n");
+    printf("%% f=>[% f]\n", b);
+    ft_printf("%% f=>[% f]\n", b);
+    printf("### 6 ###\n");
+    printf("%%+f=>[%+f]\n", b);
+    ft_printf("%%+f=>[%+f]\n", b);
+    printf("### 7 ###\n");
+    printf("%%-10f=>[%-10f]\n", b);
+    ft_printf("%%-10f=>[%-10f]\n", b);
+    printf("### 8 ###\n");
+    printf("%%20.10f=>[%20.10f]\n", b);
+    ft_printf("%%20.10f=>[%20.10f]\n", b);
+    
+    double c = 0;
+    
+    printf("### 9 ###\n");
+    printf("%% f=>[% f]\n", c);
+    ft_printf("%% f=>[% f]\n", c);
+    printf("### 10 ###\n");
+    printf("%%+f=>[%+f]\n", c);
+    ft_printf("%%+f=>[%+f]\n", c);
+    printf("### 11 ###\n");
+    printf("%%-10f=>[%-10f]\n", c);
+    ft_printf("%%-10f=>[%-10f]\n", c);
+    printf("### 12 ###\n");
+    printf("%%20.10f=>[%20.10f]\n", c);
+    ft_printf("%%20.10f=>[%20.10f]\n", c);
+    printf("### 13 ###\n");
+    printf("%%.f=>[%.f]\n", c);
+    ft_printf("%%.f=>[%.f]\n", c);
+    printf("### 14 ###\n");
+    printf("%%.1f=>[%.1f]\n", c);
+    ft_printf("%%.1f=>[%.1f]\n", c);
+    printf("### 15 ###\n");
+    printf("%%10.0f=>[%10.0f]\n", c);
+    ft_printf("%%10.0f=>[%10.0f]\n", c);
+}
+
 int		main(void)
 {
     printf("################ [ TEST START, up is Real Printf , down is My Printf ] ################\n");
@@ -634,11 +692,21 @@ int		main(void)
     // p_test();
     // n_test();
     // float_bit_test();
-    double a = 1.23456789;
-    double_bit_test(a);
-    double_bit_test2(a);
+   // double a = 1.23456789;
+   //  double_bit_test(a);
+   //  double_bit_test2(a);
     // test_one_bit_oper();
     // x_bit_test();
+
+//    f_test();
+    double a = -123.45;
+    double b = 0.6789;
+    printf("### 5 ###\n");
+    printf("%% f=>[% f]\n", b);
+    ft_printf("%% f=>[% f]\n", b);
+
+
+
 	return (0);
 
 }

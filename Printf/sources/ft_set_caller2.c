@@ -23,10 +23,8 @@ int				ft_set_fge(char	*length)
 
 	n = va_arg(*(g_info->ap), double);
 
-	if (g_info->specifier == 'e')
-	{
-
-	}
+	if (g_info->specifier == 'f')
+		return set_f_input(n);
 	return (0);
 	// return set_fge_input(n);
 }
