@@ -4,22 +4,30 @@
   아키텍처의 유효성을 검사하는 중
   원격 빌드를 시작하는 중
   소스를 컴파일하는 중:
-  main.c
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\test\main.c(17,5): warning : implicit declaration of function ‘ft_printf’; did you mean ‘fprintf’? [-Wimplicit-function-declaration]
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\test\main.c(63,39): warning : integer overflow in expression [-Woverflow]
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\test\main.c(63,39): warning :      printf   ("%%i =>[%i]\n", INT_MAX + 100);
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\test\main.c(63,39): warning :                                        ^
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\test\main.c(64,39): warning : integer overflow in expression [-Woverflow]
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\test\main.c(64,39): warning :      ft_printf("%%i =>[%i]\n", INT_MAX + 100);
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\test\main.c(64,39): warning :                                        ^
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\test\main.c(543,15): warning : unused variable ‘precison_len’ [-Wunused-variable]
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\test\main.c(543,15): warning :      long long precison_len = 6;
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\test\main.c(543,15): warning :                ^~~~~~~~~~~~
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\test\main.c(574,22): warning : conversion to ‘int’ from ‘double’ may alter its value [-Wfloat-conversion]
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\test\main.c(574,22): warning :                  n += pow(2, expoCnt);
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\test\main.c(574,22): warning :                       ^~~
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\test\main.c(702,12): warning : unused variable ‘a’ [-Wunused-variable]
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\test\main.c(702,12): warning :      double a = -123.45;
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\test\main.c(702,12): warning :             ^
+  ft_set_f.c
+C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_f.c(12,9): warning : conversion to ‘int’ from ‘long long int’ may alter its value [-Wconversion]
+C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_f.c(12,9): warning :    nmg = n % 10;
+C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_f.c(12,9): warning :          ^
+C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_f.c(15,23): warning : conversion to ‘char’ from ‘int’ may alter its value [-Wconversion]
+C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_f.c(15,23): warning :    input->str[idx--] = '0' + nmg;
+C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_f.c(15,23): warning :                        ^~~
+C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_f.c(52,7): warning : conversion to ‘long long int’ from ‘double’ may alter its value [-Wfloat-conversion]
+C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_f.c(52,7): warning :   ll = n;
+C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_f.c(52,7): warning :        ^
+C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_f.c(53,8): warning : conversion to ‘double’ from ‘long long int’ may alter its value [-Wconversion]
+C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_f.c(53,8): warning :   d = n - ll;
+C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_f.c(53,8): warning :         ^
+C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_f.c(67,9): warning : conversion to ‘int’ from ‘double’ may alter its value [-Wfloat-conversion]
+C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_f.c(67,9): warning :    num = d * 10;
+C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_f.c(67,9): warning :          ^
+C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_f.c(71,21): warning : conversion to ‘char’ from ‘int’ may alter its value [-Wconversion]
+C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_f.c(71,21): warning :    input->str[i++] = num + '0';
+C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_f.c(71,21): warning :                      ^~~
+C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_f.c(92,7): warning : conversion to ‘long long int’ from ‘double’ may alter its value [-Wfloat-conversion]
+C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_f.c(92,7): warning :   ll = n;
+C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_f.c(92,7): warning :        ^
+C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_f.c(123,41): warning : conversion to ‘long unsigned int’ from ‘int’ may change the sign of the result [-Wsign-conversion]
+C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_f.c(123,41): warning :   if (!(str = (char*)malloc(sizeof(char) * (size + 1))))
+C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_f.c(123,41): warning :                                          ^
   개체를 연결하는 중
   Printf.vcxproj -> C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\bin\x64\Debug\Printf.out
