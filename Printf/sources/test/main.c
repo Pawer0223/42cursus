@@ -603,9 +603,8 @@ void        double_bit_test2(double a)
     printf("mantissa : %f , cnt .. %d\n", mantissa, matCnt);
     double result = sign * pow(2, n) * mantissa;
     printf("result is : %f\n", result);
-  
     printf("result %%.20f is : %.20f\n", result);
-    printf("%%0.20 is : %.20f\n", a);
+    printf("origin %%.20f is : %.20f\n", a);
 }
 
 void        double_bit_test(double a)
@@ -773,12 +772,11 @@ void    big_number_test()
 {
     double a;
     double b;
-    // a = (double)LLONG_MAX;
-    a = (double)9223372036854775806.0;
-    b = (a + 1);
+    a = (double)LLONG_MAX;
+    b = 0.12345678971234567897123456789712345678971234567897;
 
-    double_bit_test(a);
-    double_bit_test2(a);
+   double_bit_test(b);
+   double_bit_test2(b);
 
     printf("a : %f\nb : %f \n", a, b);
 }
@@ -807,7 +805,13 @@ int		main(void)
     //printf("%% f=>[% f]\n", b);
     //ft_printf("%% f=>[% f]\n", b);
 
-    big_number_test();
+   // big_number_test();
+
+    double a = 10.123;
+    double_bit_test(a);
+    double_bit_test2(a);
+    printf("###################### Line ####################\n");
+    ft_printf("%%f => [%f]", a);
 
 	return (0);
 

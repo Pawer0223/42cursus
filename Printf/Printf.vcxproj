@@ -104,6 +104,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sources\ft_check.c" />
+    <ClCompile Include="sources\ft_math.c" />
     <ClCompile Include="sources\ft_set_ascii.c" />
     <ClCompile Include="sources\ft_set_caller2.c" />
     <ClCompile Include="sources\ft_set_com.c" />

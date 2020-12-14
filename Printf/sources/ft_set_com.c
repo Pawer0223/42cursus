@@ -10,3 +10,8 @@ void			fill_is_zero(t_input *input, int idx)
 	else
 		input->str[idx] = '0';
 }
+
+int				get_bit(char* ptr, int byte, int bit)
+{
+	return (*(ptr + byte) >> bit) & 0x01;
+}
