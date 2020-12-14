@@ -547,6 +547,8 @@ void        double_bit_test3(double a)
 
 void        double_bit_test2(double a)
 {
+    printf("Input : [%f]\n", a);
+
     unsigned char* ptr;
     ptr = (unsigned char*)&a;
 
@@ -601,15 +603,15 @@ void        double_bit_test2(double a)
     printf("mantissa : %f , cnt .. %d\n", mantissa, matCnt);
     double result = sign * pow(2, n) * mantissa;
     printf("result is : %f\n", result);
-    printf("just is : %f\n", a);
+  
     printf("result %%.20f is : %.20f\n", result);
     printf("%%0.20 is : %.20f\n", a);
 }
 
 void        double_bit_test(double a)
 {
-    double test = pow(2, -52);
-    printf("test : [%.20e]\n", test);
+    //double test = pow(2, -52);
+    //printf("test : [%.20e]\n", test);
     printf("### bit Check Start ### \n");
     unsigned char* ptr;
     ptr = (unsigned char*)&a;
@@ -620,8 +622,67 @@ void        double_bit_test(double a)
         }
         printf(" ");
     }
-    printf("### bit Check End ### \n");
+    printf("\n### bit Check End ### \n");
 }
+
+void    round_test()
+{
+    double a = 0.120;
+    double b = 0.130;
+
+    printf("0.125 와 0.135의 차이점 확인\n");
+    printf("### 1 ###\n");
+    for (int i = 0; i < 10; i++)
+    {
+        a += 0.001;
+        printf("%%2f => [%2f], %%.2f => [%.2f]\n", a, a);
+    }
+
+    printf("### 2 ###\n");
+    for (int i = 0; i < 10; i++)
+    {
+        b += 0.001;
+        printf("%%2f => [%2f], %%.2f => [%.2f]\n", b, b);
+    }
+    printf("3~4 왜 7.125에서 차이가 나지... \n");
+
+    printf("### 3 ###\n");
+    a = 0.125;
+    for (int i = 0; i < 10; i++)
+    {
+        a += 1;
+        printf("%%2f => [%2f], %%.2f => [%.2f]\n", a, a);
+    }
+
+    a = 7.120;
+    printf("### 4 ###\n");
+    for (int i = 0; i < 10; i++)
+    {
+        a += 0.001;
+        printf("%%2f => [%2f], %%.2f => [%.2f]\n", a, a);
+    }
+
+    b = 7.130;
+    printf("### 5 ###\n");
+    for (int i = 0; i < 10; i++)
+    {
+        b += 0.001;
+        printf("%%2f => [%2f], %%.2f => [%.2f]\n", b, b);
+    }
+
+
+    printf("### 6 ###\n");
+    a = 0.5;
+    b = 0.51;
+    for (int i = 0; i < 10; i++)
+    {
+        a += 1;
+        b += 1;
+        printf("%%f => [%f], %%.f => [%.f]\n", a, a);
+        printf("%%f => [%f], %%.f => [%.f]\n", b, b);
+    }
+}
+
 
 void        f_test()
 {
@@ -681,6 +742,47 @@ void        f_test()
     ft_printf("%%10.0f=>[%10.0f]\n", c);
 }
 
+void    big_test()
+{
+    printf("### 큰 숫자 정수를 나타낼 때, 범위가 생각보다 크다(최소 2^10이상 까지 같은 정수로 인식 하는것을 확인 함..)\n");
+    double a = (double)LLONG_MAX;
+    int addNum = 0;
+
+    double prev;
+    printf("### 1 ###\n");
+    for (int i = 0; i < 61; i++)
+    {
+        prev = a;
+        addNum += 100;
+        a += addNum;
+        printf("[%lld + %d] ==> [%.10f] , -100 출력과 차이 값 ==> [%f]\n", LLONG_MAX, addNum, a, (a - prev));
+    }
+    printf("### 2 ###\n");
+    a = (double)LLONG_MAX;
+    addNum = 1000;
+    for (int i = 0; i < 30; i++)
+    {
+        prev = a;
+        addNum++;
+        a += addNum;
+        printf("[%lld + %d] ==> [%.10f] , -100 출력과 차이 값 ==> [%f]\n", LLONG_MAX, addNum, a, (a - prev));
+    }
+}
+
+void    big_number_test()
+{
+    double a;
+    double b;
+    // a = (double)LLONG_MAX;
+    a = (double)9223372036854775806.0;
+    b = (a + 1);
+
+    double_bit_test(a);
+    double_bit_test2(a);
+
+    printf("a : %f\nb : %f \n", a, b);
+}
+
 int		main(void)
 {
     printf("################ [ TEST START, up is Real Printf , down is My Printf ] ################\n");
@@ -699,13 +801,13 @@ int		main(void)
     // x_bit_test();
 
 //    f_test();
-    double a = -123.45;
-    double b = 0.6789;
-    printf("### 5 ###\n");
-    printf("%% f=>[% f]\n", b);
-    ft_printf("%% f=>[% f]\n", b);
+    //double a = -123.45;
+    //double b = 0.6789;
+    //printf("### 5 ###\n");
+    //printf("%% f=>[% f]\n", b);
+    //ft_printf("%% f=>[% f]\n", b);
 
-
+    big_number_test();
 
 	return (0);
 
