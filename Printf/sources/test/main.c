@@ -538,13 +538,6 @@ void        float_bit_test()
     //printf("a is %f, b is %f\n", a , b);
 }
 
-void        double_bit_test3(double a)
-{
-    long long precison_len = 6;
-
-
-}
-
 void        double_bit_test2(double a)
 {
     printf("Input : [%f]\n", a);
@@ -780,6 +773,87 @@ void    big_number_test()
 
     printf("a : %f\nb : %f \n", a, b);
 }
+// 정수와 실수를 분리하는 코드
+double		separate_double(double d)
+{
+    printf("############### start [%f] ############\n", d);
+    int cnt = 0;
+
+    double d2 = d;
+    while (d2 > 1)
+    {
+        d2 /= 10;
+        cnt++;
+    }
+    printf("[%f] cnt is [%d]\n", d, cnt);
+    int i = 0;
+    double d3 = 0;
+    while (cnt > 0)
+    {
+        d2 *= 10;
+        // printf("(int)d2 => [%d]\n", (int)d2);
+        d3 += (int)d2 * pow(10, --cnt);
+        d2 -= (int)d2;
+        i++;
+    }
+    double d4 = d - d3;
+    printf("d3 is [%f] , d4 is [%f]\n", d3, d4);
+    printf("############### end ############\n");
+    return (0);
+}
+
+void round_test2()
+{
+    double a = 0.125;
+    double b = 0.135;
+
+    //printf("%%f => [%f], %%.2f => [%.2f]\n", a, a);
+    //ft_printf("%%f => [%f], %%.2f => [%.2f]\n", a, a);
+    //printf("%%f => [%f], %%.2f => [%.2f]\n", b, b);
+    //ft_printf("%%f => [%f], %%.2f => [%.2f]\n", b, b);
+
+    printf("%%.2f => [%.2f]\n", a);
+    ft_printf("%%.2f => [%.2f]\n", a);
+    printf("%%.2f => [%.2f]\n", b);
+    ft_printf("%%.2f => [%.2f]\n", b);
+
+    a = 0.125;
+    a += 7;
+    b = 7.120;
+    b += 0.001;
+    b += 0.001;
+    b += 0.001;
+    b += 0.001;
+    b += 0.001;
+
+    printf("%%.2f => [%.2f]\n", a);
+    ft_printf("%%.2f => [%.2f]\n",a);
+    printf("%%.2f => [%.2f]\n", b);
+    ft_printf("%%.2f => [%.2f]\n", b);
+
+    a = 0.999; // .1로하면 1.00나와야 함.
+    ft_printf("%%.2f => [%.2f]\n", a);
+
+    printf("### [%%.f Test] ###\n");
+    a = 1.5;
+    b = 1.51;
+
+    printf("%%.f => [%.f]\n", a);
+    ft_printf("%%.f => [%.f]\n", a);
+    printf("%%.f => [%.f]\n", b);
+    ft_printf("%%.f => [%.f]\n", b);
+
+    a = 0.5;
+    b = 0.51;
+
+    printf("##############################\n");;
+    printf("%%.f => [%.f]\n", a);
+    ft_printf("%%.f => [%.f]\n", a);
+    printf("%%.f => [%.f]\n", b);
+    ft_printf("%%.f => [%.f]\n", b);
+
+
+}
 
 int		main(void)
 {
@@ -807,11 +881,27 @@ int		main(void)
 
    // big_number_test();
 
-    double a = 10.123;
-    double_bit_test(a);
-    double_bit_test2(a);
-    printf("###################### Line ####################\n");
-    ft_printf("%%f => [%f]", a);
+    //double a = 10.123;
+    //double_bit_test(a);
+    //double_bit_test2(a);
+    //printf("###################### Line ####################\n");
+    //ft_printf("%%f => [%f]\n", a);
+    //ft_printf("%%f => [%f]\n", 11.4567);
+    //ft_printf("%%f => [%f]\n", 1351781928.4567);
+    //ft_printf("%%f => [%f]\n", 1351781926.4567);
+    //ft_printf("%%f => [%f]\n", (double)LLONG_MAX);
+
+    //double a = 1.234567;
+    //round_test2(0.00000001);
+    //round_test2(0.1);
+    //round_test2(0);
+    //round_test2(1.234);
+    //round_test2(12.345);
+    //round_test2(12345.67890);
+    //round_test2((double)123123123.45678);
+    //round_test2((double)LLONG_MAX);
+    //round_test2((double)123123123444);
+    round_test2();
 
 	return (0);
 
