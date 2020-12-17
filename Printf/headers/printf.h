@@ -59,8 +59,10 @@ double			read_bit(char* str, int exponent);
 double			ft_round(double d, int pre);
 /* math*/
 double			ft_pow(double base, double exponent);
-/* manage int */
+/* manage */
 double		get_number(double d, int need_last);
+int			get_left_size(double d);
+double		get_digit_d(double d, int pre);
 /* remove !!! for Test .. */
 void			all_print();
 void			t_printf_print();

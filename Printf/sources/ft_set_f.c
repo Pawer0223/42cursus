@@ -15,46 +15,72 @@ void			set_f_sign(t_input *input, double n)
 
     if (g_info->precision_len == -1)
         g_info->precision_len = 6;
-    printf("sign : [%d]\n", sign);
 }
 
-double		temp(double d)
+void         fill_str_f(double n, char *temp, int len, char l_or_r)
 {
-    printf("## before : [%f]\n", d);
-    d = ft_round(d, g_info->precision_len);
-    printf("## After : [%f]\n", d);
+    int i;
 
-    return (0);
+    i = 0;
+    while (i < len)
+    {
+        n *= 10;
+        temp[i++] = (int)n + '0';
+        n -= (int)n;
+    }
+    if (l_or_r == 'l' && g_info->precision_len > 0)
+        temp[i++] = '.';
+    temp[i] = 0;
+    return (1);
+}
+
+
+int         make_floating(t_input *input, double n)
+{
+    char    *l;
+    char    *r;
+    int     len;
+    double  left;
+    double  right;
+
+    left = get_number(n, 0);
+    right = n - left;
+
+    len = get_left_size(n);
+    len = len == 0 ? 1 : len;
+    left *= ft_pow(10, (len * -1));
+    if (!(l = (char*)malloc(sizeof(char) * len + 2)))
+        return (0);
+    fill_str_f(left, l, len, 'l');
+    len = g_info->precision_len;
+    right = get_digit_d(right, len);
+    if (!(r = (char*)malloc(sizeof(char) * len + 1)))
+    {
+        free(l);
+        return (0);
+    }
+    fill_str_f(right, r, len, 'r');
+    input->str = ft_strjoin(l, r);
+    input->len = ft_strlen(input->str);
+    free(l);
+    free(r);
+    return (1);
 }
 
 int				set_f_input(double n)
 {
 	t_input	*input;
-    char	*str;
 	int		size;
 
 	if (!(input = (t_input *)(malloc(sizeof(t_input)))))
 		return (0);
 	g_info->input = input;
-
     set_f_sign(input, n);
+    printf("## before : [%.21f]\n", n);
+    n = ft_round(n, g_info->precision_len);
+    printf("## After: [%.21f]\n", n);
+    if (!make_floating(input, n))
+        return (0);
 
-    temp(n);
-
-    // 1. 정수부와, 실수부를 구분한다.
-
-    // 2. precision_len 에따라 round 수행한다.
-        // ㄴ precison_len이 0이면, 정수부가 영향을 끼치므로 올림 되는 경우에 정수부 + 1 한다.
-        // ㄴ 0초과일 때, 정수부까지 올림이 되면, 정수부 + 1 해야 된다.
-        // ㄴ 0초과일 때, 정수부까지 올림되지 않을 땐, 실수부 연산만 진행하면 된다.
-
-    // 3. 정수부 모두 str 만들기
-
-    // 4. 실수부를 precsion_len만큼 실수부 만들기.
-
-    // 5. 3 + 4 합치기
-
-    // 6. input 채워주기.
-
-	return (0);
+	return (1);
 }

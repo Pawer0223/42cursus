@@ -104,8 +104,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sources\ft_check.c" />
-    <ClCompile Include="sources\ft_manage_float.c" />
     <ClCompile Include="sources\ft_manage_num.c" />
+    <ClCompile Include="sources\ft_math_back.c" />
     <ClCompile Include="sources\ft_math.c" />
     <ClCompile Include="sources\ft_set_ascii.c" />
     <ClCompile Include="sources\ft_set_caller2.c" />
@@ -114,7 +114,7 @@
     <ClCompile Include="sources\ft_global.c" />
     <ClCompile Include="sources\ft_set_caller.c" />
     <ClCompile Include="sources\ft_set_f.c" />
-    <ClCompile Include="sources\ft_set_f_backup.c" />
+    <ClCompile Include="sources\ft_set_f_back.c" />
     <ClCompile Include="sources\ft_set_input_filter.c" />
     <ClCompile Include="sources\ft_set_di.c" />
     <ClCompile Include="sources\ft_printf.c" />

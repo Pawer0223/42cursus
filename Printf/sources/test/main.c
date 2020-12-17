@@ -627,14 +627,18 @@ void    round_test()
     for (int i = 0; i < 10; i++)
     {
         a += 0.001;
-        printf("%%2f => [%2f], %%.2f => [%.2f]\n", a, a);
+        printf("================[i]===============\n",i);
+        printf("%%f => [%f], %%.2f => [%.2f]\n", a, a);
+        ft_printf("%%f => [%f], %%.2f => [%.2f]\n", a, a);
     }
 
     printf("### 2 ###\n");
     for (int i = 0; i < 10; i++)
     {
         b += 0.001;
-        printf("%%2f => [%2f], %%.2f => [%.2f]\n", b, b);
+        printf("================[i]===============\n", i);
+        printf("%%f => [%f], %%.2f => [%.2f]\n", b, b);
+        ft_printf("%%f => [%f], %%.2f => [%.2f]\n", b, b);
     }
     printf("3~4 왜 7.125에서 차이가 나지... \n");
 
@@ -643,7 +647,9 @@ void    round_test()
     for (int i = 0; i < 10; i++)
     {
         a += 1;
-        printf("%%2f => [%2f], %%.2f => [%.2f]\n", a, a);
+        printf("================[i]===============\n", i);
+        printf("%%f => [%f], %%.2f => [%.2f]\n", a, a);
+        ft_printf("%%f => [%f], %%.2f => [%.2f]\n", a, a);
     }
 
     a = 7.120;
@@ -651,7 +657,9 @@ void    round_test()
     for (int i = 0; i < 10; i++)
     {
         a += 0.001;
-        printf("%%2f => [%2f], %%.2f => [%.2f]\n", a, a);
+        printf("================[i]===============\n", i);
+        printf("%%f => [%f], %%.2f => [%.2f]\n", a, a);
+        ft_printf("%%f => [%f], %%.2f => [%.2f]\n", a, a);
     }
 
     b = 7.130;
@@ -659,7 +667,9 @@ void    round_test()
     for (int i = 0; i < 10; i++)
     {
         b += 0.001;
-        printf("%%2f => [%2f], %%.2f => [%.2f]\n", b, b);
+        printf("================[i]===============\n", i);
+        printf("%%f => [%f], %%.2f => [%.2f]\n", b, b);
+        ft_printf("%%f => [%f], %%.2f => [%.2f]\n", b, b);
     }
 
 
@@ -670,8 +680,13 @@ void    round_test()
     {
         a += 1;
         b += 1;
+        printf("================[i]===============\n", i);
+        printf("###### a #####\n");
         printf("%%f => [%f], %%.f => [%.f]\n", a, a);
+        ft_printf("%%f => [%f], %%.f => [%.f]\n", a, a);
+        printf("###### b #####\n");
         printf("%%f => [%f], %%.f => [%.f]\n", b, b);
+        ft_printf("%%f => [%f], %%.f => [%.f]\n", b, b);
     }
 }
 
@@ -807,10 +822,10 @@ void round_test2()
     double a = 0.125;
     double b = 0.135;
 
-    //printf("%%f => [%f], %%.2f => [%.2f]\n", a, a);
-    //ft_printf("%%f => [%f], %%.2f => [%.2f]\n", a, a);
-    //printf("%%f => [%f], %%.2f => [%.2f]\n", b, b);
-    //ft_printf("%%f => [%f], %%.2f => [%.2f]\n", b, b);
+    printf("%%f => [%f], %%.2f => [%.2f]\n", a, a);
+    ft_printf("%%f => [%f], %%.2f => [%.2f]\n", a, a);
+    printf("%%f => [%f], %%.2f => [%.2f]\n", b, b);
+    ft_printf("%%f => [%f], %%.2f => [%.2f]\n", b, b);
 
     printf("%%.2f => [%.2f]\n", a);
     ft_printf("%%.2f => [%.2f]\n", a);
@@ -832,6 +847,7 @@ void round_test2()
     ft_printf("%%.2f => [%.2f]\n", b);
 
     a = 0.999; // .1로하면 1.00나와야 함.
+    printf("%%.2f => [%.2f]\n", a);
     ft_printf("%%.2f => [%.2f]\n", a);
 
     printf("### [%%.f Test] ###\n");
@@ -891,18 +907,26 @@ int		main(void)
     //ft_printf("%%f => [%f]\n", 1351781926.4567);
     //ft_printf("%%f => [%f]\n", (double)LLONG_MAX);
 
-    //double a = 1.234567;
-    //round_test2(0.00000001);
-    //round_test2(0.1);
-    //round_test2(0);
-    //round_test2(1.234);
-    //round_test2(12.345);
-    //round_test2(12345.67890);
-    //round_test2((double)123123123.45678);
-    //round_test2((double)LLONG_MAX);
-    //round_test2((double)123123123444);
-    round_test2();
 
+    //round_test();
+    //printf("#########2####### \n");
+    //round_test2();
+    double a = 9.51;
+
+    printf("%%.20f => [%.20f]\n", a);
+    ft_printf("%%.20f => [%.20f]\n", a);
+
+    //printf("%%.f => [%.f]\n", a);
+    //ft_printf("%%.f => [%.f]\n", a);
+
+    //printf("%%.1f => [%.1f]\n", a);
+    //ft_printf("%%.1f => [%.1f]\n", a);
+
+    //printf("%%.2f => [%.2f]\n", a);
+    //ft_printf("%%.2f => [%.2f]\n", a);
+
+    //printf("%%.3f => [%.3f]\n", a);
+    //ft_printf("%%.3f => [%.3f]\n", a);
 	return (0);
 
 }

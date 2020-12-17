@@ -54,7 +54,7 @@ double		pre_zero(double l, double r)
 	{
 		if (prev % 2 == 0 && check_signif(r, 0))
 			return (l);
-		return (l + 1);
+		l += 1;
 	}
 	return (l);
 }
@@ -67,7 +67,7 @@ double		pre_not_zero(double l, double r, int pre)
 	double	r2;
 
 	i = 0;
-	r2 = r;
+	r2 = get_digit_d(r, pre + 1);
 	while (i <= pre)
 	{
 		r2 *= 10;
@@ -83,7 +83,7 @@ double		pre_not_zero(double l, double r, int pre)
 			return (l + r);
 		r += ft_pow(10, (pre * -1));
 	}
-	return (l + r);
+	return get_digit_d((l + r), pre);
 }
 
 double		ft_round(double d, int pre)
@@ -94,7 +94,6 @@ double		ft_round(double d, int pre)
 	left = get_number(d, 0);
 	right = d - left;
 
-	printf("left : [%f], right : [%f]\n", left, right);
 	if (pre == 0)
 		return (pre_zero(left, right));
 	return (pre_not_zero(left, right, pre));
