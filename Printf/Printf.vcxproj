@@ -114,6 +114,7 @@
     <ClCompile Include="sources\ft_global.c" />
     <ClCompile Include="sources\ft_set_caller.c" />
     <ClCompile Include="sources\ft_set_f.c" />
+    <ClCompile Include="sources\ft_set_f2.c" />
     <ClCompile Include="sources\ft_set_f_back.c" />
     <ClCompile Include="sources\ft_set_input_filter.c" />
     <ClCompile Include="sources\ft_set_di.c" />

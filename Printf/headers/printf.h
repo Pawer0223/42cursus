@@ -56,7 +56,6 @@ void			ft_format_write(char flag);
 void			fill_is_zero(t_input* input, int idx);
 int				get_bit(char* ptr, int byte, int bit);
 double			read_bit(char* str, int exponent);
-double			ft_round(double d, int pre);
 /* math*/
 double			ft_pow(double base, double exponent);
 /* manage */

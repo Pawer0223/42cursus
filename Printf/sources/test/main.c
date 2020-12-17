@@ -908,25 +908,34 @@ int		main(void)
     //ft_printf("%%f => [%f]\n", (double)LLONG_MAX);
 
 
-    //round_test();
-    //printf("#########2####### \n");
-    //round_test2();
+    round_test();
+    printf("#########2####### \n");
+    round_test2();
     double a = 9.51;
 
     printf("%%.20f => [%.20f]\n", a);
     ft_printf("%%.20f => [%.20f]\n", a);
 
-    //printf("%%.f => [%.f]\n", a);
-    //ft_printf("%%.f => [%.f]\n", a);
+    printf("%%.15f => [%.15f]\n", a);
+    ft_printf("%%.15f => [%.15f]\n", a);
 
-    //printf("%%.1f => [%.1f]\n", a);
-    //ft_printf("%%.1f => [%.1f]\n", a);
+    printf("%%.16f => [%.16f]\n", a);
+    ft_printf("%%.16f => [%.16f]\n", a);
 
-    //printf("%%.2f => [%.2f]\n", a);
-    //ft_printf("%%.2f => [%.2f]\n", a);
+    printf("%%.17f => [%.17f]\n", a);
+    ft_printf("%%.17f => [%.17f]\n", a);
 
-    //printf("%%.3f => [%.3f]\n", a);
-    //ft_printf("%%.3f => [%.3f]\n", a);
+    printf("%%.f => [%.f]\n", a);
+    ft_printf("%%.f => [%.f]\n", a);
+
+    printf("%%.1f => [%.1f]\n", a);
+    ft_printf("%%.1f => [%.1f]\n", a);
+
+    printf("%%.2f => [%.2f]\n", a);
+    ft_printf("%%.2f => [%.2f]\n", a);
+
+    printf("%%.3f => [%.3f]\n", a);
+    ft_printf("%%.3f => [%.3f]\n", a);
 	return (0);
 
 }
