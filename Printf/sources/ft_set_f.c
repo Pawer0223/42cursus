@@ -94,7 +94,7 @@ void        ft_round(char *str, int idx, int pre, double n)
     str[idx + 1] = 0;
     if (last >= 5)
     {
-        if ((prev % 2 == 0) && !check_signif(n))
+        if (last == 5 && (prev % 2 == 0) && check_signif(n))
             str[++idx] = 0;
         else
         {
