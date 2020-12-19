@@ -942,20 +942,26 @@ int		main(void)
     //ft_printf("%%f => [%f]\n", (double)LLONG_MAX);
 
 
-    round_test();
-    printf("#########2####### \n");
-    round_test2();
+    //round_test();
+    //printf("#########2####### \n");
+    //round_test2();
     
 
     printf("### 6 ###\n");
     double b = 0.51;
-    for (int i = 0; i < 10; i++)
-    {
-        b += 1;
-        printf("================[%d]===============\n", i);
-        printf("%%.f => [%.f]\n", b);
-        ft_printf("%%.f => [%.f]\n", b);
-    }
+    b += 1;
+    b += 1;
+    //for (int i = 0; i < 10; i++)
+    //{
+    //    b += 1;
+    //    printf("================[%d]===============\n", i);
+    //    printf("%%.f => [%.f]\n", b);
+    //    ft_printf("%%.f => [%.f]\n", b);
+    //}
+    printf("%%.f => [%.f]\n", b);
+    ft_printf("%%.f => [%.f]\n", b);
+
+
 
 	return (0);
 

@@ -133,9 +133,12 @@ int         make_floating(t_input *input, double n)
     input->str = str;
     i = 0;
     i = fill_str_f(str, left, left_len, i);
-    right = get_digit_d(right, right_len);
+    if (right_len == 1)
+        right = get_digit_d(right, 16);
+    else
+        right = get_digit_d(right, right_len);
     i = fill_str_f(str, right, right_len + i, i);
-    ft_round(str, i - 1, right_len - 1, n);
+    ft_round(str, i - 1, right_len - 1, right);
     input->len = ft_strlen(str);
     return (1);
 }
