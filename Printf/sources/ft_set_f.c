@@ -41,13 +41,11 @@ int			check_signif(double n)
     int strt;
 
     limit = 16;
-    n = get_digit_d(n, limit);
     i = 0;
     strt = g_info->precision_len + 1;
     while (i < limit)
     {
         n *= 10;
-        n = (int)n;
         if (i > strt && (int)n != 0)
             return (0);
         n -= (int)n;
@@ -71,6 +69,8 @@ void        round_up(char *str, int idx, int len)
         str[0] = (prev / 10) + '0';
         return;
     }
+    if (str[idx] == '.')
+        idx--;
     prev = str[idx] - '0' + 1;
     if (g_info->precision_len == 0)
     {
@@ -133,12 +133,9 @@ int         make_floating(t_input *input, double n)
     input->str = str;
     i = 0;
     i = fill_str_f(str, left, left_len, i);
-    if (right_len == 1)
-        right = get_digit_d(right, 16);
-    else
-        right = get_digit_d(right, right_len);
-    i = fill_str_f(str, right, right_len + i, i);
-    ft_round(str, i - 1, right_len - 1, right);
+    i = fill_str_f(str, get_digit_d(right, right_len), right_len + i, i);
+    if (g_info->precision_len < 16)
+        ft_round(str, i - 1, g_info->precision_len, right);
     input->len = ft_strlen(str);
     return (1);
 }

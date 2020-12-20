@@ -4,48 +4,16 @@
   아키텍처의 유효성을 검사하는 중
   원격 빌드를 시작하는 중
   소스를 컴파일하는 중:
-  ft_set_f.c
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_f.c(28,22): warning : conversion to ‘char’ from ‘int’ may alter its value [-Wconversion]
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_f.c(28,22): warning :          str[idx++] = (int)n + '0';
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_f.c(28,22): warning :                       ^
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_f.c(71,18): warning : conversion to ‘char’ from ‘int’ may alter its value [-Wconversion]
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_f.c(71,18): warning :          str[0] = (prev / 10) + '0';
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_f.c(71,18): warning :                   ^
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_f.c(77,18): warning : conversion to ‘char’ from ‘int’ may alter its value [-Wconversion]
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_f.c(77,18): warning :          str[0] = (prev / 10) + '0';
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_f.c(77,18): warning :                   ^
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_f.c(78,18): warning : conversion to ‘char’ from ‘int’ may alter its value [-Wconversion]
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_f.c(78,18): warning :          str[1] = (prev % 10) + '0';
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_f.c(78,18): warning :                   ^
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_f.c(82,18): warning : conversion to ‘char’ from ‘int’ may alter its value [-Wconversion]
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_f.c(82,18): warning :      str[idx--] = (prev % 10) + '0';
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_f.c(82,18): warning :                   ^
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_f.c(103,36): warning : conversion to ‘int’ from ‘size_t {aka long unsigned int}’ may alter its value [-Wconversion]
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_f.c(103,36): warning :                  round_up(str, idx, ft_strlen(str));
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_f.c(103,36): warning :                                     ^~~~~~~~~
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_f.c(105,30): warning : conversion to ‘char’ from ‘int’ may alter its value [-Wconversion]
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_f.c(105,30): warning :                  str[idx++] = prev + 1 + '0';
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_f.c(105,30): warning :                               ^~~~
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_f.c(130,44): warning : conversion to ‘long unsigned int’ from ‘int’ may change the sign of the result [-Wsign-conversion]
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_f.c(130,44): warning :      if (!(str = (char*)malloc(sizeof(char) * len)))
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_f.c(130,44): warning :                                             ^
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_f.c(132,19): warning : conversion to ‘size_t {aka long unsigned int}’ from ‘int’ may change the sign of the result [-Wsign-conversion]
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_f.c(132,19): warning :      ft_bzero(str, len);
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_f.c(132,19): warning :                    ^~~
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_f.c(142,18): warning : conversion to ‘int’ from ‘size_t {aka long unsigned int}’ may alter its value [-Wconversion]
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_f.c(142,18): warning :      input->len = ft_strlen(str);
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_f.c(142,18): warning :                   ^~~~~~~~~
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_f.c(155,5): warning : this ‘if’ clause does not guard... [-Wmisleading-indentation]
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_f.c(155,5): warning :      if (!make_floating(input, n))
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_f.c(155,5): warning :      ^~
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_f.c(158,2): message : ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_f.c(158,2): message :   return (1);
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_f.c(158,2): message :   ^~~~~~
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_f.c(149,7): warning : unused variable ‘size’ [-Wunused-variable]
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_f.c(149,7): warning :   int  size;
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_f.c(149,7): warning :        ^~~~
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_f.c(71,24): warning : ‘prev’ may be used uninitialized in this function [-Wmaybe-uninitialized]
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_f.c(71,24): warning :          str[0] = (prev / 10) + '0';
-C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\ft_set_f.c(71,24): warning :                   ~~~~~~^~~~~
+  main.c
+C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\test\main.c(17,5): warning : implicit declaration of function ‘ft_printf’; did you mean ‘fprintf’? [-Wimplicit-function-declaration]
+C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\test\main.c(63,39): warning : integer overflow in expression [-Woverflow]
+C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\test\main.c(63,39): warning :      printf   ("%%i =>[%i]\n", INT_MAX + 100);
+C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\test\main.c(63,39): warning :                                        ^
+C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\test\main.c(64,39): warning : integer overflow in expression [-Woverflow]
+C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\test\main.c(64,39): warning :      ft_printf("%%i =>[%i]\n", INT_MAX + 100);
+C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\test\main.c(64,39): warning :                                        ^
+C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\test\main.c(569,22): warning : conversion to ‘int’ from ‘double’ may alter its value [-Wfloat-conversion]
+C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\test\main.c(569,22): warning :                  n += pow(2, expoCnt);
+C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\sources\test\main.c(569,22): warning :                       ^~~
   개체를 연결하는 중
   Printf.vcxproj -> C:\Users\Owner\source\repos\Pawer0223\42cursus\Printf\bin\x64\Debug\Printf.out
