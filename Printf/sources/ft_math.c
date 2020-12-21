@@ -23,77 +23,76 @@ double		ft_pow(double base, double exponent)
 	return (result);
 }
 
-//int			check_signif(double r, int strt)
-//{
-//	int limit;
-//	int i;
-//	int n;
-//
-//	limit = 16;
-//	i = 0;
-//	while (i < limit)
-//	{
-//		r *= 10;
-//		n = (int)r;
-//		if (i > strt&& n != 0)
-//			return (0);
-//		r -= (int)r;
-//		i++;
-//	}
-//	return (1);
-//}
-//
-//double		pre_zero(double l, double r)
-//{
-//	int	signif;
-//	int	prev;
-//
-//	signif = (int)(r * 10);
-//	prev = (int)get_number(l + r, 1) % 2;
-//	if (signif >= 5)
-//	{
-//		if (prev % 2 == 0 && check_signif(r, 0))
-//			return (l);
-//		l += 1;
-//	}
-//	return (l);
-//}
-//
-//double		pre_not_zero(double d, double l, double r, int pre)
-//{
-//	int		signif;
-//	int		prev;
-//	int		i;
-//	double	r2;
-//	i = 0;
-//	r2 = get_digit_d(r, pre + 1);
-//	while (i <= pre)
-//	{
-//		r2 *= 10;
-//		signif = (int)r2;
-//		if (i == pre - 1)
-//			prev = (int)r2;
-//		r2 -= (int)r2;
-//		i++;
-//	}
-//	if (signif >= 5)
-//	{
-//		if (prev % 2 == 0 && check_signif(r, pre + 1))
-//			return (d);
-//		d += ft_pow(10, (pre * -1));
-//	}
-//	return get_digit_d(d, pre);
-//}
-//
-//double		ft_round(double d, int pre)
-//{
-//	double  left;
-//	double  right;
-//
-//	left = get_number(d, 0);
-//	right = d - left;
-//
-//	if (pre == 0)
-//		return (pre_zero(left, right));
-//	return (pre_not_zero(d, left, right, pre));
-//}
+int			check_signif(double n)
+{
+    int limit;
+    int i;
+    int strt;
+
+    limit = 16;
+    i = 0;
+    strt = g_info->precision_len + 1;
+    while (i < limit)
+    {
+        n *= 10;
+        if (i > strt && (int)n != 0)
+            return (0);
+        n -= (int)n;
+        i++;
+    }
+    return (1);
+}
+
+void        round_up(char* str, int idx, int len)
+{
+    int prev;
+
+    if (idx < 0)
+    {
+        str[len + 1] = 0;
+        while (len > 0)
+        {
+            str[len] = str[len - 1];
+            len--;
+        }
+        str[0] = (prev / 10) + '0';
+        return;
+    }
+    if (str[idx] == '.')
+        idx--;
+    prev = str[idx] - '0' + 1;
+    if (g_info->precision_len == 0)
+    {
+        str[0] = (prev / 10) + '0';
+        str[1] = (prev % 10) + '0';
+        str[2] = 0;
+        return;
+    }
+    str[idx--] = (prev % 10) + '0';
+    if ((prev / 10) > 0)
+        round_up(str, idx, len);
+}
+
+void        ft_round(char* str, int idx, int pre, double n)
+{
+    int last;
+    int prev;
+
+    last = str[idx--] - '0';
+    prev = pre == 0 ? str[--idx] - '0' : str[idx] - '0';
+    str[idx + 1] = 0;
+    if (last >= 5)
+    {
+        if (last == 5 && (prev % 2 == 0) && check_signif(n))
+            str[++idx] = 0;
+        else
+        {
+            str[idx + 1] = 0;
+            if ((prev + 1) > 9)
+                round_up(str, idx, ft_strlen(str));
+            else
+                str[idx++] = prev + 1 + '0';
+            return;
+        }
+    }
+}

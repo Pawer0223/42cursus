@@ -35,12 +35,3 @@ double		get_number(double d, int need_last)
 		return (last);
 	return (left);
 }
-
-double		get_digit_d(double d, int pre)
-{
-	d = d * ft_pow(10, pre);
-	d = get_number(d, 0);
-	d = d * ft_pow(10, (pre * -1));
-
-	return (d);
-}
