@@ -1,5 +1,5 @@
-#include "printf.h"
-#include "libft.h"
+#include "../headers/printf.h"
+#include "../headers/libft.h"
 
 void			remove_zero(t_input	*input)
 {

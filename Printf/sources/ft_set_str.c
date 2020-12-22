@@ -1,5 +1,5 @@
-#include "printf.h"
-#include "libft.h"
+#include "../headers/printf.h"
+#include "../headers/libft.h"
 
 int				set_str_input(char *input_str)
 {

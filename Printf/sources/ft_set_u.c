@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
-#include "libft.h"
+#include "../headers/printf.h"
+#include "../headers/libft.h"
 
 void			fill_str_u(t_input* input, long long n, int idx)
 {

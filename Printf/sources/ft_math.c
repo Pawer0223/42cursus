@@ -1,4 +1,4 @@
-#include "printf.h"
+#include "../headers/printf.h"
 
 double		ft_pow(double base, double exponent)
 {

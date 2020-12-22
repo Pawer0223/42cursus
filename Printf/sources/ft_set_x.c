@@ -1,5 +1,5 @@
-#include "printf.h"
-#include "libft.h"
+#include "../headers/printf.h"
+#include "../headers/libft.h"
 
 void			fill_str_x(t_input *input, unsigned long long n, int idx)
 {

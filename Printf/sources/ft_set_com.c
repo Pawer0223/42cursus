@@ -1,4 +1,4 @@
-#include "printf.h"
+#include "../headers/printf.h"
 
 void			fill_is_zero(t_input *input, int idx)
 {

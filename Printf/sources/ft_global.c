@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
+#include "../headers/printf.h"
 
 int		init_g(va_list *ap)
 {

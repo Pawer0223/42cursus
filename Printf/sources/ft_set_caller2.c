@@ -1,4 +1,4 @@
-#include "printf.h"
+#include "../headers/printf.h"
 
 void				ft_set_n(char	*length)
 {

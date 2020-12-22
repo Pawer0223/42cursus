@@ -1,5 +1,5 @@
-#include "printf.h"
-#include "libft.h"
+#include "../headers/printf.h"
+#include "../headers/libft.h"
 
 /* flag exist = return 0 else return 1 */
 void			check_flag(const char c)

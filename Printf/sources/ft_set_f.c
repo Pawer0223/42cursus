@@ -1,5 +1,5 @@
-#include "printf.h"
-#include "libft.h"
+#include "../headers/printf.h"
+#include "../headers/libft.h"
 
 void            set_f_sign(t_input *input, double n)
 {

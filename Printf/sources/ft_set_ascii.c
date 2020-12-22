@@ -1,4 +1,4 @@
-#include "printf.h"
+#include "../headers/printf.h"
 
 int				set_ascii_input(int n)
 {
