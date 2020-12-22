@@ -17,28 +17,69 @@ void            set_f_sign(t_input *input, double n)
         g_info->precision_len = 6;
 }
 
-int             fill_str_f(t_input *input, double n, int len, int idx)
+//int             fill_str_f(t_input *input, double n, int len, int idx)
+//{
+//    int     is_left;
+//    int     num;
+//    char    *str;
+//
+//    is_left = (idx == 0) ? 1 : 0;
+//    str = input->str;
+//    if (is_left && input->sign)
+//    {
+//        str[idx++] = input->sign;
+//        len++;
+//    }
+//    while (idx < len)
+//    {
+//        n *= 10;
+//        num = (int)n < 0 ? (int)n * -1 : (int)n;
+//        str[idx++] = num + '0';
+//        n -= (int)n;
+//    }
+//    if (is_left)
+//        str[idx++] = '.';
+//    str[idx] = 0;
+//    return (idx);
+//}
+
+int             fill_str_r(t_input *input, double n, int len, int idx)
 {
-    int     is_left;
-    int     num;
+    double  org;
+    double  expo;
     char    *str;
 
-    is_left = (idx == 0) ? 1 : 0;
+    org = n;
     str = input->str;
-    if (is_left && input->sign)
+    n *= ft_pow(10, len--);
+    while (len >= 0)
     {
+        expo = ft_pow(10, len--);
+        str[idx++] = (int)(n / expo) + '0';
+        n -= ((int)(n / expo) * expo);
+    }
+    str[idx] = 0;
+    return (idx);
+}
+
+int             fill_str_l(t_input *input, double n, int len)
+{
+    double  expo;
+    int     idx;
+    char    *str;
+
+    str = input->str;
+    idx = 0;
+    if (input->sign)
         str[idx++] = input->sign;
-        len++;
-    }
-    while (idx < len)
+    len--;
+    while (len >= 0)
     {
-        n *= 10;
-        num = (int)n < 0 ? (int)n * -1 : (int)n;
-        str[idx++] = num + '0';
-        n -= (int)n;
+        expo = ft_pow(10, len--);
+        str[idx++] = (int)(n / expo) + '0';
+        n -= ((int)(n / expo) * expo);
     }
-    if (is_left)
-        str[idx++] = '.';
+    str[idx++] = '.';
     str[idx] = 0;
     return (idx);
 }
@@ -53,14 +94,12 @@ int             make_floating(t_input *input, double n , double left, double rig
     left_len = get_left_size(n);
     left_len = left_len == 0 ? 1 : left_len;
     right_len = g_info->precision_len + 1;
-    left *= ft_pow(10, (left_len * -1));
     if (!(str = (char*)malloc(sizeof(char) * left_len + right_len + 10)))
         return (0);
     ft_bzero(str, left_len + right_len + 10);
     input->str = str;
-    i = 0;
-    i = fill_str_f(input, left, left_len, i);
-    i = fill_str_f(input, right, right_len + i, i);
+    i = fill_str_l(input, left, left_len);
+    i = fill_str_r(input, right, right_len, i);
     ft_round(str, i - 1, g_info->precision_len, right);
     input->len = ft_strlen(str);
     return (1);

@@ -115,7 +115,6 @@
 //    int len;
 //    int n;
 //
-//    d = ft_round(d);
 //    len = sizeof(double) - 1;
 //    set_f_sign(input, ptr, len);
 //    /* base 일반적으로 다 읽는 경우의 인자 값 */

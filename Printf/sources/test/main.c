@@ -596,8 +596,8 @@ void        double_bit_test2(double a)
     printf("mantissa : %f , cnt .. %d\n", mantissa, matCnt);
     double result = sign * pow(2, n) * mantissa;
     printf("result is : %f\n", result);
-    printf("result %%.20f is : %.20f\n", result);
-    printf("origin %%.20f is : %.20f\n", a);
+    printf("result %%.300f is : %.300f\n", result);
+    printf("origin %%.300f is : %.300f\n", a);
 }
 
 void        double_bit_test(double a)
@@ -948,6 +948,12 @@ void round_test2()
     printf("##############################\n");
     printf("%%.f => [%.f]\n", a);
     ft_printf("%%.f => [%.f]\n", a);
+
+    a = 0.123456789712345;
+
+    b = a * pow(10, 17);
+    printf("%%.17f => [%.17f]\n", b);
+    ft_printf("%%.17f => [%.17f]\n", b);
 }
 
 // 소수점 얼마나 정확하게 표현가능한지..
@@ -1021,31 +1027,43 @@ int		main(void)
     //round_test2()
     // expo_test();
 
-    double a = 0.123456789712345;
-    //printf("##############################\n");
-    //printf("%%.15f => [%.15f]\n", a);
-    //ft_printf("%%.15f => [%.15f]\n", a);
-    //printf("##############################\n");
-    //printf("%%.16f => [%.16f]\n", a);
-    //ft_printf("%%.16f => [%.16f]\n", a);
-    //printf("##############################\n");
-    double b = a * pow(10, 17);
   /*  printf("%%.17f => [%.17f]\n", a);
     ft_printf("%%.17f => [%.17f]\n", a);*/
+    double a = 5.12345678971234567897123456789712345678971234567897;
 
-    printf("%%.17f => [%.17f]\n", b);
-    ft_printf("%%.17f => [%.17f]\n", b);
+    // 1234 / 1000 => 1구하고   - 1000
+    // 234 / 100   => 2 구하고  - 200
+    // 34 / 10     => 3구하고   - 30
+    // 4 / 1       => 1구하고   - 0
 
-    //printf("##############################\n");
-    //printf("%%.18f => [%.18f]\n", a);
-    //ft_printf("%%.18f => [%.18f]\n", a);
-    //printf("##############################\n");
-    //printf("%%.19f => [%.19f]\n", a);
-    //ft_printf("%%.19f => [%.19f]\n", a);
-    //printf("##############################\n");
-    //printf("%%.20f => [%.20f]\n", a);
-    //ft_printf("%%.20f => [%.20f]\n", a);
+    printf("##############################\n");
+    printf("%%.15f => [%.15f]\n", a);
+    ft_printf("%%.15f => [%.15f]\n", a);
+    printf("##############################\n");
+    printf("%%.16f => [%.16f]\n", a);
+    ft_printf("%%.16f => [%.16f]\n", a);
+    printf("##############################\n");
+    printf("%%.17f => [%.17f]\n", a);
+    ft_printf("%%.17f => [%.17f]\n", a);
+    printf("##############################\n");
+    printf("%%.18f => [%.18f]\n", a);
+    ft_printf("%%.18f => [%.18f]\n", a);
+    printf("##############################\n");
+    printf("%%.19f => [%.19f]\n", a);
+    ft_printf("%%.19f => [%.19f]\n", a);
+    printf("##############################\n");
+    printf("%%.20f => [%.20f]\n", a);
+    ft_printf("%%.20f => [%.20f]\n", a);
+    printf("##############################\n");
+    printf("%%.200f => [%.200f]\n", a);
+    ft_printf("%%.200f => [%.200f]\n", a);
+    printf("##############################\n");
+    double d = 8888888888888.1;
+    printf("%%.300f => [%.300f]\n", d);
+    ft_printf("%%.300f => [%.300f]\n", d);
 
+    //double_bit_test(d);
+    //double_bit_test2(d);
 
 	return (0);
 
