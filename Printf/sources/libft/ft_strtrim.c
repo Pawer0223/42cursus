@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../headers/libft.h"
 
 int		is_possible(char c, char *set)
 {

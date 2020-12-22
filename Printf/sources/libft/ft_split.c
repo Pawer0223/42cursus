@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../headers/libft.h"
 
 size_t		get_cnt(char const *s, char c)
 {

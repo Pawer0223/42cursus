@@ -42,7 +42,6 @@ int				ft_set_ux(char	*length, char spec);
 int				ft_set_c(char	*length);
 int				ft_set_s(char	*length);
 void			ft_set_n(char	*length);
-int				ft_set_p();
 /* set input funcs */
 int				set_di_input(long long n);
 int				set_u_input(unsigned long long n);
