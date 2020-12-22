@@ -45,17 +45,18 @@ void            set_f_sign(t_input *input, double n)
 
 int             fill_str_r(t_input *input, double n, int len, int idx)
 {
-    double  org;
     double  expo;
+    int     num;
     char    *str;
 
-    org = n;
     str = input->str;
     n *= ft_pow(10, len--);
     while (len >= 0)
     {
         expo = ft_pow(10, len--);
-        str[idx++] = (int)(n / expo) + '0';
+        num = (int)(n / expo);
+        num = num < 0 ? num *= -1 : num;
+        str[idx++] = num + '0';
         n -= ((int)(n / expo) * expo);
     }
     str[idx] = 0;
@@ -67,6 +68,7 @@ int             fill_str_l(t_input *input, double n, int len)
     double  expo;
     int     idx;
     char    *str;
+    int     num;
 
     str = input->str;
     idx = 0;
@@ -76,7 +78,9 @@ int             fill_str_l(t_input *input, double n, int len)
     while (len >= 0)
     {
         expo = ft_pow(10, len--);
-        str[idx++] = (int)(n / expo) + '0';
+        num = (int)(n / expo);
+        num = num < 0 ? num *= -1 : num;
+        str[idx++] = num + '0';
         n -= ((int)(n / expo) * expo);
     }
     str[idx++] = '.';

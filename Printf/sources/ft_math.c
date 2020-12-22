@@ -1,4 +1,5 @@
 #include "../headers/printf.h"
+#include "../headers/libft.h"
 
 double		ft_pow(double base, double exponent)
 {
@@ -47,17 +48,6 @@ void        round_up(char* str, int idx, int len)
 {
     int prev;
 
-    if (idx < 0)
-    {
-        str[len + 1] = 0;
-        while (len > 0)
-        {
-            str[len] = str[len - 1];
-            len--;
-        }
-        str[0] = (prev / 10) + '0';
-        return;
-    }
     if (str[idx] == '.')
         idx--;
     prev = str[idx] - '0' + 1;
@@ -69,6 +59,8 @@ void        round_up(char* str, int idx, int len)
         return;
     }
     str[idx--] = (prev % 10) + '0';
+    if (idx == 0)
+        str[idx] = (prev / 10) + '0';
     if ((prev / 10) > 0)
         round_up(str, idx, len);
 }
@@ -87,7 +79,6 @@ void        ft_round(char* str, int idx, int pre, double n)
             str[++idx] = 0;
         else
         {
-            str[idx + 1] = 0;
             if ((prev + 1) > 9)
                 round_up(str, idx, ft_strlen(str));
             else

@@ -1022,9 +1022,9 @@ int		main(void)
     //ft_printf("%%f => [%f]\n", (double)LLONG_MAX);
 
 
-    //round_test();
-    //printf("#########2####### \n");
-    //round_test2()
+    round_test();
+    printf("#########2####### \n");
+    round_test2();
     // expo_test();
 
   /*  printf("%%.17f => [%.17f]\n", a);
@@ -1062,6 +1062,13 @@ int		main(void)
     printf("%%.300f => [%.300f]\n", d);
     ft_printf("%%.300f => [%.300f]\n", d);
 
+  //  d = -0;
+  //  printf("%%.f => [%.f]\n", d);
+  //  ft_printf("%%.f => [%.f]\n", d);
+    //double a = 0.999; // .1로하면 1.00나와야 함.
+    //printf("##############################\n");
+    //printf("%%.2f => [%.2f]\n", a);
+    //ft_printf("%%.2f => [%.2f]\n", a);
     //double_bit_test(d);
     //double_bit_test2(d);
 
