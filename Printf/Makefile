@@ -1,0 +1,106 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: taekang <taekang@student.42seoul.k>        +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2020\10/18 12:49:44 by taekang           #+#    #+#              #
+#    Updated: 2020/10/18 19:14:24 by taekang          ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+NAME = printf.a
+
+SRC_DIR = sources
+LIB_DIR = $(SRC_DIR)/libft
+HEADER_DIR = headers
+
+HEADERS = $(addprefix $(HEADER_DIR)/, \
+	printf.h\
+	libft.h\
+)
+
+LIBFT_SRCS =   $(addprefix $(LIB_DIR)/, \
+	ft_atoi.c\
+	ft_bzero.c\
+	ft_calloc.c\
+	ft_isalnum.c\
+	ft_isalpha.c\
+	ft_isascii.c\
+	ft_isdigit.c\
+	ft_isprint.c\
+	ft_itoa.c\
+	ft_memccpy.c\
+	ft_memchr.c\
+	ft_memcmp.c\
+	ft_memcpy.c\
+	ft_memmove.c\
+	ft_memset.c\
+	ft_putchar_fd.c\
+	ft_putendl_fd.c\
+	ft_putnbr_fd.c\
+	ft_putstr_fd.c\
+	ft_split.c\
+	ft_strchr.c\
+	ft_strdup.c\
+	ft_strjoin.c\
+	ft_strlcat.c\
+	ft_strlcpy.c\
+	ft_strlen.c\
+	ft_strmapi.c\
+	ft_strncmp.c\
+	ft_strnstr.c\
+	ft_strrchr.c\
+	ft_strtrim.c\
+	ft_substr.c\
+	ft_tolower.c\
+	ft_toupper.c\
+)
+
+SRCS =	$(addprefix $(SRC_DIR)/, \
+	ft_check.c\
+	ft_global.c\
+	ft_manage_num.c\
+	ft_math.c\
+	ft_printf.c\
+	ft_set_ascii.c\
+	ft_set_com.c\
+	ft_set_di.c\
+	ft_set_f.c\
+	ft_set_p.c\
+	ft_set_str.c\
+	ft_set_u.c\
+	ft_set_x.c\
+	ft_set_caller.c\
+	ft_set_input_filter.c\
+	ft_format_write.c\
+	ft_set_caller2.c\
+)
+
+LIBFT_OBJS =$(LIBFT_SRCS:.c=.o)
+OBJS = $(SRCS:.c=.o)
+
+CC = gcc
+CFLAGS = -Wall -Wextra -Werror
+
+RM = rm
+RMFLAGS = -rf
+
+AR = ar
+ARFLAGS = rcs
+
+$(NAME) : $(OBJS) $(LIBFT_OBJS)
+		$(AR) $(ARFLAGS) $(NAME) $(OBJS) $(LIBFT_OBJS)
+
+all: $(NAME)
+
+clean: 	
+		$(RM) $(RMFLAGS) $(OBJS) $(LIBFT_OBJS)
+
+fclean: clean
+		$(RM) $(RMFLAGS) $(NAME)
+
+re:		fclean all
+
+.PHONY: all clean fclean re

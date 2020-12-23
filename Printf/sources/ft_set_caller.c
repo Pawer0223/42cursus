@@ -1,4 +1,5 @@
 #include "../headers/printf.h"
+#include "../headers/libft.h"
 
 int				ft_set_di(char	*length)
 {
@@ -56,12 +57,12 @@ int				ft_set_c(char	*length)
 int				ft_set_s(char	*length)
 {
 	char	*str;
-	wchar_t	*wstr;
+	// wchar_t	*wstr;
 
 	if (length && ft_strncmp(length, "l", 3) == 0)
 	{
 		printf(" 어떻게 wide char 문자열을 다룰 수 있을까..\n");
-		wstr = va_arg(*(g_info->ap), wchar_t *);
+		// wstr = va_arg(*(g_info->ap), wchar_t *);
 		// return set_uni_input(wstr);
 		return (0);
 	}
@@ -72,10 +73,10 @@ int				ft_set_s(char	*length)
 	}
 }
 
-int				ft_set_p(h)
+int				ft_set_p()
 {
 	unsigned long long n;
 
-	n = va_arg(*(g_info->ap), void *);
+	n = (unsigned long long)va_arg(*(g_info->ap), void *);
 	return set_p_input(n);
 }

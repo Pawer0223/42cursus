@@ -1,4 +1,5 @@
 #include "../headers/printf.h"
+#include "../headers/libft.h"
 
 void				ft_set_n(char	*length)
 {
@@ -17,14 +18,13 @@ void				ft_set_n(char	*length)
 		*va_arg(*(g_info->ap), int *) = g_w_cnt;
 }
 /* ¾ê´Â ¼³¸íº¸¸é ´Ù doubleÀÎ°©´Ù.*/
-int				ft_set_fge(char	*length)
+int				ft_set_fge()
 {
 	double	n;
 
 	n = va_arg(*(g_info->ap), double);
-
 	if (g_info->specifier == 'f')
-		return set_f_input(n);
+		return (set_f_input(n));
 	return (0);
 	// return set_fge_input(n);
 }

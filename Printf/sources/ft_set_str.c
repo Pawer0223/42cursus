@@ -5,7 +5,6 @@ int				set_str_input(char *input_str)
 {
 	t_input	*input;
 	char	*str;
-	int		len;
 
 	if (!(input = (t_input*)(malloc(sizeof(t_input)))))
 		return (0);

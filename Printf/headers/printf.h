@@ -42,6 +42,8 @@ int				ft_set_ux(char	*length, char spec);
 int				ft_set_c(char	*length);
 int				ft_set_s(char	*length);
 void			ft_set_n(char	*length);
+int				ft_set_p();
+int				ft_set_fge();
 /* set input funcs */
 int				set_di_input(long long n);
 int				set_u_input(unsigned long long n);
@@ -49,12 +51,11 @@ int				set_x_input(unsigned long long n);
 int				set_p_input(unsigned long long n);
 int				set_ascii_input(int n);
 int				set_str_input(char *input_str);
+int             set_f_input(double n);
 /* format write*/
 void			ft_format_write(char flag);
 /* common */
 void			fill_is_zero(t_input* input, int idx);
-int				get_bit(char* ptr, int byte, int bit);
-double			read_bit(char* str, int exponent);
 /* math*/
 double			ft_pow(double base, double exponent);
 void			ft_round(char* str, int idx, int pre, double n);

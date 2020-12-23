@@ -59,9 +59,9 @@ void	di_test()
     printf("### 15 ###\n");
     printf   ("%%.3d =>[%.3d]\n", 0);
     ft_printf("%%.3d =>[%.3d]\n", 0);
-    printf("### 16 ###\n");
-    printf   ("%%i =>[%i]\n", INT_MAX + 100);
-    ft_printf("%%i =>[%i]\n", INT_MAX + 100);
+    // printf("### 16 ###\n");
+    // printf   ("%%i =>[%i]\n", INT_MAX + 100);
+    // ft_printf("%%i =>[%i]\n", INT_MAX + 100);
     printf("### 17 ###\n");
     printf("%%d =>[%d]\n", UINT_MAX);
     ft_printf("%%d =>[%d]\n", UINT_MAX);
@@ -901,8 +901,8 @@ void round_test2()
     ft_printf("%%.3f => [%.3f]\n", a);
     a = 0.125;
     printf("##############################\n");
-    printf("%%.2f => [%.2f]\n", a, a);
-    ft_printf("%%.2f => [%.2f]\n", a, a);
+    printf("%%.2f => [%.2f]\n", a);
+    ft_printf("%%.2f => [%.2f]\n", a);
 
     a = -1.23456789;
     printf("##############################\n");
@@ -1022,9 +1022,9 @@ int		main(void)
     //ft_printf("%%f => [%f]\n", (double)LLONG_MAX);
 
 
-    round_test();
-    printf("#########2####### \n");
-    round_test2();
+    // round_test();
+    // printf("#########2####### \n");
+    // round_test2();
     // expo_test();
 
   /*  printf("%%.17f => [%.17f]\n", a);

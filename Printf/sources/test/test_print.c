@@ -1,4 +1,4 @@
-#include "printf.h"
+#include "../../headers/printf.h"
 
 void		all_print()
 {

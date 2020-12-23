@@ -51,4 +51,5 @@ int			ft_printf(const char *format, ...)
 		}
 	}
 	free_g();
+	return (1);
 }

@@ -15,6 +15,6 @@ int		ft_set_input_filter(char spec)
 	else if (spec == 'n')
 		ft_set_n(g_info->length);
 	else if (spec == 'f' || spec == 'g' || spec == 'e')
-		return ft_set_fge(g_info->length);
+		return ft_set_fge();
 	return (1);
 }

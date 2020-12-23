@@ -55,7 +55,7 @@ int             fill_str_r(t_input *input, double n, int len, int idx)
     {
         expo = ft_pow(10, len--);
         num = (int)(n / expo);
-        num = num < 0 ? num *= -1 : num;
+        num = num < 0 ? num * -1 : num;
         str[idx++] = num + '0';
         n -= ((int)(n / expo) * expo);
     }
@@ -79,7 +79,7 @@ int             fill_str_l(t_input *input, double n, int len)
     {
         expo = ft_pow(10, len--);
         num = (int)(n / expo);
-        num = num < 0 ? num *= -1 : num;
+        num = num < 0 ? num * -1 : num;
         str[idx++] = num + '0';
         n -= ((int)(n / expo) * expo);
     }
@@ -112,7 +112,6 @@ int             make_floating(t_input *input, double n , double left, double rig
 int             set_f_input(double n)
 {
 	t_input	*input;
-	int		size;
     double  left;
     double  right;
 
@@ -122,7 +121,5 @@ int             set_f_input(double n)
     set_f_sign(input, n);
     left = get_number(n, 0);
     right = n - left;
-    if (!make_floating(input, n, left, right))
-        return (0);
-	return (1);
+	return make_floating(input, n, left, right);
 }
