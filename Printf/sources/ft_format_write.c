@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 19:09:00 by taesan            #+#    #+#             */
-/*   Updated: 2020/12/24 02:18:32 by taesan           ###   ########.fr       */
+/*   Updated: 2020/12/24 02:20:15 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,7 @@ void		percent_write(void)
 	width = g_info->width;
 	write_padding(' ', width - 1);
 	ft_putchar_fd('%', 1);
-
-	if (width == -1)
-		width = 1;
-	g_w_cnt += width;
+	g_w_cnt++;
 }
 
 void		ft_format_write(char flag)
