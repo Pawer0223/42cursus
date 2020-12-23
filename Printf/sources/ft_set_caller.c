@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 19:30:02 by taesan            #+#    #+#             */
-/*   Updated: 2020/12/23 19:30:03 by taesan           ###   ########.fr       */
+/*   Updated: 2020/12/23 20:14:47 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,38 +51,20 @@ int				ft_set_ux(char	*length, char spec)
 		return set_x_input(n);
 }
 
-int				ft_set_c(char	*length)
+int				ft_set_c(void)
 {
 	int c;
 
 	c = va_arg(*(g_info->ap), int);
-	if (length && ft_strncmp(length, "l", 3) == 0)
-	{
-		printf(" 어떻게 wide char를 다룰 수 있을까..\n");
-		// return set_uni_input(c);
-		return (0);
-	}
-	else
-		return set_ascii_input(c);
+	return (set_ascii_input(c));
 }
 
-int				ft_set_s(char	*length)
+int				ft_set_s(void)
 {
 	char	*str;
-	// wchar_t	*wstr;
 
-	if (length && ft_strncmp(length, "l", 3) == 0)
-	{
-		printf(" 어떻게 wide char 문자열을 다룰 수 있을까..\n");
-		// wstr = va_arg(*(g_info->ap), wchar_t *);
-		// return set_uni_input(wstr);
-		return (0);
-	}
-	else
-	{
-		str = va_arg(*(g_info->ap), char *);
-		return set_str_input(str);
-	}
+	str = va_arg(*(g_info->ap), char *);
+	return (set_str_input(str));
 }
 
 int				ft_set_p()

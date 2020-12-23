@@ -3,14 +3,14 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: taekang <taekang@student.42seoul.k>        +#+  +:+       +#+         #
+#    By: taesan <taesan@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2020\10/18 12:49:44 by taekang           #+#    #+#              #
-#    Updated: 2020/10/18 19:14:24 by taekang          ###   ########.fr        #
+#    Created: Invalid date        by taekang           #+#    #+#              #
+#    Updated: 2020/12/23 20:12:59 by taesan           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = printf.a
+NAME = libftprintf.a
 
 SRC_DIR = sources
 LIB_DIR = $(SRC_DIR)/libft
@@ -95,7 +95,7 @@ $(NAME) : $(OBJS) $(LIBFT_OBJS)
 
 all: $(NAME)
 
-clean: 	
+clean:
 		$(RM) $(RMFLAGS) $(OBJS) $(LIBFT_OBJS)
 
 fclean: clean

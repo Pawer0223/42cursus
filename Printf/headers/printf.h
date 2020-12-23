@@ -39,8 +39,8 @@ int				ft_set_input_filter(char spec);
 /* set input caller funcs */
 int				ft_set_di(char	*length);
 int				ft_set_ux(char	*length, char spec);
-int				ft_set_c(char	*length);
-int				ft_set_s(char	*length);
+int				ft_set_c();
+int				ft_set_s();
 void			ft_set_n(char	*length);
 int				ft_set_p();
 int				ft_set_fge();
