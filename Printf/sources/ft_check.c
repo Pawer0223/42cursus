@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 18:58:53 by taesan            #+#    #+#             */
-/*   Updated: 2020/12/23 19:08:46 by taesan           ###   ########.fr       */
+/*   Updated: 2020/12/24 01:58:09 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int				check_size(const char *format, int type)
 	if (start != g_i)
 	{
 		len = (size_t)(g_i - start);
-		if (!(num = ft_substr(format, (unsigned int)start, len)))
+		if (!(num = ft_substr(format, start, len)))
 			return (0);
 		else
 		{
@@ -71,7 +71,7 @@ int				check_spec(char c)
 {
 	if (c == 'c' || c == 's' || c == 'p' || c == 'd' || c == 'i'
 		|| c == 'u' || c == 'x' || c == 'X' || c == 'n' || c == 'f'
-		|| c == 'g' || c == 'e')
+		|| c == 'g' || c == 'e' || c == '%')
 	{
 		g_info->specifier = c;
 		g_i++;

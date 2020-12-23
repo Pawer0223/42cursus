@@ -54,6 +54,7 @@ int				set_str_input(char *input_str);
 int             set_f_input(double n);
 /* format write*/
 void			ft_format_write(char flag);
+void			percent_write(void);
 /* common */
 void			fill_is_zero(t_input* input, int idx);
 /* math*/

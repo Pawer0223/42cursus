@@ -6,37 +6,29 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 19:28:16 by taesan            #+#    #+#             */
-/*   Updated: 2020/12/23 19:28:37 by taesan           ###   ########.fr       */
+/*   Updated: 2020/12/24 02:09:34 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/printf.h"
 #include "../headers/libft.h"
 
-int			is_percent(char c)
-{
-	if (c == '%')
-	{
-		ft_putchar_fd(c, 1);
-		g_i++;
-		return (1);
-	}
-	return (0);
-}
-
 int			format_write_start(const char *format)
 {
-	if (!is_percent(format[++g_i]))
+	g_i++;
+	if (!check_format(format) || !ft_set_input_filter(g_info->specifier))
 	{
-		if (!check_format(format) || !ft_set_input_filter(g_info->specifier))
-		{
-			free_g();
-			return (0);
-		}
-		if (g_info->specifier != 'n')
-			ft_format_write(g_info->flag);
-		clear_g();
+		free_g();
+		return (0);
 	}
+	if (g_info->specifier != 'n')
+	{
+		if (g_info->specifier == '%')
+			percent_write();
+		else
+			ft_format_write(g_info->flag);
+	}
+	clear_g();
 	return (1);
 }
 
@@ -61,5 +53,5 @@ int			ft_printf(const char *format, ...)
 		}
 	}
 	free_g();
-	return (1);
+	return (g_w_cnt);
 }

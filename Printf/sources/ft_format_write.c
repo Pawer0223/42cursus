@@ -6,12 +6,25 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 19:09:00 by taesan            #+#    #+#             */
-/*   Updated: 2020/12/23 19:17:24 by taesan           ###   ########.fr       */
+/*   Updated: 2020/12/24 02:13:05 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/printf.h"
 #include "../headers/libft.h"
+
+void		percent_write(void)
+{
+	int width;
+
+	width = g_info->width;
+	write_padding(' ', width - 1);
+	ft_putchar_fd('%', 1);
+
+	if (width == 0)
+		width++;
+	g_w_cnt += width;
+}
 
 void		write_padding(char padding, int end)
 {
