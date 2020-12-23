@@ -1,7 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_check.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/12/23 18:58:53 by taesan            #+#    #+#             */
+/*   Updated: 2020/12/23 19:08:46 by taesan           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../headers/printf.h"
 #include "../headers/libft.h"
 
-/* flag exist = return 0 else return 1 */
 void			check_flag(const char c)
 {
 	if (c == '-' || c == '+' || c == ' ' || c == '#' || c == '0')
@@ -10,8 +21,8 @@ void			check_flag(const char c)
 		g_i++;
 	}
 }
-/* type1 = set width, type2 = set precision_len */
-int			check_size(const char *format, int type)
+
+int				check_size(const char *format, int type)
 {
 	int		start;
 	char	*num;
@@ -36,10 +47,10 @@ int			check_size(const char *format, int type)
 	}
 	return (1);
 }
-/* malloc error is return 0 */
-int			check_len(const char *format)
+
+int				check_len(const char *format)
 {
-	char*	len;
+	char	*len;
 	int		seq;
 
 	seq = 0;
@@ -55,8 +66,8 @@ int			check_len(const char *format)
 	}
 	return (1);
 }
-/* specifier exist return 1 else return 0 */
-int			check_spec(char c)
+
+int				check_spec(char c)
 {
 	if (c == 'c' || c == 's' || c == 'p' || c == 'd' || c == 'i'
 		|| c == 'u' || c == 'x' || c == 'X' || c == 'n' || c == 'f'
@@ -69,8 +80,7 @@ int			check_spec(char c)
 	return (0);
 }
 
-/* input format_check */
-int		check_format(const char* format)
+int				check_format(const char *format)
 {
 	check_flag(format[g_i]);
 	if (!format[g_i] || !check_size(format, 1))
