@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/12/23 19:28:16 by taesan            #+#    #+#             */
+/*   Updated: 2020/12/23 19:28:37 by taesan           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../headers/printf.h"
 #include "../headers/libft.h"
 
@@ -23,7 +35,6 @@ int			format_write_start(const char *format)
 		}
 		if (g_info->specifier != 'n')
 			ft_format_write(g_info->flag);
-		// all_print();
 		clear_g();
 	}
 	return (1);
@@ -31,9 +42,8 @@ int			format_write_start(const char *format)
 
 int			ft_printf(const char *format, ...)
 {
-	va_list 		ap;
+	va_list	ap;
 
-	// printf("### input format is : [%s] ### \n", format);
 	va_start(ap, format);
 	init_g(&ap);
 	while (format[g_i])

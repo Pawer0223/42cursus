@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/23 17:07:04 by taesan            #+#    #+#             */
-/*   Updated: 2020/12/23 17:07:12 by taesan           ###   ########.fr       */
+/*   Created: 2020/12/23 19:21:47 by taesan            #+#    #+#             */
+/*   Updated: 2020/12/23 19:27:52 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,64 +38,64 @@ double		ft_pow(double base, double exponent)
 
 int			check_signif(double n)
 {
-    int limit;
-    int i;
-    int strt;
+	int limit;
+	int i;
+	int strt;
 
-    limit = 16;
-    i = 0;
-    strt = g_info->precision_len + 1;
-    while (i < limit)
-    {
-        n *= 10;
-        if (i > strt && (int)n != 0)
-            return (0);
-        n -= (int)n;
-        i++;
-    }
-    return (1);
+	limit = 16;
+	i = 0;
+	strt = g_info->precision_len + 1;
+	while (i < limit)
+	{
+		n *= 10;
+		if (i > strt && (int)n != 0)
+			return (0);
+		n -= (int)n;
+		i++;
+	}
+	return (1);
 }
 
-void        round_up(char* str, int idx, int len)
+void		round_up(char *str, int idx, int len)
 {
-    int prev;
+	int prev;
 
-    if (str[idx] == '.')
-        idx--;
-    prev = str[idx] - '0' + 1;
-    if (g_info->precision_len == 0)
-    {
-        str[0] = (prev / 10) + '0';
-        str[1] = (prev % 10) + '0';
-        str[2] = 0;
-        return;
-    }
-    str[idx--] = (prev % 10) + '0';
-    if (idx == 0)
-        str[idx] = (prev / 10) + '0';
-    if ((prev / 10) > 0)
-        round_up(str, idx, len);
+	if (str[idx] == '.')
+		idx--;
+	prev = str[idx] - '0' + 1;
+	if (g_info->precision_len == 0)
+	{
+		str[0] = (prev / 10) + '0';
+		str[1] = (prev % 10) + '0';
+		str[2] = 0;
+		return ;
+	}
+	str[idx--] = (prev % 10) + '0';
+	if (idx == 0)
+		str[idx] = (prev / 10) + '0';
+	if ((prev / 10) > 0)
+		round_up(str, idx, len);
 }
 
-void        ft_round(char* str, int idx, int pre, double n)
+void		ft_round(char *str, int idx, int pre, double n)
 {
-    int last;
-    int prev;
+	int last;
+	int prev;
 
-    last = str[idx--] - '0';
-    prev = pre == 0 ? str[--idx] - '0' : str[idx] - '0';
-    str[idx + 1] = 0;
-    if (last >= 5)
-    {
-        if (last == 5 && (prev % 2 == 0) && check_signif(n))
-            str[++idx] = 0;
-        else
-        {
-            if ((prev + 1) > 9)
-                round_up(str, idx, ft_strlen(str));
-            else
-                str[idx++] = prev + 1 + '0';
-            return;
-        }
-    }
+	last = str[idx--] - '0';
+	prev = pre == 0 ? str[--idx] - '0' : str[idx] - '0';
+	str[idx + 1] = 0;
+	if (last >= 5)
+	{
+		if (last == 5 && (prev % 2 == 0) && check_signif(n))
+			str[++idx] = 0;
+		else
+		{
+			if ((prev + 1) > 9)
+				round_up(str, idx, ft_strlen(str));
+			else
+				str[idx++] = prev + 1 + '0';
+			return ;
+		}
+	}
 }

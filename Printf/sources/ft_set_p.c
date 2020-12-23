@@ -1,11 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_set_p.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/12/23 19:50:20 by taesan            #+#    #+#             */
+/*   Updated: 2020/12/23 19:52:49 by taesan           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../headers/printf.h"
 #include "../headers/libft.h"
 
-void			remove_zero(t_input	*input)
+void			remove_zero(t_input *input)
 {
-	int i;
-	int j;
-	char* str;
+	int		i;
+	int		j;
+	char	*str;
 
 	str = input->str;
 	i = 2;
@@ -21,7 +33,7 @@ void			remove_zero(t_input	*input)
 	}
 }
 
-void			fill_str_p(t_input* input, unsigned long long n, int idx)
+void			fill_str_p(t_input *input, unsigned long long n, int idx)
 {
 	int		nmg;
 	int		start;
@@ -43,9 +55,9 @@ void			fill_str_p(t_input* input, unsigned long long n, int idx)
 	}
 }
 
-int				setlen_p(t_input* input, unsigned long long n)
+int				setlen_p(t_input *input, unsigned long long n)
 {
-	int					len;
+	int	len;
 
 	len = 2;
 	while (n != 0)
@@ -53,7 +65,6 @@ int				setlen_p(t_input* input, unsigned long long n)
 		n /= 16;
 		len++;
 	}
-
 	if (g_info->flag == ' ' || g_info->flag == '+')
 		input->sign = g_info->flag;
 	else
@@ -67,6 +78,7 @@ int				setlen_p(t_input* input, unsigned long long n)
 int				set_p_zero(t_input *input)
 {
 	char	*str;
+
 	if (!(str = (char*)malloc(sizeof(char) * 6)))
 		return (0);
 	ft_strlcpy(str, "(nil)", 6);
@@ -85,7 +97,7 @@ int				set_p_input(unsigned long long n)
 		return (0);
 	g_info->input = input;
 	if (n == 0)
-		return set_p_zero(input);
+		return (set_p_zero(input));
 	size = setlen_p(input, n);
 	if (!(str = (char*)malloc(sizeof(char) * (size + 1))))
 		return (0);

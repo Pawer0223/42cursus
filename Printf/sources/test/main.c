@@ -104,7 +104,7 @@ void	di_test()
     printf("### 30 ###\n");
     printf   ("%%+.d => [%+.d]\n", 0);
     ft_printf("%%+.d => [%+.d]\n", 0);
-    
+
 }
 
 void    u_test()
@@ -125,7 +125,7 @@ void    u_test()
     ft_printf("%%15.20u =>[%15.20u]\n", a);
     printf("### 5 ###\n");
     printf   ("%%20.15u =>[%20.15u]\n", a);
-    ft_printf("%%20.15u =>[%20.15u]\n", a); 
+    ft_printf("%%20.15u =>[%20.15u]\n", a);
     printf("### 6 ###\n");
     printf   ("%%u =>[%u]\n", -10);
     ft_printf("%%u =>[%u]\n", -10);
@@ -553,9 +553,9 @@ void        double_bit_test2(double a)
     int len = sizeof(double) - 1;
     int sign;
     int j;
-    
+
     sign = ((*(ptr + len) >> 7) & 0x01) == 0 ? 1 : -1;
-    
+
     int expoCnt = 10;
     int n = 0;
     // 8, 7 byte에서 sign과 exponent 추출
@@ -563,7 +563,7 @@ void        double_bit_test2(double a)
     for (int i = len; i >= len - 1; i--) {
         for (j = 7; j >= 0; j--) {
             if (i == len && j == 7)
-                continue; 
+                continue;
             int bit = (*(ptr + i) >> j) & 0x01;
             if (bit == 1)
                 n += pow(2, expoCnt);
@@ -723,9 +723,9 @@ void        f_test()
     printf("### 8 ###\n");
     printf("%%20.10f=>[%20.10f]\n", b);
     ft_printf("%%20.10f=>[%20.10f]\n", b);
-    
+
     double c = 0;
-    
+
     printf("### 9 ###\n");
     printf("%% f=>[% f]\n", c);
     ft_printf("%% f=>[% f]\n", c);
@@ -1022,9 +1022,9 @@ int		main(void)
     //ft_printf("%%f => [%f]\n", (double)LLONG_MAX);
 
 
-    // round_test();
-    // printf("#########2####### \n");
-    // round_test2();
+    round_test();
+    printf("#########2####### \n");
+    round_test2();
     // expo_test();
 
   /*  printf("%%.17f => [%.17f]\n", a);

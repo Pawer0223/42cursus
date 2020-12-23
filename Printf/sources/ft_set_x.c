@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_set_x.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/12/23 19:55:10 by taesan            #+#    #+#             */
+/*   Updated: 2020/12/23 19:56:49 by taesan           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../headers/printf.h"
 #include "../headers/libft.h"
 
@@ -5,7 +17,7 @@ void			fill_str_x(t_input *input, unsigned long long n, int idx)
 {
 	int		end;
 	int		nmg;
-	char	aA;
+	char	is_a;
 
 	if (n == 0)
 		fill_is_zero(input, idx--);
@@ -15,8 +27,8 @@ void			fill_str_x(t_input *input, unsigned long long n, int idx)
 		nmg = n % 16;
 		if (nmg >= 10)
 		{
-			aA = (g_info->specifier == 'x') ? 'a' : 'A';
-			nmg = aA + (nmg % 10);
+			is_a = (g_info->specifier == 'x') ? 'a' : 'A';
+			nmg = is_a + (nmg % 10);
 		}
 		else
 			nmg = '0' + nmg;
@@ -27,7 +39,7 @@ void			fill_str_x(t_input *input, unsigned long long n, int idx)
 		input->str[idx--] = '0';
 }
 
-int				setlen_x(t_input* input, unsigned long long n)
+int				setlen_x(t_input *input, unsigned long long n)
 {
 	int					len;
 	unsigned long long	org;

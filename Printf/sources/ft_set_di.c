@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_set_di.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taekang <taekang@student.42seoul.k>        +#+  +:+       +#+        */
+/*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/08 17:35:48 by taekang           #+#    #+#             */
-/*   Updated: 2020/11/23 19:07:11 by taekang          ###   ########.fr       */
+/*   Created: 2020/12/23 19:31:34 by taesan            #+#    #+#             */
+/*   Updated: 2020/12/23 19:31:57 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,6 @@ int				set_di_input(long long n)
 		return (0);
 	input->str = str;
 	str[size--] = 0;
-	fill_str_di(input, n , size);
+	fill_str_di(input, n, size);
 	return (1);
 }

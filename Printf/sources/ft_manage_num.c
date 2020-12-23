@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/23 17:10:26 by taesan            #+#    #+#             */
-/*   Updated: 2020/12/23 18:36:49 by taesan           ###   ########.fr       */
+/*   Created: 2020/12/23 19:18:36 by taesan            #+#    #+#             */
+/*   Updated: 2020/12/23 19:19:14 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int			get_left_size(double d)
 {
-	int     left_size;
+	int left_size;
 
 	left_size = 0;
 	while (d >= 1)
@@ -27,8 +27,8 @@ int			get_left_size(double d)
 
 double		get_number(double d, int need_last)
 {
-	double  left;
-	int     expo;
+	double	left;
+	int		expo;
 	int		last;
 
 	expo = get_left_size(d);

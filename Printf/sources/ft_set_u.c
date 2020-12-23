@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_set_u.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taekang <taekang@student.42seoul.k>        +#+  +:+       +#+        */
+/*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/08 17:35:48 by taekang           #+#    #+#             */
-/*   Updated: 2020/11/23 19:07:11 by taekang          ###   ########.fr       */
+/*   Created: 2020/12/23 19:53:51 by taesan            #+#    #+#             */
+/*   Updated: 2020/12/23 19:54:09 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/printf.h"
 #include "../headers/libft.h"
 
-void			fill_str_u(t_input* input, long long n, int idx)
+void			fill_str_u(t_input *input, long long n, int idx)
 {
 	if (n == 0)
 		fill_is_zero(input, idx--);
@@ -26,7 +26,7 @@ void			fill_str_u(t_input* input, long long n, int idx)
 		input->str[idx--] = '0';
 }
 
-int				setlen_u(t_input* input, unsigned long long n)
+int				setlen_u(t_input *input, unsigned long long n)
 {
 	int	len;
 
