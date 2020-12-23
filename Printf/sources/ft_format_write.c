@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 19:09:00 by taesan            #+#    #+#             */
-/*   Updated: 2020/12/24 02:38:59 by taesan           ###   ########.fr       */
+/*   Updated: 2020/12/24 03:08:48 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ void		ft_format_write(char flag)
 	padding = get_padding(flag);
 	input = g_info->input;
 	end = (g_info->width - input->len);
+	if (!input->str)
+		return ;
 	if (flag == '-')
 	{
 		ft_putstr_fd(input->str, 1);

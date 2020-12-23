@@ -1059,12 +1059,18 @@ int		main(void)
     //double_bit_test(d);
     //double_bit_test2(d);
 
-    ft_printf("[%5%]\n");
-    ft_printf("[%-5%]\n");
-    ft_printf("[%05%]\n");
-    ft_printf("[% 5%]\n");
-    ft_printf("[%-05%]\n");
+    // ft_printf("[%5%]\n");
+    // ft_printf("[%-5%]\n");
+    // ft_printf("[%05%]\n");
+    // ft_printf("[% 5%]\n");
+    // ft_printf("[%-05%]\n");
 
+    // printf("hello, %s.", NULL);
+    int a = ft_printf("hello, %s\n", NULL);
+    printf("a => [%d]\n",a);
+
+    a = ft_printf("hello, %.s\n", NULL);
+    printf("a => [%d]\n",a);
 	return (0);
 
 }
