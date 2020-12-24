@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/24 17:58:37 by taesan            #+#    #+#             */
-/*   Updated: 2020/12/25 02:41:20 by taesan           ###   ########.fr       */
+/*   Updated: 2020/12/25 02:44:36 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,11 @@ int				check_size(const char *format, int type)
 
 	start = g_i;
 	if (mvidx_rtn_minus(format))
+	{
 		start++;
+		if (type == 1)
+			g_info->flag = '-';
+	}
 	if (start != g_i)
 	{
 		len = g_i - start;
