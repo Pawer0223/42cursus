@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 19:47:47 by taesan            #+#    #+#             */
-/*   Updated: 2020/12/23 19:48:55 by taesan           ###   ########.fr       */
+/*   Updated: 2020/12/25 02:19:58 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ int			fill_str_f(t_input *input, double n, int len, int idx)
 
 	str = input->str;
 	is_left = (idx == 0) ? 1 : 0;
-	if (is_left && input->sign)
-		str[idx++] = input->sign;
+	// if (is_left && input->sign)
+	// 	str[idx++] = input->sign;
 	len--;
 	while (len >= 0)
 	{

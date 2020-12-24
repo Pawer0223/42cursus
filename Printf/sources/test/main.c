@@ -1092,5 +1092,17 @@ int		main(void)
     printf("%10.3d\n", -12);
     ft_printf("%10.3d\n", -12);
 
+
+    printf("%07i\n", -54);
+    ft_printf("%07i\n", -54);
+
+    int a = 22;
+    printf("%07i\n", -a);
+    ft_printf("%07i\n", -a);
+    printf("% 7i\n", -a);
+    ft_printf("% 7i\n", -a);
+    printf("%+7i\n", -a);
+    ft_printf("%+7i\n", -a);
+
 	return (0);
 }

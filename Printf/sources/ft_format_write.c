@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 19:09:00 by taesan            #+#    #+#             */
-/*   Updated: 2020/12/24 03:08:48 by taesan           ###   ########.fr       */
+/*   Updated: 2020/12/25 02:16:08 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,30 @@ void		percent_write(char flag)
 	g_w_cnt++;
 }
 
+void		write_with_sign(int end, char padding)
+{
+	t_input	*input;
+	char	*str;
+
+	input = g_info->input;
+	str = input->str;
+	if (input->sign)
+	{
+		end--;
+		if (g_info->flag == '0')
+			ft_putchar_fd(input->sign, 1);
+		else
+		{
+			write_padding(padding, end);
+			ft_putchar_fd(input->sign, 1);
+			ft_putstr_fd(str, 1);
+			return ;
+		}
+	}
+	write_padding(padding, end);
+	ft_putstr_fd(str, 1);
+}
+
 void		ft_format_write(char flag)
 {
 	int		end;
@@ -69,13 +93,12 @@ void		ft_format_write(char flag)
 		return ;
 	if (flag == '-')
 	{
+		if (input->sign)
+			ft_putchar_fd(input->sign, 1);
 		ft_putstr_fd(input->str, 1);
 		write_padding(' ', end);
 	}
 	else
-	{
-		write_padding(padding, end);
-		ft_putstr_fd(input->str, 1);
-	}
+		write_with_sign(end, padding);
 	g_w_cnt += ft_strlen(input->str);
 }

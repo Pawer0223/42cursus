@@ -6,37 +6,19 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 19:31:34 by taesan            #+#    #+#             */
-/*   Updated: 2020/12/25 00:18:24 by taesan           ###   ########.fr       */
+/*   Updated: 2020/12/25 02:14:14 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/printf.h"
 #include "../headers/libft.h"
 
-void			fill_di_padding(t_input *input, int idx, int cnt)
-{
-	char padding;
-
-	while (cnt < g_info->precision_len && idx >= 0)
-	{
-		input->str[idx--] = '0';
-		cnt++;
-	}
-	if (input->sign)
-		input->str[idx--] = input->sign;
-	padding = get_padding(g_info->flag);
-	while (idx >= 0)
-		input->str[idx--] = padding;
-}
-
 void			fill_str_di(t_input *input, long long n, int idx)
 {
 	int		nmg;
-	int		cnt;
 
 	if (n == 0)
 		fill_is_zero(input, idx--);
-	cnt = 0;
 	while (idx >= 0 && n != 0)
 	{
 		nmg = n % 10;
@@ -44,9 +26,9 @@ void			fill_str_di(t_input *input, long long n, int idx)
 			nmg *= -1;
 		input->str[idx--] = '0' + nmg;
 		n /= 10;
-		cnt++;
 	}
-	fill_di_padding(input, idx, cnt);
+	while (idx >= 0)
+		input->str[idx--] = '0';
 }
 
 int				setlen_di(t_input *input, long long n)
@@ -63,13 +45,6 @@ int				setlen_di(t_input *input, long long n)
 	}
 	if (g_info->precision_len > len)
 		len = g_info->precision_len;
-	if (g_info->width > len)
-	{
-		len = g_info->width;
-		is_width = 1;
-	}
-	if (!is_width && input->sign)
-		len++;
 	input->len = len;
 	return (len);
 }
