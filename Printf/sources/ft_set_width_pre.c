@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/24 17:58:37 by taesan            #+#    #+#             */
-/*   Updated: 2020/12/24 17:58:53 by taesan           ###   ########.fr       */
+/*   Updated: 2020/12/24 18:11:07 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,10 @@ int				check_size(const char *format, int type)
 	minus = mvidx_rtn_minus(format, type);
 	if (!minus && start != g_i)
 	{
-		len = (size_t)(g_i - start);
+		len = g_i - start;
 		if (!(num = ft_substr(format, start, len)))
 			return (0);
-		else
-			width_precision_set(ft_atoi(num), type);
+		width_precision_set(ft_atoi(num), type);
 		free(num);
 	}
 	return (1);
