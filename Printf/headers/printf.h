@@ -56,6 +56,7 @@ int             set_f_input(double n);
 /* format write*/
 void			ft_format_write(char flag);
 void			percent_write(char flag);
+char			get_padding(char flag);
 /* common */
 void			fill_is_zero(t_input* input, int idx);
 /* math*/

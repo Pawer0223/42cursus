@@ -1086,8 +1086,11 @@ int		main(void)
     printf("%03i\n", -543215);
     ft_printf("%03i\n", -543215);
 
-    printf("%07i\n", -54);
-    ft_printf("%07i\n", -54);
+    printf("%7i\n", 33);
+    ft_printf("%7i\n", 33);
+
+    printf("%10.3d\n", -12);
+    ft_printf("%10.3d\n", -12);
 
 	return (0);
 }
