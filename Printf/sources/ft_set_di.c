@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 19:31:34 by taesan            #+#    #+#             */
-/*   Updated: 2020/12/24 21:03:39 by taesan           ###   ########.fr       */
+/*   Updated: 2020/12/24 21:41:35 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,17 +35,24 @@ void			fill_str_di(t_input *input, long long n, int idx)
 
 int				setlen_di(t_input *input, long long n)
 {
-	int			len;
+	int	len;
+	int is_width;
 
 	len = (n == 0) ? 1 : 0;
+	is_width = 0;
 	while (n != 0)
 	{
 		n /= 10;
 		len++;
 	}
-	if ((g_info->precision_len) > len)
+	if (g_info->precision_len > len)
 		len = g_info->precision_len;
-	if (input->sign)
+	if (g_info->width > len)
+	{
+		len = g_info->width;
+		is_width = 1;
+	}
+	if (!is_width && input->sign)
 		len++;
 	input->len = len;
 	return (len);

@@ -1083,5 +1083,11 @@ int		main(void)
     printf("%.6i\n", 100);
     ft_printf("%.6i\n", 100);
 
+    printf("%03i\n", -543215);
+    ft_printf("%03i\n", -543215);
+
+    printf("%07i\n", -54);
+    ft_printf("%07i\n", -54);
+
 	return (0);
 }
