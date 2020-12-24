@@ -1075,8 +1075,8 @@ int		main(void)
     // printf("a => [%d]\n",a);
 
     char *str = "hi low";
-    printf("%0-0s\n", str);
-    ft_printf("%0-0s\n", str);
+    printf("%00-s\n", str);
+    ft_printf("%00-s\n", str);
 
 	return (0);
 
