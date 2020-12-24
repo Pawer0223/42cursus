@@ -1059,7 +1059,7 @@ int		main(void)
     //double_bit_test(d);
     //double_bit_test2(d);
 
-    ft_printf("[%5%]\n");
+    // ft_printf("[%5%]\n");
     // ft_printf("[%-5%]\n");
     // ft_printf("[%05%]\n");
     // ft_printf("[% 5%]\n");
@@ -1075,8 +1075,8 @@ int		main(void)
     // printf("a => [%d]\n",a);
 
     char *str = "hi low";
-    printf("%0-10s\n", str);
-    ft_printf("%0-10s\n", str);
+    printf("%0-0s\n", str);
+    ft_printf("%0-0s\n", str);
 
 	return (0);
 
