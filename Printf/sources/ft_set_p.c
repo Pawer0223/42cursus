@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 19:50:20 by taesan            #+#    #+#             */
-/*   Updated: 2020/12/23 19:52:49 by taesan           ###   ########.fr       */
+/*   Updated: 2020/12/25 02:47:48 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,11 +78,13 @@ int				setlen_p(t_input *input, unsigned long long n)
 int				set_p_zero(t_input *input)
 {
 	char	*str;
+	int		size;
 
-	if (!(str = (char*)malloc(sizeof(char) * 6)))
+	size = 4;
+	if (!(str = (char*)malloc(sizeof(char) * size)))
 		return (0);
-	ft_strlcpy(str, "(nil)", 6);
-	input->len = 5;
+	ft_strlcpy(str, "0x0", size);
+	input->len = size - 1;
 	input->str = str;
 	return (1);
 }
