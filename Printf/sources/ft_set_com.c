@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 19:30:47 by taesan            #+#    #+#             */
-/*   Updated: 2020/12/24 01:59:59 by taesan           ###   ########.fr       */
+/*   Updated: 2020/12/24 17:56:57 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,27 +22,26 @@ void			fill_is_zero(t_input *input, int idx)
 	else
 		input->str[idx] = '0';
 }
+// int				get_bit(char *ptr, int byte, int bit)
+// {
+// 	return (*(ptr + byte) >> bit) & 0x01;
+// }
 
-int				get_bit(char *ptr, int byte, int bit)
-{
-	return (*(ptr + byte) >> bit) & 0x01;
-}
+// double			read_bit(char *str, int exponent)
+// {
+// 	int		idx;
+// 	int		increase;
+// 	double	result;
 
-double			read_bit(char *str, int exponent)
-{
-	int		idx;
-	int		increase;
-	double	result;
-
-	increase = (exponent < 0) ? -1 : 1;
-	idx = 0;
-	result = 0;
-	while (str[idx])
-	{
-		if (str[idx] == '1')
-			result += ft_pow(2, exponent);
-		idx++;
-		exponent += increase;
-	}
-	return (result);
-}
+// 	increase = (exponent < 0) ? -1 : 1;
+// 	idx = 0;
+// 	result = 0;
+// 	while (str[idx])
+// 	{
+// 		if (str[idx] == '1')
+// 			result += ft_pow(2, exponent);
+// 		idx++;
+// 		exponent += increase;
+// 	}
+// 	return (result);
+// }

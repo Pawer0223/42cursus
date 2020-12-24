@@ -1065,17 +1065,18 @@ int		main(void)
     // ft_printf("[% 5%]\n");
     // ft_printf("[%-05%]\n");
 
-    int a = ft_printf("hello, %s\n", NULL);
-    printf("a => [%d]\n",a);
+    // int a = ft_printf("hello, %s\n", NULL);
+    // printf("a => [%d]\n",a);
+    // a = ft_printf("hello, %.s\n", NULL);
+    // printf("a => [%d]\n",a);
+    // a = ft_printf("%32s\n", NULL);
+    // printf("a => [%d]\n",a);
+    // a = ft_printf("%.03s\n", NULL);
+    // printf("a => [%d]\n",a);
 
-    a = ft_printf("hello, %.s\n", NULL);
-    printf("a => [%d]\n",a);
-
-    a = ft_printf("%32s\n", NULL);
-    printf("a => [%d]\n",a);
-
-    a = ft_printf("%.03s\n", NULL);
-    printf("a => [%d]\n",a);
+    char *str = "hi low";
+    printf("%0-10s\n", str);
+    ft_printf("%0-10s\n", str);
 
 	return (0);
 

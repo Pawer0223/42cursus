@@ -34,6 +34,7 @@ void			free_g(void);
 void			free_input(t_input	*input);
 /* check funcs */
 int				check_format(const char	*format);
+int				check_size(const char *format, int type);
 /* set_input_filter */
 int				ft_set_input_filter(char spec);
 /* set input caller funcs */

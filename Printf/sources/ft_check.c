@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 18:58:53 by taesan            #+#    #+#             */
-/*   Updated: 2020/12/24 01:58:09 by taesan           ###   ########.fr       */
+/*   Updated: 2020/12/24 18:00:03 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,32 +20,6 @@ void			check_flag(const char c)
 		g_info->flag = c;
 		g_i++;
 	}
-}
-
-int				check_size(const char *format, int type)
-{
-	int		start;
-	char	*num;
-	size_t	len;
-
-	start = g_i;
-	while (format[g_i] && ft_isdigit(format[g_i]))
-		g_i++;
-	if (start != g_i)
-	{
-		len = (size_t)(g_i - start);
-		if (!(num = ft_substr(format, start, len)))
-			return (0);
-		else
-		{
-			if (type == 1)
-				g_info->width = ft_atoi(num);
-			else
-				g_info->precision_len = ft_atoi(num);
-		}
-		free(num);
-	}
-	return (1);
 }
 
 int				check_len(const char *format)
