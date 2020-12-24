@@ -1074,10 +1074,14 @@ int		main(void)
     // a = ft_printf("%.03s\n", NULL);
     // printf("a => [%d]\n",a);
 
-    char *str = "hi low";
-    printf("%00-s\n", str);
-    ft_printf("%00-s\n", str);
+    // char *str = "hi low";
+    // printf("%00-s\n", str);
+    // ft_printf("%00-s\n", str);
+    printf("%.6i\n", -3);
+    ft_printf("%.6i\n", -3);
+
+    printf("%.6i\n", 100);
+    ft_printf("%.6i\n", 100);
 
 	return (0);
-
 }

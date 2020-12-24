@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 19:31:34 by taesan            #+#    #+#             */
-/*   Updated: 2020/12/23 19:31:57 by taesan           ###   ########.fr       */
+/*   Updated: 2020/12/24 21:03:39 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ void			fill_str_di(t_input *input, long long n, int idx)
 		input->str[idx--] = '0' + nmg;
 		n /= 10;
 	}
-	if (input->sign && idx >= 0)
-		input->str[idx--] = input->sign;
 	while (idx >= 0)
 		input->str[idx--] = '0';
+	if (input->sign)
+		input->str[0] = input->sign;
 }
 
 int				setlen_di(t_input *input, long long n)
@@ -43,10 +43,10 @@ int				setlen_di(t_input *input, long long n)
 		n /= 10;
 		len++;
 	}
-	if (input->sign)
-		len++;
 	if ((g_info->precision_len) > len)
 		len = g_info->precision_len;
+	if (input->sign)
+		len++;
 	input->len = len;
 	return (len);
 }
