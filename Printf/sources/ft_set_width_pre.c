@@ -6,14 +6,14 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/24 17:58:37 by taesan            #+#    #+#             */
-/*   Updated: 2020/12/24 18:11:07 by taesan           ###   ########.fr       */
+/*   Updated: 2020/12/24 18:27:29 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/printf.h"
 #include "../headers/libft.h"
 
-void			width_precision_set(int type, int n)
+void			width_precision_set(int n, int type)
 {
 	if (type == 1)
 		g_info->width = n;
@@ -42,7 +42,7 @@ int				check_size(const char *format, int type)
 {
 	int		start;
 	char	*num;
-	size_t	len;
+	int		len;
 	int		minus;
 
 	start = g_i;

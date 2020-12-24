@@ -1059,7 +1059,7 @@ int		main(void)
     //double_bit_test(d);
     //double_bit_test2(d);
 
-    // ft_printf("[%5%]\n");
+    ft_printf("[%5%]\n");
     // ft_printf("[%-5%]\n");
     // ft_printf("[%05%]\n");
     // ft_printf("[% 5%]\n");
