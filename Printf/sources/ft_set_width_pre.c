@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/24 17:58:37 by taesan            #+#    #+#             */
-/*   Updated: 2020/12/24 19:06:45 by taesan           ###   ########.fr       */
+/*   Updated: 2020/12/25 02:38:14 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void			width_precision_set(int n, int type)
 		g_info->precision_len = n;
 }
 
-int				mvidx_rtn_minus(const char *format, int type)
+int				mvidx_rtn_minus(const char *format)
 {
 	int is_minus;
 
@@ -33,13 +33,13 @@ int				mvidx_rtn_minus(const char *format, int type)
 	}
 	while (format[g_i] && ft_isdigit(format[g_i]))
 		g_i++;
-	if (is_minus)
-		width_precision_set(0, type);
+	// if (is_minus)
+	// 	width_precision_set(0, type);
 	if (format[g_i] && format[g_i] == '-')
 	{
 		g_i++;
 		is_minus = 1;
-		width_precision_set(0, type);
+		// width_precision_set(0, type);
 	}
 	return (is_minus);
 }
@@ -49,11 +49,11 @@ int				check_size(const char *format, int type)
 	int		start;
 	char	*num;
 	int		len;
-	int		minus;
+	// int		minus;
 
 	start = g_i;
-	minus = mvidx_rtn_minus(format, type);
-	if (!minus && start != g_i)
+	mvidx_rtn_minus(format);
+	if (start != g_i)
 	{
 		len = g_i - start;
 		if (!(num = ft_substr(format, start, len)))

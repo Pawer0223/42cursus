@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 19:31:34 by taesan            #+#    #+#             */
-/*   Updated: 2020/12/25 02:14:14 by taesan           ###   ########.fr       */
+/*   Updated: 2020/12/25 02:38:49 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,8 @@ void			fill_str_di(t_input *input, long long n, int idx)
 int				setlen_di(t_input *input, long long n)
 {
 	int	len;
-	int is_width;
 
 	len = (n == 0) ? 1 : 0;
-	is_width = 0;
 	while (n != 0)
 	{
 		n /= 10;
