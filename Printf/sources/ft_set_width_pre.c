@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/24 17:58:37 by taesan            #+#    #+#             */
-/*   Updated: 2020/12/25 02:38:14 by taesan           ###   ########.fr       */
+/*   Updated: 2020/12/25 02:41:20 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,10 @@ int				check_size(const char *format, int type)
 	int		start;
 	char	*num;
 	int		len;
-	// int		minus;
 
 	start = g_i;
-	mvidx_rtn_minus(format);
+	if (mvidx_rtn_minus(format))
+		start++;
 	if (start != g_i)
 	{
 		len = g_i - start;
