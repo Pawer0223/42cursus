@@ -1077,32 +1077,35 @@ int		main(void)
     // char *str = "hi low";
     // printf("%00-s\n", str);
     // ft_printf("%00-s\n", str);
-    printf("%.6i\n", -3);
-    ft_printf("%.6i\n", -3);
+    // printf("%.6i\n", -3);
+    // ft_printf("%.6i\n", -3);
 
-    printf("%.6i\n", 100);
-    ft_printf("%.6i\n", 100);
+    // printf("%.6i\n", 100);
+    // ft_printf("%.6i\n", 100);
 
-    printf("%03i\n", -543215);
-    ft_printf("%03i\n", -543215);
+    // printf("%03i\n", -543215);
+    // ft_printf("%03i\n", -543215);
 
-    printf("%7i\n", 33);
-    ft_printf("%7i\n", 33);
+    // printf("%7i\n", 33);
+    // ft_printf("%7i\n", 33);
 
-    printf("%10.3d\n", -12);
-    ft_printf("%10.3d\n", -12);
+    // printf("%10.3d\n", -12);
+    // ft_printf("%10.3d\n", -12);
 
 
-    printf("%07i\n", -54);
-    ft_printf("%07i\n", -54);
+    // printf("%07i\n", -54);
+    // ft_printf("%07i\n", -54);
 
-    int a = 22;
-    printf("%07i\n", -a);
-    ft_printf("%07i\n", -a);
-    printf("% 7i\n", -a);
-    ft_printf("% 7i\n", -a);
-    printf("%+7i\n", -a);
-    ft_printf("%+7i\n", -a);
+    // int a = 22;
+    // printf("%07i\n", -a);
+    // ft_printf("%07i\n", -a);
+    // printf("% 7i\n", -a);
+    // ft_printf("% 7i\n", -a);
+    // printf("%+7i\n", -a);
+    // ft_printf("%+7i\n", -a);
+
+    printf("%2.9p\n", 1234);
+    ft_printf("%2.9p\n", 1234);
 
 	return (0);
 }

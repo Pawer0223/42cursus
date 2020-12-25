@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 19:50:20 by taesan            #+#    #+#             */
-/*   Updated: 2020/12/25 02:52:13 by taesan           ###   ########.fr       */
+/*   Updated: 2020/12/25 21:43:10 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,10 @@ void			remove_zero(t_input *input)
 void			fill_str_p(t_input *input, unsigned long long n, int idx)
 {
 	int		nmg;
-	int		start;
 
-	start = 0;
-	if (input->sign)
-		input->str[start++] = input->sign;
-	input->str[start++] = '0';
-	input->str[start++] = 'x';
-	while (idx >= start)
+	input->str[0] = '0';
+	input->str[1] = 'x';
+	while (n != 0)
 	{
 		nmg = n % 16;
 		if (nmg >= 10)
@@ -53,6 +49,8 @@ void			fill_str_p(t_input *input, unsigned long long n, int idx)
 		input->str[idx--] = nmg;
 		n /= 16;
 	}
+	while (idx >= 2)
+		input->str[idx--] = '0';
 }
 
 int				setlen_p(t_input *input, unsigned long long n)
@@ -69,8 +67,8 @@ int				setlen_p(t_input *input, unsigned long long n)
 		input->sign = g_info->flag;
 	else
 		input->sign = 0;
-	if (input->sign)
-		len++;
+	if (g_info->precision_len > len)
+		len = g_info->precision_len + 2;
 	input->len = len;
 	return (len);
 }
@@ -106,6 +104,6 @@ int				set_p_input(unsigned long long n)
 	input->str = str;
 	str[size--] = 0;
 	fill_str_p(input, n, size);
-	remove_zero(input);
+	// remove_zero(input);
 	return (1);
 }
