@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 19:29:24 by taesan            #+#    #+#             */
-/*   Updated: 2020/12/26 17:27:34 by taesan           ###   ########.fr       */
+/*   Updated: 2020/12/26 23:05:16 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 void		ft_ascii_write(int n)
 {
-	if (g_info->width != -1)
+	if (g_info->width > 1)
 	{
 		if (g_info->flag == '-')
 		{

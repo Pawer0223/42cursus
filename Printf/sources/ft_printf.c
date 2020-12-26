@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 19:28:16 by taesan            #+#    #+#             */
-/*   Updated: 2020/12/26 17:29:10 by taesan           ###   ########.fr       */
+/*   Updated: 2020/12/26 23:08:28 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,11 @@ int			format_write_start(const char *format)
 		if (g_info->specifier == '%')
 			percent_write(g_info->flag);
 		else
+		{
+			if (g_info->width < 0)
+				g_info->width *= -1;
 			ft_format_write(g_info->flag);
+		}
 	}
 	clear_g();
 	return (1);

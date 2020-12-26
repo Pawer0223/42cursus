@@ -1133,23 +1133,42 @@ int		main(void)
     // printf("%.*s\n", 3, "hello");
     // ft_printf("%.*s\n", 3, "hello");
 
-    int a = printf("[%*s]", -32, "abc");
-    printf("\n a = >[%d]\n", a);
+    // int a = printf("[%*s]", -32, "abc");
+    // printf("\n a = >[%d]\n", a);
 
-    a = ft_printf("[%*s]", -32, "abc");
-    printf("\n a = >[%d]\n", a);
+    // a = ft_printf("[%*s]", -32, "abc");
+    // printf("\n a = >[%d]\n", a);
 
-    a = printf("[%.*s]", -3, "hello");
-    printf("\n a = >[%d]\n", a);
+    // a = printf("[%.*s]", -3, "hello");
+    // printf("\n a = >[%d]\n", a);
 
-    a = ft_printf("[%.*s]", -3, "hello");
-    printf("\n a = >[%d]\n", a);
+    // a = ft_printf("[%.*s]", -3, "hello");
+    // printf("\n a = >[%d]\n", a);
 
-    a = printf("[%.s]", "hello");
-    printf("\n a = >[%d]\n", a);
+    // a = printf("[%.s]", "hello");
+    // printf("\n a = >[%d]\n", a);
 
-    a = ft_printf("[%.s]", "hello");
-    printf("\n a = >[%d]\n", a);
+    // a = ft_printf("[%.s]", "hello");
+    // printf("\n a = >[%d]\n", a);
+
+    // int a = printf("this %s is empty\n", "");
+    // printf("a = >[%d]\n", a);
+    // a = ft_printf("this %s is empty\n", "");
+    // printf("a = >[%d]\n", a);
+
+    // char * s_hidden = "hi low";
+    // a = printf("%0000s\n", s_hidden);
+    // printf("a = >[%d]\n", a);
+    // a = ft_printf("%0000s\n", s_hidden);
+    // printf("a = >[%d]\n", a);
+
+    printf("%.*s\n", -3, "hello");
+    ft_printf("%.*s\n", -3, "hello");
+
+    printf("%.*i\n", -6, -3);
+    ft_printf("%.*i\n", -6, -3);
+
+
 
 	return (0);
 }
