@@ -6,7 +6,7 @@
 #    By: taesan <taesan@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by taekang           #+#    #+#              #
-#    Updated: 2020/12/24 18:08:03 by taesan           ###   ########.fr        #
+#    Updated: 2020/12/26 17:15:24 by taesan           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,7 +65,7 @@ SRCS =	$(addprefix $(SRC_DIR)/, \
 	ft_manage_num.c\
 	ft_math.c\
 	ft_printf.c\
-	ft_set_ascii.c\
+	ft_ascii_write.c\
 	ft_set_com.c\
 	ft_set_di.c\
 	ft_set_f.c\

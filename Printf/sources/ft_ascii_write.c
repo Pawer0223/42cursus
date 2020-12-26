@@ -1,30 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_set_ascii.c                                     :+:      :+:    :+:   */
+/*   ft_ascii_write.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 19:29:24 by taesan            #+#    #+#             */
-/*   Updated: 2020/12/26 16:43:17 by taesan           ###   ########.fr       */
+/*   Updated: 2020/12/26 17:27:34 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/printf.h"
+#include "../headers/libft.h"
 
-int				set_ascii_input(char n)
+void		ft_ascii_write(int n)
 {
-	t_input	*input;
-	char	*str;
-
-	if (!(input = (t_input*)(malloc(sizeof(t_input)))))
-		return (0);
-	g_info->input = input;
-	input->len = 1;
-	if (!(str = (char*)malloc(sizeof(char) * 2)))
-		return (0);
-	input->str = str;
-	str[1] = 0;
-	str[0] = (char)n;
-	return (1);
+	if (g_info->width != -1)
+	{
+		if (g_info->flag == '-')
+		{
+			ft_putchar_fd(n, 1);
+			write_padding(' ', g_info->width - 1);
+		}
+		else
+		{
+			write_padding(' ', g_info->width - 1);
+			ft_putchar_fd(n, 1);
+		}
+	}
+	else
+		ft_putchar_fd(n, 1);
+	g_w_cnt++;
 }

@@ -1077,7 +1077,7 @@ void    expo_test()
 
 int		main(void)
 {
-    printf("################ [ TEST START, up is Real Printf , down is My Printf ] ################\n");
+    // printf("################ [ TEST START, up is Real Printf , down is My Printf ] ################\n");
     // di_test();
     // u_test();
     // x_test();
@@ -1125,8 +1125,14 @@ int		main(void)
     printf("[%5c]\n", '\x00');
     ft_printf("[%5c]\n", '\x00');
 
-    printf("%c\n", 0);
-    printf("%c\n", '0');
+    // printf("[%c]\n", 0);
+    // ft_printf("[%c]\n", 0);
+
+    // printf("[%c]\n", '0');
+    // ft_printf("[%c]\n", '0');
+
+    // printf("%c\n", 0);
+    // printf("%c\n", '0');
 
 	return (0);
 }

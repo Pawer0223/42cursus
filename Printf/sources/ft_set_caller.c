@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 19:30:02 by taesan            #+#    #+#             */
-/*   Updated: 2020/12/26 16:43:38 by taesan           ###   ########.fr       */
+/*   Updated: 2020/12/26 17:18:04 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,14 +49,6 @@ int				ft_set_ux(char *length, char spec)
 		return (set_u_input(n));
 	else
 		return (set_x_input(n));
-}
-
-int				ft_set_c(void)
-{
-	char c;
-
-	c = va_arg(*(g_info->ap), int);
-	return (set_ascii_input(c));
 }
 
 int				ft_set_s(void)
