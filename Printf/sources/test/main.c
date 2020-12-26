@@ -1127,11 +1127,29 @@ int		main(void)
 
     // p_test();
 
-    printf("%%-*.3s LYDI == |%-*.3s|\n", 5, "LYDI");
-    ft_printf("%%-*.3s LYDI == |%-*.3s|\n", 5, "LYDI");
+    // printf("%%-*.3s LYDI == |%-*.3s|\n", 5, "LYDI");
+    // ft_printf("%%-*.3s LYDI == |%-*.3s|\n", 5, "LYDI");
 
-    printf("%.*s\n", 3, "hello");
-    ft_printf("%.*s\n", 3, "hello");
+    // printf("%.*s\n", 3, "hello");
+    // ft_printf("%.*s\n", 3, "hello");
+
+    int a = printf("[%*s]", -32, "abc");
+    printf("\n a = >[%d]\n", a);
+
+    a = ft_printf("[%*s]", -32, "abc");
+    printf("\n a = >[%d]\n", a);
+
+    a = printf("[%.*s]", -3, "hello");
+    printf("\n a = >[%d]\n", a);
+
+    a = ft_printf("[%.*s]", -3, "hello");
+    printf("\n a = >[%d]\n", a);
+
+    a = printf("[%.s]", "hello");
+    printf("\n a = >[%d]\n", a);
+
+    a = ft_printf("[%.s]", "hello");
+    printf("\n a = >[%d]\n", a);
 
 	return (0);
 }

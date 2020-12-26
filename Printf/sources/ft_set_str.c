@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 19:53:08 by taesan            #+#    #+#             */
-/*   Updated: 2020/12/24 03:33:46 by taesan           ###   ########.fr       */
+/*   Updated: 2020/12/26 20:41:42 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int				set_str_input(char *input_str)
 	g_info->input = input;
 	if (!input_str)
 		return (set_str_zero(input));
-	if (g_info->precision_len != -1)
+	if (g_info->precision_len >= 0)
 		str = ft_substr(input_str, 0, g_info->precision_len);
 	else
 		str = ft_strdup(input_str);

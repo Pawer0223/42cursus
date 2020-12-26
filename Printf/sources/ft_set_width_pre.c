@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/24 17:58:37 by taesan            #+#    #+#             */
-/*   Updated: 2020/12/26 18:21:45 by taesan           ###   ########.fr       */
+/*   Updated: 2020/12/26 20:45:30 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,16 @@ int				mvidx_rtn_minus(const char *format)
 
 int				check_star(int type)
 {
+	int n;
+
+	n = va_arg(*(g_info->ap), int);
 	g_i++;
-	width_precision_set(va_arg(*(g_info->ap), int), type);
+	if (n < 0)
+	{
+		n *= -1;
+		g_info->flag = '-';
+	}
+	width_precision_set(n, type);
 	return (1);
 }
 
