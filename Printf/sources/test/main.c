@@ -321,6 +321,19 @@ void        s_test()
     printf("### 5 ###\n");
     printf("%%10.s =>[%10.s]\n", "defg");
     ft_printf("%%10.s =>[%10.s]\n", "defg");
+
+    int a = ft_printf("hello, %s\n", NULL);
+    printf("a => [%d]\n",a);
+    a = ft_printf("hello, %.s\n", NULL);
+    printf("a => [%d]\n",a);
+    a = ft_printf("%32s\n", NULL);
+    printf("a => [%d]\n",a);
+    a = ft_printf("%.03s\n", NULL);
+    printf("a => [%d]\n",a);
+
+    char *str = "hi low";
+    printf("%00-s\n", str);
+    ft_printf("%00-s\n", str);
 }
 
 void        p_test()
@@ -433,6 +446,52 @@ void        n_test()
     printf("### 16 ###\n");
     printf("n4 is %d\n", n4);
     ft_printf("n4 is %d\n", n4);
+    printf("### 17 ###\n");
+    printf("[%5%]\n");
+    ft_printf("[%5%]\n");
+    printf("### 18 ###\n");
+    printf("[%5%]\n");
+    ft_printf("[%5%]\n");
+    printf("### 19 ###\n");
+    printf("[%-5%]\n");
+    ft_printf("[%-5%]\n");
+    printf("### 20 ###\n");
+    printf("[%05%]\n");
+    ft_printf("[%05%]\n");
+    printf("### 21 ###\n");
+    printf("[% 5%]\n");
+    ft_printf("[% 5%]\n");
+    printf("### 22 ###\n");
+    printf("[%-05%]\n");
+    ft_printf("[%-05%]\n");
+
+    printf("%.6i\n", -3);
+    ft_printf("%.6i\n", -3);
+
+    printf("%.6i\n", 100);
+    ft_printf("%.6i\n", 100);
+
+    printf("%03i\n", -543215);
+    ft_printf("%03i\n", -543215);
+
+    printf("%7i\n", 33);
+    ft_printf("%7i\n", 33);
+
+    printf("%10.3d\n", -12);
+    ft_printf("%10.3d\n", -12);
+
+
+    printf("%07i\n", -54);
+    ft_printf("%07i\n", -54);
+
+    int a = 22;
+    printf("%07i\n", -a);
+    ft_printf("%07i\n", -a);
+    printf("% 7i\n", -a);
+    ft_printf("% 7i\n", -a);
+    printf("%+7i\n", -a);
+    ft_printf("%+7i\n", -a);
+
 }
 
 void        test_one_bit_oper()
@@ -1062,55 +1121,13 @@ int		main(void)
     //double_bit_test(d);
     //double_bit_test2(d);
 
-    // ft_printf("[%5%]\n");
-    // ft_printf("[%-5%]\n");
-    // ft_printf("[%05%]\n");
-    // ft_printf("[% 5%]\n");
-    // ft_printf("[%-05%]\n");
+    // p_test();
+    printf("[%5c]\n", '\x00');
+    ft_printf("[%5c]\n", '\x00');
 
-    // int a = ft_printf("hello, %s\n", NULL);
-    // printf("a => [%d]\n",a);
-    // a = ft_printf("hello, %.s\n", NULL);
-    // printf("a => [%d]\n",a);
-    // a = ft_printf("%32s\n", NULL);
-    // printf("a => [%d]\n",a);
-    // a = ft_printf("%.03s\n", NULL);
-    // printf("a => [%d]\n",a);
-
-    // char *str = "hi low";
-    // printf("%00-s\n", str);
-    // ft_printf("%00-s\n", str);
-    // printf("%.6i\n", -3);
-    // ft_printf("%.6i\n", -3);
-
-    // printf("%.6i\n", 100);
-    // ft_printf("%.6i\n", 100);
-
-    // printf("%03i\n", -543215);
-    // ft_printf("%03i\n", -543215);
-
-    // printf("%7i\n", 33);
-    // ft_printf("%7i\n", 33);
-
-    // printf("%10.3d\n", -12);
-    // ft_printf("%10.3d\n", -12);
-
-
-    // printf("%07i\n", -54);
-    // ft_printf("%07i\n", -54);
-
-    // int a = 22;
-    // printf("%07i\n", -a);
-    // ft_printf("%07i\n", -a);
-    // printf("% 7i\n", -a);
-    // ft_printf("% 7i\n", -a);
-    // printf("%+7i\n", -a);
-    // ft_printf("%+7i\n", -a);
-
-    printf("%.5p\n", 0);
-    ft_printf("%.5p\n", 0);
-
-    p_test();
+    printf("%c\n", 0);
+    printf("%c\n", '0');
 
 	return (0);
 }
+

@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 19:30:02 by taesan            #+#    #+#             */
-/*   Updated: 2020/12/24 02:58:49 by taesan           ###   ########.fr       */
+/*   Updated: 2020/12/26 16:43:38 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ int				ft_set_di(char	*length)
 	}
 	else
 		n = va_arg(*(g_info->ap), int);
-	return set_di_input(n);
+	return (set_di_input(n));
 }
 
-int				ft_set_ux(char	*length, char spec)
+int				ft_set_ux(char *length, char spec)
 {
 	unsigned long long	n;
 
@@ -53,7 +53,7 @@ int				ft_set_ux(char	*length, char spec)
 
 int				ft_set_c(void)
 {
-	int c;
+	char c;
 
 	c = va_arg(*(g_info->ap), int);
 	return (set_ascii_input(c));

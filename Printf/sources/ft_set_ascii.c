@@ -6,13 +6,13 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 19:29:24 by taesan            #+#    #+#             */
-/*   Updated: 2020/12/23 19:29:35 by taesan           ###   ########.fr       */
+/*   Updated: 2020/12/26 16:43:17 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/printf.h"
 
-int				set_ascii_input(int n)
+int				set_ascii_input(char n)
 {
 	t_input	*input;
 	char	*str;

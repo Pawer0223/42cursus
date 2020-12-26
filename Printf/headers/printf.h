@@ -50,7 +50,7 @@ int				set_di_input(long long n);
 int				set_u_input(unsigned long long n);
 int				set_x_input(unsigned long long n);
 int				set_p_input(unsigned long long n);
-int				set_ascii_input(int n);
+int				set_ascii_input(char n);
 int				set_str_input(char *input_str);
 int             set_f_input(double n);
 /* format write*/
