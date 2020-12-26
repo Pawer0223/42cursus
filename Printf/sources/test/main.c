@@ -371,6 +371,9 @@ void        p_test()
     printf("### 11 ###\n");
     printf("%%.3p =>[%.3p]\n", 256);
     ft_printf("%%.3p =>[%.3p]\n", 256);
+    printf("### 12 ###\n");
+    printf("%.5p\n", 0);
+    ft_printf("%.5p\n", 0);
 }
 
 void        n_test()
@@ -1104,8 +1107,10 @@ int		main(void)
     // printf("%+7i\n", -a);
     // ft_printf("%+7i\n", -a);
 
-    printf("%2.9p\n", 1234);
-    ft_printf("%2.9p\n", 1234);
+    printf("%.5p\n", 0);
+    ft_printf("%.5p\n", 0);
+
+    p_test();
 
 	return (0);
 }
