@@ -301,6 +301,10 @@ void        c_test()
      printf("%%c =>[%c]\n", 256);
      ft_printf("%%c =>[%c]\n", 256);
 
+     printf("### etc7 ###\n");
+     printf("[%5c]\n", '\x00');
+     ft_printf("[%5c]\n", '\x00');
+
 }
 
 void        s_test()
@@ -1122,17 +1126,9 @@ int		main(void)
     //double_bit_test2(d);
 
     // p_test();
-    printf("[%5c]\n", '\x00');
-    ft_printf("[%5c]\n", '\x00');
 
-    // printf("[%c]\n", 0);
-    // ft_printf("[%c]\n", 0);
-
-    // printf("[%c]\n", '0');
-    // ft_printf("[%c]\n", '0');
-
-    // printf("%c\n", 0);
-    // printf("%c\n", '0');
+    printf("%%-*.3s LYDI == |%-*.3s|\n", 5, "LYDI");
+    ft_printf("%%-*.3s LYDI == |%-*.3s|\n", 5, "LYDI");
 
 	return (0);
 }
