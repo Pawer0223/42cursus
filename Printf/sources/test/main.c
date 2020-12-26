@@ -1130,6 +1130,9 @@ int		main(void)
     printf("%%-*.3s LYDI == |%-*.3s|\n", 5, "LYDI");
     ft_printf("%%-*.3s LYDI == |%-*.3s|\n", 5, "LYDI");
 
+    printf("%.*s\n", 3, "hello");
+    ft_printf("%.*s\n", 3, "hello");
+
 	return (0);
 }
 
