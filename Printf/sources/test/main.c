@@ -391,6 +391,9 @@ void        p_test()
     printf("### 12 ###\n");
     printf("%.5p\n", 0);
     ft_printf("%.5p\n", 0);
+    printf("### 13 ###\n");
+    printf("%.*p\n", -3, 0);
+    ft_printf("%.*p\n", -3, 0);
 }
 
 void        n_test()
@@ -1162,13 +1165,20 @@ int		main(void)
     // a = ft_printf("%0000s\n", s_hidden);
     // printf("a = >[%d]\n", a);
 
-    printf("%.*s\n", -3, "hello");
-    ft_printf("%.*s\n", -3, "hello");
+    // printf("%.*s\n", -3, "hello");
+    // ft_printf("%.*s\n", -3, "hello");
 
-    printf("%.*i\n", -6, -3);
-    ft_printf("%.*i\n", -6, -3);
+    // printf("%.*i\n", -6, -3);
+    // ft_printf("%.*i\n", -6, -3);
+
+    // printf("1 [%.*s]\n", -3, 0);
+    // ft_printf("2 [%.*s]\n", -3, 0);
 
 
+    // p_test();
+
+    printf("%.*p\n",-3, 0);
+    ft_printf("%.*p\n",-3, 0);
 
 	return (0);
 }
