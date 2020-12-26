@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/24 17:58:37 by taesan            #+#    #+#             */
-/*   Updated: 2020/12/26 23:00:26 by taesan           ###   ########.fr       */
+/*   Updated: 2020/12/26 23:11:28 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ int				check_star(int type)
 
 	n = va_arg(*(g_info->ap), int);
 	g_i++;
+	if (type == 1 && n < 0)
+		g_info->flag = '-';
 	width_precision_set(n, type);
 	return (1);
 }
