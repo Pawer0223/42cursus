@@ -1237,6 +1237,9 @@ int		main(void)
     printf("[%010p]\n", 43);
     ft_printf("[%010p]\n", 43);
 
+    printf("[%.*i]\n", -6, -3);
+    ft_printf("[%.*i]\n", -6, -3);
+
 	return (0);
 }
 
