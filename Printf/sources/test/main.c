@@ -1203,7 +1203,32 @@ int		main(void)
     printf("1 => [%llu%u%lu]\n", ull_pos_1, ui_pos_1, ul_pos_1);
     ft_printf("2 => [%llu%u%lu]\n", ull_pos_1, ui_pos_1, ul_pos_1);
 
+    printf("1 => [%llu%hhu%llx]\n", ull_pos_1, uch_pos_1, ull_pos_1);
+    ft_printf("2 => [%llu%hhu%llx]\n", ull_pos_1, uch_pos_1, ull_pos_1);
 
+    printf("1 => [%hu%lu%hhx]\n", ush_pos_1, ul_pos_1, uch_pos_1);
+    ft_printf("2 => [%hu%lu%hhx]\n", ush_pos_1, ul_pos_1, uch_pos_1);
+
+    printf("1 => [%lu%hhu%hx]\n", ul_pos_1, uch_pos_1, ush_pos_1);
+    ft_printf("2 => [%lu%hhu%hx]\n", ul_pos_1, uch_pos_1, ush_pos_1);
+
+    printf("1 => [%u%llu%hhx]\n", ui_pos_1, ull_pos_1, uch_pos_1);
+    ft_printf("2 => [%u%llu%hhx]\n", ui_pos_1, ull_pos_1, uch_pos_1);
+
+    printf("1 => [%llu%u%lx]\n", ull_pos_1, ui_pos_1, ul_pos_1);
+    ft_printf("2 => [%llu%u%lx]\n", ull_pos_1, ui_pos_1, ul_pos_1);
+
+    printf("1 => [%#037lx]\n", 22337203685477ul);
+    ft_printf("2 => [%#037lx]\n", 22337203685477ul);
+
+    printf("1 => [% 010d]\n", 123);
+    ft_printf("2 => [% 010d]\n", 123);
+
+    printf("1 => [%+010d]\n", 123);
+    ft_printf("2 => [%+010d]\n", 123);
+
+    printf("1 => [%+010d]\n", 123);
+    ft_printf("2 => [%+010d]\n", 123);
 
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 19:09:00 by taesan            #+#    #+#             */
-/*   Updated: 2020/12/26 23:08:54 by taesan           ###   ########.fr       */
+/*   Updated: 2020/12/27 19:26:32 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ char		get_padding(char flag)
 
 	padding = ' ';
 	if (flag == '0' && g_info->precision_len == -1)
+		padding = '0';
+	if (g_info->flag_zero)
 		padding = '0';
 	return (padding);
 }
@@ -65,7 +67,7 @@ void		write_with_sign(int end, char padding)
 	str = input->str;
 	if (input->sign)
 	{
-		if (g_info->flag == '0' && g_info->precision_len == -1)
+		if (g_info->flag_zero && g_info->precision_len == -1)
 			ft_putchar_fd(input->sign, 1);
 		else
 		{

@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 19:18:12 by taesan            #+#    #+#             */
-/*   Updated: 2020/12/26 23:07:20 by taesan           ###   ########.fr       */
+/*   Updated: 2020/12/27 19:10:14 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int			init_g(va_list *ap)
 		return (0);
 	g_info->ap = ap;
 	g_info->flag = 0;
+	g_info->flag_zero = 0;
 	g_info->length = 0;
 	g_info->input = 0;
 	g_info->width = 0;
@@ -37,6 +38,7 @@ void		clear_g(void)
 	g_info->length = 0;
 	g_info->input = 0;
 	g_info->flag = 0;
+	g_info->flag_zero = 0;
 	g_info->width = 0;
 	g_info->precision_len = -1;
 }

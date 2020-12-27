@@ -20,6 +20,7 @@ typedef struct	s_printf
 	t_input	*input;
 	char	*length;
 	char	flag;
+	char	flag_zero;
 	char	specifier;
 	int		width;
 	int		precision_len;
