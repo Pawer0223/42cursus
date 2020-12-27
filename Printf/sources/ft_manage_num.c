@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 19:18:36 by taesan            #+#    #+#             */
-/*   Updated: 2020/12/23 19:19:14 by taesan           ###   ########.fr       */
+/*   Updated: 2020/12/28 02:10:48 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ int			get_left_size(double d)
 {
 	int left_size;
 
+	if (d < 0)
+		d *= -1;
 	left_size = 0;
 	while (d >= 1)
 	{

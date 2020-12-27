@@ -1129,57 +1129,10 @@ void    expo_test()
     double d = 8888888888888.1;
     printf("%%.300f => [%.300f]\n", d);
     ft_printf("%%.300f => [%.300f]\n", d);
-
 }
 
-int		main(void)
+void    pft_test()
 {
-    // printf("################ [ TEST START, up is Real Printf , down is My Printf ] ################\n");
-    // di_test();
-    // u_test();
-    // x_test();
-    // c_test();
-    // s_test();
-    // p_test();
-    // n_test();
-    // float_bit_test();
-   // double a = 1.23456789;
-   //  double_bit_test(a);
-   //  double_bit_test2(a);
-    // test_one_bit_oper();
-    // x_bit_test();
-
-//    f_test();
-    //double a = -123.45;
-    //double b = 0.6789;
-    //printf("### 5 ###\n");
-    //printf("%% f=>[% f]\n", b);
-    //ft_printf("%% f=>[% f]\n", b);
-
-   // big_number_test();
-
-    //double a = 10.123;
-    //double_bit_test(a);
-    //double_bit_test2(a);
-    //printf("###################### Line ####################\n");
-    //ft_printf("%%f => [%f]\n", a);
-    //ft_printf("%%f => [%f]\n", 11.4567);
-    //ft_printf("%%f => [%f]\n", 1351781928.4567);
-    //ft_printf("%%f => [%f]\n", 1351781926.4567);
-    //ft_printf("%%f => [%f]\n", (double)LLONG_MAX);
-
-
-    // round_test();
-    // printf("#########2####### \n");
-    // round_test2();
-    // expo_test();
-
-
-    //double_bit_test(d);
-    //double_bit_test2(d);
-
-    // p_test();
-
     static unsigned char  uch_pos_1 = 100;
     static unsigned short ush_pos_1 = 3047;
     static unsigned int     ui_pos_1 = 878023;
@@ -1245,6 +1198,59 @@ int		main(void)
 
     printf("1 => [%#037lx]\n", 22337203685477ul);
     ft_printf("1 => [%#037lx]\n", 22337203685477ul);
+}
+
+int		main(void)
+{
+    // printf("################ [ TEST START, up is Real Printf , down is My Printf ] ################\n");
+    // di_test();
+    // u_test();
+    // x_test();
+    // c_test();
+    // s_test();
+    // p_test();
+    // n_test();
+    // float_bit_test();
+   // double a = 1.23456789;
+   //  double_bit_test(a);
+   //  double_bit_test2(a);
+    // test_one_bit_oper();
+    // x_bit_test();
+
+//    f_test();
+    //double a = -123.45;
+    //double b = 0.6789;
+    //printf("### 5 ###\n");
+    //printf("%% f=>[% f]\n", b);
+    //ft_printf("%% f=>[% f]\n", b);
+
+   // big_number_test();
+
+    //double a = 10.123;
+    //double_bit_test(a);
+    //double_bit_test2(a);
+    //printf("###################### Line ####################\n");
+    //ft_printf("%%f => [%f]\n", a);
+    //ft_printf("%%f => [%f]\n", 11.4567);
+    //ft_printf("%%f => [%f]\n", 1351781928.4567);
+    //ft_printf("%%f => [%f]\n", 1351781926.4567);
+    //ft_printf("%%f => [%f]\n", (double)LLONG_MAX);
+
+
+    // round_test();
+    // printf("#########2####### \n");
+    // round_test2();
+    // expo_test();
+
+
+    //double_bit_test(d);
+    //double_bit_test2(d);
+
+    // p_test();
+    // printf("1 => [%f]\n", -0.0);
+    // ft_printf("2 => [%f]\n", -0.0);
+    printf("1 => [%f]\n", -958.125);
+    ft_printf("1 => [%f]\n", -958.125);
 
 	return (0);
 }

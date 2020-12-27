@@ -6,19 +6,21 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 19:47:47 by taesan            #+#    #+#             */
-/*   Updated: 2020/12/25 02:19:58 by taesan           ###   ########.fr       */
+/*   Updated: 2020/12/28 02:04:38 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/printf.h"
 #include "../headers/libft.h"
 
-void		set_f_sign(t_input *input, double n)
+void		set_f_sign(t_input *input, char *ptr)
 {
-	int	sign;
+	int		is_minus;
+	int		len;
 
-	sign = n < 0 ? 1 : 0;
-	if (sign == 1)
+	len = sizeof(double) - 1;
+	is_minus = ((*(ptr + len) >> 7) & 0x01);
+	if (is_minus)
 		input->sign = '-';
 	else if (g_info->flag == ' ' || g_info->flag == '+')
 		input->sign = g_info->flag;
@@ -80,11 +82,13 @@ int			set_f_input(double n)
 	t_input	*input;
 	double	left;
 	double	right;
+	char	*ptr;
 
 	if (!(input = (t_input *)(malloc(sizeof(t_input)))))
 		return (0);
 	g_info->input = input;
-	set_f_sign(input, n);
+	ptr = (char*)&n;
+	set_f_sign(input, ptr);
 	left = get_number(n, 0);
 	right = n - left;
 	return (make_floating(input, n, left, right));
