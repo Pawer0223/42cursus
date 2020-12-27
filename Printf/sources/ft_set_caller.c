@@ -6,14 +6,14 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 19:30:02 by taesan            #+#    #+#             */
-/*   Updated: 2020/12/26 17:18:04 by taesan           ###   ########.fr       */
+/*   Updated: 2020/12/27 15:44:22 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/printf.h"
 #include "../headers/libft.h"
 
-int				ft_set_di(char	*length)
+int				ft_set_di(char *length)
 {
 	long long	n;
 
@@ -24,6 +24,8 @@ int				ft_set_di(char	*length)
 			n = va_arg(*(g_info->ap), long int);
 		else if (ft_strncmp(length, "ll", 3) == 0)
 			n = va_arg(*(g_info->ap), long long int);
+		else
+			n = va_arg(*(g_info->ap), int);
 	}
 	else
 		n = va_arg(*(g_info->ap), int);
@@ -35,13 +37,14 @@ int				ft_set_ux(char *length, char spec)
 	unsigned long long	n;
 
 	n = 0;
-
 	if (length)
 	{
 		if (ft_strncmp(length, "l", 3) == 0)
 			n = va_arg(*(g_info->ap), unsigned long int);
 		else if (ft_strncmp(length, "ll", 3) == 0)
 			n = va_arg(*(g_info->ap), unsigned long long int);
+		else
+			n = va_arg(*(g_info->ap), unsigned int);
 	}
 	else
 		n = va_arg(*(g_info->ap), unsigned int);

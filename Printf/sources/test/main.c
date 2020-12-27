@@ -1177,9 +1177,11 @@ int		main(void)
 
     // p_test();
 
-    printf("%.*p\n",-3, 0);
-    ft_printf("%.*p\n",-3, 0);
+    printf("1 => [%hhd]\n", (char)46);
+    ft_printf("2 => [%hhd]\n", (char)46);
 
+    printf("1 => [%d]\n", (char)46);
+    ft_printf("2 => [%d]\n", (char)46);
 	return (0);
 }
 
