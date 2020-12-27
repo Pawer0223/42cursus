@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 19:47:47 by taesan            #+#    #+#             */
-/*   Updated: 2020/12/28 02:04:38 by taesan           ###   ########.fr       */
+/*   Updated: 2020/12/28 03:49:42 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,6 @@ int			fill_str_f(t_input *input, double n, int len, int idx)
 
 	str = input->str;
 	is_left = (idx == 0) ? 1 : 0;
-	// if (is_left && input->sign)
-	// 	str[idx++] = input->sign;
 	len--;
 	while (len >= 0)
 	{
@@ -73,6 +71,11 @@ int			make_floating(t_input *input, double n, double l, double r)
 	i = fill_str_f(input, l, left_len, 0);
 	i = fill_str_f(input, (r * ft_pow(10, right_len)), right_len, i);
 	ft_round(str, i - 1, g_info->precision_len, r);
+	if (g_info->precision_len == 0 && g_info->flag == '#')
+	{
+		str[1] = '.';
+		str[2] = 0;
+	}
 	input->len = ft_strlen(str);
 	return (1);
 }

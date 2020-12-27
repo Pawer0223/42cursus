@@ -1258,8 +1258,26 @@ int		main(void)
 
     // printf("1 => [%.1f]\n", 3.85);
     // ft_printf("1 => [%.1f]\n", 3.85);
-    round_test();
-    round_test2();
+    // round_test();
+    // round_test2();
+
+    // printf("1 => [%#.0f]\n", 0.0);
+    // ft_printf("2 => [%#.0f]\n", 0.0);
+
+    // printf("1 => [%#.0f]\n", -7.4);
+    // ft_printf("2 => [%#.0f]\n", -7.4);
+
+    printf("1 => [%05.0f]\n", 0.0);
+    ft_printf("2 => [%05.0f]\n", 0.0);
+
+    printf("1 => [%05.0f]\n", -0.0);
+    ft_printf("2 => [%05.0f]\n", -0.0);
+
+    printf("1 => [%05.1f]\n", 0.0);
+    ft_printf("2 => [%05.1f]\n", 0.0);
+
+    printf("1 => [%010f]\n", 2.1);
+    ft_printf("2 => [%010f]\n", 2.1);
 
 	return (0);
 }
