@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 19:50:20 by taesan            #+#    #+#             */
-/*   Updated: 2020/12/27 20:17:56 by taesan           ###   ########.fr       */
+/*   Updated: 2020/12/27 20:25:41 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int				setlen_p(t_input *input, unsigned long long n)
 	}
 	if (g_info->precision_len > len)
 		len = g_info->precision_len + 2;
-	if (g_info->precision_len == -1)
+	if (g_info->precision_len == -1 && g_info->flag_zero)
 		len = g_info->width > len ? g_info->width : len;
 	input->len = len;
 	if (g_info->flag == ' ' || g_info->flag == '+')
