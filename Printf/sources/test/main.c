@@ -1249,8 +1249,17 @@ int		main(void)
     // p_test();
     // printf("1 => [%f]\n", -0.0);
     // ft_printf("2 => [%f]\n", -0.0);
-    printf("1 => [%f]\n", -958.125);
-    ft_printf("1 => [%f]\n", -958.125);
+    // printf("1 => [%f]\n", -958.125);
+    // ft_printf("1 => [%f]\n", -958.125);
+
+    // printf("1 => [%.1f]\n", -3.85);
+    // ft_printf("1 => [%.1f]\n", -3.85);
+    // double_bit_test(-3.85);
+
+    // printf("1 => [%.1f]\n", 3.85);
+    // ft_printf("1 => [%.1f]\n", 3.85);
+    round_test();
+    round_test2();
 
 	return (0);
 }

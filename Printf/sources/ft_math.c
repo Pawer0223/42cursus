@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 19:21:47 by taesan            #+#    #+#             */
-/*   Updated: 2020/12/23 19:27:52 by taesan           ###   ########.fr       */
+/*   Updated: 2020/12/28 02:57:02 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,22 +38,20 @@ double		ft_pow(double base, double exponent)
 
 int			check_signif(double n)
 {
-	int limit;
-	int i;
-	int strt;
+	int		limit;
+	int		i;
+	double	temp;
 
 	limit = 16;
 	i = 0;
-	strt = g_info->precision_len + 1;
 	while (i < limit)
 	{
-		n *= 10;
-		if (i > strt && (int)n != 0)
-			return (0);
-		n -= (int)n;
+		temp = n * ft_pow(2, i);
+		if (temp == 1)
+			return (1);
 		i++;
 	}
-	return (1);
+	return (0);
 }
 
 void		round_up(char *str, int idx, int len)
