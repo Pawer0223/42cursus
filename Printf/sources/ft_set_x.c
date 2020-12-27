@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 19:55:10 by taesan            #+#    #+#             */
-/*   Updated: 2020/12/27 20:05:38 by taesan           ###   ########.fr       */
+/*   Updated: 2020/12/28 01:43:52 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,26 +39,6 @@ void			fill_str_x(t_input *input, unsigned long long n, int idx)
 		input->str[idx--] = '0';
 }
 
-// void			fill_str_p(t_input *input, unsigned long long n, int idx)
-// {
-// 	int		nmg;
-
-// 	input->str[0] = '0';
-// 	input->str[1] = 'x';
-// 	while (n != 0)
-// 	{
-// 		nmg = n % 16;
-// 		if (nmg >= 10)
-// 			nmg = 'a' + (nmg % 10);
-// 		else
-// 			nmg = '0' + nmg;
-// 		input->str[idx--] = nmg;
-// 		n /= 16;
-// 	}
-// 	while (idx >= 2)
-// 		input->str[idx--] = '0';
-// }
-
 int				setlen_x(t_input *input, unsigned long long n)
 {
 	int					len;
@@ -74,32 +54,14 @@ int				setlen_x(t_input *input, unsigned long long n)
 	if ((g_info->precision_len) > len)
 		len = g_info->precision_len;
 	if (g_info->flag == '#' && org != 0)
+	{
 		len += 2;
+		if (g_info->precision_len == -1 && g_info->flag_zero)
+			len = g_info->width > len ? g_info->width : len;
+	}
 	input->len = len;
 	return (len);
 }
-
-// int				setlen_p(t_input *input, unsigned long long n)
-// {
-// 	int	len;
-
-// 	len = (n == 0 && g_info->precision_len < 0) ? 3 : 2;
-// 	while (n != 0)
-// 	{
-// 		n /= 16;
-// 		len++;
-// 	}
-// 	if (g_info->precision_len < 0)
-// 		g_info->precision_len *= -1;
-// 	if (g_info->precision_len > len)
-// 		len = g_info->precision_len + 2;
-// 	input->len = len;
-// 	if (g_info->flag == ' ' || g_info->flag == '+')
-// 		input->sign = g_info->flag;
-// 	else
-// 		input->sign = 0;
-// 	return (len);
-// }
 
 int				set_x_input(unsigned long long n)
 {
