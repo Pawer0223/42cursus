@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 19:09:00 by taesan            #+#    #+#             */
-/*   Updated: 2020/12/27 19:26:32 by taesan           ###   ########.fr       */
+/*   Updated: 2020/12/27 19:48:53 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,7 @@ char		get_padding(char flag)
 	char padding;
 
 	padding = ' ';
-	if (flag == '0' && g_info->precision_len == -1)
-		padding = '0';
-	if (g_info->flag_zero)
+	if (g_info->flag_zero && g_info->precision_len == -1)
 		padding = '0';
 	return (padding);
 }

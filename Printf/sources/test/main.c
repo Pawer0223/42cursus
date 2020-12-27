@@ -1230,6 +1230,8 @@ int		main(void)
     printf("1 => [%+010d]\n", 123);
     ft_printf("2 => [%+010d]\n", 123);
 
+    printf("1 => [%08.5i]\n", 34);
+    ft_printf("2 => [%08.5i]\n", 34);
 	return (0);
 }
 
