@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 19:09:00 by taesan            #+#    #+#             */
-/*   Updated: 2020/12/27 19:48:53 by taesan           ###   ########.fr       */
+/*   Updated: 2020/12/27 19:53:52 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void		write_padding(char padding, int end)
 	}
 }
 
-char		get_padding(char flag)
+char		get_padding(void)
 {
 	char padding;
 
@@ -42,7 +42,7 @@ void		percent_write(char flag)
 	char	padding;
 
 	width = g_info->width;
-	padding = get_padding(flag);
+	padding = get_padding();
 	if (flag == '-')
 	{
 		ft_putchar_fd('%', 1);
@@ -85,7 +85,7 @@ void		ft_format_write(char flag)
 	char	padding;
 	t_input	*input;
 
-	padding = get_padding(flag);
+	padding = get_padding();
 	input = g_info->input;
 	if (!input->str)
 		return ;
