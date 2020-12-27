@@ -105,6 +105,12 @@ void	di_test()
     printf   ("%%+.d => [%+.d]\n", 0);
     ft_printf("%%+.d => [%+.d]\n", 0);
 
+        printf("1 => [%hhd]\n", (char)46);
+    ft_printf("2 => [%hhd]\n", (char)46);
+
+    printf("1 => [%d]\n", (char)46);
+    ft_printf("2 => [%d]\n", (char)46);
+
 }
 
 void    u_test()
@@ -338,7 +344,51 @@ void        s_test()
     char *str = "hi low";
     printf("%00-s\n", str);
     ft_printf("%00-s\n", str);
-}
+
+    printf("%.*s\n", -3, "hello");
+    ft_printf("%.*s\n", -3, "hello");
+
+    printf("%.*i\n", -6, -3);
+    ft_printf("%.*i\n", -6, -3);
+
+    printf("1 [%.*s]\n", -3, 0);
+    ft_printf("2 [%.*s]\n", -3, 0);
+
+        printf("%%-*.3s LYDI == |%-*.3s|\n", 5, "LYDI");
+    ft_printf("%%-*.3s LYDI == |%-*.3s|\n", 5, "LYDI");
+
+    printf("%.*s\n", 3, "hello");
+    ft_printf("%.*s\n", 3, "hello");
+
+        a = printf("[%*s]", -32, "abc");
+        printf("\n a = >[%d]\n", a);
+
+        a = ft_printf("[%*s]", -32, "abc");
+        printf("\n a = >[%d]\n", a);
+
+        a = printf("[%.*s]", -3, "hello");
+        printf("\n a = >[%d]\n", a);
+
+        a = ft_printf("[%.*s]", -3, "hello");
+        printf("\n a = >[%d]\n", a);
+
+        a = printf("[%.s]", "hello");
+        printf("\n a = >[%d]\n", a);
+
+        a = ft_printf("[%.s]", "hello");
+        printf("\n a = >[%d]\n", a);
+
+        a = printf("this %s is empty\n", "");
+        printf("a = >[%d]\n", a);
+        a = ft_printf("this %s is empty\n", "");
+        printf("a = >[%d]\n", a);
+
+        char * s_hidden = "hi low";
+        a = printf("%0000s\n", s_hidden);
+        printf("a = >[%d]\n", a);
+        a = ft_printf("%0000s\n", s_hidden);
+        printf("a = >[%d]\n", a);
+    }
 
 void        p_test()
 {
@@ -1130,58 +1180,31 @@ int		main(void)
 
     // p_test();
 
-    // printf("%%-*.3s LYDI == |%-*.3s|\n", 5, "LYDI");
-    // ft_printf("%%-*.3s LYDI == |%-*.3s|\n", 5, "LYDI");
-
-    // printf("%.*s\n", 3, "hello");
-    // ft_printf("%.*s\n", 3, "hello");
-
-    // int a = printf("[%*s]", -32, "abc");
-    // printf("\n a = >[%d]\n", a);
-
-    // a = ft_printf("[%*s]", -32, "abc");
-    // printf("\n a = >[%d]\n", a);
-
-    // a = printf("[%.*s]", -3, "hello");
-    // printf("\n a = >[%d]\n", a);
-
-    // a = ft_printf("[%.*s]", -3, "hello");
-    // printf("\n a = >[%d]\n", a);
-
-    // a = printf("[%.s]", "hello");
-    // printf("\n a = >[%d]\n", a);
-
-    // a = ft_printf("[%.s]", "hello");
-    // printf("\n a = >[%d]\n", a);
-
-    // int a = printf("this %s is empty\n", "");
-    // printf("a = >[%d]\n", a);
-    // a = ft_printf("this %s is empty\n", "");
-    // printf("a = >[%d]\n", a);
-
-    // char * s_hidden = "hi low";
-    // a = printf("%0000s\n", s_hidden);
-    // printf("a = >[%d]\n", a);
-    // a = ft_printf("%0000s\n", s_hidden);
-    // printf("a = >[%d]\n", a);
-
-    // printf("%.*s\n", -3, "hello");
-    // ft_printf("%.*s\n", -3, "hello");
-
-    // printf("%.*i\n", -6, -3);
-    // ft_printf("%.*i\n", -6, -3);
-
-    // printf("1 [%.*s]\n", -3, 0);
-    // ft_printf("2 [%.*s]\n", -3, 0);
+    static unsigned char  uch_pos_1 = 100;
+    static unsigned short ush_pos_1 = 3047;
+    static unsigned int     ui_pos_1 = 878023;
+    static unsigned long  ul_pos_1 = 22337203685477;
+    static unsigned long long   ull_pos_1 = 22337203685477;
+    static unsigned long long  ullmax = 9223372036854775807;
+    static unsigned long  ulmax = 9223372036854775807;
+    printf("1 => [%llu%hhu%llu]\n", ull_pos_1, uch_pos_1, ull_pos_1);
+    ft_printf("2 => [%llu%hhu%llu]\n", ull_pos_1, uch_pos_1, ull_pos_1);
 
 
-    // p_test();
+    printf("1 => [%hu%lu%hhu]\n", ush_pos_1, ul_pos_1, uch_pos_1);
+    ft_printf("2 => [%hu%lu%hhu]\n", ush_pos_1, ul_pos_1, uch_pos_1);
 
-    printf("1 => [%hhd]\n", (char)46);
-    ft_printf("2 => [%hhd]\n", (char)46);
+    printf("1 => [%lu%hhu%hu]\n", ul_pos_1, uch_pos_1, ush_pos_1);
+    ft_printf("2 => [%lu%hhu%hu]\n", ul_pos_1, uch_pos_1, ush_pos_1);
 
-    printf("1 => [%d]\n", (char)46);
-    ft_printf("2 => [%d]\n", (char)46);
+    printf("1 => [%u%llu%hhu]\n", ui_pos_1, ull_pos_1, uch_pos_1);
+    ft_printf("2 => [%u%llu%hhu]\n", ui_pos_1, ull_pos_1, uch_pos_1);
+
+    printf("1 => [%llu%u%lu]\n", ull_pos_1, ui_pos_1, ul_pos_1);
+    ft_printf("2 => [%llu%u%lu]\n", ull_pos_1, ui_pos_1, ul_pos_1);
+
+
+
 	return (0);
 }
 
