@@ -1180,58 +1180,63 @@ int		main(void)
 
     // p_test();
 
-    static unsigned char  uch_pos_1 = 100;
-    static unsigned short ush_pos_1 = 3047;
-    static unsigned int     ui_pos_1 = 878023;
-    static unsigned long  ul_pos_1 = 22337203685477;
-    static unsigned long long   ull_pos_1 = 22337203685477;
-    static unsigned long long  ullmax = 9223372036854775807;
-    static unsigned long  ulmax = 9223372036854775807;
-    printf("1 => [%llu%hhu%llu]\n", ull_pos_1, uch_pos_1, ull_pos_1);
-    ft_printf("2 => [%llu%hhu%llu]\n", ull_pos_1, uch_pos_1, ull_pos_1);
+    // static unsigned char  uch_pos_1 = 100;
+    // static unsigned short ush_pos_1 = 3047;
+    // static unsigned int     ui_pos_1 = 878023;
+    // static unsigned long  ul_pos_1 = 22337203685477;
+    // static unsigned long long   ull_pos_1 = 22337203685477;
+    // static unsigned long long  ullmax = 9223372036854775807;
+    // static unsigned long  ulmax = 9223372036854775807;
+    // printf("1 => [%llu%hhu%llu]\n", ull_pos_1, uch_pos_1, ull_pos_1);
+    // ft_printf("2 => [%llu%hhu%llu]\n", ull_pos_1, uch_pos_1, ull_pos_1);
 
 
-    printf("1 => [%hu%lu%hhu]\n", ush_pos_1, ul_pos_1, uch_pos_1);
-    ft_printf("2 => [%hu%lu%hhu]\n", ush_pos_1, ul_pos_1, uch_pos_1);
+    // printf("1 => [%hu%lu%hhu]\n", ush_pos_1, ul_pos_1, uch_pos_1);
+    // ft_printf("2 => [%hu%lu%hhu]\n", ush_pos_1, ul_pos_1, uch_pos_1);
 
-    printf("1 => [%lu%hhu%hu]\n", ul_pos_1, uch_pos_1, ush_pos_1);
-    ft_printf("2 => [%lu%hhu%hu]\n", ul_pos_1, uch_pos_1, ush_pos_1);
+    // printf("1 => [%lu%hhu%hu]\n", ul_pos_1, uch_pos_1, ush_pos_1);
+    // ft_printf("2 => [%lu%hhu%hu]\n", ul_pos_1, uch_pos_1, ush_pos_1);
 
-    printf("1 => [%u%llu%hhu]\n", ui_pos_1, ull_pos_1, uch_pos_1);
-    ft_printf("2 => [%u%llu%hhu]\n", ui_pos_1, ull_pos_1, uch_pos_1);
+    // printf("1 => [%u%llu%hhu]\n", ui_pos_1, ull_pos_1, uch_pos_1);
+    // ft_printf("2 => [%u%llu%hhu]\n", ui_pos_1, ull_pos_1, uch_pos_1);
 
-    printf("1 => [%llu%u%lu]\n", ull_pos_1, ui_pos_1, ul_pos_1);
-    ft_printf("2 => [%llu%u%lu]\n", ull_pos_1, ui_pos_1, ul_pos_1);
+    // printf("1 => [%llu%u%lu]\n", ull_pos_1, ui_pos_1, ul_pos_1);
+    // ft_printf("2 => [%llu%u%lu]\n", ull_pos_1, ui_pos_1, ul_pos_1);
 
-    printf("1 => [%llu%hhu%llx]\n", ull_pos_1, uch_pos_1, ull_pos_1);
-    ft_printf("2 => [%llu%hhu%llx]\n", ull_pos_1, uch_pos_1, ull_pos_1);
+    // printf("1 => [%llu%hhu%llx]\n", ull_pos_1, uch_pos_1, ull_pos_1);
+    // ft_printf("2 => [%llu%hhu%llx]\n", ull_pos_1, uch_pos_1, ull_pos_1);
 
-    printf("1 => [%hu%lu%hhx]\n", ush_pos_1, ul_pos_1, uch_pos_1);
-    ft_printf("2 => [%hu%lu%hhx]\n", ush_pos_1, ul_pos_1, uch_pos_1);
+    // printf("1 => [%hu%lu%hhx]\n", ush_pos_1, ul_pos_1, uch_pos_1);
+    // ft_printf("2 => [%hu%lu%hhx]\n", ush_pos_1, ul_pos_1, uch_pos_1);
 
-    printf("1 => [%lu%hhu%hx]\n", ul_pos_1, uch_pos_1, ush_pos_1);
-    ft_printf("2 => [%lu%hhu%hx]\n", ul_pos_1, uch_pos_1, ush_pos_1);
+    // printf("1 => [%lu%hhu%hx]\n", ul_pos_1, uch_pos_1, ush_pos_1);
+    // ft_printf("2 => [%lu%hhu%hx]\n", ul_pos_1, uch_pos_1, ush_pos_1);
 
-    printf("1 => [%u%llu%hhx]\n", ui_pos_1, ull_pos_1, uch_pos_1);
-    ft_printf("2 => [%u%llu%hhx]\n", ui_pos_1, ull_pos_1, uch_pos_1);
+    // printf("1 => [%u%llu%hhx]\n", ui_pos_1, ull_pos_1, uch_pos_1);
+    // ft_printf("2 => [%u%llu%hhx]\n", ui_pos_1, ull_pos_1, uch_pos_1);
 
-    printf("1 => [%llu%u%lx]\n", ull_pos_1, ui_pos_1, ul_pos_1);
-    ft_printf("2 => [%llu%u%lx]\n", ull_pos_1, ui_pos_1, ul_pos_1);
+    // printf("1 => [%llu%u%lx]\n", ull_pos_1, ui_pos_1, ul_pos_1);
+    // ft_printf("2 => [%llu%u%lx]\n", ull_pos_1, ui_pos_1, ul_pos_1);
 
-    printf("1 => [%#037lx]\n", 22337203685477ul);
-    ft_printf("2 => [%#037lx]\n", 22337203685477ul);
+    // printf("1 => [%#037lx]\n", 22337203685477ul);
+    // ft_printf("2 => [%#037lx]\n", 22337203685477ul);
 
-    printf("1 => [% 010d]\n", 123);
-    ft_printf("2 => [% 010d]\n", 123);
+    // printf("1 => [% 010d]\n", 123);
+    // ft_printf("2 => [% 010d]\n", 123);
 
-    printf("1 => [%+010d]\n", 123);
-    ft_printf("2 => [%+010d]\n", 123);
+    // printf("1 => [%+010d]\n", 123);
+    // ft_printf("2 => [%+010d]\n", 123);
 
-    printf("1 => [%+010d]\n", 123);
-    ft_printf("2 => [%+010d]\n", 123);
+    // printf("1 => [%+010d]\n", 123);
+    // ft_printf("2 => [%+010d]\n", 123);
 
-    printf("1 => [%08.5i]\n", 34);
-    ft_printf("2 => [%08.5i]\n", 34);
+
+    printf("[%010x]\n", 43);
+    ft_printf("[%010x]\n", 43);
+
+    printf("[%010p]\n", 43);
+    ft_printf("[%010p]\n", 43);
+
 	return (0);
 }
 

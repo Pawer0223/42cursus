@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 19:55:10 by taesan            #+#    #+#             */
-/*   Updated: 2020/12/27 18:57:55 by taesan           ###   ########.fr       */
+/*   Updated: 2020/12/27 20:05:38 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,6 @@ int				setlen_x(t_input *input, unsigned long long n)
 		n /= 16;
 		len++;
 	}
-	if (g_info->precision_len < 0)
-		g_info->precision_len *= -1;
 	if ((g_info->precision_len) > len)
 		len = g_info->precision_len;
 	if (g_info->flag == '#' && org != 0)
