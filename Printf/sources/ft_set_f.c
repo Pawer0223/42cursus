@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 19:47:47 by taesan            #+#    #+#             */
-/*   Updated: 2020/12/28 16:09:33 by taesan           ###   ########.fr       */
+/*   Updated: 2020/12/28 17:24:27 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void		set_f_sign(t_input *input, char *ptr)
 		input->sign = '-';
 	else
 		set_input_sign(input);
-	if (g_info->precision_len == -1)
+	if (g_info->precision_len < 0)
 		g_info->precision_len = 6;
 }
 

@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 19:21:47 by taesan            #+#    #+#             */
-/*   Updated: 2020/12/28 02:57:02 by taesan           ###   ########.fr       */
+/*   Updated: 2020/12/28 17:05:33 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ int			check_signif(double n)
 	while (i < limit)
 	{
 		temp = n * ft_pow(2, i);
+		if (temp < 0)
+			temp *= -1;
 		if (temp == 1)
 			return (1);
 		i++;
