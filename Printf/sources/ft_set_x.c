@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 19:55:10 by taesan            #+#    #+#             */
-/*   Updated: 2020/12/28 19:50:34 by taesan           ###   ########.fr       */
+/*   Updated: 2020/12/29 04:27:34 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,9 @@ int				setlen_x(t_input *input, unsigned long long n)
 {
 	int					len;
 	unsigned long long	org;
+	t_flag				*flags;
 
+	flags = g_info->flags;
 	len = (n == 0) ? 1 : 0;
 	org = n;
 	while (n != 0)
@@ -53,10 +55,10 @@ int				setlen_x(t_input *input, unsigned long long n)
 	}
 	if ((g_info->precision_len) > len)
 		len = g_info->precision_len;
-	if (g_info->flags->hash && org != 0)
+	if (flags->hash && org != 0)
 	{
 		len += 2;
-		if (g_info->precision_len < 0 && g_info->flags->zero)
+		if (g_info->precision_len < 0 && flags->zero && !flags->minus)
 			len = g_info->width > len ? g_info->width : len;
 	}
 	input->len = len;

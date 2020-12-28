@@ -1499,30 +1499,12 @@ int		main(void)
     //double_bit_test2(d);
 
     // p_test();
+    int x = 13;
+    printf("-->|%#0*x|<--\n", -4, x);
+    ft_printf("-->|%#0*x|<--\n", -4, x);
 
-    // lover_test();
-    int a;
-    // a = printf("-->|%-6.*s|<--\n", -4, "abc");
-    // printf("printf [%d]\n", a);
-    // a = ft_printf("-->|%-6.*s|<--\n", -4, "abc");
-    // printf("ft_printf [%d]\n", a);
 
-    // a = printf("-->|%-6.*s|<--\n", -4, NULL);
-    // printf("printf [%d]\n", a);
-    // a = ft_printf("-->|%-6.*s|<--\n", -4, NULL);
-    // printf("ft_printf [%d]\n", a);
 
-    // a = printf("-->|%-6.*s|<--\n", -4, "");
-    // printf("printf [%d]\n", a);
-    // a = ft_printf("-->|%-6.*s|<--\n", -4, "");
-    // printf("ft_printf [%d]\n", a);
-    // printf("-->|%-10.7s|<--\n", NULL);
-    // //printf("printf [%d]\n", a);
-    // ft_printf("-->|%-10.7s|<--\n", NULL);
-
-    const char *s = (const char *)NULL;
-    printf("-->|%-16.*s|<--\n", 1, s);
-    ft_printf("-->|%-16.*s|<--\n", 1, s);
 
 	return (0);
 }
