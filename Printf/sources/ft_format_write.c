@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 19:09:00 by taesan            #+#    #+#             */
-/*   Updated: 2020/12/28 19:38:52 by taesan           ###   ########.fr       */
+/*   Updated: 2020/12/28 19:45:58 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,9 @@ void		write_with_sign(int end, char padding)
 	str = input->str;
 	if (input->sign)
 	{
-		if (g_info->flags->zero && g_info->precision_len == -1)
+		if (g_info->flags->zero && g_info->precision_len < 0)
 			ft_putchar_fd(input->sign, 1);
-		else if(g_info->flags->zero && g_info->specifier == 'f')
+		else if (g_info->flags->zero && g_info->specifier == 'f')
 			ft_putchar_fd(input->sign, 1);
 		else
 		{
