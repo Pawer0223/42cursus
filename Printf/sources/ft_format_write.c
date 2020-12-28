@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 19:09:00 by taesan            #+#    #+#             */
-/*   Updated: 2020/12/28 03:49:17 by taesan           ###   ########.fr       */
+/*   Updated: 2020/12/28 16:17:53 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,21 +31,21 @@ char		get_padding(void)
 	char padding;
 
 	padding = ' ';
-	if (g_info->flag_zero && g_info->precision_len == -1)
+	if (g_info->flags->zero && g_info->precision_len == -1)
 		padding = '0';
-	if (g_info->flag_zero && g_info->specifier == 'f')
+	if (g_info->flags->zero && g_info->specifier == 'f')
 		padding = '0';
 	return (padding);
 }
 
-void		percent_write(char flag)
+void		percent_write(t_flag *flags)
 {
 	int		width;
 	char	padding;
 
 	width = g_info->width;
 	padding = get_padding();
-	if (flag == '-')
+	if (flags->minus)
 	{
 		ft_putchar_fd('%', 1);
 		write_padding(padding, width - 1);
@@ -67,9 +67,9 @@ void		write_with_sign(int end, char padding)
 	str = input->str;
 	if (input->sign)
 	{
-		if (g_info->flag_zero && g_info->precision_len == -1)
+		if (g_info->flags->zero && g_info->precision_len == -1)
 			ft_putchar_fd(input->sign, 1);
-		else if(g_info->flag_zero && g_info->specifier == 'f')
+		else if(g_info->flags->zero && g_info->specifier == 'f')
 			ft_putchar_fd(input->sign, 1);
 		else
 		{
@@ -83,7 +83,7 @@ void		write_with_sign(int end, char padding)
 	ft_putstr_fd(str, 1);
 }
 
-void		ft_format_write(char flag)
+void		ft_format_write(t_flag *flags)
 {
 	int		end;
 	char	padding;
@@ -99,7 +99,7 @@ void		ft_format_write(char flag)
 		end--;
 		g_w_cnt++;
 	}
-	if (flag == '-')
+	if (flags->minus)
 	{
 		if (input->sign)
 			ft_putchar_fd(input->sign, 1);

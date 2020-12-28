@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 18:58:53 by taesan            #+#    #+#             */
-/*   Updated: 2020/12/27 19:42:42 by taesan           ###   ########.fr       */
+/*   Updated: 2020/12/28 15:59:02 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,16 @@ void			check_flag(const char *format)
 	c = format[g_i];
 	if (c == '-' || c == '+' || c == ' ' || c == '#' || c == '0')
 	{
-		if (c == '0' && g_info->flag != '-')
-			g_info->flag_zero = 1;
-		if (c == '-' && g_info->flag_zero)
-			g_info->flag_zero = 0;
-		if (g_info->flag == ' ' && c == '+')
-			g_info->flag = '+';
-		if (g_info->flag == '0' || !g_info->flag)
-			g_info->flag = c;
+		if (!g_info->flags->exist)
+			g_info->flags->exist = 1;
+		if (c == '-')
+			g_info->flags->minus = 1;
+		if (c == '+')
+			g_info->flags->plus = 1;
+		if (c == '#')
+			g_info->flags->hash = 1;
+		if (c == '0')
+			g_info->flags->zero = 1;
 		g_i++;
 		check_flag(format);
 	}

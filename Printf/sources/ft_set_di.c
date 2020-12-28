@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 19:31:34 by taesan            #+#    #+#             */
-/*   Updated: 2020/12/27 19:22:38 by taesan           ###   ########.fr       */
+/*   Updated: 2020/12/28 16:08:54 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,16 +47,6 @@ int				setlen_di(t_input *input, long long n)
 	return (len);
 }
 
-void			set_di_sign(t_input *input, long long n)
-{
-	if (n < 0)
-		input->sign = '-';
-	else if (g_info->flag == ' ' || g_info->flag == '+')
-		input->sign = g_info->flag;
-	else
-		input->sign = 0;
-}
-
 int				set_di_input(long long n)
 {
 	t_input		*input;
@@ -66,7 +56,10 @@ int				set_di_input(long long n)
 	if (!(input = (t_input *)(malloc(sizeof(t_input)))))
 		return (0);
 	g_info->input = input;
-	set_di_sign(input, n);
+	if (n < 0)
+		input->sign = '-';
+	else
+		set_input_sign(input);
 	size = setlen_di(input, n);
 	if (!(str = (char*)malloc(sizeof(char) * (size + 1))))
 		return (0);

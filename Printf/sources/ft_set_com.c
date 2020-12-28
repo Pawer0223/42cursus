@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 19:30:47 by taesan            #+#    #+#             */
-/*   Updated: 2020/12/24 17:56:57 by taesan           ###   ########.fr       */
+/*   Updated: 2020/12/28 16:07:19 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,17 @@ void			fill_is_zero(t_input *input, int idx)
 	else
 		input->str[idx] = '0';
 }
+
+void			set_input_sign(t_input *input)
+{
+	if (g_info->flags->space && !g_info->flags->plus)
+		input->sign = ' ';
+	else if (g_info->flags->plus)
+		input->sign = '+';
+	else
+		input->sign = 0;
+}
+
 // int				get_bit(char *ptr, int byte, int bit)
 // {
 // 	return (*(ptr + byte) >> bit) & 0x01;

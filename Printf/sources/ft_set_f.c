@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 19:47:47 by taesan            #+#    #+#             */
-/*   Updated: 2020/12/28 03:49:42 by taesan           ###   ########.fr       */
+/*   Updated: 2020/12/28 16:09:33 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,8 @@ void		set_f_sign(t_input *input, char *ptr)
 	is_minus = ((*(ptr + len) >> 7) & 0x01);
 	if (is_minus)
 		input->sign = '-';
-	else if (g_info->flag == ' ' || g_info->flag == '+')
-		input->sign = g_info->flag;
 	else
-		input->sign = 0;
+		set_input_sign(input);
 	if (g_info->precision_len == -1)
 		g_info->precision_len = 6;
 }
@@ -71,7 +69,7 @@ int			make_floating(t_input *input, double n, double l, double r)
 	i = fill_str_f(input, l, left_len, 0);
 	i = fill_str_f(input, (r * ft_pow(10, right_len)), right_len, i);
 	ft_round(str, i - 1, g_info->precision_len, r);
-	if (g_info->precision_len == 0 && g_info->flag == '#')
+	if (g_info->precision_len == 0 && g_info->flags->hash)
 	{
 		str[1] = '.';
 		str[2] = 0;

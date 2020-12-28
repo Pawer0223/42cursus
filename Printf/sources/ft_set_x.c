@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 19:55:10 by taesan            #+#    #+#             */
-/*   Updated: 2020/12/28 01:43:52 by taesan           ###   ########.fr       */
+/*   Updated: 2020/12/28 16:15:13 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void			fill_str_x(t_input *input, unsigned long long n, int idx)
 
 	if (n == 0)
 		fill_is_zero(input, idx--);
-	end = (g_info->flag == '#' && n != 0) ? 2 : 0;
+	end = (g_info->flags->hash && n != 0) ? 2 : 0;
 	while (idx >= 0 && n != 0)
 	{
 		nmg = n % 16;
@@ -53,10 +53,10 @@ int				setlen_x(t_input *input, unsigned long long n)
 	}
 	if ((g_info->precision_len) > len)
 		len = g_info->precision_len;
-	if (g_info->flag == '#' && org != 0)
+	if (g_info->flags->hash && org != 0)
 	{
 		len += 2;
-		if (g_info->precision_len == -1 && g_info->flag_zero)
+		if (g_info->precision_len == -1 && g_info->flags->zero)
 			len = g_info->width > len ? g_info->width : len;
 	}
 	input->len = len;
@@ -78,7 +78,7 @@ int				set_x_input(unsigned long long n)
 	input->str = str;
 	str[size--] = 0;
 	str[0] = '0';
-	if (g_info->flag == '#' && n != 0)
+	if (g_info->flags->hash && n != 0)
 		str[1] = g_info->specifier;
 	fill_str_x(input, n, size);
 	return (1);
