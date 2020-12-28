@@ -1279,6 +1279,9 @@ int		main(void)
     printf("1 => [%010f]\n", 2.1);
     ft_printf("2 => [%010f]\n", 2.1);
 
+    printf("1 => [%-05%]\n");
+    ft_printf("2 => [%-05%]\n");
+
 	return (0);
 }
 

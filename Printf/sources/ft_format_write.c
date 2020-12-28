@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 19:09:00 by taesan            #+#    #+#             */
-/*   Updated: 2020/12/28 16:17:53 by taesan           ###   ########.fr       */
+/*   Updated: 2020/12/28 16:43:02 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,16 @@ void		write_padding(char padding, int end)
 	}
 }
 
-char		get_padding(void)
+char		get_padding(t_flag *flags)
 {
 	char padding;
 
 	padding = ' ';
-	if (g_info->flags->zero && g_info->precision_len == -1)
-		padding = '0';
-	if (g_info->flags->zero && g_info->specifier == 'f')
-		padding = '0';
+	if (flags->zero && !flags->minus)
+	{
+		if (g_info->precision_len == -1 || g_info->specifier == 'f')
+			padding = '0';
+	}
 	return (padding);
 }
 
@@ -44,7 +45,7 @@ void		percent_write(t_flag *flags)
 	char	padding;
 
 	width = g_info->width;
-	padding = get_padding();
+	padding = get_padding(flags);
 	if (flags->minus)
 	{
 		ft_putchar_fd('%', 1);
@@ -89,7 +90,7 @@ void		ft_format_write(t_flag *flags)
 	char	padding;
 	t_input	*input;
 
-	padding = get_padding();
+	padding = get_padding(flags);
 	input = g_info->input;
 	if (!input->str)
 		return ;
