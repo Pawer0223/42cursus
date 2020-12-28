@@ -78,4 +78,5 @@ int				get_left_size(double d);
 void			all_print();
 void			t_printf_print();
 void			t_input_print();
+int				ft_printf(const char *format, ...);
 #endif
