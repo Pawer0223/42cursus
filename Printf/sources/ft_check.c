@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 18:58:53 by taesan            #+#    #+#             */
-/*   Updated: 2020/12/28 15:59:02 by taesan           ###   ########.fr       */
+/*   Updated: 2020/12/28 17:01:19 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ void			check_flag(const char *format)
 			g_info->flags->hash = 1;
 		if (c == '0')
 			g_info->flags->zero = 1;
+		if (c == ' ')
+			g_info->flags->space = 1;
 		g_i++;
 		check_flag(format);
 	}
