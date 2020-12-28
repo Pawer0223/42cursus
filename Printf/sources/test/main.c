@@ -1516,33 +1516,14 @@ int		main(void)
     // printf("printf [%d]\n", a);
     // a = ft_printf("-->|%-6.*s|<--\n", -4, "");
     // printf("ft_printf [%d]\n", a);
+    // printf("-->|%-10.7s|<--\n", NULL);
+    // //printf("printf [%d]\n", a);
+    // ft_printf("-->|%-10.7s|<--\n", NULL);
 
-    a = printf("-->|%-6.4s|<--\n", "abc");
-    //printf("printf [%d]\n", a);
-    a = ft_printf("-->|%-6.4s|<--\n", "abc");
-    //printf("ft_printf [%d]\n", a);
+    const char *s = (const char *)NULL;
+    printf("-->|%-16.*s|<--\n", 1, s);
+    ft_printf("-->|%-16.*s|<--\n", 1, s);
 
-    a = printf("-->|%-6.4s|<--\n", NULL);
-    //printf("printf [%d]\n", a);
-    a = ft_printf("-->|%-6.4s|<--\n", NULL);
-    //printf("ft_printf [%d]\n", a);
-
-    a = printf("-->|%-6.4s|<--\n", "");
-    //printf("printf [%d]\n", a);
-    a = ft_printf("-->|%-6.4s|<--\n", "");
-
-    printf("-->|%-6.6s|<--\n", NULL);
-    //printf("printf [%d]\n", a);
-    ft_printf("-->|%-6.6s|<--\n", NULL);
-   // printf("ft_printf [%d]\n", a);
-
-    printf("-->|%-10.6s|<--\n", NULL);
-    //printf("printf [%d]\n", a);
-    ft_printf("-->|%-10.6s|<--\n", NULL);
-
-    printf("-->|%-10.7s|<--\n", NULL);
-    //printf("printf [%d]\n", a);
-    ft_printf("-->|%-10.7s|<--\n", NULL);
 	return (0);
 }
 

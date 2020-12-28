@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 19:53:08 by taesan            #+#    #+#             */
-/*   Updated: 2020/12/29 02:23:19 by taesan           ###   ########.fr       */
+/*   Updated: 2020/12/29 04:07:15 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,17 @@
 int				set_str_zero(t_input *input)
 {
 	char	*str;
+	char	*sub_str;
 
 	if (!(str = (char*)malloc(sizeof(char) * 7)))
 		return (0);
 	ft_strlcpy(str, "(null)", 7);
 	if (g_info->precision_len >= 0)
-		str = ft_substr(str, 0, g_info->precision_len);
+	{
+		sub_str = ft_substr(str, 0, g_info->precision_len);
+		free(str);
+		str = sub_str;
+	}
 	input->str = str;
 	input->len = ft_strlen(str);
 	return (1);
