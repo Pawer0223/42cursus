@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 19:53:08 by taesan            #+#    #+#             */
-/*   Updated: 2020/12/29 02:14:27 by taesan           ###   ########.fr       */
+/*   Updated: 2020/12/29 02:19:08 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,11 @@ int				set_str_zero(t_input *input)
 
 	if (!(str = (char*)malloc(sizeof(char) * 7)))
 		return (0);
-	if (g_info->width > g_info->precision_len && g_info->precision_len < 6)
-		str[0] = 0;
+	if (g_info->precision_len >= 0)
+	{
+		if (g_info->width > g_info->precision_len && g_info->precision_len < 6)
+			str[0] = 0;
+	}
 	else
 	{
 		ft_strlcpy(str, "(null)", 7);
