@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 19:21:47 by taesan            #+#    #+#             */
-/*   Updated: 2020/12/28 17:05:33 by taesan           ###   ########.fr       */
+/*   Updated: 2020/12/28 18:07:57 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,26 @@ int			check_signif(double n)
 	return (0);
 }
 
+void		str_move(char *str, int v)
+{
+	int i;
+
+	i = 0;
+	while (str[i])
+		i++;
+	while (i >= 0)
+	{
+		str[i + 1] = str[i];
+		i--;
+	}
+	str[0] = v + '0';
+}
+
 void		round_up(char *str, int idx, int len)
 {
 	int prev;
 
-	if (str[idx] == '.')
+	if (idx > 0 && str[idx] == '.')
 		idx--;
 	prev = str[idx] - '0' + 1;
 	if (g_info->precision_len == 0)
@@ -74,7 +89,12 @@ void		round_up(char *str, int idx, int len)
 	if (idx == 0)
 		str[idx] = (prev / 10) + '0';
 	if ((prev / 10) > 0)
-		round_up(str, idx, len);
+	{
+		if (idx < 0)
+			str_move(str, (prev / 10));
+		else
+			round_up(str, idx, len);
+	}
 }
 
 void		ft_round(char *str, int idx, int pre, double n)
