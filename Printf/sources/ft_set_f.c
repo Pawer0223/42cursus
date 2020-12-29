@@ -6,27 +6,12 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 19:47:47 by taesan            #+#    #+#             */
-/*   Updated: 2020/12/28 17:24:27 by taesan           ###   ########.fr       */
+/*   Updated: 2020/12/29 17:58:52 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/printf.h"
 #include "../headers/libft.h"
-
-void		set_f_sign(t_input *input, char *ptr)
-{
-	int		is_minus;
-	int		len;
-
-	len = sizeof(double) - 1;
-	is_minus = ((*(ptr + len) >> 7) & 0x01);
-	if (is_minus)
-		input->sign = '-';
-	else
-		set_input_sign(input);
-	if (g_info->precision_len < 0)
-		g_info->precision_len = 6;
-}
 
 int			fill_str_f(t_input *input, double n, int len, int idx)
 {
@@ -83,13 +68,11 @@ int			set_f_input(double n)
 	t_input	*input;
 	double	left;
 	double	right;
-	char	*ptr;
 
 	if (!(input = (t_input *)(malloc(sizeof(t_input)))))
 		return (0);
 	g_info->input = input;
-	ptr = (char*)&n;
-	set_f_sign(input, ptr);
+	set_double_sign(input, (char *)&n);
 	left = get_number(n, 0);
 	right = n - left;
 	return (make_floating(input, n, left, right));

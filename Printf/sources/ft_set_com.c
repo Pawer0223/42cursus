@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 19:30:47 by taesan            #+#    #+#             */
-/*   Updated: 2020/12/28 16:07:19 by taesan           ###   ########.fr       */
+/*   Updated: 2020/12/29 17:56:07 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,21 @@ void			set_input_sign(t_input *input)
 		input->sign = '+';
 	else
 		input->sign = 0;
+}
+
+void			set_double_sign(t_input *input, char *ptr)
+{
+	int		is_minus;
+	int		len;
+
+	len = sizeof(double) - 1;
+	is_minus = ((*(ptr + len) >> 7) & 0x01);
+	if (is_minus)
+		input->sign = '-';
+	else
+		set_input_sign(input);
+	if (g_info->precision_len < 0)
+		g_info->precision_len = 6;
 }
 
 // int				get_bit(char *ptr, int byte, int bit)

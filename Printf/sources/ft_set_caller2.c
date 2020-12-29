@@ -17,7 +17,7 @@ void				ft_set_n(char	*length)
 	else
 		*va_arg(*(g_info->ap), int *) = g_w_cnt;
 }
-/* ¾ê´Â ¼³¸íº¸¸é ´Ù doubleÀÎ°©´Ù.*/
+
 int				ft_set_fge()
 {
 	double	n;
@@ -26,5 +26,4 @@ int				ft_set_fge()
 	if (g_info->specifier == 'f')
 		return (set_f_input(n));
 	return (0);
-	// return set_fge_input(n);
 }

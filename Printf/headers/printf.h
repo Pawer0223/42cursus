@@ -68,6 +68,7 @@ void			ft_ascii_write(int n);
 /* common */
 void			fill_is_zero(t_input* input, int idx);
 void			set_input_sign(t_input* input);
+void			set_double_sign(t_input *input, char *ptr);
 /* math*/
 double			ft_pow(double base, double exponent);
 void			ft_round(char* str, int idx, int pre, double n);

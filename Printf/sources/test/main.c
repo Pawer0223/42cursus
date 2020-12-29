@@ -809,6 +809,79 @@ void    round_test()
     }
 }
 
+void    e_test()
+{
+    double a = 0.120;
+    double b = 0.130;
+
+    printf("0.125 와 0.135의 차이점 확인\n");
+    printf("### 1 ###\n");
+    for (int i = 0; i < 10; i++)
+    {
+        a += 0.001;
+        printf("================[%d]===============\n",i);
+        printf("%%f => [%f], %%.2f => [%.2f]\n", a, a);
+        ft_printf("%%f => [%f], %%.2f => [%.2f]\n", a, a);
+    }
+
+    printf("### 2 ###\n");
+    for (int i = 0; i < 10; i++)
+    {
+        b += 0.001;
+        printf("================[%d]===============\n", i);
+        printf("%%f => [%f], %%.2f => [%.2f]\n", b, b);
+        ft_printf("%%f => [%f], %%.2f => [%.2f]\n", b, b);
+    }
+    printf("3~4 왜 7.125에서 차이가 나지... \n");
+
+    printf("### 3 ###\n");
+    a = 0.125;
+    for (int i = 0; i < 10; i++)
+    {
+        a += 1;
+        printf("================[%d]===============\n", i);
+        printf("%%f => [%f], %%.2f => [%.2f]\n", a, a);
+        ft_printf("%%f => [%f], %%.2f => [%.2f]\n", a, a);
+    }
+
+    a = 7.120;
+    printf("### 4 ###\n");
+    for (int i = 0; i < 10; i++)
+    {
+        a += 0.001;
+        printf("================[%d]===============\n", i);
+        printf("%%f => [%f], %%.2f => [%.2f]\n", a, a);
+        ft_printf("%%f => [%f], %%.2f => [%.2f]\n", a, a);
+    }
+
+    b = 7.130;
+    printf("### 5 ###\n");
+    for (int i = 0; i < 10; i++)
+    {
+        b += 0.001;
+        printf("================[%d]===============\n", i);
+        printf("%%f => [%f], %%.2f => [%.2f]\n", b, b);
+        ft_printf("%%f => [%f], %%.2f => [%.2f]\n", b, b);
+    }
+
+
+    printf("### 6 ###\n");
+    a = 0.5;
+    b = 0.51;
+    for (int i = 0; i < 10; i++)
+    {
+        a += 1;
+        b += 1;
+        printf("================[%d]===============\n", i);
+        printf("###### a #####\n");
+        printf("%%f => [%f], %%.f => [%.f]\n", a, a);
+        ft_printf("%%f => [%f], %%.f => [%.f]\n", a, a);
+        printf("###### b #####\n");
+        printf("%%f => [%f], %%.f => [%.f]\n", b, b);
+        ft_printf("%%f => [%f], %%.f => [%.f]\n", b, b);
+    }
+}
+
 
 void        f_test()
 {
@@ -1499,11 +1572,14 @@ int		main(void)
     //double_bit_test2(d);
 
     // p_test();
-    int x = 13;
-    printf("-->|%#0*x|<--\n", -4, x);
-    ft_printf("-->|%#0*x|<--\n", -4, x);
+    // int x = 13;
+    // printf("-->|%#0*x|<--\n", -4, x);
+    // ft_printf("-->|%#0*x|<--\n", -4, x);
 
+    double e = 0.0;
 
+    printf("-->|%-4.e|<--\n", e);
+    ft_printf("-->|%-4.e|<--\n", e);
 
 
 	return (0);
