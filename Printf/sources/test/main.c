@@ -1575,11 +1575,21 @@ int		main(void)
     // int x = 13;
     // printf("-->|%#0*x|<--\n", -4, x);
     // ft_printf("-->|%#0*x|<--\n", -4, x);
+    static charch_pos_1 = 100, ch_neg_1 = -87;
+    static shortsh_pos_1 = 3047, sh_neg_1 = -8875;
+    static inti_pos_1 = 878023;
+    static longl_pos_1 = 22337203685477, l_neg_1 = -22337203685477;
+    static long long    ll_pos_1 = 22337203685477, ll_neg_1 = -22337203685477;
+    static longlmax    = 9223372036854775807;
+    static longlmin    = -9223372036854775807;
+    static long long    llmax = 9223372036854775807;
+    static long long    llmin = -9223372036854775807ll;
+    static char ch_pos_1 = 100;
+    static char str_1[] = "hello world", str_2[] = "panda", str_3[] = "this is a longer string";
 
-    double e = 0.0;
+    printf("1 => [%hhi%s%lli%s]\n", ch_pos_1, str_3, ll_neg_1, str_2);
+    ft_printf("2 => [%hhi%s%lli%s]\n", ch_pos_1, str_3, ll_neg_1, str_2);
 
-    printf("-->|%-4.e|<--\n", e);
-    ft_printf("-->|%-4.e|<--\n", e);
 
 
 	return (0);
