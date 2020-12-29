@@ -39,7 +39,6 @@ long long		g_w_cnt;
 int				init_g(va_list *ap);
 void			clear_g(void);
 void			free_g(void);
-void			free_input(t_input	*input);
 /* check funcs */
 int				check_format(const char	*format);
 int				check_size(const char *format, int type);

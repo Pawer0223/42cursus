@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 19:18:12 by taesan            #+#    #+#             */
-/*   Updated: 2020/12/29 19:16:37 by taesan           ###   ########.fr       */
+/*   Updated: 2020/12/29 19:32:47 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void			init_flags(void)
 	g_info->flags->zero = 0;
 }
 
-int			init_g(va_list *ap)
+int				init_g(va_list *ap)
 {
 	if (!(g_info = (t_printf *)malloc(sizeof(t_printf))))
 		return (0);
@@ -39,12 +39,23 @@ int			init_g(va_list *ap)
 	return (1);
 }
 
-void		clear_g(void)
+void			free_with_clear(t_input *input)
 {
+	if (g_info->input)
+	{
+		input->sign = 0;
+		input->len = 0;
+		if (input->str)
+			free(input->str);
+		free(input);
+	}
 	if (g_info->length)
 		free(g_info->length);
-	if (g_info->input)
-		free_input(g_info->input);
+}
+
+void			clear_g(void)
+{
+	free_with_clear(g_info->input);
 	init_flags();
 	g_info->length = 0;
 	g_info->input = 0;
@@ -52,23 +63,11 @@ void		clear_g(void)
 	g_info->precision_len = -1;
 }
 
-void		free_input(t_input *input)
+void			free_g(void)
 {
-	input->sign = 0;
-	input->len = 0;
-	if (input->str)
-		free(input->str);
-	free(input);
-}
-
-void		free_g(void)
-{
+	clear_g();
 	if (g_info->flags)
 		free(g_info->flags);
-	if (g_info->length)
-		free(g_info->length);
-	if (g_info->input)
-		free_input(g_info->input);
 	va_end(*g_info->ap);
 	free(g_info);
 }
