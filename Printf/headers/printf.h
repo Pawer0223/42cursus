@@ -10,7 +10,6 @@
 
 typedef struct s_flag
 {
-	char exist;
 	char plus;
 	char minus;
 	char space;

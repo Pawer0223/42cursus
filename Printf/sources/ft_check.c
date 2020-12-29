@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 18:58:53 by taesan            #+#    #+#             */
-/*   Updated: 2020/12/28 17:01:19 by taesan           ###   ########.fr       */
+/*   Updated: 2020/12/29 19:05:48 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@ void			check_flag(const char *format)
 	c = format[g_i];
 	if (c == '-' || c == '+' || c == ' ' || c == '#' || c == '0')
 	{
-		if (!g_info->flags->exist)
-			g_info->flags->exist = 1;
 		if (c == '-')
 			g_info->flags->minus = 1;
 		if (c == '+')

@@ -6,7 +6,7 @@
 #    By: taesan <taesan@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by taekang           #+#    #+#              #
-#    Updated: 2020/12/26 17:15:24 by taesan           ###   ########.fr        #
+#    Updated: 2020/12/29 19:09:51 by taesan           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,6 +59,7 @@ LIBFT_SRCS =   $(addprefix $(LIB_DIR)/, \
 )
 
 SRCS =	$(addprefix $(SRC_DIR)/, \
+	test_print.c\
 	ft_set_width_pre.c\
 	ft_check.c\
 	ft_global.c\

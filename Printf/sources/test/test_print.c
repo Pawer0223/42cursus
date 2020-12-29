@@ -1,16 +1,20 @@
 // #include "../../headers/printf.h"
 
-// void		all_print()
+// void		t_flags_print()
 // {
-// 	t_printf_print();
-// 	t_input_print();
+// 	printf("\n\n ################# flags ############# \n");
+// 	printf("flag->zero : [%c], ", g_info->flags->hash);
+// 	printf("flag->minus : [%c], ", g_info->flags->minus);
+// 	printf("flag->plus : [%c], ", g_info->flags->plus);
+// 	printf("flag->space : [%c], ", g_info->flags->space);
+// 	printf("flag->zero : [%c]\n", g_info->flags->zero);
+// 	printf("################# flags End############# \n");
 // }
 
 // void		t_printf_print()
 // {
 // 	printf("\n\n ################# Printf ############# \n");
 // 	printf("length : [%s], ", g_info->length);
-// 	printf("flag : [%c], ", g_info->flag);
 // 	printf("specifier : [%c], ", g_info->specifier);
 // 	printf("width : [%d], ", g_info->width);
 // 	printf("precision_len : [%d] \n", g_info->precision_len);
@@ -33,3 +37,11 @@
 // 	printf("################# Input End############# \n");
 
 // }
+
+// void		all_print()
+// {
+// 	t_printf_print();
+// 	t_flags_print();
+// 	t_input_print();
+// }
+

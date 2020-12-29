@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 19:18:12 by taesan            #+#    #+#             */
-/*   Updated: 2020/12/28 16:30:08 by taesan           ###   ########.fr       */
+/*   Updated: 2020/12/29 19:05:57 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void			init_flags(void)
 {
-	g_info->flags->exist = 0;
 	g_info->flags->plus = 0;
 	g_info->flags->minus = 0;
 	g_info->flags->space = 0;
