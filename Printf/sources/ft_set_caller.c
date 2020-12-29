@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 19:30:02 by taesan            #+#    #+#             */
-/*   Updated: 2020/12/27 15:44:22 by taesan           ###   ########.fr       */
+/*   Updated: 2020/12/29 19:53:37 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,18 @@ int				ft_set_di(char *length)
 	if (length)
 	{
 		if (ft_strncmp(length, "l", 3) == 0)
-			n = va_arg(*(g_info->ap), long int);
+			n = (long)va_arg(*(g_info->ap), long int);
 		else if (ft_strncmp(length, "ll", 3) == 0)
 			n = va_arg(*(g_info->ap), long long int);
+		else if (ft_strncmp(length, "h", 3) == 0)
+			n = (short)va_arg(*(g_info->ap), long int);
+		else if (ft_strncmp(length, "hh", 3) == 0)
+			n = (signed char)va_arg(*(g_info->ap), long long int);
 		else
-			n = va_arg(*(g_info->ap), int);
+			n = (int)va_arg(*(g_info->ap), int);
 	}
 	else
-		n = va_arg(*(g_info->ap), int);
+		n = (int)va_arg(*(g_info->ap), int);
 	return (set_di_input(n));
 }
 
@@ -40,14 +44,18 @@ int				ft_set_ux(char *length, char spec)
 	if (length)
 	{
 		if (ft_strncmp(length, "l", 3) == 0)
-			n = va_arg(*(g_info->ap), unsigned long int);
+			n = (unsigned long)va_arg(*(g_info->ap), unsigned long);
 		else if (ft_strncmp(length, "ll", 3) == 0)
-			n = va_arg(*(g_info->ap), unsigned long long int);
+			n = va_arg(*(g_info->ap), unsigned long long);
+		else if (ft_strncmp(length, "h", 3) == 0)
+			n = (unsigned short)va_arg(*(g_info->ap), unsigned int);
+		else if (ft_strncmp(length, "hh", 3) == 0)
+			n = (unsigned char)va_arg(*(g_info->ap), unsigned int);
 		else
-			n = va_arg(*(g_info->ap), unsigned int);
+			n = (unsigned int)va_arg(*(g_info->ap), unsigned int);
 	}
 	else
-		n = va_arg(*(g_info->ap), unsigned int);
+		n = (unsigned int)va_arg(*(g_info->ap), unsigned int);
 	if (spec == 'u')
 		return (set_u_input(n));
 	else

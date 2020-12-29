@@ -1572,24 +1572,32 @@ int		main(void)
     //double_bit_test2(d);
 
     // p_test();
-    // int x = 13;
-    // printf("-->|%#0*x|<--\n", -4, x);
-    // ft_printf("-->|%#0*x|<--\n", -4, x);
-    static char ch_pos_1 = 100, ch_neg_1 = -87;
-    static short sh_pos_1 = 3047, sh_neg_1 = -8875;
-    static int i_pos_1 = 878023;
-    static long l_pos_1 = 22337203685477, l_neg_1 = -22337203685477;
-    static long long    ll_pos_1 = 22337203685477, ll_neg_1 = -22337203685477;
-    static long lmax    = 9223372036854775807;
-    static long lmin    = -9223372036854775807;
-    static long long    llmax = 9223372036854775807;
-    static long long    llmin = -9223372036854775807ll;
-    static char str_1[] = "hello world", str_2[] = "panda", str_3[] = "this is a longer string";
+    // static char ch_pos_1 = 100, ch_neg_1 = -87;
+    // static short sh_pos_1 = 3047, sh_neg_1 = -8875;
+    // static int i_pos_1 = 878023;
+    // static long l_pos_1 = 22337203685477, l_neg_1 = -22337203685477;
+    // static long long    ll_pos_1 = 22337203685477, ll_neg_1 = -22337203685477;
+    // static long lmax    = 9223372036854775807;
+    // static long lmin    = -9223372036854775807;
+    // static long long    llmax = 9223372036854775807;
+    // static long long    llmin = -9223372036854775807ll;
+    // static char str_1[] = "hello world", str_2[] = "panda", str_3[] = "this is a longer string";
 
-    printf("1 => [%hhi%s%lli%s]\n", ch_pos_1, str_3, ll_neg_1, str_2);
-    ft_printf("2 => [%hhi%s%lli%s]\n", ch_pos_1, str_3, ll_neg_1, str_2);
+    // printf("1 => [%hhi%s%lli%s]\n", ch_pos_1, str_3, ll_neg_1, str_2);
+    // ft_printf("2 => [%hhi%s%lli%s]\n", ch_pos_1, str_3, ll_neg_1, str_2);
 
-
+    unsigned int hu = 4294967161;
+    printf("-->|%-4.hu|<--\n", hu);
+    ft_printf("-->|%-4.hu|<--\n", hu);
+    // printf("-->|%-4.*hu|<--\n", -4, hu);
+    // printf("-->|%-4.*hu|<--\n", -3, hu);
+    // printf("-->|%-4.*hu|<--\n", -2, hu);
+    // printf("-->|%-4.*hu|<--\n", -1, hu);
+    // printf("-->|%-4.*hu|<--\n", 0, hu);
+    // printf("-->|%-4.*hu|<--\n", 1, hu);
+    // printf("-->|%-4.*hu|<--\n", 2, hu);
+    // printf("-->|%-4.*hu|<--\n", 3, hu);
+    // printf("-->|%-4.*hu|<--\n", 4, hu);
 
 	return (0);
 }
