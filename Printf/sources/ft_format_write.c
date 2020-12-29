@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 19:09:00 by taesan            #+#    #+#             */
-/*   Updated: 2020/12/29 21:59:38 by taesan           ###   ########.fr       */
+/*   Updated: 2020/12/29 22:05:51 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void		percent_write(t_flag *flags)
 	char	padding;
 
 	width = g_info->width;
-	padding = get_padding(flags);
+	padding = (flags->zero && !flags->minus) ? '0' : ' ';
 	if (flags->minus)
 	{
 		ft_putchar_fd('%', 1);
