@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: taekang <taekang@student.42seoul.k>        +#+  +:+       +#+         #
+#    By: taesan <taesan@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2020\10/18 12:49:44 by taekang           #+#    #+#              #
-#    Updated: 2020/10/18 19:14:24 by taekang          ###   ########.fr        #
+#    Created: Invalid date        by taekang           #+#    #+#              #
+#    Updated: 2020/12/30 01:26:21 by taesan           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,8 +46,7 @@ SRCS =			ft_atoi.c\
 	   		 	ft_substr.c\
 	   		 	ft_tolower.c\
 	   		 	ft_toupper.c\
-
-BONUS_SRCS = 	ft_lstadd_back.c\
+				ft_lstadd_back.c\
 				ft_lstadd_front.c\
 				ft_lstclear.c\
 				ft_lstdelone.c\
@@ -58,7 +57,6 @@ BONUS_SRCS = 	ft_lstadd_back.c\
 				ft_lstsize.c\
 
 OBJS = $(SRCS:.c=.o)
-BONUS_OBJS =$(BONUS_SRCS:.c=.o)
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
@@ -74,15 +72,12 @@ $(NAME) : $(OBJS)
 
 all: $(NAME)
 
-clean: 	
-		$(RM) $(RMFLAGS) $(OBJS) $(BONUS_OBJS)
+clean:
+		$(RM) $(RMFLAGS) $(OBJS)
 
 fclean: clean
 		$(RM) $(RMFLAGS) $(NAME)
 
 re:		fclean all
 
-bonus: $(OBJS) $(BONUS_OBJS)
-		$(AR) $(ARFLAGS) $(NAME) $(OBJS) $(BONUS_OBJS)
-
-.PHONY: all clean fclean re bonus
+.PHONY: all clean fclean re

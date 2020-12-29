@@ -6,57 +6,16 @@
 #    By: taesan <taesan@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by taekang           #+#    #+#              #
-#    Updated: 2020/12/29 19:09:51 by taesan           ###   ########.fr        #
+#    Updated: 2020/12/30 02:22:37 by taesan           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libftprintf.a
 
+LIBFT = libft.a
+
 SRC_DIR = sources
-LIB_DIR = $(SRC_DIR)/libft
-HEADER_DIR = headers
-
-HEADERS = $(addprefix $(HEADER_DIR)/, \
-	printf.h\
-	libft.h\
-)
-
-LIBFT_SRCS =   $(addprefix $(LIB_DIR)/, \
-	ft_atoi.c\
-	ft_bzero.c\
-	ft_calloc.c\
-	ft_isalnum.c\
-	ft_isalpha.c\
-	ft_isascii.c\
-	ft_isdigit.c\
-	ft_isprint.c\
-	ft_itoa.c\
-	ft_memccpy.c\
-	ft_memchr.c\
-	ft_memcmp.c\
-	ft_memcpy.c\
-	ft_memmove.c\
-	ft_memset.c\
-	ft_putchar_fd.c\
-	ft_putendl_fd.c\
-	ft_putnbr_fd.c\
-	ft_putstr_fd.c\
-	ft_split.c\
-	ft_strchr.c\
-	ft_strdup.c\
-	ft_strjoin.c\
-	ft_strlcat.c\
-	ft_strlcpy.c\
-	ft_strlen.c\
-	ft_strmapi.c\
-	ft_strncmp.c\
-	ft_strnstr.c\
-	ft_strrchr.c\
-	ft_strtrim.c\
-	ft_substr.c\
-	ft_tolower.c\
-	ft_toupper.c\
-)
+LIBFT_DIR = $(SRC_DIR)/libft
 
 SRCS =	$(addprefix $(SRC_DIR)/, \
 	test_print.c\
@@ -80,7 +39,6 @@ SRCS =	$(addprefix $(SRC_DIR)/, \
 	ft_set_caller2.c\
 )
 
-LIBFT_OBJS =$(LIBFT_SRCS:.c=.o)
 OBJS = $(SRCS:.c=.o)
 
 CC = gcc
@@ -92,16 +50,22 @@ RMFLAGS = -rf
 AR = ar
 ARFLAGS = rcs
 
-$(NAME) : $(OBJS) $(LIBFT_OBJS)
-		$(AR) $(ARFLAGS) $(NAME) $(OBJS) $(LIBFT_OBJS)
+$(NAME) : $(LIBFT) $(OBJS)
+		$(AR) $(ARFLAGS) $(NAME) $(LIBFT_DIR)/$(LIBFT) $(OBJS)
+
+$(LIBFT) :
+		$(MAKE) -C $(LIBFT_DIR)
 
 all: $(NAME)
 
-clean:
+clean: clean_libft
 		$(RM) $(RMFLAGS) $(OBJS) $(LIBFT_OBJS)
 
+clean_libft:
+		$(MAKE) -C $(LIBFT_DIR) clean
+
 fclean: clean
-		$(RM) $(RMFLAGS) $(NAME)
+		$(RM) $(RMFLAGS) $(NAME) $(LIBFT_DIR)/$(LIBFT)
 
 re:		fclean all
 
