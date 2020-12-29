@@ -60,7 +60,7 @@ int				set_str_input(char *input_str);
 int             set_f_input(double n);
 /* format write*/
 void			ft_format_write(t_flag *flags);
-//void			percent_write(t_flag *flags);
+void			percent_write(t_flag *flags);
 void			write_padding(char padding, int end);
 void			ft_ascii_write(int n);
 /* common */
