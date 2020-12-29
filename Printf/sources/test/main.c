@@ -1589,20 +1589,27 @@ int		main(void)
     // unsigned int hu = 4294967161;
     // printf("-->|%-4.hu|<--\n", hu);
     // ft_printf("-->|%-4.hu|<--\n", hu);
-    printf("-->|%0*.%|<--\n", 2);
-    ft_printf("-->|%0*.%|<--\n", 2);
+    static char ch_pos_1 = 100, ch_neg_1 = -87;
+    static short sh_pos_1 = 3047, sh_neg_1 = -8875;
+    static int i_pos_1 = 878023;
+    static long l_pos_1 = 22337203685477, l_neg_1 = -22337203685477;
+    static long long    ll_pos_1 = 22337203685477, ll_neg_1 = -22337203685477;
+    static long lmax    = 9223372036854775807;
+    static long lmin    = -9223372036854775807;
+    static long long    llmax = 9223372036854775807;
+    static long long    llmin = -9223372036854775807ll;
+    static unsigned char uch_pos_1 = 100;
+    static unsigned short ush_pos_1 = 3047;
+    static unsigned int     ui_pos_1 = 878023;
+    static unsigned long ul_pos_1 = 22337203685477;
+    static unsigned long long   ull_pos_1 = 22337203685477;
+    static unsigned long long  ullmax = 9223372036854775807;
+    static unsigned long ulmax = 9223372036854775807;
 
-    printf("-->|%# 04.3%|<--\n");
-    ft_printf("-->|%# 04.3%|<--\n");
 
-    printf("-->|%# 04.4%|<--\n");
-    ft_printf("-->|%# 04.4%|<--\n");
+    printf("1 => [%s%hihello%-17.14llu%lli%08hu%s%17ssomestuff%s%hi%i%.24lu%llu%u%.2s%li]\n","abc",sh_neg_1,ull_pos_1,ll_neg_1,ush_pos_1,"wassup","nope","",(short)32767,0,ul_pos_1,0ull,ui_pos_1,"notall",l_pos_1);
+    ft_printf("2 => [%s%hihello%-17.14llu%lli%08hu%s%17ssomestuff%s%hi%i%.24lu%llu%u%.2s%li]\n","abc",sh_neg_1,ull_pos_1,ll_neg_1,ush_pos_1,"wassup","nope","",(short)32767,0,ul_pos_1,0ull,ui_pos_1,"notall",l_pos_1);
 
-    printf("-->|%# 04.3%|<--\n");
-    ft_printf("-->|%# 04.3%|<--\n");
-
-    printf("-->|%# 04.4%|<--\n");
-    ft_printf("-->|%# 04.4%|<--\n");
 
 
 	return (0);

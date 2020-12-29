@@ -1,7 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_set_caller2.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/12/30 00:30:57 by taesan            #+#    #+#             */
+/*   Updated: 2020/12/30 00:31:23 by taesan           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../headers/printf.h"
 #include "../headers/libft.h"
 
-void				ft_set_n(char	*length)
+void			ft_set_n(char *length)
 {
 	if (length)
 	{
@@ -18,7 +30,7 @@ void				ft_set_n(char	*length)
 		*va_arg(*(g_info->ap), int *) = g_w_cnt;
 }
 
-int				ft_set_fge()
+int				ft_set_fge(void)
 {
 	double	n;
 
