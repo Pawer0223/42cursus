@@ -1589,19 +1589,21 @@ int		main(void)
     // unsigned int hu = 4294967161;
     // printf("-->|%-4.hu|<--\n", hu);
     // ft_printf("-->|%-4.hu|<--\n", hu);
+    printf("-->|%0*.%|<--\n", 2);
+    ft_printf("-->|%0*.%|<--\n", 2);
 
-    long long lu = 18446744073709551481;
-    printf("-->|%-4.lu|<--\n", lu);
-    ft_printf("-->|%-4.lu|<--\n", lu);
-    // printf("-->|%-4.*hu|<--\n", -4, hu);
-    // printf("-->|%-4.*hu|<--\n", -3, hu);
-    // printf("-->|%-4.*hu|<--\n", -2, hu);
-    // printf("-->|%-4.*hu|<--\n", -1, hu);
-    // printf("-->|%-4.*hu|<--\n", 0, hu);
-    // printf("-->|%-4.*hu|<--\n", 1, hu);
-    // printf("-->|%-4.*hu|<--\n", 2, hu);
-    // printf("-->|%-4.*hu|<--\n", 3, hu);
-    // printf("-->|%-4.*hu|<--\n", 4, hu);
+    printf("-->|%# 04.3%|<--\n");
+    ft_printf("-->|%# 04.3%|<--\n");
+
+    printf("-->|%# 04.4%|<--\n");
+    ft_printf("-->|%# 04.4%|<--\n");
+
+    printf("-->|%# 04.3%|<--\n");
+    ft_printf("-->|%# 04.3%|<--\n");
+
+    printf("-->|%# 04.4%|<--\n");
+    ft_printf("-->|%# 04.4%|<--\n");
+
 
 	return (0);
 }
