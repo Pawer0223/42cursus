@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 19:09:00 by taesan            #+#    #+#             */
-/*   Updated: 2020/12/29 21:51:29 by taesan           ###   ########.fr       */
+/*   Updated: 2020/12/29 21:52:57 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char		get_padding(t_flag *flags)
 	return (padding);
 }
 
-void		percent_write(t_flag *flags)
+void		percent_write(void)
 {
 	// int		width;
 	// char	padding;
