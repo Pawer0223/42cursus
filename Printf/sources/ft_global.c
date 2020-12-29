@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 19:18:12 by taesan            #+#    #+#             */
-/*   Updated: 2020/12/29 19:05:57 by taesan           ###   ########.fr       */
+/*   Updated: 2020/12/29 19:16:37 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ void		clear_g(void)
 
 void		free_input(t_input *input)
 {
+	input->sign = 0;
+	input->len = 0;
 	if (input->str)
 		free(input->str);
 	free(input);
