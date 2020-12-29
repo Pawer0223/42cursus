@@ -1586,9 +1586,13 @@ int		main(void)
     // printf("1 => [%hhi%s%lli%s]\n", ch_pos_1, str_3, ll_neg_1, str_2);
     // ft_printf("2 => [%hhi%s%lli%s]\n", ch_pos_1, str_3, ll_neg_1, str_2);
 
-    unsigned int hu = 4294967161;
-    printf("-->|%-4.hu|<--\n", hu);
-    ft_printf("-->|%-4.hu|<--\n", hu);
+    // unsigned int hu = 4294967161;
+    // printf("-->|%-4.hu|<--\n", hu);
+    // ft_printf("-->|%-4.hu|<--\n", hu);
+
+    long long lu = 18446744073709551481;
+    printf("-->|%-4.lu|<--\n", lu);
+    ft_printf("-->|%-4.lu|<--\n", lu);
     // printf("-->|%-4.*hu|<--\n", -4, hu);
     // printf("-->|%-4.*hu|<--\n", -3, hu);
     // printf("-->|%-4.*hu|<--\n", -2, hu);

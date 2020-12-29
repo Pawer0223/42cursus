@@ -6,14 +6,14 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 19:53:51 by taesan            #+#    #+#             */
-/*   Updated: 2020/12/29 19:51:11 by taesan           ###   ########.fr       */
+/*   Updated: 2020/12/29 20:00:08 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/printf.h"
 #include "../headers/libft.h"
 
-void			fill_str_u(t_input *input, long long n, int idx)
+void			fill_str_u(t_input *input, unsigned long long n, int idx)
 {
 	if (n == 0)
 		fill_is_zero(input, idx--);
