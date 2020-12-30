@@ -6,7 +6,7 @@
 #    By: taesan <taesan@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by taekang           #+#    #+#              #
-#    Updated: 2020/12/30 23:39:06 by taesan           ###   ########.fr        #
+#    Updated: 2020/12/30 23:57:33 by taesan           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -96,7 +96,7 @@ AR = ar
 ARFLAGS = rcs
 
 $(NAME) : $(OBJS) $(LIBFT_OBJS)
-		$(AR) $(ARFLAGS) $(NAME) $(LIBFT_OBJS)
+		$(AR) $(ARFLAGS) $(NAME) $(OBJS) $(LIBFT_OBJS)
 
 all:	$(NAME)
 
