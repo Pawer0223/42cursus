@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/01 11:40:50 by taesan            #+#    #+#             */
-/*   Updated: 2021/01/01 12:47:48 by taesan           ###   ########.fr       */
+/*   Updated: 2021/01/02 16:28:03 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ int     main(void)
     char **line;
 
     int fd = open("./test.txt", O_RDONLY);
+
+    line = (char **)malloc(sizeof(char *) * 10);
     
     int i = 1;
     while (get_next_line(fd, line)) {
