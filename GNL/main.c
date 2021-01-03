@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/01 11:40:50 by taesan            #+#    #+#             */
-/*   Updated: 2021/01/02 16:28:03 by taesan           ###   ########.fr       */
+/*   Updated: 2021/01/03 22:03:08 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,21 @@
 int     main(void)
 {
     char **line;
+    char **line2;
 
     int fd = open("./test.txt", O_RDONLY);
+    int fd2 = open("./test.txt", O_RDONLY);
 
     line = (char **)malloc(sizeof(char *) * 10);
+    line2 = (char **)malloc(sizeof(char *) * 10);
     
     int i = 1;
-    while (get_next_line(fd, line)) {
-        printf("[%d] : [%s]\n", i++, *line);
+    printf("### is My ###\n");
+    while (1) {
+        int result = get_next_line(fd, line);
+        printf("[%d] => %s", i++, *line);
+        if (!result)
+            break;
     }
 
     return (0);

@@ -6,83 +6,125 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/01 10:47:44 by taesan            #+#    #+#             */
-/*   Updated: 2021/01/02 19:26:22 by taesan           ###   ########.fr       */
+/*   Updated: 2021/01/03 21:59:32 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int     return_error(char *buf, t_list *list)
+char     *append_content(char *buf, char *content)
 {
-    if (!list)
-        ft_lstclear(list);
-    free(buf);
-    return (-1);
-}
+    char *new_content;
+    int i;
+    int j;
 
-char	*gnl_substr(char const *s, size_t len)
-{
-    int     idx;
-	char	*dst;
-
-    idx = 0;
-	if (!s)
-		return (0);
-	if (!(dst = (char *)malloc(sizeof(char) * (len + 1))))
-		return (0);
-    while (s[idx] && idx < len)
+    if (!content)
     {
-        dst[idx] = s[idx];
-        idx++;
+        if (!(new_content = ft_strdup(buf)))
+            return (0);
     }
-    dst[idx] = 0;
-	return (dst);
+    else
+    {
+        if (!(new_content = (char *)malloc(ft_strlen(buf) + ft_strlen(content) + 1)))
+            return (0);
+        i = 0;
+        while (content[i])
+        {
+            new_content[i] = content[i];
+            i++;
+        }
+        j = 0;
+        while (buf[j])
+        {
+            new_content[i + j] = buf[j];
+            j++;
+        }
+        new_content[i + j] = 0; 
+    }
+    free(content);
+    free(buf);
+    return (new_content);
 }
 
-int     exist_line(char *buf, char **line, t_list *list)
+char     *create_new(char *content, int idx)
 {
     int     i;
-    char    *result;
+    int     len;
+    char    *new_content;
 
+    len = ft_strlen(content) - idx + 2;
+    if (!(new_content = (char *)malloc(sizeof(char) * len)))
+        return (0);
     i = 0;
-    while (buf[i])
+    while (i < len - 1)
+        new_content[i++] = content[idx++];
+    new_content[len - 1] = 0;
+    return (new_content);
+}
+
+int     line_check(int fd, char **contents, char **line, int is_finish)
+{
+    int     i;
+    char    *new_content;
+    char    *result;
+    
+    i = 0;
+    while (contents[fd][i])
     {
-        if (buf[i] == '\n')
+        if (contents[fd][i] == '\n')
         {
-            if (!(result = gnl_substr(buf, i)))
-                return (return_error(buf, list));
+            i++;
+            if (!(result = ft_substr(contents[fd], 0, i)))
+                return (-1);
+            if (!(new_content = create_new(contents[fd], i)))
+                return (-1);
+            free(contents[fd]);
+            contents[fd] = new_content;
             *line = result;
-            free(buf);
             return (1);
         }
         i++;
     }
+    if (is_finish && !(*line = ft_strdup(contents[fd])))
+        return (-1);
+    return (0);
+}
+
+int     finish(int fd, char **contents, char **line, int read_r)
+{
+    if (read_r == -1)
+        return (-1);
+    if (contents[fd] && line_check(fd, contents, line, 1) == -1)
+        return (-1);
+    if (contents[fd])
+    {
+        free(contents[fd]);
+        contents[fd] = 0;
+        return (0);
+    }
+    *line = ft_strdup("");
     return (0);
 }
 
 int     get_next_line(int fd, char **line)
 {
-    char            *buf;
-    static t_list   *list;
-    int             rr;
-    int             r;
+    static char *contents[FOPEN_MAX];
+    char        *buf;
+    int         read_r;
+    int         line_exist;
 
-    if (fd < 0 || !line || BUFFER_SIZE <= 0)
+    if (fd < 0 || BUFFER_SIZE <= 0 || !line)
         return (-1);
-    if (!(buf = malloc(BUFFER_SIZE + 1)))
+    if (!(buf = (char *)malloc(sizeof(char) * BUFFER_SIZE + 1)))
         return (-1);
-    while((rr = read(fd, buf, BUFFER_SIZE)) > 0)
+    while ((read_r = read(fd, buf, BUFFER_SIZE)) > 0)
     {
-        buf[rr] = 0;
-        if (!(list = append_list(buf, list)))
-            return (return_error(buf, list));
-        if (r = exist_line(buf, line, list) == 1)
-            return (1);
-        if (r == -1)
+        buf[read_r] = 0;
+        if (!(contents[fd] = append_content(buf, contents[fd])))
             return (-1);
+        line_exist = line_check(fd, contents, line, 0);
+        if (line_exist != 0)
+            return (line_exist);
     }
-    ft_lstclear(list);
-    if (rr == -1)
-        return (-1);
-    return (0);
+    return finish(fd, contents, line, read_r);
 }

@@ -7,20 +7,13 @@
 
 # include <unistd.h>
 # include <stdlib.h>
+# include <limits.h>
 
-typedef struct  s_list
-{
-    void            *content;
-    struct s_list   *next;
-    struct s_list   *prev;
-}               t_list;
-
-int             get_next_line(int fd, char **line);
-t_list	        *ft_lstnew(void *content , t_list *curr);
-void            ft_lstdelone(t_list *list);
-void	        ft_lstclear(t_list *list);
-t_list          *append_list(char *buf, t_list *list);
-
+int     get_next_line(int fd, char **line);
+int     ft_strlen(char *s);
+char	*ft_strdup(char *s1);
+size_t	ft_strlcpy(char *dest, const char *src, size_t dstsize);
+char	*ft_substr(char *s, unsigned int start, size_t len);
 /**
  ** remove
 **/

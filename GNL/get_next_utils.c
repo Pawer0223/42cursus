@@ -6,61 +6,77 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/01 21:19:05 by taesan            #+#    #+#             */
-/*   Updated: 2021/01/02 19:12:54 by taesan           ###   ########.fr       */
+/*   Updated: 2021/01/03 20:36:04 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-t_list	    *ft_lstnew(void *content , t_list *curr)
+int     ft_strlen(char *s)
 {
-	t_list	*list;
+    int i;
 
-	if (!(list = (t_list *)malloc(sizeof(t_list))))
+    i = 0;
+    while (s[i])
+        i++;
+    return (i);
+}
+
+char	*ft_strdup(char *s1)
+{
+	int		len;
+	int		i;
+	char	*s2;
+
+	len = ft_strlen(s1);
+	if (!(s2 = malloc(sizeof(char) * (len + 1))))
 		return (0);
-	list->content = content;
-	list->next = NULL;
-    list->prev = curr;
-	return (list);
-}
-
-void        ft_lstdelone(t_list *list)
-{
-    if (!list)
-        return ;
-    free(list->content);
-    free(list);
-}
-
-void	    ft_lstclear(t_list *list)
-{
-    t_list *curr;
-    t_list *prev;
-
-	if (!list)
-		return ;
-    curr = list->prev;
-    prev = curr->prev;
-	while (prev)
+	i = 0;
+	while (i < len)
 	{
-        ft_lstdelone(curr->next);
-        ft_lstdelone(curr);
-        curr = prev->prev;
-        prev = prev->prev;
+		s2[i] = s1[i];
+		i++;
 	}
+	s2[i] = '\0';
+	return (s2);
 }
 
-t_list     *append_list(char *buf, t_list *list)
+size_t	ft_strlcpy(char *dest, const char *src, size_t dstsize)
 {
-    t_list *next;
+	size_t src_len;
+	size_t i;
 
-    if (!list && !(next = ft_lstnew(buf, NULL)))
-        return (0);
-    else if (list && !(next = ft_lstnew(buf, list)))
-        return (0);
-    if (!list)
-        list = next;
-    else
-        list->next = next;
-    return (next);
+	if (!src)
+		return (0);
+	src_len = 0;
+	while (src[src_len])
+		src_len++;
+	if (!dest)
+		return (src_len);
+	if (dstsize)
+	{
+		i = 0;
+		while (src[i] && i + 1 < dstsize)
+		{
+			dest[i] = src[i];
+			i++;
+		}
+		dest[i] = '\0';
+	}
+	return (src_len);
+}
+
+char	*ft_substr(char *s, unsigned int start, size_t len)
+{
+	char	*dst;
+
+	if (!s)
+		return (0);
+	if (!(dst = (char *)malloc(sizeof(char) * (len + 1))))
+		return (0);
+	if (start >= ft_strlen(s))
+		ft_strlcpy(dst, "", 2);
+	else
+		ft_strlcpy(dst, (s + start), len + 1);
+	return (dst);
 }
