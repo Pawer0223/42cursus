@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/01 21:19:05 by taesan            #+#    #+#             */
-/*   Updated: 2021/01/04 14:29:47 by taesan           ###   ########.fr       */
+/*   Updated: 2021/01/04 22:00:35 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ size_t		ft_strlcpy(char *dest, const char *src, size_t dstsize)
 	return (src_len);
 }
 
-char		*ft_substr(char *s, unsigned int start, size_t len)
+char		*ft_substr(char *s, int start, size_t len)
 {
 	char	*dst;
 

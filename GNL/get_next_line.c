@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/01 10:47:44 by taesan            #+#    #+#             */
-/*   Updated: 2021/01/04 14:25:56 by taesan           ###   ########.fr       */
+/*   Updated: 2021/01/04 21:59:52 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ int			line_check(int fd, char **contents, char **line, int is_finish)
 	char	*result;
 
 	i = 0;
+	if (!contents[fd])
+		return (0);
 	while (contents[fd][i])
 	{
 		if (contents[fd][i] == '\n')
@@ -86,10 +88,12 @@ int			line_check(int fd, char **contents, char **line, int is_finish)
 
 int			finish(int fd, char **contents, char **line, int read_r)
 {
+	int line_exist;
+	
 	if (read_r == -1)
 		return (-1);
-	if (contents[fd] && line_check(fd, contents, line, 1) == -1)
-		return (-1);
+	if (line_exist = line_check(fd, contents, line, 1))
+		return (line_exist);
 	if (contents[fd])
 	{
 		free(contents[fd]);
