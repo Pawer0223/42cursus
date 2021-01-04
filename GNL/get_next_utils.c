@@ -6,23 +6,33 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/01 21:19:05 by taesan            #+#    #+#             */
-/*   Updated: 2021/01/03 20:36:04 by taesan           ###   ########.fr       */
+/*   Updated: 2021/01/04 14:29:47 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int     ft_strlen(char *s)
+char		*content_null(char *buf, char *content)
 {
-    int i;
+	char *new_content;
 
-    i = 0;
-    while (s[i])
-        i++;
-    return (i);
+	if (!(new_content = ft_strdup(buf)))
+		return (0);
+	free(buf);
+	return (new_content);
 }
 
-char	*ft_strdup(char *s1)
+int			ft_strlen(char *s)
+{
+	int i;
+
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
+}
+
+char		*ft_strdup(char *s1)
 {
 	int		len;
 	int		i;
@@ -41,7 +51,7 @@ char	*ft_strdup(char *s1)
 	return (s2);
 }
 
-size_t	ft_strlcpy(char *dest, const char *src, size_t dstsize)
+size_t		ft_strlcpy(char *dest, const char *src, size_t dstsize)
 {
 	size_t src_len;
 	size_t i;
@@ -66,7 +76,7 @@ size_t	ft_strlcpy(char *dest, const char *src, size_t dstsize)
 	return (src_len);
 }
 
-char	*ft_substr(char *s, unsigned int start, size_t len)
+char		*ft_substr(char *s, unsigned int start, size_t len)
 {
 	char	*dst;
 

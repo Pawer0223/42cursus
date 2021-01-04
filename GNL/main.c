@@ -6,9 +6,12 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/01 11:40:50 by taesan            #+#    #+#             */
-/*   Updated: 2021/01/03 22:03:08 by taesan           ###   ########.fr       */
+/*   Updated: 2021/01/04 14:26:59 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+# include <stdio.h>
+# include <fcntl.h>
 
 #include "get_next_line.h"
 int     main(void)
