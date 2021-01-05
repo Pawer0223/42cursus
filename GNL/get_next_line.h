@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/04 14:26:34 by taesan            #+#    #+#             */
-/*   Updated: 2021/01/04 22:00:29 by taesan           ###   ########.fr       */
+/*   Updated: 2021/01/05 17:43:32 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define GET_NEXT_LINE_H
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 32
+#  define BUFFER_SIZE 9
 # endif
 
 # include <unistd.h>

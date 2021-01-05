@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/01 21:19:05 by taesan            #+#    #+#             */
-/*   Updated: 2021/01/04 22:00:35 by taesan           ###   ########.fr       */
+/*   Updated: 2021/01/05 16:18:06 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ char		*content_null(char *buf, char *content)
 
 	if (!(new_content = ft_strdup(buf)))
 		return (0);
-	free(buf);
 	return (new_content);
 }
 

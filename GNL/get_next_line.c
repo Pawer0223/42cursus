@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/01 10:47:44 by taesan            #+#    #+#             */
-/*   Updated: 2021/01/04 21:59:52 by taesan           ###   ########.fr       */
+/*   Updated: 2021/01/05 16:23:55 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ char		*append_content(char *buf, char *content)
 	}
 	new_c[i + j] = 0;
 	free(content);
-	free(buf);
 	return (new_c);
 }
 
@@ -69,10 +68,9 @@ int			line_check(int fd, char **contents, char **line, int is_finish)
 	{
 		if (contents[fd][i] == '\n')
 		{
-			i++;
 			if (!(result = ft_substr(contents[fd], 0, i)))
 				return (-1);
-			if (!(new_content = create_new(contents[fd], i)))
+			if (!(new_content = create_new(contents[fd], i + 1)))
 				return (-1);
 			free(contents[fd]);
 			contents[fd] = new_content;
@@ -92,7 +90,8 @@ int			finish(int fd, char **contents, char **line, int read_r)
 	
 	if (read_r == -1)
 		return (-1);
-	if (line_exist = line_check(fd, contents, line, 1))
+	line_exist = line_check(fd, contents, line, 1);
+	if (line_exist)
 		return (line_exist);
 	if (contents[fd])
 	{
@@ -122,7 +121,10 @@ int			get_next_line(int fd, char **line)
 			return (-1);
 		line_exist = line_check(fd, contents, line, 0);
 		if (line_exist != 0)
+		{
+			free(buf);
 			return (line_exist);
+		}
 	}
 	return (finish(fd, contents, line, read_r));
 }
