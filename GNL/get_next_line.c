@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/01 10:47:44 by taesan            #+#    #+#             */
-/*   Updated: 2021/01/05 16:23:55 by taesan           ###   ########.fr       */
+/*   Updated: 2021/01/05 18:14:30 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char		*append_content(char *buf, char *content)
 	int		j;
 
 	if (!content)
-		return (content_null(buf, content));
+		return (content_null(buf));
 	if (!(new_c = (char *)malloc(ft_strlen(buf) + ft_strlen(content) + 1)))
 		return (0);
 	i = 0;

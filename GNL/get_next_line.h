@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/04 14:26:34 by taesan            #+#    #+#             */
-/*   Updated: 2021/01/05 17:43:32 by taesan           ###   ########.fr       */
+/*   Updated: 2021/01/05 18:14:18 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,6 @@ int		ft_strlen(char *s);
 char	*ft_strdup(char *s1);
 size_t	ft_strlcpy(char *dest, const char *src, size_t dstsize);
 char	*ft_substr(char *s, int start, size_t len);
-char	*content_null(char *buf, char *content);
+char	*content_null(char *buf);
 
 #endif

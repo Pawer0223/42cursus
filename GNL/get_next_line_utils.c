@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_utils.c                                   :+:      :+:    :+:   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/01 21:19:05 by taesan            #+#    #+#             */
-/*   Updated: 2021/01/05 16:18:06 by taesan           ###   ########.fr       */
+/*   Updated: 2021/01/05 18:14:10 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char		*content_null(char *buf, char *content)
+char		*content_null(char *buf)
 {
 	char *new_content;
 
