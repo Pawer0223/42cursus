@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/01 10:47:44 by taesan            #+#    #+#             */
-/*   Updated: 2021/01/05 18:14:30 by taesan           ###   ########.fr       */
+/*   Updated: 2021/01/06 14:06:13 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char		*append_content(char *buf, char *content)
 	return (new_c);
 }
 
-char		*create_new(char *content, int idx)
+char		*create_new(char *content, char *result, int idx)
 {
 	int		i;
 	int		len;
@@ -47,7 +47,10 @@ char		*create_new(char *content, int idx)
 
 	len = ft_strlen(content) - idx + 2;
 	if (!(new_content = (char *)malloc(sizeof(char) * len)))
+	{
+		free(result);
 		return (0);
+	}
 	i = 0;
 	while (i < len - 1)
 		new_content[i++] = content[idx++];
@@ -62,15 +65,13 @@ int			line_check(int fd, char **contents, char **line, int is_finish)
 	char	*result;
 
 	i = 0;
-	if (!contents[fd])
-		return (0);
 	while (contents[fd][i])
 	{
 		if (contents[fd][i] == '\n')
 		{
 			if (!(result = ft_substr(contents[fd], 0, i)))
 				return (-1);
-			if (!(new_content = create_new(contents[fd], i + 1)))
+			if (!(new_content = create_new(contents[fd], result, i + 1)))
 				return (-1);
 			free(contents[fd]);
 			contents[fd] = new_content;
@@ -87,10 +88,10 @@ int			line_check(int fd, char **contents, char **line, int is_finish)
 int			finish(int fd, char **contents, char **line, int read_r)
 {
 	int line_exist;
-	
+
 	if (read_r == -1)
 		return (-1);
-	line_exist = line_check(fd, contents, line, 1);
+	line_exist = contents[fd] == 0 ? 0 : line_check(fd, contents, line, 1);
 	if (line_exist)
 		return (line_exist);
 	if (contents[fd])
@@ -126,5 +127,6 @@ int			get_next_line(int fd, char **line)
 			return (line_exist);
 		}
 	}
+	free(buf);
 	return (finish(fd, contents, line, read_r));
 }
