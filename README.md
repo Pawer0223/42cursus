@@ -1,4 +1,4 @@
-# [Libft](https://velog.io/@pawer/Libft)
+# [libft](https://velog.io/@pawer/Libft)
 
 <details>
 <summary>part 1 - libc 함수 직접구현</summary>
@@ -57,7 +57,7 @@
 	</ul>
 </details>
 
-# [FT_SERVER](https://velog.io/@pawer/ftserver)
+# [ft_server](https://velog.io/@pawer/ftserver)
 
 <details>
 <summary>docker 사용해서 요구사항에 맞는 컨테이너 생성하기</summary>
