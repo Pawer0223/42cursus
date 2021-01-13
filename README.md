@@ -57,9 +57,9 @@
 	</ul>
 </details>
 
-# netwhat
+# [FT_SERVER](https://velog.io/@pawer/ftserver)
 
 <details>
-<summary>네트워크이해하기</summary>
+<summary>docker 사용해서 요구사항에 맞는 컨테이너 생성하기</summary>
 </details>
 
