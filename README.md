@@ -57,14 +57,16 @@
 	</ul>
 </details>
 
-# [ft_server](https://velog.io/@pawer/ftserver)
+# [ft_server](https://velog.io/@pawer/FTSERVER)
 
 <details>
-<summary>docker 사용해서 요구사항에 맞는 컨테이너 생성하기</summary>
+<summary>wordpress를 동작시키는 컨테이너를 자동화하여 실행할 수 있도록 DockerFile 작성하기.</summary>
 	<ul>
-		<li>[Docker - 1](https://rampart81.github.io/post/docker_introduction/)</li>
-		<li>[SSL](https://opentutorials.org/course/228/4894)</li>
-		<li>[DockerFile]()</li>
-	</ul>	
+		<li>os => debian:buster</li>
+		<li>web-server => nginx</li>
+		<li>dbms => mariadb(mysql)</li>
+		<li>CGI기능을 쓰기위한 프로그램 => php7.3-fpm</li>
+		<li>php랑 mysql이랑 연동하는 프로그램 => php-mysql</li>
+	</ul>
 </details>
 
