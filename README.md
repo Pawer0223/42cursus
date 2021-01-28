@@ -10,6 +10,9 @@
 
 <details>
 <summary>part 2 - 문자열 함수구현</summary>
+	<ul>
+		<li>문자열 관련 함수 </li>
+	</ul>
 </details>
 
 <details>
