@@ -73,17 +73,13 @@
 	</ul>
 </details>
 
-# [cub3d]()
+# [cub3d](https://velog.io/@pawer/Cub3d)
 
 <details>
 <summary>cub3d</summary>
 	<ul>
-		<li><a href="https://ko.wikipedia.org/wiki/OpenGL">OpenGL</a>을 사용하여, 정보를 시각화 하는 방법을 익힌다.</li>
-		<li>42에서 제공하는 minlibx를 사용하여, window를 생성하고, 그 위에 이미지를 pixel단위로 그려넣는다.</li>
+		<li><a href="https://ko.wikipedia.org/wiki/OpenGL">OpenGL</a>을 사용하여, 3d그래픽 표현하기.</li>
 		<li>최종적으로, 레이케스팅 기술을 구현하여 3d 그래픽을 구현한다.</li>
 		<li>make 할 때 mlxlib 같이 컴파일 하는법... 정리하기</li>
-
-
-
 	</ul>
 </details>
