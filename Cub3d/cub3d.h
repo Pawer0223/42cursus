@@ -16,8 +16,12 @@
 typedef struct	s_draw
 {
 	double	wall_x;
+	double	step;
+	double	tex_pos;
 	int		draw_s;
 	int		draw_e;
+	int		line_h;
+	int		texture_num;
 }				t_draw;
 
 typedef struct  s_double_pair

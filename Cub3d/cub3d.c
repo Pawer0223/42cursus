@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/20 00:15:40 by taekang           #+#    #+#             */
-/*   Updated: 2021/02/21 02:26:44 by taekang          ###   ########.fr       */
+/*   Updated: 2021/02/21 02:48:35 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,52 +105,55 @@ void	shoot_ray(t_ray *ray, t_info *info)
 		ray->perp_wall_dist = (ray->map.y - info->pos.y + (1 - ray->step.y) / 2) / ray->dir.y;
 }
 
-void		draw_wall(t_ray *ray, t_info *info, int x)
+void		draw_init(t_ray *ray, t_info *info)
 {
-			//Calculate height of line to draw on screen
-	int lineHeight = (int)(height / ray->perp_wall_dist);
+	//Calculate height of line to draw on screen
+	info->draw.line_h = (int)(height / ray->perp_wall_dist);
 	//calculate lowest and highest pixel to fill in current stripe
-	info->draw.draw_s = -lineHeight / 2 + height / 2;
+	info->draw.draw_s = -info->draw.line_h / 2 + height / 2;
 	if(info->draw.draw_s < 0)
 		info->draw.draw_s = 0;
-	info->draw.draw_e = lineHeight / 2 + height / 2;
+	info->draw.draw_e = info->draw.line_h / 2 + height / 2;
 	if(info->draw.draw_e >= height)
 		info->draw.draw_e = height - 1;
 	// texturing calculations
-	int texNum = worldMap[ray->map.x][ray->map.y] - 1;
+	info->draw.texture_num = worldMap[ray->map.x][ray->map.y] - 1;
 	// calculate value of wallX
 	if (ray->side == 0)
 		info->draw.wall_x = info->pos.y + ray->perp_wall_dist * ray->dir.y;
 	else
 		info->draw.wall_x = info->pos.x + ray->perp_wall_dist * ray->dir.x;
 	info->draw.wall_x -= floor(info->draw.wall_x);
+}
 
+void		draw_wall(t_ray *ray, t_info *info, int x)
+{
+	int y;
+	int	tex_x;
+	int	tex_y;
+	int	color;
+	
+	draw_init(ray, info);
+	info->draw.step = 1.0 * texHeight / info->draw.line_h;
+	info->draw.tex_pos = (info->draw.draw_s - height / 2 + info->draw.line_h / 2) * info->draw.step;
 	// x coordinate on the texture
-	int texX = (int)(info->draw.wall_x * (double)texWidth);
+	tex_x = (int)(info->draw.wall_x * (double)texWidth);
 	if (ray->side == 0 && ray->dir.x > 0)
-		texX = texWidth - texX - 1;
+		tex_x = texWidth - tex_x - 1;
 	if (ray->side == 1 && ray->dir.y < 0)
-		texX = texWidth - texX - 1;
-
-	// How much to increase the texture coordinate perscreen pixel
-	double step = 1.0 * texHeight / lineHeight;
-
-	// Starting texture coordinate
-	double texPos = (info->draw.draw_s - height / 2 + lineHeight / 2) * step;
-
-	for (int y = info->draw.draw_s; y < info->draw.draw_e; y++)
+		tex_x = texWidth - tex_x - 1;	
+	y = info->draw.draw_s;
+	while(y < info->draw.draw_e)
 	{
 		// Cast the texture coordinate to integer, and mask with (texHeight - 1) in case of overflow
-		int texY = (int)texPos & (texHeight - 1);
-		texPos += step;
-
-		int color = info->texture[texNum][texHeight * texY + texX];
-
+		tex_y = (int)info->draw.tex_pos & (texHeight - 1);
+		info->draw.tex_pos += (info->draw.step);
+		color = info->texture[info->draw.texture_num][texHeight * tex_y + tex_x];
 		// make color darker for y-sides: R, G and B byte each divided through two with a "shift" and an "and"
 		if (ray->side == 1)
 			color = (color >> 1) & 8355711;
-
 		info->buf[y][x] = color;
+		y++;
 	}
 }
 
