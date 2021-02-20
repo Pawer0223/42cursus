@@ -13,11 +13,37 @@
 #define width 640
 #define height 480
 
-typedef struct  s_pair
+typedef struct	s_draw
+{
+	double	wall_x;
+	int		draw_s;
+	int		draw_e;
+}				t_draw;
+
+typedef struct  s_double_pair
 {
     double      x;
     double      y;
-}               t_pair;
+}               t_d_pair;
+
+typedef struct  s_int_pair
+{
+    int	x;
+	int	y;
+}               t_i_pair;
+
+typedef struct	s_ray
+{
+	double		camera_x;
+	double		perp_wall_dist;
+	t_d_pair	dir;
+	t_d_pair	side_dist;
+	t_d_pair	delta_dist;
+	t_i_pair	map;
+	t_i_pair	step;
+	int			hit;
+	int			side;
+}				t_ray;
 
 typedef struct	s_img
 {
@@ -34,10 +60,11 @@ typedef struct	s_info
 {
     void	*mlx;
 	void	*win;
-    t_pair  pos;
-    t_pair  dir;
-    t_pair  plane;
+    t_d_pair  pos;
+    t_d_pair  dir;
+    t_d_pair  plane;
 	t_img	img;
+	t_draw	draw;
 	int		buf[height][width];
 	int		**texture;
     int     *map;
