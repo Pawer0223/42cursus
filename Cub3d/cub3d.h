@@ -60,20 +60,32 @@ typedef struct	s_img
 	int		img_height;
 }				t_img;
 
-typedef struct	s_info
+typedef struct	s_player
 {
-    void	*mlx;
-	void	*win;
-    t_d_pair  pos;
-    t_d_pair  dir;
-    t_d_pair  plane;
-	t_img	img;
-	t_draw	draw;
-	int		buf[height][width];
-	int		**texture;
-    int     *map;
-	double	moveSpeed;
-	double	rotSpeed;
-}				t_info;
+    // void		*mlx;
+	// void		*win;
+    t_d_pair 	pos;
+    t_d_pair 	dir;
+    t_d_pair 	plane;
+	// t_img		img;
+	t_draw		draw;
+	// int		buf[height][width];
+	// int			**texture;
+	double		move_speed;
+	double		rot_sppeed;
+}				t_player;
 
-void	calc(t_info *info);
+
+typedef struct	s_cub3d
+{   
+	void		*mlx;
+	void		*win;
+	//int			**buf;
+	//int			**world_map;
+	int			buf[height][width];
+	int			**texture;
+	t_img		img;
+	t_player	player;
+}				t_cub3d;
+
+void	calc(t_cub3d *info);
