@@ -2,6 +2,10 @@
     "42header.username": "taekang",
     "42header.email": "taekang@student.42.fr",
     "files.associations": {
-        "cub3d.h": "c"
+        "cub3d.h": "c",
+        "libft.h": "c",
+        "__locale": "c",
+        "locale": "c",
+        "__node_handle": "c"
     }
   }

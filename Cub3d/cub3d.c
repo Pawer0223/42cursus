@@ -6,11 +6,12 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/20 00:15:40 by taekang           #+#    #+#             */
-/*   Updated: 2021/02/21 15:25:01 by taekang          ###   ########.fr       */
+/*   Updated: 2021/02/22 02:23:35 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include "./libft/libft.h"
 
 int	worldMap[mapWidth][mapHeight] =
 									{
@@ -39,6 +40,20 @@ int	worldMap[mapWidth][mapHeight] =
 										{2,2,0,0,0,0,0,2,2,2,0,0,0,2,2,0,5,0,5,0,0,0,5,5},
 										{2,2,2,2,1,2,2,2,2,2,2,1,2,2,2,5,5,5,5,5,5,5,5,5}
 									};
+
+void	load_texture(t_cub3d *info)
+{
+	t_img	img;
+
+	load_image(info, info->texture[0], "textures/deer.xpm", &img);
+	load_image(info, info->texture[1], "textures/redbrick.xpm", &img);
+	load_image(info, info->texture[2], "textures/purplestone.xpm", &img);
+	load_image(info, info->texture[3], "textures/greystone.xpm", &img);
+	load_image(info, info->texture[4], "textures/bluestone.xpm", &img);
+	load_image(info, info->texture[5], "textures/mossy.xpm", &img);
+	load_image(info, info->texture[6], "textures/wood.xpm", &img);
+	load_image(info, info->texture[7], "textures/colorstone.xpm", &img);
+}
 
 void	set_step_side_dist(t_ray *ray, t_player *info)
 {
@@ -317,20 +332,6 @@ void	load_image(t_cub3d *info, int *texture, char *path, t_img *img)
 	mlx_destroy_image(info->mlx, img->img);
 }
 
-void	load_texture(t_cub3d *info)
-{
-	t_img	img;
-
-	load_image(info, info->texture[0], "textures/deer.xpm", &img);
-	load_image(info, info->texture[1], "textures/redbrick.xpm", &img);
-	load_image(info, info->texture[2], "textures/purplestone.xpm", &img);
-	load_image(info, info->texture[3], "textures/greystone.xpm", &img);
-	load_image(info, info->texture[4], "textures/bluestone.xpm", &img);
-	load_image(info, info->texture[5], "textures/mossy.xpm", &img);
-	load_image(info, info->texture[6], "textures/wood.xpm", &img);
-	load_image(info, info->texture[7], "textures/colorstone.xpm", &img);
-}
-
 void	player_init(t_player *p)
 {
 	p->pos.x = 22.0;
@@ -383,10 +384,18 @@ int	info_init(t_cub3d *info)
 	return (1);
 }
 
-int	main(void)
+void	error_print(const char *error_message)
+{
+	printf("Error\n");
+	printf("[%s]\n", error_message);
+}
+
+int	main(int argc, const char *argv[])
 {
 	t_cub3d info;
 
+
+	// .cub파일 Path받아오기.
 	// .cub파일 파싱해서
 	// 1. worldMap 저장
 	// 2. texture저장
