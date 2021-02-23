@@ -6,13 +6,21 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/01 11:40:50 by taesan            #+#    #+#             */
-/*   Updated: 2021/02/23 02:28:48 by taekang          ###   ########.fr       */
+/*   Updated: 2021/02/24 01:14:27 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# define ERROR_PARAM		"Parameter Error"
-# define ERROR_EXTENSION	"File Extension Error"
-# define ERROR_FILE_PARSE	".cub parse Error constant IDENTIFIERS is duplicated"
+# define ERROR_PARAM			"Parameter Error"
+# define ERROR_EXTENSION		"File Extension Error"
+# define ERROR_FILE_PARSE		".cub parse Error constant IDENTIFIERS is duplicated"
+# define ERROR_FILE_NOT_EXIST 	"File Not Exist"
+# define ERROR_TEXTURE_LOAD		"Texture File Load Error"
+# define ERROR_TEXTURE_MALLOC 	"Texture malloc Error"
+# define ERROR_RGB_FORMAT		"Identifier R format Error"
+# define ERROR_RGB_VALUE		"RGB value Error"
+
+
+
 
 # define TEXTURES			8
 # define TEX_NORTH			0 // eagle
@@ -128,7 +136,6 @@ typedef struct	s_cub3d
 // 	load_image(info, info->texture[7], "textures/colorstone.xpm", &img);
 // }
 
-
 # define IDENTIFIERS	9
 # define NORTH			0
 # define SOUTH			1
@@ -140,7 +147,38 @@ typedef struct	s_cub3d
 # define RESOLUTION		7
 # define MAP_LINE		8
 
-int check_identifier(char const *line)
+int	error_occur(const char *error_message)
+{
+	printf("Error\n");
+	printf(": [%s]\n", error_message);
+    return (0);
+}
+
+int			default_init(t_cub3d *info, int visited[])
+{
+	int i;
+	int	j;
+
+	i = 0;
+	while (i < TEXTURES)
+	{
+		if (!(info->texture[i] = (int *)malloc(sizeof(int) * (TEX_HEIGHT * TEX_WIDTH))))
+		{
+			j = 0;
+			while (j < i)
+				free(info->texture[j++]);
+			return error_occur(ERROR_TEXTURE_MALLOC);
+		}
+		ft_bzero(info->texture[i], TEX_HEIGHT * TEX_WIDTH);
+		i++;
+	}
+	i = 0;
+	while (i < IDENTIFIERS)
+		visited[i++] = 0;
+	return (1);
+}
+
+int check_identifier(char *line)
 {
 	if (line[0] == 'R' && line[1] == ' ')
 		return (RESOLUTION);
@@ -159,13 +197,6 @@ int check_identifier(char const *line)
 	else if (line[0] == 'C' && line[1] == ' ')
 		return (CEILING);
 	return (MAP_LINE);
-}
-
-int	error_occur(const char *error_message)
-{
-	printf("Error\n");
-	printf("[%s]\n", error_message);
-    return (0);
 }
 
 int     extension_check(const char *path, const char *extension)
@@ -203,7 +234,7 @@ int		get_int_value(const char *line, int *i)
 	return (value);
 }
 
-int		parse_id_r(t_cub3d *info, char const *line)
+int		parse_id_r(t_cub3d *info, char *line)
 {
 	int		i;
 	
@@ -217,40 +248,104 @@ int		parse_id_r(t_cub3d *info, char const *line)
 }
 
 
-void	load_image2(t_cub3d *info, int *texture, char *path, t_img *img)
+int		load_image(t_cub3d *info, int *texture, char *path, t_img *img)
 {
-	img->img = mlx_xpm_file_to_image(info->mlx, path, &img->img_width, &img->img_height);
-	img->data = (int *)mlx_get_data_addr(img->img, &img->bpp, &img->size_l, &img->endian);
-	for (int y = 0; y < img->img_height; y++)
+	int	x;
+	int	y;
+
+	if (!(img->img = mlx_xpm_file_to_image(info->mlx, path, &img->img_width, &img->img_height)))
+		return (0);
+	if (!(img->data = (int *)mlx_get_data_addr(img->img, &img->bpp, &img->size_l, &img->endian)))
+		return (0);
+	x = 0;
+	y = 0;
+	while (y < img->img_height)
 	{
-		for (int x = 0; x < img->img_width; x++)
+		while (x < img->img_width)
 		{
 			texture[img->img_width * y + x] = img->data[img->img_width * y + x];
+			x++;
 		}
+		y++;
 	}
 	mlx_destroy_image(info->mlx, img->img);
-}
-
-int		parse_texture(t_cub3d *info, int id, char const *line)
-{
-	char	*path;
-	int		i;
-	int		len;
-
-	i = (id == SPRITE) ? 2 : 3;
-	len = ft_strlen(line + i);
-	if (!(path = ft_substr(line, i, len)))
-		return (0);
-	printf("path : [%s]\n", line + i);
-	load_image2(info, info->texture[id], (char *)(line + i), &info->img);
 	return (1);
 }
 
+int		parse_and_load_texture(t_cub3d *info, int id, char *line)
+{
+	int	i;
+
+	i = (id == SPRITE) ? 2 : 3;
+	if (!load_image(info, info->texture[id], (line + i), &info->img))
+		return (error_occur(ERROR_TEXTURE_LOAD));
+	return (1);
+}
+
+int		ft_isspace(char c)
+{
+	if (c == '\t' || c == '\n' || c == '\v' || c == '\f' || c == '\r' || c == ' ')
+		return (1);
+	return (0);	
+}
+
+int		is_empty_line(char *line)
+{
+	int		i;
+
+	i = 0;
+	while (line[i])
+	{
+		if (!ft_isspace(line[i]) || line[i] != ' ' || line[i] != ',')
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+int		set_color(int *color, int *value, int seq)
+{
+	if (*value < 0 || *value > 255)
+		return (error_occur(ERROR_RGB_VALUE));
+	*color = *color | (*value << (16 - (seq * 8)));
+	*value = 0;
+	return (1);
+}
+
+int		parse_color(t_cub3d *info, int id, char *line)
+{
+	int	i;
+	int	value;
+	int	seq;
+
+	i = 2;
+	value = 0;
+	seq = 0;
+	while (line[i])
+	{
+		if (ft_isdigit(line[i]))
+			value = value * 10 + line[i] - '0';
+		else if (line[i] == ',')
+		{
+			if(!set_color(info->texture[id], &value, seq++))
+				return (0);
+		}
+		else
+			return ((error_occur(ERROR_RGB_FORMAT)));
+		i++;
+	}
+	if (i == 2 || seq != 2 || !set_color(info->texture[id], &value, seq))
+		return ((error_occur(ERROR_RGB_FORMAT)));
+	// printf("info->texture[%d] : %d\n", id, *info->texture[id]);
+	return (1);
+}
 // parameter .. check ... need...
 int    parse_line(t_cub3d *info, char *line, int visited[])
 {
     int id;
 
+	if (is_empty_line(line))
+		return (1); 
     id = check_identifier(line);
 	if (id != MAP_LINE && visited[id])
 		return (error_occur(ERROR_FILE_PARSE));
@@ -258,50 +353,14 @@ int    parse_line(t_cub3d *info, char *line, int visited[])
     if (id == RESOLUTION)
 		return (parse_id_r(info, line));
 	else if (id >= NORTH && id <= SPRITE)
-		return (parse_texture(info, id, line));
-	// else if (id == FLOOR || id == CEILING)
-	// 	return (parse_color(config, key, line));
+		return (parse_and_load_texture(info, id, line));
+	else if (id == FLOOR || id == CEILING)
+		return (parse_color(info, id, line));
 	// return (!!str_add_back(map_buffer, ft_strdup(line)));
-    return (0);
+    return (1);
 }
 
-int			default_init(t_cub3d *info, int visited[])
-{
-	int i;
-	int	j;
-
-	i = 0;
-	while (i < TEXTURES)
-	{
-		if (!(info->texture[i] = (int *)malloc(sizeof(int) * (TEX_HEIGHT * TEX_WIDTH))))
-		{
-			j = 0;
-			while (j < i)
-				free(info->texture[j++]);
-			return (0);
-		}
-		i++;
-	}
-
-	i = 0;
-	j = 0;
-	while (i < TEXTURES)
-	{
-		while (j < (TEX_HEIGHT * TEX_WIDTH))
-		{
-			info->texture[i][j] = 0;
-			j++;
-		}
-		i++;
-	}
-
-	i = 0;
-	while (i < IDENTIFIERS)
-		visited[i++] = 0;
-	return (1);
-}
-
-int parse_file(t_cub3d *info, const char *path)
+int		parse_file(t_cub3d *info, const char *path)
 {
 	int			c_fd;
 	char		*line;
@@ -311,7 +370,7 @@ int parse_file(t_cub3d *info, const char *path)
 	if (!extension_check(path, ".cub"))
         return (error_occur(ERROR_EXTENSION));
 	if ((c_fd = open(path, O_RDONLY)) < 0)
-		return (0);
+		return (error_occur(ERROR_FILE_NOT_EXIST));
 	if (!default_init(info, visited))
 		return (0);
 	r = 1;
