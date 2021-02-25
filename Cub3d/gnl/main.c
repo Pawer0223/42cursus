@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/01 11:40:50 by taesan            #+#    #+#             */
-/*   Updated: 2021/02/24 01:14:27 by taekang          ###   ########.fr       */
+/*   Updated: 2021/02/25 19:19:10 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,21 +18,25 @@
 # define ERROR_TEXTURE_MALLOC 	"Texture malloc Error"
 # define ERROR_RGB_FORMAT		"Identifier R format Error"
 # define ERROR_RGB_VALUE		"RGB value Error"
+# define ERROR_DEFAULT_INIT		"Default Init Error"
+# define ERROR_POINT_DUPLICATE	"Point(N, S, E, W) Duplicate"
+# define ERROR_MAP_MALLOC 		"WorldMap malloc Error"
 
 
 
-
-# define TEXTURES			8
-# define TEX_NORTH			0 // eagle
-# define TEX_SOUTH			1 // redbrick
-# define TEX_WEST			2 // purplestone
-# define TEX_EAST			3 // wall_type_etc1 , mossy
-# define TEX_CEILING		4 // celing, wood
-# define TEX_FLOOR			5 // floor1, greystone
-# define TEX_SPRITE			6 // sprite... , blue stone , not used
-# define TEX_SPRITE_UP		7 // colorstone
 # define TEX_WIDTH			64
 # define TEX_HEIGHT			64
+
+# define IDENTIFIERS	9
+# define NORTH			0
+# define SOUTH			1
+# define WEST			2
+# define EAST			3
+# define SPRITE			4
+# define CEILING		5
+# define FLOOR			6
+# define RESOLUTION		7
+# define MAP_LINE		8
 
 # include <stdio.h>
 # include <fcntl.h>
@@ -105,6 +109,7 @@ typedef struct	s_player
 	// int			**texture;
 	double		move_speed;
 	double		rot_sppeed;
+	char		point;
 }				t_player;
 
 
@@ -115,37 +120,15 @@ typedef struct	s_cub3d
 	int			**buf;
 	int			**world_map;
 	// int			buf[height][width];
-	int			*texture[TEXTURES];
+	int			*texture[IDENTIFIERS];
 	int			win_width;
 	int			win_height;
+	int			map_width;
+	int			map_height;
 	t_img		img;
 	t_player	player;
+	t_list		*map_buf;
 }				t_cub3d;
-
-// void	load_texture(t_cub3d *info)
-// {
-// 	t_img	img;
-
-// 	load_image(info, info->texture[0], "textures/eagle.xpm", &img);
-// 	load_image(info, info->texture[1], "textures/redbrick.xpm", &img);
-// 	load_image(info, info->texture[2], "textures/purplestone.xpm", &img);
-// 	load_image(info, info->texture[3], "textures/greystone.xpm", &img);		
-// 	load_image(info, info->texture[4], "textures/mossy.xpm", &img);
-// 	load_image(info, info->texture[5], "textures/wood.xpm", &img);	
-// 	load_image(info, info->texture[6], "textures/bluestone.xpm", &img);
-// 	load_image(info, info->texture[7], "textures/colorstone.xpm", &img);
-// }
-
-# define IDENTIFIERS	9
-# define NORTH			0
-# define SOUTH			1
-# define WEST			2
-# define EAST			3
-# define SPRITE			4
-# define CEILING		5
-# define FLOOR			6
-# define RESOLUTION		7
-# define MAP_LINE		8
 
 int	error_occur(const char *error_message)
 {
@@ -154,13 +137,15 @@ int	error_occur(const char *error_message)
     return (0);
 }
 
-int			default_init(t_cub3d *info, int visited[])
+int			default_init(t_cub3d *info)
 {
 	int i;
 	int	j;
-
+	
+	ft_bzero(info, sizeof(t_cub3d));
+	info->mlx = mlx_init();
 	i = 0;
-	while (i < TEXTURES)
+	while (i < IDENTIFIERS)
 	{
 		if (!(info->texture[i] = (int *)malloc(sizeof(int) * (TEX_HEIGHT * TEX_WIDTH))))
 		{
@@ -172,9 +157,6 @@ int			default_init(t_cub3d *info, int visited[])
 		ft_bzero(info->texture[i], TEX_HEIGHT * TEX_WIDTH);
 		i++;
 	}
-	i = 0;
-	while (i < IDENTIFIERS)
-		visited[i++] = 0;
 	return (1);
 }
 
@@ -274,10 +256,11 @@ int		load_image(t_cub3d *info, int *texture, char *path, t_img *img)
 
 int		parse_and_load_texture(t_cub3d *info, int id, char *line)
 {
-	int	i;
+	int		i;
+	t_img	img;
 
 	i = (id == SPRITE) ? 2 : 3;
-	if (!load_image(info, info->texture[id], (line + i), &info->img))
+	if (!load_image(info, info->texture[id], (line + i), &img))
 		return (error_occur(ERROR_TEXTURE_LOAD));
 	return (1);
 }
@@ -336,18 +319,76 @@ int		parse_color(t_cub3d *info, int id, char *line)
 	}
 	if (i == 2 || seq != 2 || !set_color(info->texture[id], &value, seq))
 		return ((error_occur(ERROR_RGB_FORMAT)));
-	// printf("info->texture[%d] : %d\n", id, *info->texture[id]);
 	return (1);
 }
-// parameter .. check ... need...
-int    parse_line(t_cub3d *info, char *line, int visited[])
+
+int		map_line_check(t_cub3d *info, char c, int width)
 {
-    int id;
+	if ((c >= '0' && c <= '4') || c == ' ')
+		return (1);
+	else if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
+	{
+		if (info->player.point)
+			return error_occur(ERROR_POINT_DUPLICATE);
+		info->player.point = c;
+		info->player.pos.x = width;
+		info->player.pos.y = info->map_height;
+		return (2);
+	}
+	else
+		return (0);
+}
+
+int		ft_max(int a, int b)
+{
+	return (a > b) ? a : b;
+}
+
+void	del_line(void *line)
+{
+	free(line);
+}
+
+int		parse_map(t_cub3d *info, char *line)
+{
+	// 1, 2, 3, 4 N,S,E,W 만 가능하도록
+	int 	i;
+	int		r;
+	int		width;
+	t_list	*next;
+
+	i = 0;
+	width = 0;
+	r = 0;
+	while (line[i])
+	{
+		if (!(r = map_line_check(info, line[i], width)))
+			return (0);
+		if (r == 2)
+			line[i] = '0';
+		width++;
+		i++;
+	}
+	info->map_width = ft_max(info->map_width, width);
+	info->map_height++;
+	if (!(next = ft_lstnew(line)))
+	{
+		ft_lstclear(&info->map_buf, &del_line);
+		return (0);
+	}
+	ft_lstadd_back(&info->map_buf, next);
+	return (1);
+}
+
+// parameter .. check ... need...
+int    parse_line(t_cub3d *info, char *line, int visited[])   
+{
+    int		id;
 
 	if (is_empty_line(line))
 		return (1); 
     id = check_identifier(line);
-	if (id != MAP_LINE && visited[id])
+	if (id != MAP_LINE && (visited[id] || visited[MAP_LINE]))
 		return (error_occur(ERROR_FILE_PARSE));
 	visited[id] = 1;
     if (id == RESOLUTION)
@@ -356,8 +397,13 @@ int    parse_line(t_cub3d *info, char *line, int visited[])
 		return (parse_and_load_texture(info, id, line));
 	else if (id == FLOOR || id == CEILING)
 		return (parse_color(info, id, line));
-	// return (!!str_add_back(map_buffer, ft_strdup(line)));
-    return (1);
+	if (id == MAP_LINE && !visited[id])
+	{
+		if (!(info->map_buf = ft_lstnew(line)))
+			return (0);
+		visited[id] = 1;
+	}
+	return (parse_map(info, ft_strdup(line)));
 }
 
 int		parse_file(t_cub3d *info, const char *path)
@@ -367,30 +413,110 @@ int		parse_file(t_cub3d *info, const char *path)
 	int			r;
 	int 		visited[IDENTIFIERS];
 
+	ft_bzero(visited, (IDENTIFIERS * sizeof(int)));
 	if (!extension_check(path, ".cub"))
         return (error_occur(ERROR_EXTENSION));
 	if ((c_fd = open(path, O_RDONLY)) < 0)
 		return (error_occur(ERROR_FILE_NOT_EXIST));
-	if (!default_init(info, visited))
-		return (0);
 	r = 1;
-	while (get_next_line(c_fd, &line))
+	while (r && get_next_line(c_fd, &line))
 	{
         r = parse_line(info, line, visited);
 		free(line);
-		if (!r)
-			return (0);
+
 	}
+	if (!r || parse_line(info, line, visited))
+		return (0);
 	free(line);
 	close(c_fd);
+	return (1);
+}
+
+void	print_list(void *content)
+{
+	printf("[%s]\n", content);
+}
+
+void	to_string(t_cub3d *info)
+{
+
+	printf("win_width : %d\n", info->win_width);
+	printf("win_height : %d\n", info->win_height);
+	printf("map_width : %d\n", info->map_width);
+	printf("map_height : %d\n", info->map_height);
+	printf("### map_buf ###\n");
+	ft_lstiter(info->map_buf, &print_list);
+}
+
+int		world_map_malloc(int **map, int width, int i)
+{
+	int j;
+
+	if (!(map[i] = (int *)malloc(sizeof(int) * width)))
+	{
+		j = 0;
+		while (j < i)
+			free(map[j++]);
+		return (0);
+	}
+	return (1);
+}
+
+void	print_world_map(t_cub3d *info)
+{
+	int i;
+	int j;
+
+	printf("### print_world_map ### \n");
+	i = 0;
+	while (i < info->map_height)
+	{
+		j = 0;
+		while (j < info->map_width)
+		{
+			printf("%d", info->world_map[i][j]);
+			j++;
+		}
+		printf("\n");
+		i++;
+	}
+}
+
+
+int		make_world_map(t_cub3d *info)
+{
+	int 	**map;
+	int		i;
+	int		j;
+	t_list	*curr;
+
+	if (!(map = (int **)malloc(sizeof(int *) * info->map_height)))
+		return (0);
+	i = 0;
+	curr = info->map_buf;
+	while (curr)
+	{
+		if (!world_map_malloc(map, info->map_width, i))
+			return (0);
+		j = 0;
+		while (*(char *)(curr->content + j))
+		{
+			map[i][j] = *(char *)(curr->content + j) - '0';
+			j++;
+		}
+		i++;
+		curr = curr->next;
+	}
+	info->world_map = map;
 	return (1);
 }
 
 int	main(int argc, const char *argv[])
 {
 	t_cub3d info;
-	info.mlx = mlx_init();
 
+	if (!default_init(&info))
+		return error_occur(ERROR_DEFAULT_INIT);
 	if (argc == 2)
         parse_file(&info, argv[1]);
     else if (argc == 3)
@@ -402,4 +528,14 @@ int	main(int argc, const char *argv[])
 	}
     else
         return (error_occur(ERROR_PARAM));
+	
+	to_string(&info);
+	if (!make_world_map(&info))
+		return (error_occur(ERROR_MAP_MALLOC));
+
+	print_world_map(&info);
+	ft_lstclear(&info.map_buf, &del_line);
+	printf("### make after ### \n");
+	to_string(&info);
+
 }
