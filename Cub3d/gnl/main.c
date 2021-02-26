@@ -6,22 +6,22 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/01 11:40:50 by taesan            #+#    #+#             */
-/*   Updated: 2021/02/25 19:19:10 by taekang          ###   ########.fr       */
+/*   Updated: 2021/02/26 14:54:03 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # define ERROR_PARAM			"Parameter Error"
 # define ERROR_EXTENSION		"File Extension Error"
-# define ERROR_FILE_PARSE		".cub parse Error constant IDENTIFIERS is duplicated"
+# define ERROR_FILE_PARSE		".cub Parse Error Constant IDENTIFIERS is Duplicated"
 # define ERROR_FILE_NOT_EXIST 	"File Not Exist"
 # define ERROR_TEXTURE_LOAD		"Texture File Load Error"
-# define ERROR_TEXTURE_MALLOC 	"Texture malloc Error"
-# define ERROR_RGB_FORMAT		"Identifier R format Error"
+# define ERROR_TEXTURE_MALLOC 	"Texture Malloc Error"
+# define ERROR_RGB_FORMAT		"Identifier R Format Error"
 # define ERROR_RGB_VALUE		"RGB value Error"
 # define ERROR_DEFAULT_INIT		"Default Init Error"
 # define ERROR_POINT_DUPLICATE	"Point(N, S, E, W) Duplicate"
-# define ERROR_MAP_MALLOC 		"WorldMap malloc Error"
-
+# define ERROR_MAP_MALLOC 		"WorldMap Malloc Error"
+# define ERROR_MAP_FORMAT		"WorldMap Format Error"
 
 
 # define TEX_WIDTH			64
@@ -446,6 +446,12 @@ void	to_string(t_cub3d *info)
 	printf("map_height : %d\n", info->map_height);
 	printf("### map_buf ###\n");
 	ft_lstiter(info->map_buf, &print_list);
+	printf("### player ###\n");
+	printf("pos.x : %f, pos.y : %f\n", info->player.pos.x, info->player.pos.y);
+	printf("dir.x : %f, dir.y : %f\n", info->player.dir.x, info->player.dir.y);
+	printf("plane.x : %f, plane.y : %f\n", info->player.plane.x, info->player.plane.y);
+	printf("point : %c\n", info->player.point);
+	printf("move_speed : %f, rot_speed : %f\n", info->player.move_speed ,info->player.move_speed);
 }
 
 int		world_map_malloc(int **map, int width, int i)
@@ -511,6 +517,13 @@ int		make_world_map(t_cub3d *info)
 	return (1);
 }
 
+int	map_valid_check(t_cub3d *info)
+{
+	// 0 주변에는 1만 존재해야 함.
+	
+	return (1);
+}
+
 int	main(int argc, const char *argv[])
 {
 	t_cub3d info;
@@ -528,14 +541,10 @@ int	main(int argc, const char *argv[])
 	}
     else
         return (error_occur(ERROR_PARAM));
-	
-	to_string(&info);
 	if (!make_world_map(&info))
 		return (error_occur(ERROR_MAP_MALLOC));
-
-	print_world_map(&info);
 	ft_lstclear(&info.map_buf, &del_line);
-	printf("### make after ### \n");
+	if (!map_valid_check(&info))
+		return error_occur(ERROR_MAP_FORMAT);
 	to_string(&info);
-
 }
