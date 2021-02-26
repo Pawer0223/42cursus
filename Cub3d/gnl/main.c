@@ -6,142 +6,142 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/01 11:40:50 by taesan            #+#    #+#             */
-/*   Updated: 2021/02/26 14:54:03 by taekang          ###   ########.fr       */
+/*   Updated: 2021/02/27 01:38:28 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# define ERROR_PARAM			"Parameter Error"
-# define ERROR_EXTENSION		"File Extension Error"
-# define ERROR_FILE_PARSE		".cub Parse Error Constant IDENTIFIERS is Duplicated"
-# define ERROR_FILE_NOT_EXIST 	"File Not Exist"
-# define ERROR_TEXTURE_LOAD		"Texture File Load Error"
-# define ERROR_TEXTURE_MALLOC 	"Texture Malloc Error"
-# define ERROR_RGB_FORMAT		"Identifier R Format Error"
-# define ERROR_RGB_VALUE		"RGB value Error"
-# define ERROR_DEFAULT_INIT		"Default Init Error"
-# define ERROR_POINT_DUPLICATE	"Point(N, S, E, W) Duplicate"
-# define ERROR_MAP_MALLOC 		"WorldMap Malloc Error"
-# define ERROR_MAP_FORMAT		"WorldMap Format Error"
+#define ERROR_PARAM "Parameter Error"
+#define ERROR_EXTENSION "File Extension Error"
+#define ERROR_FILE_PARSE ".cub Parse Error Constant IDENTIFIERS is Duplicated"
+#define ERROR_FILE_NOT_EXIST "File Not Exist"
+#define ERROR_TEXTURE_LOAD "Texture File Load Error"
+#define ERROR_TEXTURE_MALLOC "Texture Malloc Error"
+#define ERROR_RGB_FORMAT "Identifier R Format Error"
+#define ERROR_RGB_VALUE "RGB value Error"
+#define ERROR_DEFAULT_INIT "Default Init Error"
+#define ERROR_POINT_DUPLICATE "Point(N, S, E, W) Duplicate"
+#define ERROR_MAP_MALLOC "WorldMap Malloc Error"
+#define ERROR_MAP_FORMAT "WorldMap Format Error"
 
+#define TEX_WIDTH 64
+#define TEX_HEIGHT 64
 
-# define TEX_WIDTH			64
-# define TEX_HEIGHT			64
+#define IDENTIFIERS 9
+#define NORTH 0
+#define SOUTH 1
+#define WEST 2
+#define EAST 3
+#define SPRITE 4
+#define CEILING 5
+#define FLOOR 6
+#define RESOLUTION 7
+#define MAP_LINE 8
 
-# define IDENTIFIERS	9
-# define NORTH			0
-# define SOUTH			1
-# define WEST			2
-# define EAST			3
-# define SPRITE			4
-# define CEILING		5
-# define FLOOR			6
-# define RESOLUTION		7
-# define MAP_LINE		8
+#define MAP_EMPTY_PASS 9
 
-# include <stdio.h>
-# include <fcntl.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include "../libft/libft.h"
-# include "get_next_line.h"
-# include "mlx/mlx.h"
+#include <stdio.h>
+#include <fcntl.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include "../libft/libft.h"
+#include "get_next_line.h"
+#include "mlx/mlx.h"
 
 // compile => gcc get_next_line.c get_next_line_utils.c main.c -L../libft -lft
 // compile => gcc -g get_next_line.c get_next_line_utils.c main.c -L../libft -lft -Lmlx -lmlx -framework OpenGL -framework Appkit
 
-typedef struct	s_draw
+typedef struct s_draw
 {
-	double	wall_x;
-	double	step;
-	double	tex_pos;
-	int		draw_s;
-	int		draw_e;
-	int		line_h;
-	int		texture_num;
-}				t_draw;
+	double wall_x;
+	double step;
+	double tex_pos;
+	int draw_s;
+	int draw_e;
+	int line_h;
+	int texture_num;
+} t_draw;
 
-typedef struct  s_double_pair
+typedef struct s_double_pair
 {
-    double      x;
-    double      y;
-}               t_d_pair;
+	double x;
+	double y;
+} t_d_pair;
 
-typedef struct  s_int_pair
+typedef struct s_int_pair
 {
-    int	x;
-	int	y;
-}               t_i_pair;
+	int x;
+	int y;
+} t_i_pair;
 
-typedef struct	s_ray
+typedef struct s_ray
 {
-	double		camera_x;
-	double		perp_wall_dist;
-	t_d_pair	dir;
-	t_d_pair	side_dist;
-	t_d_pair	delta_dist;
-	t_i_pair	map;
-	t_i_pair	step;
-	int			hit;
-	int			side;
-}				t_ray;
+	double camera_x;
+	double perp_wall_dist;
+	t_d_pair dir;
+	t_d_pair side_dist;
+	t_d_pair delta_dist;
+	t_i_pair map;
+	t_i_pair step;
+	int hit;
+	int side;
+} t_ray;
 
-typedef struct	s_img
+typedef struct s_img
 {
-	void	*img;
-	int		*data;
-	int		size_l;
-	int		bpp;
-	int		endian;
-	int		img_width;
-	int		img_height;
-}				t_img;
+	void *img;
+	int *data;
+	int size_l;
+	int bpp;
+	int endian;
+	int img_width;
+	int img_height;
+} t_img;
 
-typedef struct	s_player
+typedef struct s_player
 {
-    // void		*mlx;
+	// void		*mlx;
 	// void		*win;
-    t_d_pair 	pos;
-    t_d_pair 	dir;
-    t_d_pair 	plane;
+	t_d_pair pos;
+	t_d_pair dir;
+	t_d_pair plane;
 	// t_img		img;
-	t_draw		draw;
+	t_draw draw;
 	// int		buf[height][width];
 	// int			**texture;
-	double		move_speed;
-	double		rot_sppeed;
-	char		point;
-}				t_player;
+	double move_speed;
+	double rot_sppeed;
+	char point;
+} t_player;
 
-
-typedef struct	s_cub3d
-{   
-	void		*mlx;
-	void		*win;
-	int			**buf;
-	int			**world_map;
+typedef struct s_cub3d
+{
+	void *mlx;
+	void *win;
+	int **buf;
+	int **world_map;
 	// int			buf[height][width];
-	int			*texture[IDENTIFIERS];
-	int			win_width;
-	int			win_height;
-	int			map_width;
-	int			map_height;
-	t_img		img;
-	t_player	player;
-	t_list		*map_buf;
-}				t_cub3d;
+	int *texture[IDENTIFIERS];
+	int win_width;
+	int win_height;
+	int map_width;
+	int map_height;
+	t_img img;
+	t_player player;
+	t_list *map_buf;
+} t_cub3d;
 
-int	error_occur(const char *error_message)
+int error_occur(const char *error_message)
 {
 	printf("Error\n");
 	printf(": [%s]\n", error_message);
-    return (0);
+	return (0);
 }
 
-int			default_init(t_cub3d *info)
+int default_init(t_cub3d *info)
 {
 	int i;
-	int	j;
-	
+	int j;
+
 	ft_bzero(info, sizeof(t_cub3d));
 	info->mlx = mlx_init();
 	i = 0;
@@ -181,24 +181,24 @@ int check_identifier(char *line)
 	return (MAP_LINE);
 }
 
-int     extension_check(const char *path, const char *extension)
+int extension_check(const char *path, const char *extension)
 {
-    int p_len;
-    int e_len;
+	int p_len;
+	int e_len;
 
-    p_len = ft_strlen(path);
-    e_len = ft_strlen(extension);
+	p_len = ft_strlen(path);
+	e_len = ft_strlen(extension);
 
-    if (p_len < e_len)
-        return (0);
-    if (ft_strcmp(path + p_len - e_len, extension) != 0)
-        return (0);
-    return (1);
+	if (p_len < e_len)
+		return (0);
+	if (ft_strcmp(path + p_len - e_len, extension) != 0)
+		return (0);
+	return (1);
 }
 
-int		get_int_value(const char *line, int *i)
+int get_int_value(const char *line, int *i)
 {
-	int	value;
+	int value;
 
 	value = 0;
 	while (line[*i] && line[*i] == ' ')
@@ -216,12 +216,12 @@ int		get_int_value(const char *line, int *i)
 	return (value);
 }
 
-int		parse_id_r(t_cub3d *info, char *line)
+int parse_id_r(t_cub3d *info, char *line)
 {
-	int		i;
-	
+	int i;
+
 	i = 1;
-	info->win_width = get_int_value(line , &i);
+	info->win_width = get_int_value(line, &i);
 	info->win_height = get_int_value(line, &i);
 	if (info->win_width == -1 || info->win_height == -1)
 		return (0);
@@ -229,11 +229,10 @@ int		parse_id_r(t_cub3d *info, char *line)
 	return (1);
 }
 
-
-int		load_image(t_cub3d *info, int *texture, char *path, t_img *img)
+int load_image(t_cub3d *info, int *texture, char *path, t_img *img)
 {
-	int	x;
-	int	y;
+	int x;
+	int y;
 
 	if (!(img->img = mlx_xpm_file_to_image(info->mlx, path, &img->img_width, &img->img_height)))
 		return (0);
@@ -254,10 +253,10 @@ int		load_image(t_cub3d *info, int *texture, char *path, t_img *img)
 	return (1);
 }
 
-int		parse_and_load_texture(t_cub3d *info, int id, char *line)
+int parse_and_load_texture(t_cub3d *info, int id, char *line)
 {
-	int		i;
-	t_img	img;
+	int i;
+	t_img img;
 
 	i = (id == SPRITE) ? 2 : 3;
 	if (!load_image(info, info->texture[id], (line + i), &img))
@@ -265,16 +264,16 @@ int		parse_and_load_texture(t_cub3d *info, int id, char *line)
 	return (1);
 }
 
-int		ft_isspace(char c)
+int ft_isspace(char c)
 {
 	if (c == '\t' || c == '\n' || c == '\v' || c == '\f' || c == '\r' || c == ' ')
 		return (1);
-	return (0);	
+	return (0);
 }
 
-int		is_empty_line(char *line)
+int is_empty_line(char *line)
 {
-	int		i;
+	int i;
 
 	i = 0;
 	while (line[i])
@@ -286,7 +285,7 @@ int		is_empty_line(char *line)
 	return (1);
 }
 
-int		set_color(int *color, int *value, int seq)
+int set_color(int *color, int *value, int seq)
 {
 	if (*value < 0 || *value > 255)
 		return (error_occur(ERROR_RGB_VALUE));
@@ -295,11 +294,11 @@ int		set_color(int *color, int *value, int seq)
 	return (1);
 }
 
-int		parse_color(t_cub3d *info, int id, char *line)
+int parse_color(t_cub3d *info, int id, char *line)
 {
-	int	i;
-	int	value;
-	int	seq;
+	int i;
+	int value;
+	int seq;
 
 	i = 2;
 	value = 0;
@@ -310,7 +309,7 @@ int		parse_color(t_cub3d *info, int id, char *line)
 			value = value * 10 + line[i] - '0';
 		else if (line[i] == ',')
 		{
-			if(!set_color(info->texture[id], &value, seq++))
+			if (!set_color(info->texture[id], &value, seq++))
 				return (0);
 		}
 		else
@@ -322,7 +321,7 @@ int		parse_color(t_cub3d *info, int id, char *line)
 	return (1);
 }
 
-int		map_line_check(t_cub3d *info, char c, int width)
+int map_line_check(t_cub3d *info, char c, int width)
 {
 	if ((c >= '0' && c <= '4') || c == ' ')
 		return (1);
@@ -339,23 +338,23 @@ int		map_line_check(t_cub3d *info, char c, int width)
 		return (0);
 }
 
-int		ft_max(int a, int b)
+int ft_max(int a, int b)
 {
 	return (a > b) ? a : b;
 }
 
-void	del_line(void *line)
+void del_line(void *line)
 {
 	free(line);
 }
 
-int		parse_map(t_cub3d *info, char *line)
+int parse_map(t_cub3d *info, char *line)
 {
 	// 1, 2, 3, 4 N,S,E,W 만 가능하도록
-	int 	i;
-	int		r;
-	int		width;
-	t_list	*next;
+	int i;
+	int r;
+	int width;
+	t_list *next;
 
 	i = 0;
 	width = 0;
@@ -366,6 +365,8 @@ int		parse_map(t_cub3d *info, char *line)
 			return (0);
 		if (r == 2)
 			line[i] = '0';
+		if (line[i] == ' ')
+			line[i] = '9';
 		width++;
 		i++;
 	}
@@ -381,17 +382,17 @@ int		parse_map(t_cub3d *info, char *line)
 }
 
 // parameter .. check ... need...
-int    parse_line(t_cub3d *info, char *line, int visited[])   
+int parse_line(t_cub3d *info, char *line, int visited[])
 {
-    int		id;
+	int id;
 
 	if (is_empty_line(line))
-		return (1); 
-    id = check_identifier(line);
+		return (1);
+	id = check_identifier(line);
 	if (id != MAP_LINE && (visited[id] || visited[MAP_LINE]))
 		return (error_occur(ERROR_FILE_PARSE));
 	visited[id] = 1;
-    if (id == RESOLUTION)
+	if (id == RESOLUTION)
 		return (parse_id_r(info, line));
 	else if (id >= NORTH && id <= SPRITE)
 		return (parse_and_load_texture(info, id, line));
@@ -406,24 +407,23 @@ int    parse_line(t_cub3d *info, char *line, int visited[])
 	return (parse_map(info, ft_strdup(line)));
 }
 
-int		parse_file(t_cub3d *info, const char *path)
+int parse_file(t_cub3d *info, const char *path)
 {
-	int			c_fd;
-	char		*line;
-	int			r;
-	int 		visited[IDENTIFIERS];
+	int c_fd;
+	char *line;
+	int r;
+	int visited[IDENTIFIERS];
 
 	ft_bzero(visited, (IDENTIFIERS * sizeof(int)));
 	if (!extension_check(path, ".cub"))
-        return (error_occur(ERROR_EXTENSION));
+		return (error_occur(ERROR_EXTENSION));
 	if ((c_fd = open(path, O_RDONLY)) < 0)
 		return (error_occur(ERROR_FILE_NOT_EXIST));
 	r = 1;
 	while (r && get_next_line(c_fd, &line))
 	{
-        r = parse_line(info, line, visited);
+		r = parse_line(info, line, visited);
 		free(line);
-
 	}
 	if (!r || parse_line(info, line, visited))
 		return (0);
@@ -432,12 +432,12 @@ int		parse_file(t_cub3d *info, const char *path)
 	return (1);
 }
 
-void	print_list(void *content)
+void print_list(void *content)
 {
 	printf("[%s]\n", content);
 }
 
-void	to_string(t_cub3d *info)
+void to_string(t_cub3d *info)
 {
 
 	printf("win_width : %d\n", info->win_width);
@@ -451,10 +451,10 @@ void	to_string(t_cub3d *info)
 	printf("dir.x : %f, dir.y : %f\n", info->player.dir.x, info->player.dir.y);
 	printf("plane.x : %f, plane.y : %f\n", info->player.plane.x, info->player.plane.y);
 	printf("point : %c\n", info->player.point);
-	printf("move_speed : %f, rot_speed : %f\n", info->player.move_speed ,info->player.move_speed);
+	printf("move_speed : %f, rot_speed : %f\n", info->player.move_speed, info->player.move_speed);
 }
 
-int		world_map_malloc(int **map, int width, int i)
+int world_map_malloc(int **map, int width, int i)
 {
 	int j;
 
@@ -468,7 +468,7 @@ int		world_map_malloc(int **map, int width, int i)
 	return (1);
 }
 
-void	print_world_map(t_cub3d *info)
+void print_world_map(t_cub3d *info)
 {
 	int i;
 	int j;
@@ -488,13 +488,12 @@ void	print_world_map(t_cub3d *info)
 	}
 }
 
-
-int		make_world_map(t_cub3d *info)
+int make_world_map(t_cub3d *info)
 {
-	int 	**map;
-	int		i;
-	int		j;
-	t_list	*curr;
+	int **map;
+	int i;
+	int j;
+	t_list *curr;
 
 	if (!(map = (int **)malloc(sizeof(int *) * info->map_height)))
 		return (0);
@@ -510,6 +509,8 @@ int		make_world_map(t_cub3d *info)
 			map[i][j] = *(char *)(curr->content + j) - '0';
 			j++;
 		}
+		while (j < info->map_width)
+			map[i][j++] = MAP_EMPTY_PASS;
 		i++;
 		curr = curr->next;
 	}
@@ -517,34 +518,98 @@ int		make_world_map(t_cub3d *info)
 	return (1);
 }
 
-int	map_valid_check(t_cub3d *info)
+int map_edge_check(int **map, int start, int end, int is_row)
 {
-	// 0 주변에는 1만 존재해야 함.
-	
 	return (1);
 }
 
-int	main(int argc, const char *argv[])
+int map_valid_check(t_cub3d *info)
+{
+	int **map = info->world_map;
+
+	int i;
+	int j;
+
+	printf("### print_world_map ### \n");
+	i = 0;
+	while (i < info->map_height)
+	{
+		j = 0;
+		while (j < info->map_width)
+		{
+			printf("%d", map[i][j]);
+			j++;
+		}
+		printf("\n");
+		i++;
+	}
+	printf(" ########## \n");
+
+	for (int i = 0; i < info->map_height; i++) {
+		// 왼 -> 오
+		int j = 0;
+		while (map[i][j] && map[i][j] == MAP_EMPTY_PASS)
+			j++;
+		if (map[i][j] != 1){
+			printf("#1#\n");
+			return (0);
+		}
+		// 오 ->왼
+		j = info->map_width - 1;
+		while (map[i][j] && map[i][j] == MAP_EMPTY_PASS)
+			j--;
+		if (map[i][j] != 1) {
+			printf("map[%d][%d] = %d\n", i , j, map[i][j]);
+			printf("#2#\n");
+			return (0);
+		}
+	}
+
+	for (int i = 0; i < info->map_width; i++)
+	{
+		// 위 -> 아래
+		int j = 0;
+		while (map[j][i] && map[j][i] == ' ')
+			j++;
+		if (map[j][i] != 1) {
+			printf("#3#\n");
+			return (0);
+		}
+		// 아래 -> 위
+		j = info->map_height - 1;
+		while (map[j][i] && map[j][i] == MAP_EMPTY_PASS)
+			j--;
+		if (map[j][i] != 1) {
+			printf("map[%d][%d] = %d\n", j , i, map[j][i]);
+			printf("#4#\n");
+			return (0);
+		}
+	}
+	return (1);
+}
+
+int main(int argc, const char *argv[])
 {
 	t_cub3d info;
 
 	if (!default_init(&info))
 		return error_occur(ERROR_DEFAULT_INIT);
 	if (argc == 2)
-        parse_file(&info, argv[1]);
-    else if (argc == 3)
-    {
+		parse_file(&info, argv[1]);
+	else if (argc == 3)
+	{
 		if (ft_strcmp(argv[1], "--save") != 0)
 			return (error_occur(ERROR_PARAM));
-        // save 옵션 저장 해주기.
-        parse_file(&info, argv[2]);
+		// save 옵션 저장 해주기.
+		parse_file(&info, argv[2]);
 	}
-    else
-        return (error_occur(ERROR_PARAM));
+	else
+		return (error_occur(ERROR_PARAM));
 	if (!make_world_map(&info))
 		return (error_occur(ERROR_MAP_MALLOC));
 	ft_lstclear(&info.map_buf, &del_line);
 	if (!map_valid_check(&info))
 		return error_occur(ERROR_MAP_FORMAT);
+	printf("Valid check Success !!! \n");
 	to_string(&info);
 }
