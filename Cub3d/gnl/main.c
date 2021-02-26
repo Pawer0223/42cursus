@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/01 11:40:50 by taesan            #+#    #+#             */
-/*   Updated: 2021/02/27 01:38:28 by taekang          ###   ########.fr       */
+/*   Updated: 2021/02/27 02:03:37 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -518,72 +518,48 @@ int make_world_map(t_cub3d *info)
 	return (1);
 }
 
-int map_edge_check(int **map, int start, int end, int is_row)
+int edge_left_right_check(t_cub3d *info)
 {
-	return (1);
-}
-
-int map_valid_check(t_cub3d *info)
-{
-	int **map = info->world_map;
-
 	int i;
 	int j;
 
-	printf("### print_world_map ### \n");
 	i = 0;
 	while (i < info->map_height)
 	{
 		j = 0;
-		while (j < info->map_width)
-		{
-			printf("%d", map[i][j]);
+		while (info->world_map[i][j] && info->world_map[i][j] == MAP_EMPTY_PASS)
 			j++;
-		}
-		printf("\n");
+		if (info->world_map[i][j] != 1)
+			return (0);
+		j = info->map_width - 1;
+		while (j >= 0 && info->world_map[i][j] == MAP_EMPTY_PASS)
+			j--;
+		if (info->world_map[i][j] != 1)
+			return (0);
 		i++;
 	}
-	printf(" ########## \n");
+	return (1);
+}
 
-	for (int i = 0; i < info->map_height; i++) {
-		// 왼 -> 오
-		int j = 0;
-		while (map[i][j] && map[i][j] == MAP_EMPTY_PASS)
-			j++;
-		if (map[i][j] != 1){
-			printf("#1#\n");
-			return (0);
-		}
-		// 오 ->왼
-		j = info->map_width - 1;
-		while (map[i][j] && map[i][j] == MAP_EMPTY_PASS)
-			j--;
-		if (map[i][j] != 1) {
-			printf("map[%d][%d] = %d\n", i , j, map[i][j]);
-			printf("#2#\n");
-			return (0);
-		}
-	}
+int edge_up_down_check(t_cub3d *info)
+{
+	int i;
+	int j;
 
-	for (int i = 0; i < info->map_width; i++)
+	i = 0;
+	while (i < info->map_width)
 	{
-		// 위 -> 아래
-		int j = 0;
-		while (map[j][i] && map[j][i] == ' ')
+		j = 0;
+		while (info->world_map[j][i] && info->world_map[j][i] == MAP_EMPTY_PASS)
 			j++;
-		if (map[j][i] != 1) {
-			printf("#3#\n");
+		if (info->world_map[j][i] != 1)
 			return (0);
-		}
-		// 아래 -> 위
 		j = info->map_height - 1;
-		while (map[j][i] && map[j][i] == MAP_EMPTY_PASS)
+		while (j >= 0 && info->world_map[j][i] == MAP_EMPTY_PASS)
 			j--;
-		if (map[j][i] != 1) {
-			printf("map[%d][%d] = %d\n", j , i, map[j][i]);
-			printf("#4#\n");
+		if (info->world_map[j][i] != 1)
 			return (0);
-		}
+		i++;
 	}
 	return (1);
 }
@@ -608,7 +584,7 @@ int main(int argc, const char *argv[])
 	if (!make_world_map(&info))
 		return (error_occur(ERROR_MAP_MALLOC));
 	ft_lstclear(&info.map_buf, &del_line);
-	if (!map_valid_check(&info))
+	if (!edge_left_right_check(&info) || !edge_up_down_check(&info))
 		return error_occur(ERROR_MAP_FORMAT);
 	printf("Valid check Success !!! \n");
 	to_string(&info);
