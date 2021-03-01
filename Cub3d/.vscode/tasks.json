@@ -3,7 +3,7 @@
         {
             "type": "cppbuild",
             "label": "C/C++: gcc build active file",
-            "command": "/usr/bin/gcc",
+            "command": "/usr/bin/gcc", //gcc -g get_next_line.c  get_next_line_utils.c main.c cub3d.c -L./libft -lft -Lmlx -lmlx -framework OpenGL -framework Appkit
             "args": [
                 "-g",
                 "*.c", //"${file}",

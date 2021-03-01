@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/01 11:40:50 by taesan            #+#    #+#             */
-/*   Updated: 2021/02/28 01:09:52 by taekang          ###   ########.fr       */
+/*   Updated: 2021/03/02 00:50:06 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,10 @@
 #define ERROR_MAP_MALLOC "WorldMap Malloc Error"
 #define ERROR_MAP_FORMAT "WorldMap Format Error"
 #define ERROR_BUF_MALLOC "Buf Malloc Error"
-
+#define	ERROR_MAP_FORMAT_NSEW "Map Not Exist N or S or E or W"
+#define	ERROR_PARSE_FILE "Parse File Error"
+#define ERROR_MAP_LINE_FORMAT "WorldMap Line Format Error"
+#define	ERROR_MAP_BUF_MALLOC "Map Buf Malloc Error"
 
 #define TEX_WIDTH 64
 #define TEX_HEIGHT 64
@@ -134,3 +137,4 @@ typedef struct s_cub3d
 
 int	main_loop(t_cub3d *info);
 int	key_press(int key, t_cub3d *info);
+void to_string(t_cub3d *info);

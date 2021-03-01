@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/01 11:40:50 by taesan            #+#    #+#             */
-/*   Updated: 2021/02/28 01:42:55 by taekang          ###   ########.fr       */
+/*   Updated: 2021/03/02 01:34:29 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ void print_world_map(t_cub3d *info)
 
 void to_string(t_cub3d *info)
 {
-
 	printf("win_width : %d\n", info->win_width);
 	printf("win_height : %d\n", info->win_height);
 	printf("map_width : %d\n", info->map_width);
@@ -56,6 +55,7 @@ void to_string(t_cub3d *info)
 	printf("plane.x : %f, plane.y : %f\n", info->player.plane.x, info->player.plane.y);
 	printf("point : %c\n", info->player.point);
 	printf("move_speed : %f, rot_speed : %f\n", info->player.move_speed, info->player.move_speed);
+	print_world_map(info);
 }
 
 int error_occur(const char *error_message)
@@ -85,7 +85,7 @@ int default_init(t_cub3d *info)
 				free(info->texture[j++]);
 			return error_occur(ERROR_TEXTURE_MALLOC);
 		}
-		ft_bzero(info->texture[i], TEX_HEIGHT * TEX_WIDTH);
+		ft_bzero(info->texture[i], sizeof(int) * TEX_HEIGHT * TEX_WIDTH);
 		i++;
 	}
 	return (1);
@@ -169,10 +169,10 @@ int load_image(t_cub3d *info, int *texture, char *path, t_img *img)
 		return (0);
 	if (!(img->data = (int *)mlx_get_data_addr(img->img, &img->bpp, &img->size_l, &img->endian)))
 		return (0);
-	x = 0;
 	y = 0;
 	while (y < img->img_height)
 	{
+		x = 0;
 		while (x < img->img_width)
 		{
 			texture[img->img_width * y + x] = img->data[img->img_width * y + x];
@@ -190,6 +190,8 @@ int parse_and_load_texture(t_cub3d *info, int id, char *line)
 	t_img img;
 
 	i = (id == SPRITE) ? 2 : 3;
+	printf("load textured id : [%d] => [%s]\n", id, line + i);
+
 	if (!load_image(info, info->texture[id], (line + i), &img))
 		return (error_occur(ERROR_TEXTURE_LOAD));
 	return (1);
@@ -252,7 +254,7 @@ int parse_color(t_cub3d *info, int id, char *line)
 	return (1);
 }
 
-int map_line_check(t_cub3d *info, char c, int width)
+int	map_line_check(t_cub3d *info, char c, int width)
 {
 	if ((c >= '0' && c <= '4') || c == ' ')
 		return (1);
@@ -261,12 +263,12 @@ int map_line_check(t_cub3d *info, char c, int width)
 		if (info->player.point)
 			return error_occur(ERROR_POINT_DUPLICATE);
 		info->player.point = c;
-		info->player.pos.x = width;
-		info->player.pos.y = info->map_height;
+		info->player.pos.x = info->map_height;
+		info->player.pos.y = width;
 		return (2);
 	}
 	else
-		return (0);
+		return error_occur(ERROR_MAP_LINE_FORMAT);
 }
 
 int ft_max(int a, int b)
@@ -306,7 +308,7 @@ int parse_map(t_cub3d *info, char *line)
 	if (!(next = ft_lstnew(line)))
 	{
 		ft_lstclear(&info->map_buf, &del_line);
-		return (0);
+		return error_occur(ERROR_MAP_BUF_MALLOC);
 	}
 	ft_lstadd_back(&info->map_buf, next);
 	return (1);
@@ -332,7 +334,7 @@ int parse_line(t_cub3d *info, char *line, int visited[])
 	if (id == MAP_LINE && !visited[id])
 	{
 		if (!(info->map_buf = ft_lstnew(line)))
-			return (0);
+			return error_occur(ERROR_BUF_MALLOC);
 		visited[id] = 1;
 	}
 	return (parse_map(info, ft_strdup(line)));
@@ -356,8 +358,10 @@ int parse_file(t_cub3d *info, const char *path)
 		r = parse_line(info, line, visited);
 		free(line);
 	}
-	if (!r || parse_line(info, line, visited))
+	if (!r || !parse_line(info, line, visited))
 		return (0);
+	if (!info->player.point)
+		return error_occur(ERROR_MAP_FORMAT_NSEW);
 	free(line);
 	close(c_fd);
 	return (1);
@@ -466,15 +470,20 @@ void	player_init(t_player *p)
 int cub3d_init(t_cub3d *info)
 {
 	int i;
+	int	j;
 
-	i = 0;
 	if (!(info->buf = (int **)malloc(sizeof(int *) * info->win_height)))
 		return error_occur(ERROR_BUF_MALLOC);
 	i = 0;
 	while (i < info->win_height)
 	{
 		if (!(info->buf[i] = (int *)malloc(sizeof(int) * info->win_width)))
-			return (0);
+		{
+			j = 0;
+			while (j < i)
+				free(info->buf[j++]);
+			return error_occur(ERROR_BUF_MALLOC);
+		}
 		i++;
 	}
 	return (1);
@@ -487,46 +496,46 @@ int raycasting_start(t_cub3d *info)
 	int	i;
 	
 	mlx_get_screen_size(info->mlx, &max_x, &max_y);
-	if (max_x < info->win_height)
+	if (info->win_height > max_x)
 		info->win_height = max_x;
-	if (max_y < info->win_width)
+	if (info->win_width > max_y)
 		info->win_width = max_y;
 	player_init(&info->player);
 	if (!cub3d_init(info))
 		return (0);
-	
 	info->win = mlx_new_window(info->mlx, info->win_width, info->win_height, "cub3d");
 	info->img.img = mlx_new_image(info->mlx, info->win_width, info->win_height);
 	info->img.data = (int *)mlx_get_data_addr(info->img.img, &info->img.bpp, &info->img.size_l, &info->img.endian);
-
 	mlx_loop_hook(info->mlx, &main_loop, info);
 	mlx_hook(info->win, X_EVENT_KEY_PRESS, 0, &key_press, info);
 	mlx_loop(info->mlx);
-
 	return (1);
 }
 
 int main(int argc, const char *argv[])
 {
 	t_cub3d info;
+	int		r;
 
 	if (!default_init(&info))
 		return error_occur(ERROR_DEFAULT_INIT);
 	if (argc == 2)
-		parse_file(&info, argv[1]);
+		r = parse_file(&info, argv[1]);
 	else if (argc == 3)
 	{
 		if (ft_strcmp(argv[1], "--save") != 0)
 			return (error_occur(ERROR_PARAM));
 		// save 옵션 저장 해주기.
-		parse_file(&info, argv[2]);
+		r = parse_file(&info, argv[2]);
 	}
 	else
 		return (error_occur(ERROR_PARAM));
+	if (!r)
+		return error_occur(ERROR_PARSE_FILE);
 	if (!make_world_map(&info))
 		return (error_occur(ERROR_MAP_MALLOC));
 	ft_lstclear(&info.map_buf, &del_line);
-	if (!edge_left_right_check(&info) || !edge_up_down_check(&info))
-		return error_occur(ERROR_MAP_FORMAT);
+	// if (!edge_left_right_check(&info) || !edge_up_down_check(&info))
+	// 	return error_occur(ERROR_MAP_FORMAT);
 	raycasting_start(&info);
 }

@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/20 00:15:40 by taekang           #+#    #+#             */
-/*   Updated: 2021/02/28 02:02:31 by taekang          ###   ########.fr       */
+/*   Updated: 2021/03/02 01:47:08 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,16 @@ void	set_step_side_dist(t_ray *ray, t_cub3d *info)
 	{
 		ray->step.y = 1;
 		ray->side_dist.y = (ray->map.y + 1.0 - p.pos.y) * ray->delta_dist.y;
-	}	
+	}
 }
 
 void	ray_init(t_ray *ray, t_cub3d *info, int x)
 {
-	t_player p;
+	t_player	p;
+	double		camera_x;
 
 	p = info->player;
-	double camera_x = 2 * x / (double)info->win_width - 1;
+	camera_x = 2 * x / (double)info->win_width - 1;
 	ray->camera_x = camera_x;
 	ray->dir.x = p.dir.x + p.plane.x * camera_x;
 	ray->dir.y = p.dir.y + p.plane.y * camera_x;
@@ -58,9 +59,6 @@ void	ray_init(t_ray *ray, t_cub3d *info, int x)
 
 void	shoot_ray(t_ray *ray, t_cub3d *info)
 {
-	int **world_map;
-
-	world_map = info->world_map;
 	while (ray->hit == 0)
 	{
 		//jump to next map square, OR in x-direction, OR in y-direction
@@ -77,7 +75,7 @@ void	shoot_ray(t_ray *ray, t_cub3d *info)
 			ray->side = 1;
 		}
 		//Check if ray has hit a wall
-		if (world_map[ray->map.x][ray->map.y] > 0) 
+		if (info->world_map[ray->map.x][ray->map.y] > 0) 
 			ray->hit = 1;
 	}
 	if (ray->side == 0)
@@ -95,10 +93,10 @@ void		draw_init(t_ray *ray, t_cub3d *info, t_draw *draw)
 	draw->line_h = (int)(height / ray->perp_wall_dist);
 	//calculate lowest and highest pixel to fill in current stripe
 	draw->draw_s = -draw->line_h / 2 + height / 2;
-	if(draw->draw_s < 0)
+	if (draw->draw_s < 0)
 		draw->draw_s = 0;
 	draw->draw_e = draw->line_h / 2 + height / 2;
-	if(draw->draw_e >= height)
+	if (draw->draw_e >= height)
 		draw->draw_e = height - 1;
 	// texturing calculations
 	draw->texture_num = info->world_map[ray->map.x][ray->map.y] - 1;
@@ -119,18 +117,18 @@ void		draw_wall(t_ray *ray, t_cub3d *info, t_draw *draw, int x)
 	
 	draw_init(ray, info, draw);
 	draw->step = 1.0 * TEX_HEIGHT / draw->line_h;
-	draw->tex_pos = (draw->draw_s - TEX_HEIGHT / 2 + draw->line_h / 2) * draw->step;
+	draw->tex_pos = (draw->draw_s - info->win_height / 2 + draw->line_h / 2) * draw->step;
 	// x coordinate on the texture
 	tex_x = (int)(draw->wall_x * (double)TEX_WIDTH);
 	if (ray->side == 0 && ray->dir.x > 0)
 		tex_x = TEX_WIDTH - tex_x - 1;
 	if (ray->side == 1 && ray->dir.y < 0)
-		tex_x = TEX_WIDTH - tex_x - 1;	
+		tex_x = TEX_WIDTH - tex_x - 1;
 	y = draw->draw_s;
 	while(y < draw->draw_e)
 	{
 		// Cast the texture coordinate to integer, and mask with (texHeight - 1) in case of overflow
-		tex_y = (int)draw->tex_pos & (TEX_WIDTH - 1);
+		tex_y = (int)draw->tex_pos & (TEX_HEIGHT - 1);
 		draw->tex_pos += (draw->step);
 		color = info->texture[draw->texture_num][TEX_HEIGHT * tex_y + tex_x];
 		// make color darker for y-sides: R, G and B byte each divided through two with a "shift" and an "and"
@@ -192,13 +190,16 @@ void	draw_floor(t_ray *ray, t_cub3d *info, t_draw *draw, int x)
 
 		int checkerBoardPattern = ((int)(currentFloorX) + (int)(currentFloorY)) % 2;
 		int floorTexture;
-		if(checkerBoardPattern == 0) floorTexture = 3;
-		else floorTexture = 4;
+		int	celingTexture;
+		// if(checkerBoardPattern == 0) floorTexture = 3;
+		// else floorTexture = 4;
+		floorTexture = 3;
+		celingTexture = 4;
 
 		//floor
 		info->buf[y][x] = (info->texture[floorTexture][TEX_WIDTH * floorTexY + floorTexX] >> 1) & 8355711;
 		//ceiling (symmetrical!)
-		info->buf[info->win_height - y][x] = info->texture[6][TEX_WIDTH * floorTexY + floorTexX];
+		info->buf[info->win_height - y][x] = info->texture[celingTexture][TEX_WIDTH * floorTexY + floorTexX];
 	}
 }
 
@@ -213,13 +214,17 @@ int		draw_buf_fill(t_ray *ray, t_cub3d *info, int x)
 // raycasting
 void	calc(t_cub3d *info)
 {
+	int x;
+
+	x = 0;
 	//WALL CASTING
-	for(int x = 0; x < info->win_height; x++)
+	while(x < info->win_width)
 	{
 		t_ray ray;
 		ray_init(&ray, info, x);
 		shoot_ray(&ray, info);
 		draw_buf_fill(&ray, info, x);
+		x++;
 	}
 }
 
@@ -262,7 +267,7 @@ int	key_press(int key, t_cub3d *info)
 	if (key == K_S)
 	{
 		if (!map[(int)(p.pos.x - p.dir.x * p.move_speed)][(int)(p.pos.y)])
-			p.pos.x -= p.dir.x * p.move_speed;
+			p.pos.x -= p.dir.x * p.move_speed; 
 		if (!map[(int)(p.pos.x)][(int)(p.pos.y - p.dir.y * p.move_speed)])
 			p.pos.y -= p.dir.y * p.move_speed;
 	}

@@ -6,18 +6,19 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/20 00:15:40 by taekang           #+#    #+#             */
-/*   Updated: 2021/02/23 14:55:43 by taekang          ###   ########.fr       */
+/*   Updated: 2021/03/02 01:34:53 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include "./libft/libft.h"
+#include "../libft/libft.h"
 
+// gcc cub3d.c -L../mlx -lmlx -L../libft -lft -framework OpenGL -framework Appkit
 int	worldMap[mapWidth][mapHeight] =
 									{
 										{8,8,8,8,8,8,8,8,8,8,8,4,4,6,4,4,6,4,6,4,4,4,6,4},
-										{8,0,0,0,0,0,0,0,0,0,8,4,0,0,0,0,0,0,0,0,0,0,0,4},
-										{8,0,3,3,0,0,0,0,0,8,8,4,0,0,0,0,0,0,0,0,0,0,0,6},
+										{8,0,8,0,0,0,0,0,0,0,8,4,0,0,0,0,0,0,0,0,0,0,0,4},
+										{8,0,8,3,0,0,0,0,0,8,8,4,0,0,0,0,0,0,0,0,0,0,0,6},
 										{8,0,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,6},
 										{8,0,3,3,0,0,0,0,0,8,8,4,0,0,0,0,0,0,0,0,0,0,0,4},
 										{8,0,0,0,0,0,0,0,0,0,8,4,0,0,0,0,0,6,6,6,0,6,4,6},
@@ -41,18 +42,32 @@ int	worldMap[mapWidth][mapHeight] =
 										{2,2,2,2,1,2,2,2,2,2,2,1,2,2,2,5,5,5,5,5,5,5,5,5}
 									};
 
+void	load_image(t_cub3d *info, int *texture, char *path, t_img *img)
+{
+	img->img = mlx_xpm_file_to_image(info->mlx, path, &img->img_width, &img->img_height);
+	img->data = (int *)mlx_get_data_addr(img->img, &img->bpp, &img->size_l, &img->endian);
+	for (int y = 0; y < img->img_height; y++)
+	{
+		for (int x = 0; x < img->img_width; x++)
+		{
+			texture[img->img_width * y + x] = img->data[img->img_width * y + x];
+		}
+	}
+	mlx_destroy_image(info->mlx, img->img);
+}
+
 void	load_texture(t_cub3d *info)
 {
 	t_img	img;
 
-	load_image(info, info->texture[0], "textures/deer.xpm", &img);
+	load_image(info, info->texture[0], "textures/eagle.xpm", &img);
 	load_image(info, info->texture[1], "textures/redbrick.xpm", &img);
 	load_image(info, info->texture[2], "textures/purplestone.xpm", &img);
 	load_image(info, info->texture[3], "textures/greystone.xpm", &img);
 	load_image(info, info->texture[4], "textures/bluestone.xpm", &img);
 	load_image(info, info->texture[5], "textures/mossy.xpm", &img);
 	load_image(info, info->texture[6], "textures/wood.xpm", &img);
-	load_image(info, info->texture[7], "textures/colorstone.xpm", &img);
+	load_image(info, info->texture[7], "textures/deer.xpm", &img);
 }
 
 void	set_step_side_dist(t_ray *ray, t_player *info)
@@ -254,7 +269,6 @@ void	calc(t_cub3d *info)
 	}
 }
 
-
 void	draw(t_cub3d    *info)
 {
 	for (int y = 0; y < height; y++)
@@ -318,24 +332,10 @@ int	key_press(int key, t_player *info)
 	return (0);
 }
 
-void	load_image(t_cub3d *info, int *texture, char *path, t_img *img)
-{
-	img->img = mlx_xpm_file_to_image(info->mlx, path, &img->img_width, &img->img_height);
-	img->data = (int *)mlx_get_data_addr(img->img, &img->bpp, &img->size_l, &img->endian);
-	for (int y = 0; y < img->img_height; y++)
-	{
-		for (int x = 0; x < img->img_width; x++)
-		{
-			texture[img->img_width * y + x] = img->data[img->img_width * y + x];
-		}
-	}
-	mlx_destroy_image(info->mlx, img->img);
-}
-
 void	player_init(t_player *p)
 {
-	p->pos.x = 22.0;
-	p->pos.y = 11.5;
+	p->pos.x = 1.5;//22.0;
+	p->pos.y = 6.5;//11.5;
 	p->dir.x = -1.0;
 	p->dir.y = 0.0;
 	p->plane.x = 0.0;
@@ -406,7 +406,6 @@ int	main(int argc, const char *argv[])
 	info.mlx = mlx_init();
 	if (!info_init(&info) || !texture_init(&info))
 		return (0);
-	
 	info.win = mlx_new_window(info.mlx, width, height, "cub3d");
 	info.img.img = mlx_new_image(info.mlx, width, height);
 	info.img.data = (int *)mlx_get_data_addr(info.img.img, &info.img.bpp, &info.img.size_l, &info.img.endian);
