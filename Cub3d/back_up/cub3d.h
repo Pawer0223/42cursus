@@ -8,8 +8,8 @@
 #define X_EVENT_KEY_EXIT	17
 #define texWidth 64
 #define texHeight 64
-#define mapWidth 24
-#define mapHeight 24
+#define mapWidth 5
+#define mapHeight 5
 #define width 640
 #define height 480
 

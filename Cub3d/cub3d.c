@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/20 00:15:40 by taekang           #+#    #+#             */
-/*   Updated: 2021/03/02 01:47:08 by taekang          ###   ########.fr       */
+/*   Updated: 2021/03/02 19:14:46 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,23 +114,25 @@ void		draw_wall(t_ray *ray, t_cub3d *info, t_draw *draw, int x)
 	int	tex_x;
 	int	tex_y;
 	int	color;
+
+	t_tex tex = info->texture[draw->texture_num];
 	
 	draw_init(ray, info, draw);
-	draw->step = 1.0 * TEX_HEIGHT / draw->line_h;
+	draw->step = 1.0 * tex.height / draw->line_h;
 	draw->tex_pos = (draw->draw_s - info->win_height / 2 + draw->line_h / 2) * draw->step;
 	// x coordinate on the texture
-	tex_x = (int)(draw->wall_x * (double)TEX_WIDTH);
+	tex_x = (int)(draw->wall_x * (double)tex.width);
 	if (ray->side == 0 && ray->dir.x > 0)
-		tex_x = TEX_WIDTH - tex_x - 1;
+		tex_x = tex.width - tex_x - 1;
 	if (ray->side == 1 && ray->dir.y < 0)
-		tex_x = TEX_WIDTH - tex_x - 1;
+		tex_x = tex.width - tex_x - 1;
 	y = draw->draw_s;
 	while(y < draw->draw_e)
 	{
 		// Cast the texture coordinate to integer, and mask with (texHeight - 1) in case of overflow
-		tex_y = (int)draw->tex_pos & (TEX_HEIGHT - 1);
+		tex_y = (int)draw->tex_pos & (tex.height - 1);
 		draw->tex_pos += (draw->step);
-		color = info->texture[draw->texture_num][TEX_HEIGHT * tex_y + tex_x];
+		color = tex.texture[tex.height * tex_y + tex_x];
 		// make color darker for y-sides: R, G and B byte each divided through two with a "shift" and an "and"
 		if (ray->side == 1)
 			color = (color >> 1) & 8355711;
@@ -185,21 +187,24 @@ void	draw_floor(t_ray *ray, t_cub3d *info, t_draw *draw, int x)
 		double currentFloorY = weight * floor_w_y + (1.0 - weight) * info->player.pos.y;
 
 		int floorTexX, floorTexY;
-		floorTexX = (int)(currentFloorX * TEX_WIDTH) % TEX_WIDTH;
-		floorTexY = (int)(currentFloorY * TEX_HEIGHT) % TEX_HEIGHT;
+
+		t_tex texFloor;
+		t_tex texCeling;
+
+		texFloor = info->texture[3];
+		texCeling = info->texture[4];
+
+		floorTexX = (int)(currentFloorX * texFloor.width) % texFloor.width;
+		floorTexY = (int)(currentFloorY * texFloor.height) % texFloor.height;
 
 		int checkerBoardPattern = ((int)(currentFloorX) + (int)(currentFloorY)) % 2;
-		int floorTexture;
-		int	celingTexture;
 		// if(checkerBoardPattern == 0) floorTexture = 3;
 		// else floorTexture = 4;
-		floorTexture = 3;
-		celingTexture = 4;
 
 		//floor
-		info->buf[y][x] = (info->texture[floorTexture][TEX_WIDTH * floorTexY + floorTexX] >> 1) & 8355711;
+		info->buf[y][x] = (texFloor.texture[texFloor.width * floorTexY + floorTexX] >> 1) & 8355711;
 		//ceiling (symmetrical!)
-		info->buf[info->win_height - y][x] = info->texture[celingTexture][TEX_WIDTH * floorTexY + floorTexX];
+		info->buf[info->win_height - y][x] = texCeling.texture[texCeling.width * floorTexY + floorTexX];
 	}
 }
 
@@ -228,8 +233,7 @@ void	calc(t_cub3d *info)
 	}
 }
 
-
-void	draw(t_cub3d    *info)
+void	draw(t_cub3d *info)
 {
 	for (int y = 0; y < info->win_height; y++)
 	{
@@ -255,7 +259,6 @@ int	key_press(int key, t_cub3d *info)
 
 	map = info->world_map;
 	p = info->player;
-
 	if (key == K_W)
 	{
 		if (!map[(int)(p.pos.x + p.dir.x * p.move_speed)][(int)(p.pos.y)])
@@ -293,7 +296,7 @@ int	key_press(int key, t_cub3d *info)
 		p.plane.x = p.plane.x * cos(p.rot_sppeed) - p.plane.y * sin(p.rot_sppeed);
 		p.plane.y = oldPlaneX * sin(p.rot_sppeed) + p.plane.y * cos(p.rot_sppeed);
 	}
-
+	info->player = p;
 	if (key == K_ESC)
 		exit(0);
 	return (0);

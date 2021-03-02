@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/01 11:40:50 by taesan            #+#    #+#             */
-/*   Updated: 2021/03/02 00:50:06 by taekang          ###   ########.fr       */
+/*   Updated: 2021/03/02 19:09:57 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@
 #define ERROR_MAP_LINE_FORMAT "WorldMap Line Format Error"
 #define	ERROR_MAP_BUF_MALLOC "Map Buf Malloc Error"
 
-#define TEX_WIDTH 64
-#define TEX_HEIGHT 64
+// #define TEX_WIDTH 64
+// #define TEX_HEIGHT 64
 
 #define IDENTIFIERS 9
 #define NORTH 0
@@ -119,13 +119,27 @@ typedef struct s_player
 	char point;
 } t_player;
 
+typedef struct	s_tex
+{
+	char		*path;
+	int			*texture;
+	void		*ptr;
+	t_d_pair	start;
+	t_d_pair	end;
+	int			width;
+	int			height;
+	int			bpp;
+	int			size_line;
+	int			endian;
+}				t_tex;
+
 typedef struct s_cub3d
 {
 	void *mlx;
 	void *win;
 	int **buf;
 	int **world_map;
-	int *texture[IDENTIFIERS];
+	t_tex texture[IDENTIFIERS];
 	int win_width;
 	int win_height;
 	int map_width;

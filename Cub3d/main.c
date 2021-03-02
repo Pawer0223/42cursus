@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/01 11:40:50 by taesan            #+#    #+#             */
-/*   Updated: 2021/03/02 01:34:29 by taekang          ###   ########.fr       */
+/*   Updated: 2021/03/02 19:30:05 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,23 +71,29 @@ int error_occur(const char *error_message)
 int default_init(t_cub3d *info)
 {
 	int i;
-	int j;
+	// int j;
 
 	ft_bzero(info, sizeof(t_cub3d));
 	info->mlx = mlx_init();
 	i = 0;
 	while (i < IDENTIFIERS)
 	{
-		if (!(info->texture[i] = (int *)malloc(sizeof(int) * (TEX_HEIGHT * TEX_WIDTH))))
-		{
-			j = 0;
-			while (j < i)
-				free(info->texture[j++]);
-			return error_occur(ERROR_TEXTURE_MALLOC);
-		}
-		ft_bzero(info->texture[i], sizeof(int) * TEX_HEIGHT * TEX_WIDTH);
+		ft_bzero(&info->texture[i], sizeof(t_tex));
 		i++;
 	}
+
+	// while (i < IDENTIFIERS)
+	// {
+	// 	if (!(info->texture[i] = (int *)malloc(sizeof(int) * (TEX_HEIGHT * TEX_WIDTH))))
+	// 	{
+	// 		j = 0;
+	// 		while (j < i)
+	// 			free(info->texture[j++]);
+	// 		return error_occur(ERROR_TEXTURE_MALLOC);
+	// 	}
+	// 	ft_bzero(info->texture[i], sizeof(int) * TEX_HEIGHT * TEX_WIDTH);
+	// 	i++;
+	// }
 	return (1);
 }
 
@@ -160,22 +166,24 @@ int parse_id_r(t_cub3d *info, char *line)
 	return (1);
 }
 
-int load_image(t_cub3d *info, int *texture, char *path, t_img *img)
+int load_image(t_cub3d *info, t_tex *tex, char *path, t_img *img)
 {
 	int x;
 	int y;
 
-	if (!(img->img = mlx_xpm_file_to_image(info->mlx, path, &img->img_width, &img->img_height)))
+	if (!(img->img = mlx_xpm_file_to_image(info->mlx, path, &tex->width, &tex->height)))
 		return (0);
 	if (!(img->data = (int *)mlx_get_data_addr(img->img, &img->bpp, &img->size_l, &img->endian)))
 		return (0);
+	if (!(tex->texture = (int *)malloc(sizeof(int) * tex->width * tex->height)))
+		return (0);
 	y = 0;
-	while (y < img->img_height)
+	while (y < tex->height)
 	{
 		x = 0;
-		while (x < img->img_width)
+		while (x < tex->width)
 		{
-			texture[img->img_width * y + x] = img->data[img->img_width * y + x];
+			tex->texture[tex->width * y + x] = img->data[tex->width * y + x];
 			x++;
 		}
 		y++;
@@ -192,7 +200,7 @@ int parse_and_load_texture(t_cub3d *info, int id, char *line)
 	i = (id == SPRITE) ? 2 : 3;
 	printf("load textured id : [%d] => [%s]\n", id, line + i);
 
-	if (!load_image(info, info->texture[id], (line + i), &img))
+	if (!load_image(info, &info->texture[id], (line + i), &img))
 		return (error_occur(ERROR_TEXTURE_LOAD));
 	return (1);
 }
@@ -220,6 +228,8 @@ int is_empty_line(char *line)
 
 int set_color(int *color, int *value, int seq)
 {
+	if (!color && !(color = (int *)malloc(sizeof(int))))
+		return error_occur(ERROR_TEXTURE_MALLOC);
 	if (*value < 0 || *value > 255)
 		return (error_occur(ERROR_RGB_VALUE));
 	*color = *color | (*value << (16 - (seq * 8)));
@@ -242,14 +252,14 @@ int parse_color(t_cub3d *info, int id, char *line)
 			value = value * 10 + line[i] - '0';
 		else if (line[i] == ',')
 		{
-			if (!set_color(info->texture[id], &value, seq++))
+			if (!set_color(info->texture[id].texture, &value, seq++))
 				return (0);
 		}
 		else
 			return ((error_occur(ERROR_RGB_FORMAT)));
 		i++;
 	}
-	if (i == 2 || seq != 2 || !set_color(info->texture[id], &value, seq))
+	if (i == 2 || seq != 2 || !set_color(info->texture[id].texture, &value, seq))
 		return ((error_occur(ERROR_RGB_FORMAT)));
 	return (1);
 }
@@ -263,8 +273,8 @@ int	map_line_check(t_cub3d *info, char c, int width)
 		if (info->player.point)
 			return error_occur(ERROR_POINT_DUPLICATE);
 		info->player.point = c;
-		info->player.pos.x = info->map_height;
-		info->player.pos.y = width;
+		info->player.pos.x = info->map_height + 0.5;
+		info->player.pos.y = width + 0.5;
 		return (2);
 	}
 	else
@@ -495,6 +505,7 @@ int raycasting_start(t_cub3d *info)
 	int max_y;
 	int	i;
 	
+	to_string(info);
 	mlx_get_screen_size(info->mlx, &max_x, &max_y);
 	if (info->win_height > max_x)
 		info->win_height = max_x;
@@ -516,7 +527,7 @@ int main(int argc, const char *argv[])
 {
 	t_cub3d info;
 	int		r;
-
+	
 	if (!default_init(&info))
 		return error_occur(ERROR_DEFAULT_INIT);
 	if (argc == 2)
