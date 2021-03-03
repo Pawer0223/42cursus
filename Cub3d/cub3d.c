@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/20 00:15:40 by taekang           #+#    #+#             */
-/*   Updated: 2021/03/02 19:14:46 by taekang          ###   ########.fr       */
+/*   Updated: 2021/03/03 16:38:29 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,8 +191,8 @@ void	draw_floor(t_ray *ray, t_cub3d *info, t_draw *draw, int x)
 		t_tex texFloor;
 		t_tex texCeling;
 
-		texFloor = info->texture[3];
-		texCeling = info->texture[4];
+		texFloor = info->texture[FLOOR];
+		texCeling = info->texture[CEILING];
 
 		floorTexX = (int)(currentFloorX * texFloor.width) % texFloor.width;
 		floorTexY = (int)(currentFloorY * texFloor.height) % texFloor.height;

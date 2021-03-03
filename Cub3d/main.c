@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/01 11:40:50 by taesan            #+#    #+#             */
-/*   Updated: 2021/03/02 19:30:05 by taekang          ###   ########.fr       */
+/*   Updated: 2021/03/03 17:30:29 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -226,13 +226,18 @@ int is_empty_line(char *line)
 	return (1);
 }
 
-int set_color(int *color, int *value, int seq)
+int set_color(t_tex *tex, int *value, int seq)
 {
-	if (!color && !(color = (int *)malloc(sizeof(int))))
-		return error_occur(ERROR_TEXTURE_MALLOC);
+	if (!tex->texture)
+	{
+		if (!(tex->texture = (int *)malloc(sizeof(int))))
+			return error_occur(ERROR_TEXTURE_MALLOC);
+		tex->height = 64;
+		tex->width = 64;
+	}
 	if (*value < 0 || *value > 255)
 		return (error_occur(ERROR_RGB_VALUE));
-	*color = *color | (*value << (16 - (seq * 8)));
+	*tex->texture = *tex->texture | (*value << (16 - (seq * 8)));
 	*value = 0;
 	return (1);
 }
@@ -252,14 +257,14 @@ int parse_color(t_cub3d *info, int id, char *line)
 			value = value * 10 + line[i] - '0';
 		else if (line[i] == ',')
 		{
-			if (!set_color(info->texture[id].texture, &value, seq++))
+			if (!set_color(&info->texture[id], &value, seq++))
 				return (0);
 		}
 		else
 			return ((error_occur(ERROR_RGB_FORMAT)));
 		i++;
 	}
-	if (i == 2 || seq != 2 || !set_color(info->texture[id].texture, &value, seq))
+	if (i == 2 || seq != 2 || !set_color(&info->texture[id], &value, seq))
 		return ((error_occur(ERROR_RGB_FORMAT)));
 	return (1);
 }
@@ -506,7 +511,11 @@ int raycasting_start(t_cub3d *info)
 	int	i;
 	
 	to_string(info);
-	mlx_get_screen_size(info->mlx, &max_x, &max_y);
+	// mlx_get_screen_size(info->mlx, &max_x, &max_y);
+	max_x = 1920;
+	max_y = 1080;
+	printf("max_x : %d, max_y : %d\n", max_x , max_y);
+
 	if (info->win_height > max_x)
 		info->win_height = max_x;
 	if (info->win_width > max_y)
@@ -546,7 +555,7 @@ int main(int argc, const char *argv[])
 	if (!make_world_map(&info))
 		return (error_occur(ERROR_MAP_MALLOC));
 	ft_lstclear(&info.map_buf, &del_line);
-	// if (!edge_left_right_check(&info) || !edge_up_down_check(&info))
-	// 	return error_occur(ERROR_MAP_FORMAT);
+	if (!edge_left_right_check(&info) || !edge_up_down_check(&info))
+		return error_occur(ERROR_MAP_FORMAT);
 	raycasting_start(&info);
 }

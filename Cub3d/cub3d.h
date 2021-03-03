@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/01 11:40:50 by taesan            #+#    #+#             */
-/*   Updated: 2021/03/02 19:09:57 by taekang          ###   ########.fr       */
+/*   Updated: 2021/03/03 17:06:30 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 #define ERROR_FILE_NOT_EXIST "File Not Exist"
 #define ERROR_TEXTURE_LOAD "Texture File Load Error"
 #define ERROR_TEXTURE_MALLOC "Texture Malloc Error"
-#define ERROR_RGB_FORMAT "Identifier R Format Error"
+#define ERROR_RGB_FORMAT "Identifier RGB Format Error"
 #define ERROR_RGB_VALUE "RGB value Error"
 #define ERROR_DEFAULT_INIT "Default Init Error"
 #define ERROR_POINT_DUPLICATE "Point(N, S, E, W) Duplicate"
@@ -50,8 +50,8 @@
 #define WEST 2
 #define EAST 3
 #define SPRITE 4
-#define CEILING 5
-#define FLOOR 6
+#define FLOOR 5
+#define CEILING 6
 #define RESOLUTION 7
 #define MAP_LINE 8
 
@@ -121,16 +121,9 @@ typedef struct s_player
 
 typedef struct	s_tex
 {
-	char		*path;
 	int			*texture;
-	void		*ptr;
-	t_d_pair	start;
-	t_d_pair	end;
 	int			width;
 	int			height;
-	int			bpp;
-	int			size_line;
-	int			endian;
 }				t_tex;
 
 typedef struct s_cub3d
