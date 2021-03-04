@@ -6,11 +6,22 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/20 00:15:40 by taekang           #+#    #+#             */
-/*   Updated: 2021/03/03 16:38:29 by taekang          ###   ########.fr       */
+/*   Updated: 2021/03/04 16:29:45 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	clear_buf(t_cub3d *info)
+{
+	for (int i = 0; i < info->win_height; i++)
+	{
+		for (int j = 0; j < info->win_width; j++)
+		{
+			info->buf[i][j] = 0;
+		}
+	}
+}
 
 void	set_step_side_dist(t_ray *ray, t_cub3d *info)
 {
@@ -127,6 +138,7 @@ void		draw_wall(t_ray *ray, t_cub3d *info, t_draw *draw, int x)
 	if (ray->side == 1 && ray->dir.y < 0)
 		tex_x = tex.width - tex_x - 1;
 	y = draw->draw_s;
+	printf("texture num : %d\n", draw->texture_num);
 	while(y < draw->draw_e)
 	{
 		// Cast the texture coordinate to integer, and mask with (texHeight - 1) in case of overflow
@@ -249,6 +261,7 @@ int	main_loop(t_cub3d *info)
 {
 	calc(info);
 	draw(info);
+	clear_buf(info);
 	return (0);
 }
 
@@ -300,17 +313,6 @@ int	key_press(int key, t_cub3d *info)
 	if (key == K_ESC)
 		exit(0);
 	return (0);
-}
-
-void	clear_buf(t_cub3d *info)
-{
-	for (int i = 0; i < info->win_height; i++)
-	{
-		for (int j = 0; j < info->win_width; j++)
-		{
-			info->buf[i][j] = 0;
-		}
-	}
 }
 
 void	error_print(const char *error_message)

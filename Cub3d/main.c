@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/01 11:40:50 by taesan            #+#    #+#             */
-/*   Updated: 2021/03/03 17:30:29 by taekang          ###   ########.fr       */
+/*   Updated: 2021/03/04 18:52:57 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,6 +177,7 @@ int load_image(t_cub3d *info, t_tex *tex, char *path, t_img *img)
 		return (0);
 	if (!(tex->texture = (int *)malloc(sizeof(int) * tex->width * tex->height)))
 		return (0);
+	ft_bzero(tex->texture, tex->width * tex->height * sizeof(int));
 	y = 0;
 	while (y < tex->height)
 	{
@@ -198,8 +199,6 @@ int parse_and_load_texture(t_cub3d *info, int id, char *line)
 	t_img img;
 
 	i = (id == SPRITE) ? 2 : 3;
-	printf("load textured id : [%d] => [%s]\n", id, line + i);
-
 	if (!load_image(info, &info->texture[id], (line + i), &img))
 		return (error_occur(ERROR_TEXTURE_LOAD));
 	return (1);
@@ -437,12 +436,12 @@ int edge_left_right_check(t_cub3d *info)
 		j = 0;
 		while (info->world_map[i][j] && info->world_map[i][j] == MAP_EMPTY_PASS)
 			j++;
-		if (info->world_map[i][j] != 1)
+		if (info->world_map[i][j] == 0)
 			return (0);
 		j = info->map_width - 1;
 		while (j >= 0 && info->world_map[i][j] == MAP_EMPTY_PASS)
 			j--;
-		if (info->world_map[i][j] != 1)
+		if (info->world_map[i][j] == 0)
 			return (0);
 		i++;
 	}
@@ -460,12 +459,12 @@ int edge_up_down_check(t_cub3d *info)
 		j = 0;
 		while (info->world_map[j][i] && info->world_map[j][i] == MAP_EMPTY_PASS)
 			j++;
-		if (info->world_map[j][i] != 1)
+		if (info->world_map[j][i] == 0)
 			return (0);
 		j = info->map_height - 1;
 		while (j >= 0 && info->world_map[j][i] == MAP_EMPTY_PASS)
 			j--;
-		if (info->world_map[j][i] != 1)
+		if (info->world_map[j][i] == 0)
 			return (0);
 		i++;
 	}
@@ -515,7 +514,6 @@ int raycasting_start(t_cub3d *info)
 	max_x = 1920;
 	max_y = 1080;
 	printf("max_x : %d, max_y : %d\n", max_x , max_y);
-
 	if (info->win_height > max_x)
 		info->win_height = max_x;
 	if (info->win_width > max_y)
@@ -556,6 +554,9 @@ int main(int argc, const char *argv[])
 		return (error_occur(ERROR_MAP_MALLOC));
 	ft_lstclear(&info.map_buf, &del_line);
 	if (!edge_left_right_check(&info) || !edge_up_down_check(&info))
+	{
+		//map free
 		return error_occur(ERROR_MAP_FORMAT);
+	}
 	raycasting_start(&info);
 }
