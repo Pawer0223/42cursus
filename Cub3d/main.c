@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/01 11:40:50 by taesan            #+#    #+#             */
-/*   Updated: 2021/03/04 18:52:57 by taekang          ###   ########.fr       */
+/*   Updated: 2021/03/05 21:18:16 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,6 +193,7 @@ int load_image(t_cub3d *info, t_tex *tex, char *path, t_img *img)
 	return (1);
 }
 
+// here
 int parse_and_load_texture(t_cub3d *info, int id, char *line)
 {
 	int i;
