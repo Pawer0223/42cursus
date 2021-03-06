@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/20 00:15:40 by taekang           #+#    #+#             */
-/*   Updated: 2021/03/04 16:29:45 by taekang          ###   ########.fr       */
+/*   Updated: 2021/03/06 01:18:35 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,7 +138,7 @@ void		draw_wall(t_ray *ray, t_cub3d *info, t_draw *draw, int x)
 	if (ray->side == 1 && ray->dir.y < 0)
 		tex_x = tex.width - tex_x - 1;
 	y = draw->draw_s;
-	printf("texture num : %d\n", draw->texture_num);
+	// printf("texture num : %d\n", draw->texture_num);
 	while(y < draw->draw_e)
 	{
 		// Cast the texture coordinate to integer, and mask with (texHeight - 1) in case of overflow
