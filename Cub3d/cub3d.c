@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/20 00:15:40 by taekang           #+#    #+#             */
-/*   Updated: 2021/03/06 01:18:35 by taekang          ###   ########.fr       */
+/*   Updated: 2021/03/07 16:14:04 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,10 +125,9 @@ void		draw_wall(t_ray *ray, t_cub3d *info, t_draw *draw, int x)
 	int	tex_x;
 	int	tex_y;
 	int	color;
-
-	t_tex tex = info->texture[draw->texture_num];
 	
 	draw_init(ray, info, draw);
+	t_tex tex = info->texture[draw->texture_num];
 	draw->step = 1.0 * tex.height / draw->line_h;
 	draw->tex_pos = (draw->draw_s - info->win_height / 2 + draw->line_h / 2) * draw->step;
 	// x coordinate on the texture
@@ -138,7 +137,7 @@ void		draw_wall(t_ray *ray, t_cub3d *info, t_draw *draw, int x)
 	if (ray->side == 1 && ray->dir.y < 0)
 		tex_x = tex.width - tex_x - 1;
 	y = draw->draw_s;
-	// printf("texture num : %d\n", draw->texture_num);
+	printf("texture num : %d\n", draw->texture_num);
 	while(y < draw->draw_e)
 	{
 		// Cast the texture coordinate to integer, and mask with (texHeight - 1) in case of overflow
