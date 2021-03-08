@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/01 11:40:50 by taesan            #+#    #+#             */
-/*   Updated: 2021/03/08 16:16:34 by taekang          ###   ########.fr       */
+/*   Updated: 2021/03/08 17:01:17 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -240,41 +240,42 @@ int is_empty_line(char *line)
 #define tex_w 1
 #define tex_h 1
 
-int set_color(int *color, int *value, int seq)
+int set_color(char c, int *color, int *value, int *seq)
 {
-	if (*value < 0 || *value > 255)
-		return (error_occur(ERROR_RGB_VALUE));
-	*color = *color | (*value << (16 - (seq * 8)));
-	*value = 0;
+	if (c && ft_isdigit(c))
+		*value = *value * 10 + c - '0';
+	else if (c == ',' || (!c && *value >= 0))
+	{
+		if (c < 0 || *value > 255)
+			return (error_occur(ERROR_RGB_VALUE));
+		*color = *color | (*value << (16 - (*seq * 8)));
+		*value = 0;
+		*seq += 1;
+	}
+	else
+		return ((error_occur(ERROR_RGB_FORMAT)));
 	return (1);
 }
 
 int parse_color(t_cub3d *info, int id, char *line)
 {
-	int i;
 	int value;
 	int seq;
 	int color;
 
-	i = 2;
+	line += 2;
 	value = 0;
 	seq = 0;
 	color = 0;
-	while (line[i])
+	while (*line)
 	{
-		if (ft_isdigit(line[i]))
-			value = value * 10 + line[i] - '0';
-		else if (line[i] == ',')
-		{
-			if (!set_color(&color, &value, seq++))
-				return (0);
-		}
-		else
-			return ((error_occur(ERROR_RGB_FORMAT)));
-		i++;
+		if (!set_color(*line, &color, &value, &seq))
+			return (0);
+		line++;
 	}
-	if (i == 2 || seq != 2 || !set_color(&color, &value, seq))
+	if (seq != 2 || !set_color(*line, &color, &value, &seq)) {
 		return ((error_occur(ERROR_RGB_FORMAT)));
+	}
 	info->texture[id].width = 64;
 	info->texture[id].height = 64;
 	if (!(fill_texture(&info->texture[id], &color, 1)))
