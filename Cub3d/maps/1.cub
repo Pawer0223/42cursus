@@ -6,9 +6,8 @@ WE textures/wall_3.xpm
 EA textures/floor_1.xpm
 S textures/barrel.xpm
 
-F 255,255,255
-C 0,0,0
-
+F 000,102,000
+C 255,204,000
 
 11111111111
 20000000004

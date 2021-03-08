@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/20 00:15:40 by taekang           #+#    #+#             */
-/*   Updated: 2021/03/07 16:14:04 by taekang          ###   ########.fr       */
+/*   Updated: 2021/03/08 15:41:15 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,7 +137,6 @@ void		draw_wall(t_ray *ray, t_cub3d *info, t_draw *draw, int x)
 	if (ray->side == 1 && ray->dir.y < 0)
 		tex_x = tex.width - tex_x - 1;
 	y = draw->draw_s;
-	printf("texture num : %d\n", draw->texture_num);
 	while(y < draw->draw_e)
 	{
 		// Cast the texture coordinate to integer, and mask with (texHeight - 1) in case of overflow
@@ -208,7 +207,7 @@ void	draw_floor(t_ray *ray, t_cub3d *info, t_draw *draw, int x)
 		floorTexX = (int)(currentFloorX * texFloor.width) % texFloor.width;
 		floorTexY = (int)(currentFloorY * texFloor.height) % texFloor.height;
 
-		int checkerBoardPattern = ((int)(currentFloorX) + (int)(currentFloorY)) % 2;
+		//int checkerBoardPattern = ((int)(currentFloorX) + (int)(currentFloorY)) % 2;
 		// if(checkerBoardPattern == 0) floorTexture = 3;
 		// else floorTexture = 4;
 

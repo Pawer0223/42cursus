@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/01 11:40:50 by taesan            #+#    #+#             */
-/*   Updated: 2021/03/05 21:18:16 by taekang          ###   ########.fr       */
+/*   Updated: 2021/03/08 16:16:34 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,15 +166,11 @@ int parse_id_r(t_cub3d *info, char *line)
 	return (1);
 }
 
-int load_image(t_cub3d *info, t_tex *tex, char *path, t_img *img)
+int	fill_texture(t_tex *tex, int *data, int is_f_c)
 {
 	int x;
 	int y;
 
-	if (!(img->img = mlx_xpm_file_to_image(info->mlx, path, &tex->width, &tex->height)))
-		return (0);
-	if (!(img->data = (int *)mlx_get_data_addr(img->img, &img->bpp, &img->size_l, &img->endian)))
-		return (0);
 	if (!(tex->texture = (int *)malloc(sizeof(int) * tex->width * tex->height)))
 		return (0);
 	ft_bzero(tex->texture, tex->width * tex->height * sizeof(int));
@@ -184,11 +180,26 @@ int load_image(t_cub3d *info, t_tex *tex, char *path, t_img *img)
 		x = 0;
 		while (x < tex->width)
 		{
-			tex->texture[tex->width * y + x] = img->data[tex->width * y + x];
+			if (is_f_c)
+				tex->texture[tex->width * y + x] = *data;
+			else
+				tex->texture[tex->width * y + x] = data[tex->width * y + x];
 			x++;
 		}
 		y++;
 	}
+	return (1);
+}
+
+int load_image(t_cub3d *info, t_tex *tex, char *path, t_img *img)
+{
+
+	if (!(img->img = mlx_xpm_file_to_image(info->mlx, path, &tex->width, &tex->height)))
+		return (0);
+	if (!(img->data = (int *)mlx_get_data_addr(img->img, &img->bpp, &img->size_l, &img->endian)))
+		return (0);
+	if (!(fill_texture(tex, img->data, 0)))
+		return (error_occur(ERROR_FILL_TEXTURE));
 	mlx_destroy_image(info->mlx, img->img);
 	return (1);
 }
@@ -226,18 +237,14 @@ int is_empty_line(char *line)
 	return (1);
 }
 
-int set_color(t_tex *tex, int *value, int seq)
+#define tex_w 1
+#define tex_h 1
+
+int set_color(int *color, int *value, int seq)
 {
-	if (!tex->texture)
-	{
-		if (!(tex->texture = (int *)malloc(sizeof(int))))
-			return error_occur(ERROR_TEXTURE_MALLOC);
-		tex->height = 64;
-		tex->width = 64;
-	}
 	if (*value < 0 || *value > 255)
 		return (error_occur(ERROR_RGB_VALUE));
-	*tex->texture = *tex->texture | (*value << (16 - (seq * 8)));
+	*color = *color | (*value << (16 - (seq * 8)));
 	*value = 0;
 	return (1);
 }
@@ -247,25 +254,31 @@ int parse_color(t_cub3d *info, int id, char *line)
 	int i;
 	int value;
 	int seq;
+	int color;
 
 	i = 2;
 	value = 0;
 	seq = 0;
+	color = 0;
 	while (line[i])
 	{
 		if (ft_isdigit(line[i]))
 			value = value * 10 + line[i] - '0';
 		else if (line[i] == ',')
 		{
-			if (!set_color(&info->texture[id], &value, seq++))
+			if (!set_color(&color, &value, seq++))
 				return (0);
 		}
 		else
 			return ((error_occur(ERROR_RGB_FORMAT)));
 		i++;
 	}
-	if (i == 2 || seq != 2 || !set_color(&info->texture[id], &value, seq))
+	if (i == 2 || seq != 2 || !set_color(&color, &value, seq))
 		return ((error_occur(ERROR_RGB_FORMAT)));
+	info->texture[id].width = 64;
+	info->texture[id].height = 64;
+	if (!(fill_texture(&info->texture[id], &color, 1)))
+		return (error_occur(ERROR_FILL_TEXTURE));
 	return (1);
 }
 

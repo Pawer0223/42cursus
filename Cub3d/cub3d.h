@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/01 11:40:50 by taesan            #+#    #+#             */
-/*   Updated: 2021/03/03 22:32:04 by taekang          ###   ########.fr       */
+/*   Updated: 2021/03/08 15:57:31 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@
 #define	ERROR_PARSE_FILE "Parse File Error"
 #define ERROR_MAP_LINE_FORMAT "WorldMap Line Format Error"
 #define	ERROR_MAP_BUF_MALLOC "Map Buf Malloc Error"
+#define	ERROR_FILL_TEXTURE "Texture Info Load Error"
+
 
 // #define TEX_WIDTH 64
 // #define TEX_HEIGHT 64
