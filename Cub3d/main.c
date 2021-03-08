@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/01 11:40:50 by taesan            #+#    #+#             */
-/*   Updated: 2021/03/08 17:01:17 by taekang          ###   ########.fr       */
+/*   Updated: 2021/03/08 18:54:41 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -488,10 +488,23 @@ int edge_up_down_check(t_cub3d *info)
 
 void	player_init(t_player *p)
 {
-	p->dir.x = -1.0;
-	p->dir.y = 0.0;
-	p->plane.x = 0.0;
-	p->plane.y = 0.66;
+		char point;
+
+	point = p->point;
+	if (point == 'N' || point == 'S')
+	{
+		p->dir.x = (point == 'S') ? 1.0 : -1.0;
+		p->dir.y = 0.0;
+		p->plane.x = 0.0;
+		p->plane.y = (point == 'S') ? -0.66 : 0.66;
+	}
+	else if (point == 'E' || point == 'W')
+	{
+		p->dir.x = 0.0;
+		p->dir.y = (point == 'W') ? -1.0 : 1.0;
+		p->plane.x = (point == 'W') ? -0.66 : 0.66;
+		p->plane.y = 0.0;
+	}
 	p->move_speed = 0.05;
 	p->rot_sppeed = 0.05;
 }

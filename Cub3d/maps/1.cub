@@ -1,19 +1,19 @@
 R 700 500
 
-NO textures/barrel.xpm
-SO textures/wall_2.xpm
-WE textures/wall_3.xpm
-EA textures/floor_1.xpm
+NO textures/n.xpm
+SO textures/s.xpm
+WE textures/w.xpm
+EA textures/e.xpm
 S textures/barrel.xpm
 
 F 000,102,000
-C 255,204, 
+C 255,204,000
 
 11111111111
-20000000004
-20000000004
-20000000004
-2000N000004
-20000000004
-20000000004
-13333333331
+30000000004
+30000000004
+30000000004
+3000S000004
+30000000004
+30000000004
+12222222221
