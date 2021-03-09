@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/01 11:40:50 by taesan            #+#    #+#             */
-/*   Updated: 2021/03/08 15:57:31 by taekang          ###   ########.fr       */
+/*   Updated: 2021/03/10 02:10:03 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@
 #define ERROR_MAP_LINE_FORMAT "WorldMap Line Format Error"
 #define	ERROR_MAP_BUF_MALLOC "Map Buf Malloc Error"
 #define	ERROR_FILL_TEXTURE "Texture Info Load Error"
-
+#define	ERROR_SPRITES_MALLOC "Sprites Malloc Error"
+#define	ERROR_ADD_SPRITE "Sprites Add Error"
 
 // #define TEX_WIDTH 64
 // #define TEX_HEIGHT 64
@@ -58,6 +59,10 @@
 #define MAP_LINE 8
 
 #define MAP_EMPTY_PASS 9
+
+
+#define MAX_X 1920
+#define MAX_Y 1080
 
 
 // compile => gcc get_next_line.c get_next_line_utils.c main.c -L../libft -lft
@@ -134,11 +139,13 @@ typedef struct s_cub3d
 	void *win;
 	int **buf;
 	int **world_map;
+	t_d_pair **sprites;
 	t_tex texture[IDENTIFIERS];
 	int win_width;
 	int win_height;
 	int map_width;
 	int map_height;
+	int sprite_num;
 	t_img img;
 	t_player player;
 	t_list *map_buf;

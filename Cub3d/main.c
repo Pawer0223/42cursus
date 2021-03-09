@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/01 11:40:50 by taesan            #+#    #+#             */
-/*   Updated: 2021/03/09 18:34:07 by taekang          ###   ########.fr       */
+/*   Updated: 2021/03/10 02:16:22 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,29 @@ void print_world_map(t_cub3d *info)
 	}
 }
 
+void print_sprites(t_cub3d *info)
+{
+	int i;
+	i = 0;
+	while (i < info->sprite_num)
+	{
+		printf("[%d] sprite => x : %f, y : %f\n", i, info->sprites[i]->x, info->sprites[i]->y);
+		i++;
+	}
+}
+
 void to_string(t_cub3d *info)
 {
 	printf("win_width : %d\n", info->win_width);
 	printf("win_height : %d\n", info->win_height);
 	printf("map_width : %d\n", info->map_width);
 	printf("map_height : %d\n", info->map_height);
+	printf("sprite_num : %d\n", info->sprite_num);
 	printf("### map_buf ###\n");
+
 	ft_lstiter(info->map_buf, &print_list);
+	printf("### sprite info ###\n");
+	print_sprites(info);
 	printf("### player ###\n");
 	printf("pos.x : %f, pos.y : %f\n", info->player.pos.x, info->player.pos.y);
 	printf("dir.x : %f, dir.y : %f\n", info->player.dir.x, info->player.dir.y);
@@ -204,11 +219,10 @@ int load_image(t_cub3d *info, t_tex *tex, char *path, t_img *img)
 	return (1);
 }
 
-// here
 int parse_and_load_texture(t_cub3d *info, int id, char *line)
 {
-	int i;
-	t_img img;
+	int		i;
+	t_img	img;
 
 	i = (id == SPRITE) ? 2 : 3;
 	if (!load_image(info, &info->texture[id], (line + i), &img))
@@ -285,9 +299,7 @@ int parse_color(t_cub3d *info, int id, char *line)
 
 int	map_line_check(t_cub3d *info, char c, int width)
 {
-	if ((c >= '0' && c <= '5') || c == ' ')
-		return (1);
-	else if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
+	if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
 	{
 		if (info->player.point)
 			return error_occur(ERROR_POINT_DUPLICATE);
@@ -295,6 +307,12 @@ int	map_line_check(t_cub3d *info, char c, int width)
 		info->player.pos.x = info->map_height + 0.5;
 		info->player.pos.y = width + 0.5;
 		return (2);
+	}
+	else if ((c >= '0' && c <= '5') || c == ' ')
+	{
+		if (c == '5')
+			info->sprite_num++;
+		return (1);
 	}
 	else
 		return error_occur(ERROR_MAP_LINE_FORMAT);
@@ -410,33 +428,47 @@ int world_map_malloc(int **map, int width, int i)
 	return (1);
 }
 
-int make_world_map(t_cub3d *info)
+int	add_sprite_info(int i, int j, int seq, t_d_pair **ss)
 {
-	int **map;
+	int free_n;
+
+	free_n = 0;
+	if (!(ss[seq] = (t_d_pair *)malloc(sizeof(t_d_pair))))
+	{
+		while (free_n < seq)
+			free(ss[free_n++]);
+		return (0);
+	}
+	ss[seq]->x = i + 0.5;
+	ss[seq]->y = j + 0.5;
+	return (1);
+}
+
+int make_world_map(int **map, int width, t_list *curr, t_d_pair **ss)
+{
 	int i;
 	int j;
-	t_list *curr;
+	int	seq;
 
-	if (!(map = (int **)malloc(sizeof(int *) * info->map_height)))
-		return (0);
+	seq = 0;
 	i = 0;
-	curr = info->map_buf;
 	while (curr)
 	{
-		if (!world_map_malloc(map, info->map_width, i))
+		if (!world_map_malloc(map, width, i))
 			return (0);
 		j = 0;
 		while (*(char *)(curr->content + j))
 		{
 			map[i][j] = *(char *)(curr->content + j) - '0';
+			if (map[i][j] == 5 && !add_sprite_info(i, j, seq++, ss))
+				return (error_occur(ERROR_ADD_SPRITE));
 			j++;
 		}
-		while (j < info->map_width)
+		while (j < width)
 			map[i][j++] = MAP_EMPTY_PASS;
 		i++;
 		curr = curr->next;
 	}
-	info->world_map = map;
 	return (1);
 }
 
@@ -533,28 +565,39 @@ int cub3d_init(t_cub3d *info)
 
 int raycasting_start(t_cub3d *info)
 {
-	int max_x;
-	int max_y;
-	int	i;
-	
+
 	to_string(info);
-	// mlx_get_screen_size(info->mlx, &max_x, &max_y);
-	max_x = 1920;
-	max_y = 1080;
-	printf("max_x : %d, max_y : %d\n", max_x , max_y);
-	if (info->win_height > max_x)
-		info->win_height = max_x;
-	if (info->win_width > max_y)
-		info->win_width = max_y;
-	player_init(&info->player);
-	if (!cub3d_init(info))
-		return (0);
+	
 	info->win = mlx_new_window(info->mlx, info->win_width, info->win_height, "cub3d");
 	info->img.img = mlx_new_image(info->mlx, info->win_width, info->win_height);
 	info->img.data = (int *)mlx_get_data_addr(info->img.img, &info->img.bpp, &info->img.size_l, &info->img.endian);
 	mlx_loop_hook(info->mlx, &main_loop, info);
 	mlx_hook(info->win, X_EVENT_KEY_PRESS, 0, &key_press, info);
 	mlx_loop(info->mlx);
+	return (1);
+}
+
+int game_info_init(t_cub3d *info)
+{
+	if (!cub3d_init(info))
+		return (0);
+	if (!(info->sprites = (t_d_pair **)malloc(sizeof(t_d_pair) * info->sprite_num)))
+		return error_occur(ERROR_SPRITES_MALLOC);
+	if (!(info->world_map = (int **)malloc(sizeof(int *) * info->map_height)))
+		return error_occur(ERROR_SPRITES_MALLOC);
+	if (!make_world_map(info->world_map, info->win_width, info->map_buf, info->sprites))
+		return (error_occur(ERROR_MAP_MALLOC));
+	ft_lstclear(&info->map_buf, &del_line);
+	if (!edge_left_right_check(info) || !edge_up_down_check(info))
+	{
+		//map free
+		return error_occur(ERROR_MAP_FORMAT);
+	}
+	if (info->win_height > MAX_X)
+		info->win_height = MAX_X;
+	if (info->win_width > MAX_Y)
+		info->win_width = MAX_Y;
+	player_init(&info->player);
 	return (1);
 }
 
@@ -578,13 +621,7 @@ int main(int argc, const char *argv[])
 		return (error_occur(ERROR_PARAM));
 	if (!r)
 		return error_occur(ERROR_PARSE_FILE);
-	if (!make_world_map(&info))
-		return (error_occur(ERROR_MAP_MALLOC));
-	ft_lstclear(&info.map_buf, &del_line);
-	if (!edge_left_right_check(&info) || !edge_up_down_check(&info))
-	{
-		//map free
-		return error_occur(ERROR_MAP_FORMAT);
-	}
+	if (!game_info_init(&info))
+		return (0);
 	raycasting_start(&info);
 }
