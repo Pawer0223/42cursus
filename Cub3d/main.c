@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/01 11:40:50 by taesan            #+#    #+#             */
-/*   Updated: 2021/03/08 18:54:41 by taekang          ###   ########.fr       */
+/*   Updated: 2021/03/09 18:34:07 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -285,7 +285,7 @@ int parse_color(t_cub3d *info, int id, char *line)
 
 int	map_line_check(t_cub3d *info, char c, int width)
 {
-	if ((c >= '0' && c <= '4') || c == ' ')
+	if ((c >= '0' && c <= '5') || c == ' ')
 		return (1);
 	else if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
 	{
@@ -488,7 +488,7 @@ int edge_up_down_check(t_cub3d *info)
 
 void	player_init(t_player *p)
 {
-		char point;
+	char point;
 
 	point = p->point;
 	if (point == 'N' || point == 'S')
@@ -505,8 +505,8 @@ void	player_init(t_player *p)
 		p->plane.x = (point == 'W') ? -0.66 : 0.66;
 		p->plane.y = 0.0;
 	}
-	p->move_speed = 0.05;
-	p->rot_sppeed = 0.05;
+	p->move_speed = 0.1;
+	p->rot_sppeed = 0.1;
 }
 
 int cub3d_init(t_cub3d *info)

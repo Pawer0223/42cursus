@@ -6,11 +6,91 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/20 00:15:40 by taekang           #+#    #+#             */
-/*   Updated: 2021/03/08 15:41:15 by taekang          ###   ########.fr       */
+/*   Updated: 2021/03/09 19:53:48 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+#define numSprites 19
+
+// first => 거리
+// second => texture 식별자 ?
+typedef struct		s_pair
+{
+	double	first;
+	int		second;
+}					t_pair;
+
+struct	Sprite
+{
+	double		x;
+	double		y;
+	int			texture;
+};
+
+// sprite가 존재하는 위치 좌표 정보네
+struct Sprite	sprite[numSprites] =
+{
+	{2.5, 5.5, 5},
+	{3.5,2.5, 5},
+	{6.5,5.5, 5},
+};
+
+int		spriteOrder[numSprites];
+double	spriteDistance[numSprites];
+
+// 바꿔야함 win_width로 
+double	zBuffer[700];
+
+
+
+// distance 기준으로 내림차순 정렬
+void	sort_order(t_pair *orders, int amount)
+{
+	t_pair	tmp;
+
+	for (int i = 0; i < amount - 1; i++)
+	{
+		for (int j = i + 1; j < amount; j++)
+		{
+			if (orders[i].first > orders[j].first)
+			{
+				tmp.first = orders[i].first;
+				tmp.second = orders[i].second;
+				orders[i].first = orders[j].first;
+				orders[i].second = orders[j].second;
+				orders[j].first = tmp.first;
+				orders[j].second = tmp.second;
+			}
+		}
+	}
+}
+
+void	sortSprites(int *order, double *dist, int amount)
+{
+	t_pair	*sprites;
+
+	//std::vector<std::pair<double, int>> sprites(amount);
+	sprites = (t_pair*)malloc(sizeof(t_pair) * amount);
+	for (int i = 0; i < amount; i++)
+	{
+		sprites[i].first = dist[i];
+		sprites[i].second = order[i];
+	}
+	sort_order(sprites, amount);
+	//std::sort(sprites.begin(), sprites.end());
+	for (int i = 0; i < amount; i++)
+	{
+		dist[i] = sprites[amount - i - 1].first;
+		order[i] = sprites[amount - i - 1].second;
+	}
+	free(sprites);
+}
+
+
+
+/* up is test code */
 
 void	clear_buf(t_cub3d *info)
 {
@@ -218,29 +298,104 @@ void	draw_floor(t_ray *ray, t_cub3d *info, t_draw *draw, int x)
 	}
 }
 
-int		draw_buf_fill(t_ray *ray, t_cub3d *info, int x)
+void	draw_sprite(t_cub3d *info)
+{
+	t_player *p = &info->player;
+
+		//SPRITE CASTING
+	//sort sprites from far to close
+	for(int i = 0; i < numSprites; i++)
+	{
+		spriteOrder[i] = i;
+		spriteDistance[i] = ((p->pos.x - sprite[i].x) * (p->pos.x - sprite[i].x) + (p->pos.y - sprite[i].y) * (p->pos.y - sprite[i].y)); //sqrt not taken, unneeded
+	}
+	sortSprites(spriteOrder, spriteDistance, numSprites);
+	//after sorting the sprites, do the projection and draw them
+	for(int i = 0; i < numSprites; i++)
+	{
+		//translate sprite position to relative to camera
+		double spriteX = sprite[spriteOrder[i]].x - p->pos.x;
+		double spriteY = sprite[spriteOrder[i]].y - p->pos.y;
+
+		double invDet = 1.0 / (p->plane.x * p->dir.y - p->dir.x * p->plane.y); //required for correct matrix multiplication
+
+		double transformX = invDet * (p->dir.y * spriteX - p->dir.x * spriteY);
+		double transformY = invDet * (-p->plane.y * spriteX + p->plane.x * spriteY); //this is actually the depth inside the screen, that what Z is in 3D, the distance of sprite to player, matching sqrt(spriteDistance[i])
+
+		int spriteScreenX = (int)((info->win_width / 2) * (1 + transformX / transformY));
+
+		//parameters for scaling and moving the sprites
+		#define uDiv 1
+		#define vDiv 1
+		#define vMove 0.0
+		int vMoveScreen = (int)(vMove / transformY);
+
+		//calculate height of the sprite on screen
+		int spriteHeight = (int)fabs((info->win_height / transformY) / vDiv); //using "transformY" instead of the real distance prevents fisheye
+		//calculate lowest and highest pixel to fill in current stripe
+		int drawStartY = -spriteHeight / 2 + info->win_height / 2 + vMoveScreen;
+		if(drawStartY < 0) drawStartY = 0;
+		int drawEndY = spriteHeight / 2 + info->win_height / 2 + vMoveScreen;
+		if(drawEndY >= info->win_height) drawEndY = info->win_height - 1;
+		// printf("drawStartY : %d, drawEndY : %d\n", drawStartY, drawEndY);
+
+
+		//calculate width of the sprite
+		int spriteWidth = (int)fabs((info->win_height / transformY) / uDiv);
+		int drawStartX = -spriteWidth / 2 + spriteScreenX;
+		if(drawStartX < 0) drawStartX = 0;
+		int drawEndX = spriteWidth / 2 + spriteScreenX;
+		if(drawEndX >= info->win_width) drawEndX = info->win_width - 1;
+
+		// printf("drawStartX : %d, drawEndX : %d\n", drawStartX, drawEndX);
+
+		t_tex tex = info->texture[SPRITE];
+		//loop through every vertical stripe of the sprite on screen
+		for(int stripe = drawStartX; stripe < drawEndX; stripe++)
+		{
+			int texX = (int)((256 * (stripe - (-spriteWidth / 2 + spriteScreenX)) * tex.width / spriteWidth) / 256);
+			//the conditions in the if are:
+			//1) it's in front of camera plane so you don't see things behind you
+			//2) it's on the screen (left)
+			//3) it's on the screen (right)
+			//4) ZBuffer, with perpendicular distance
+			if(transformY > 0 && stripe > 0 && stripe < info->win_width && transformY < zBuffer[stripe])
+			for(int y = drawStartY; y < drawEndY; y++) //for every pixel of the current stripe
+			{
+				int d = (y-vMoveScreen) * 256 - info->win_height * 128 + spriteHeight * 128; //256 and 128 factors to avoid floats
+				int texY = ((d * tex.height) / spriteHeight) / 256;
+				int color = tex.texture[tex.width * texY + texX]; //get current color from the texture
+				if((color & 0x00FFFFFF) != 0) info->buf[y][stripe] = color; //paint pixel if it isn't black, black is the invisible color
+			}
+		}
+	}
+}
+
+void		draw_buf_fill(t_ray *ray, t_cub3d *info, int x)
 {
 	t_draw draw;
+	
 	draw_wall(ray, info, &draw, x);
 	draw_floor(ray, info, &draw, x);
-	return (1);
 }
 
 // raycasting
 void	calc(t_cub3d *info)
 {
-	int x;
+	int		x;
+	t_ray	ray;
 
 	x = 0;
 	//WALL CASTING
 	while(x < info->win_width)
 	{
-		t_ray ray;
 		ray_init(&ray, info, x);
 		shoot_ray(&ray, info);
+		zBuffer[x] = ray.perp_wall_dist; //perpendicular distance is used
 		draw_buf_fill(&ray, info, x);
 		x++;
 	}
+	draw_sprite(info);
 }
 
 void	draw(t_cub3d *info)
