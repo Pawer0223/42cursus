@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/20 00:15:40 by taekang           #+#    #+#             */
-/*   Updated: 2021/03/09 20:38:14 by taekang          ###   ########.fr       */
+/*   Updated: 2021/03/09 20:46:38 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@ struct	Sprite
 // sprite가 존재하는 위치 좌표 정보네
 struct Sprite	sprite[numSprites] =
 {
+	{3.5, 5.5, 5},
 	{2.5, 5.5, 5},
-	{3.5, 2.5, 5},
-	{6.5, 5.5, 5},
+	{1.5, 5.5, 5},
 };
 
 int		spriteOrder[numSprites];
@@ -42,8 +42,6 @@ double	spriteDistance[numSprites];
 
 // 바꿔야함 win_width로 
 double	zBuffer[700];
-
-
 
 // distance 기준으로 내림차순 정렬
 void	sort_order(t_pair *orders, int amount)
@@ -166,7 +164,7 @@ void	shoot_ray(t_ray *ray, t_cub3d *info)
 			ray->side = 1;
 		}
 		//Check if ray has hit a wall
-		if (info->world_map[ray->map.x][ray->map.y] > 0 && info->world_map[ray->map.x][ray->map.y] <= 4) 
+		if (info->world_map[ray->map.x][ray->map.y] > 0 && info->world_map[ray->map.x][ray->map.y] <= SPRITE)
 			ray->hit = 1;
 	}
 	if (ray->side == 0)
