@@ -6,13 +6,13 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/20 00:15:40 by taekang           #+#    #+#             */
-/*   Updated: 2021/03/09 19:53:48 by taekang          ###   ########.fr       */
+/*   Updated: 2021/03/09 20:38:14 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-#define numSprites 19
+#define numSprites 3
 
 // first => 거리
 // second => texture 식별자 ?
@@ -33,8 +33,8 @@ struct	Sprite
 struct Sprite	sprite[numSprites] =
 {
 	{2.5, 5.5, 5},
-	{3.5,2.5, 5},
-	{6.5,5.5, 5},
+	{3.5, 2.5, 5},
+	{6.5, 5.5, 5},
 };
 
 int		spriteOrder[numSprites];
@@ -166,7 +166,7 @@ void	shoot_ray(t_ray *ray, t_cub3d *info)
 			ray->side = 1;
 		}
 		//Check if ray has hit a wall
-		if (info->world_map[ray->map.x][ray->map.y] > 0) 
+		if (info->world_map[ray->map.x][ray->map.y] > 0 && info->world_map[ray->map.x][ray->map.y] <= 4) 
 			ray->hit = 1;
 	}
 	if (ray->side == 0)
@@ -359,6 +359,7 @@ void	draw_sprite(t_cub3d *info)
 			//2) it's on the screen (left)
 			//3) it's on the screen (right)
 			//4) ZBuffer, with perpendicular distance
+			// printf("transformY : %f, zBuffer[stripe] : %f\n", transformY, zBuffer[stripe]);
 			if(transformY > 0 && stripe > 0 && stripe < info->win_width && transformY < zBuffer[stripe])
 			for(int y = drawStartY; y < drawEndY; y++) //for every pixel of the current stripe
 			{
