@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/01 11:40:50 by taesan            #+#    #+#             */
-/*   Updated: 2021/03/10 02:10:03 by taekang          ###   ########.fr       */
+/*   Updated: 2021/03/11 02:35:46 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,22 +133,27 @@ typedef struct	s_tex
 	int			height;
 }				t_tex;
 
+typedef struct	s_sprite
+{
+	t_d_pair	**pos;
+	int			cnt;
+}				t_sprite;
+
 typedef struct s_cub3d
 {
 	void *mlx;
 	void *win;
 	int **buf;
 	int **world_map;
-	t_d_pair **sprites;
 	t_tex texture[IDENTIFIERS];
 	int win_width;
 	int win_height;
 	int map_width;
 	int map_height;
-	int sprite_num;
 	t_img img;
 	t_player player;
 	t_list *map_buf;
+	t_sprite sprites;
 }   t_cub3d;
 
 int	main_loop(t_cub3d *info);

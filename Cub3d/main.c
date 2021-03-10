@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/01 11:40:50 by taesan            #+#    #+#             */
-/*   Updated: 2021/03/10 21:34:27 by taekang          ###   ########.fr       */
+/*   Updated: 2021/03/11 02:39:50 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,13 @@ void print_world_map(t_cub3d *info)
 	}
 }
 
-void print_sprites(t_cub3d *info)
+void print_sprites(int cnt, t_d_pair **pos)
 {
 	int i;
 	i = 0;
-	while (i < info->sprite_num)
+	while (i < cnt)
 	{
-		printf("[%d] sprite => x : %f, y : %f\n", i, info->sprites[i]->x, info->sprites[i]->y);
+		printf("[%d] sprite => x : %f, y : %f\n", i, pos[i]->x, pos[i]->y);
 		i++;
 	}
 }
@@ -58,12 +58,12 @@ void to_string(t_cub3d *info)
 	printf("win_height : %d\n", info->win_height);
 	printf("map_width : %d\n", info->map_width);
 	printf("map_height : %d\n", info->map_height);
-	printf("sprite_num : %d\n", info->sprite_num);
+	printf("sprite_num : %d\n", info->sprites.cnt);
 	printf("### map_buf ###\n");
 
 	ft_lstiter(info->map_buf, &print_list);
 	printf("### sprite info ###\n");
-	print_sprites(info);
+	print_sprites(info->sprites.cnt, info->sprites.pos);
 	printf("### player ###\n");
 	printf("pos.x : %f, pos.y : %f\n", info->player.pos.x, info->player.pos.y);
 	printf("dir.x : %f, dir.y : %f\n", info->player.dir.x, info->player.dir.y);
@@ -279,7 +279,7 @@ int	map_line_check(t_cub3d *info, char c, int width)
 	else if ((c >= '0' && c <= '5') || c == ' ')
 	{
 		if (c == '5')
-			info->sprite_num++;
+			info->sprites.cnt++;
 		return (1);
 	}
 	else
@@ -545,15 +545,15 @@ void raycasting_start(t_cub3d *info)
 	mlx_loop(info->mlx);
 }
 
-int game_info_init(t_cub3d *info)
+int game_info_init(t_cub3d *info, t_sprite *sprites)
 {
 	if (!cub3d_init(info))
 		return (0);
-	if (!(info->sprites = (t_d_pair **)malloc(sizeof(t_d_pair) * info->sprite_num)))
+	if (!(sprites->pos = (t_d_pair **)malloc(sizeof(t_d_pair) * sprites->cnt)))
 		return error_occur(ERROR_SPRITES_MALLOC);
 	if (!(info->world_map = (int **)malloc(sizeof(int *) * info->map_height)))
 		return error_occur(ERROR_SPRITES_MALLOC);
-	if (!make_world_map(info->world_map, info->win_width, info->map_buf, info->sprites))
+	if (!make_world_map(info->world_map, info->win_width, info->map_buf, sprites->pos))
 		return (error_occur(ERROR_MAP_MALLOC));
 	ft_lstclear(&info->map_buf, &del_line);
 	if (!edge_left_right_check(info) || !edge_up_down_check(info))
@@ -586,7 +586,7 @@ int main(int argc, const char *argv[])
 		return (error_occur(ERROR_PARAM));
 	if (!r)
 		exit(1);
-	if (!game_info_init(&info))
+	if (!game_info_init(&info, &info.sprites))
 		exit(1);
 	 raycasting_start(&info);
 }

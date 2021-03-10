@@ -6,13 +6,11 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/20 00:15:40 by taekang           #+#    #+#             */
-/*   Updated: 2021/03/09 20:46:38 by taekang          ###   ########.fr       */
+/*   Updated: 2021/03/11 02:39:00 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-#define numSprites 3
 
 // first => 거리
 // second => texture 식별자 ?
@@ -29,16 +27,8 @@ struct	Sprite
 	int			texture;
 };
 
-// sprite가 존재하는 위치 좌표 정보네
-struct Sprite	sprite[numSprites] =
-{
-	{3.5, 5.5, 5},
-	{2.5, 5.5, 5},
-	{1.5, 5.5, 5},
-};
-
-int		spriteOrder[numSprites];
-double	spriteDistance[numSprites];
+int		spriteOrder[4];
+double	spriteDistance[4];
 
 // 바꿔야함 win_width로 
 double	zBuffer[700];
@@ -85,8 +75,6 @@ void	sortSprites(int *order, double *dist, int amount)
 	}
 	free(sprites);
 }
-
-
 
 /* up is test code */
 
@@ -296,24 +284,28 @@ void	draw_floor(t_ray *ray, t_cub3d *info, t_draw *draw, int x)
 	}
 }
 
-void	draw_sprite(t_cub3d *info)
+void	draw_sprite(t_cub3d *info, t_sprite *sprites)
 {
 	t_player *p = &info->player;
+	t_d_pair	**sprite;
 
-		//SPRITE CASTING
+	sprite = sprites->pos;
+	double a = sprite[0]->x;
+
+	//SPRITE CASTING
 	//sort sprites from far to close
-	for(int i = 0; i < numSprites; i++)
+	for(int i = 0; i < sprites->cnt; i++)
 	{
 		spriteOrder[i] = i;
-		spriteDistance[i] = ((p->pos.x - sprite[i].x) * (p->pos.x - sprite[i].x) + (p->pos.y - sprite[i].y) * (p->pos.y - sprite[i].y)); //sqrt not taken, unneeded
+		spriteDistance[i] = ((p->pos.x - sprite[i]->x) * (p->pos.x - sprite[i]->x) + (p->pos.y - sprite[i]->y) * (p->pos.y - sprite[i]->y)); //sqrt not taken, unneeded
 	}
-	sortSprites(spriteOrder, spriteDistance, numSprites);
+	sortSprites(spriteOrder, spriteDistance, sprites->cnt);
 	//after sorting the sprites, do the projection and draw them
-	for(int i = 0; i < numSprites; i++)
+	for(int i = 0; i < sprites->cnt; i++)
 	{
 		//translate sprite position to relative to camera
-		double spriteX = sprite[spriteOrder[i]].x - p->pos.x;
-		double spriteY = sprite[spriteOrder[i]].y - p->pos.y;
+		double spriteX = sprite[spriteOrder[i]]->x - p->pos.x;
+		double spriteY = sprite[spriteOrder[i]]->y - p->pos.y;
 
 		double invDet = 1.0 / (p->plane.x * p->dir.y - p->dir.x * p->plane.y); //required for correct matrix multiplication
 
@@ -394,7 +386,7 @@ void	calc(t_cub3d *info)
 		draw_buf_fill(&ray, info, x);
 		x++;
 	}
-	draw_sprite(info);
+	draw_sprite(info, &info->sprites);
 }
 
 void	draw(t_cub3d *info)
