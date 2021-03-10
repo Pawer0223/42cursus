@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/01 11:40:50 by taesan            #+#    #+#             */
-/*   Updated: 2021/03/11 02:39:50 by taekang          ###   ########.fr       */
+/*   Updated: 2021/03/11 03:43:48 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -508,8 +508,8 @@ void	player_init(t_player *p)
 		p->plane.x = (point == 'W') ? -0.66 : 0.66;
 		p->plane.y = 0.0;
 	}
-	p->move_speed = 0.1;
-	p->rot_sppeed = 0.1;
+	p->move_speed = 0.35;
+	p->rot_sppeed = 0.35;
 }
 
 int cub3d_init(t_cub3d *info)
@@ -535,7 +535,7 @@ int cub3d_init(t_cub3d *info)
 void raycasting_start(t_cub3d *info)
 {
 
-	to_string(info);
+	// to_string(info);
 	
 	info->win = mlx_new_window(info->mlx, info->win_width, info->win_height, "cub3d");
 	info->img.img = mlx_new_image(info->mlx, info->win_width, info->win_height);
@@ -550,6 +550,8 @@ int game_info_init(t_cub3d *info, t_sprite *sprites)
 	if (!cub3d_init(info))
 		return (0);
 	if (!(sprites->pos = (t_d_pair **)malloc(sizeof(t_d_pair) * sprites->cnt)))
+		return error_occur(ERROR_SPRITES_MALLOC);
+	if (!(sprites->z_buffer = (double *)malloc(sizeof(double) * info->win_width)))
 		return error_occur(ERROR_SPRITES_MALLOC);
 	if (!(info->world_map = (int **)malloc(sizeof(int *) * info->map_height)))
 		return error_occur(ERROR_SPRITES_MALLOC);

@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/01 11:40:50 by taesan            #+#    #+#             */
-/*   Updated: 2021/03/11 02:35:46 by taekang          ###   ########.fr       */
+/*   Updated: 2021/03/11 03:40:04 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@
 #define	ERROR_FILL_TEXTURE "Texture Info Load Error"
 #define	ERROR_SPRITES_MALLOC "Sprites Malloc Error"
 #define	ERROR_ADD_SPRITE "Sprites Add Error"
+#define ERROR_DISTANCE_MALLOC "Sprite Distance Pointer Malloc Error"
 
 // #define TEX_WIDTH 64
 // #define TEX_HEIGHT 64
@@ -137,6 +138,8 @@ typedef struct	s_sprite
 {
 	t_d_pair	**pos;
 	int			cnt;
+	double		*z_buffer;
+
 }				t_sprite;
 
 typedef struct s_cub3d
@@ -159,3 +162,4 @@ typedef struct s_cub3d
 int	main_loop(t_cub3d *info);
 int	key_press(int key, t_cub3d *info);
 void to_string(t_cub3d *info);
+int error_occur(const char *error_message);

@@ -13,6 +13,17 @@
         "array": "c",
         "string": "c",
         "string_view": "c",
-        "vector": "c"
+        "vector": "c",
+        "__functional_03": "c",
+        "__hash_table": "c",
+        "__split_buffer": "c",
+        "algorithm": "c",
+        "chrono": "c",
+        "functional": "c",
+        "memory_resource": "c",
+        "memory": "c",
+        "tuple": "c",
+        "unordered_map": "c",
+        "utility": "c"
     }
   }

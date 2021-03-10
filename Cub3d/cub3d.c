@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/20 00:15:40 by taekang           #+#    #+#             */
-/*   Updated: 2021/03/11 02:39:00 by taekang          ###   ########.fr       */
+/*   Updated: 2021/03/11 03:43:05 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,66 +14,32 @@
 
 // first => 거리
 // second => texture 식별자 ?
-typedef struct		s_pair
-{
-	double	first;
-	int		second;
-}					t_pair;
-
-struct	Sprite
-{
-	double		x;
-	double		y;
-	int			texture;
-};
-
-int		spriteOrder[4];
-double	spriteDistance[4];
-
 // 바꿔야함 win_width로 
-double	zBuffer[700];
 
 // distance 기준으로 내림차순 정렬
-void	sort_order(t_pair *orders, int amount)
+void	sort_sprite_desc(t_d_pair **sprite, double *dist, int amount)
 {
-	t_pair	tmp;
+	double temp;
+	t_d_pair *temp_p;
 
+	temp = 0.0;
 	for (int i = 0; i < amount - 1; i++)
 	{
 		for (int j = i + 1; j < amount; j++)
 		{
-			if (orders[i].first > orders[j].first)
+			if (dist[i] < dist[j])
 			{
-				tmp.first = orders[i].first;
-				tmp.second = orders[i].second;
-				orders[i].first = orders[j].first;
-				orders[i].second = orders[j].second;
-				orders[j].first = tmp.first;
-				orders[j].second = tmp.second;
+				temp = dist[i];
+				temp_p = sprite[i];
+				
+				dist[i] = dist[j];
+				sprite[i] = sprite[j];
+				
+				dist[j] = temp;
+				sprite[j] = temp_p;
 			}
 		}
 	}
-}
-
-void	sortSprites(int *order, double *dist, int amount)
-{
-	t_pair	*sprites;
-
-	//std::vector<std::pair<double, int>> sprites(amount);
-	sprites = (t_pair*)malloc(sizeof(t_pair) * amount);
-	for (int i = 0; i < amount; i++)
-	{
-		sprites[i].first = dist[i];
-		sprites[i].second = order[i];
-	}
-	sort_order(sprites, amount);
-	//std::sort(sprites.begin(), sprites.end());
-	for (int i = 0; i < amount; i++)
-	{
-		dist[i] = sprites[amount - i - 1].first;
-		order[i] = sprites[amount - i - 1].second;
-	}
-	free(sprites);
 }
 
 /* up is test code */
@@ -286,26 +252,28 @@ void	draw_floor(t_ray *ray, t_cub3d *info, t_draw *draw, int x)
 
 void	draw_sprite(t_cub3d *info, t_sprite *sprites)
 {
-	t_player *p = &info->player;
+	t_player	*p = &info->player;
 	t_d_pair	**sprite;
+	double		*distance;
 
+	// last free distance ! 해주기 
+	if (!(distance = (double *)malloc(sizeof(double) * sprites->cnt)))
+	{
+		error_occur(ERROR_DISTANCE_MALLOC);
+		exit(1);
+	}
 	sprite = sprites->pos;
-	double a = sprite[0]->x;
-
 	//SPRITE CASTING
 	//sort sprites from far to close
 	for(int i = 0; i < sprites->cnt; i++)
-	{
-		spriteOrder[i] = i;
-		spriteDistance[i] = ((p->pos.x - sprite[i]->x) * (p->pos.x - sprite[i]->x) + (p->pos.y - sprite[i]->y) * (p->pos.y - sprite[i]->y)); //sqrt not taken, unneeded
-	}
-	sortSprites(spriteOrder, spriteDistance, sprites->cnt);
+		distance[i] = ((p->pos.x - sprite[i]->x) * (p->pos.x - sprite[i]->x) + (p->pos.y - sprite[i]->y) * (p->pos.y - sprite[i]->y));
+	sort_sprite_desc(sprite, distance, sprites->cnt);
 	//after sorting the sprites, do the projection and draw them
 	for(int i = 0; i < sprites->cnt; i++)
 	{
 		//translate sprite position to relative to camera
-		double spriteX = sprite[spriteOrder[i]]->x - p->pos.x;
-		double spriteY = sprite[spriteOrder[i]]->y - p->pos.y;
+		double spriteX = sprite[i]->x - p->pos.x;
+		double spriteY = sprite[i]->y - p->pos.y;
 
 		double invDet = 1.0 / (p->plane.x * p->dir.y - p->dir.x * p->plane.y); //required for correct matrix multiplication
 
@@ -350,7 +318,7 @@ void	draw_sprite(t_cub3d *info, t_sprite *sprites)
 			//3) it's on the screen (right)
 			//4) ZBuffer, with perpendicular distance
 			// printf("transformY : %f, zBuffer[stripe] : %f\n", transformY, zBuffer[stripe]);
-			if(transformY > 0 && stripe > 0 && stripe < info->win_width && transformY < zBuffer[stripe])
+			if(transformY > 0 && stripe > 0 && stripe < info->win_width && transformY < sprites->z_buffer[stripe])
 			for(int y = drawStartY; y < drawEndY; y++) //for every pixel of the current stripe
 			{
 				int d = (y-vMoveScreen) * 256 - info->win_height * 128 + spriteHeight * 128; //256 and 128 factors to avoid floats
@@ -360,6 +328,7 @@ void	draw_sprite(t_cub3d *info, t_sprite *sprites)
 			}
 		}
 	}
+	free(distance);
 }
 
 void		draw_buf_fill(t_ray *ray, t_cub3d *info, int x)
@@ -382,7 +351,7 @@ void	calc(t_cub3d *info)
 	{
 		ray_init(&ray, info, x);
 		shoot_ray(&ray, info);
-		zBuffer[x] = ray.perp_wall_dist; //perpendicular distance is used
+		info->sprites.z_buffer[x] = ray.perp_wall_dist; //perpendicular distance is used
 		draw_buf_fill(&ray, info, x);
 		x++;
 	}
