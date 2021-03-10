@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/01 11:40:50 by taesan            #+#    #+#             */
-/*   Updated: 2021/03/11 03:43:48 by taekang          ###   ########.fr       */
+/*   Updated: 2021/03/11 04:03:37 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -443,7 +443,7 @@ int make_world_map(int **map, int width, t_list *curr, t_d_pair **ss)
 	return (1);
 }
 
-int edge_left_right_check(t_cub3d *info)
+int edge_left_right_check(t_cub3d *info, int limit)
 {
 	int i;
 	int j;
@@ -452,21 +452,21 @@ int edge_left_right_check(t_cub3d *info)
 	while (i < info->map_height)
 	{
 		j = 0;
-		while (info->world_map[i][j] && info->world_map[i][j] == MAP_EMPTY_PASS)
+		while (j < limit && info->world_map[i][j] && info->world_map[i][j] == MAP_EMPTY_PASS)
 			j++;
-		if (info->world_map[i][j] == 0)
+		if (j >= limit || info->world_map[i][j] == 0)
 			return (0);
 		j = info->map_width - 1;
 		while (j >= 0 && info->world_map[i][j] == MAP_EMPTY_PASS)
 			j--;
-		if (info->world_map[i][j] == 0)
+		if (j < 0 || info->world_map[i][j] == 0)
 			return (0);
 		i++;
 	}
 	return (1);
 }
 
-int edge_up_down_check(t_cub3d *info)
+int edge_up_down_check(t_cub3d *info, int limit)
 {
 	int i;
 	int j;
@@ -475,14 +475,14 @@ int edge_up_down_check(t_cub3d *info)
 	while (i < info->map_width)
 	{
 		j = 0;
-		while (info->world_map[j][i] && info->world_map[j][i] == MAP_EMPTY_PASS)
+		while (j < limit && info->world_map[j][i] && info->world_map[j][i] == MAP_EMPTY_PASS)
 			j++;
-		if (info->world_map[j][i] == 0)
+		if (j >= limit || info->world_map[j][i] == 0)
 			return (0);
 		j = info->map_height - 1;
 		while (j >= 0 && info->world_map[j][i] == MAP_EMPTY_PASS)
 			j--;
-		if (info->world_map[j][i] == 0)
+		if (j < 0 || info->world_map[j][i] == 0)
 			return (0);
 		i++;
 	}
@@ -558,7 +558,8 @@ int game_info_init(t_cub3d *info, t_sprite *sprites)
 	if (!make_world_map(info->world_map, info->win_width, info->map_buf, sprites->pos))
 		return (error_occur(ERROR_MAP_MALLOC));
 	ft_lstclear(&info->map_buf, &del_line);
-	if (!edge_left_right_check(info) || !edge_up_down_check(info))
+	to_string(info);
+	if (!edge_left_right_check(info, info->map_width) || !edge_up_down_check(info, info->map_height))
 		return error_occur(ERROR_MAP_FORMAT);
 	if (info->win_height > MAX_X)
 		info->win_height = MAX_X;
