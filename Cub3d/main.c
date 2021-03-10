@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/01 11:40:50 by taesan            #+#    #+#             */
-/*   Updated: 2021/03/10 02:16:22 by taekang          ###   ########.fr       */
+/*   Updated: 2021/03/10 21:34:27 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,38 +78,6 @@ int error_occur(const char *error_message)
 	printf("Error\n");
 	printf(": [%s]\n", error_message);
 	return (0);
-}
-
-/*
-	init
-*/
-int default_init(t_cub3d *info)
-{
-	int i;
-	// int j;
-
-	ft_bzero(info, sizeof(t_cub3d));
-	info->mlx = mlx_init();
-	i = 0;
-	while (i < IDENTIFIERS)
-	{
-		ft_bzero(&info->texture[i], sizeof(t_tex));
-		i++;
-	}
-
-	// while (i < IDENTIFIERS)
-	// {
-	// 	if (!(info->texture[i] = (int *)malloc(sizeof(int) * (TEX_HEIGHT * TEX_WIDTH))))
-	// 	{
-	// 		j = 0;
-	// 		while (j < i)
-	// 			free(info->texture[j++]);
-	// 		return error_occur(ERROR_TEXTURE_MALLOC);
-	// 	}
-	// 	ft_bzero(info->texture[i], sizeof(int) * TEX_HEIGHT * TEX_WIDTH);
-	// 	i++;
-	// }
-	return (1);
 }
 
 int check_identifier(char *line)
@@ -330,7 +298,6 @@ void del_line(void *line)
 
 int parse_map(t_cub3d *info, char *line)
 {
-	// 1, 2, 3, 4 N,S,E,W 만 가능하도록
 	int i;
 	int r;
 	int width;
@@ -454,8 +421,12 @@ int make_world_map(int **map, int width, t_list *curr, t_d_pair **ss)
 	i = 0;
 	while (curr)
 	{
-		if (!world_map_malloc(map, width, i))
-			return (0);
+		// 중간에 에러나도 앞에 malloc한거 free 안함. 마지막에 exit해주니깐.
+		// leak 확인 후, 안되면 아래 코드로 다시 복구하기..
+		if (!(map[i] = (int *)malloc(sizeof(int) * width)))
+			return (error_occur(ERROR_MAP_MALLOC));
+		// if (!world_map_malloc(map, width, i))
+		// 	return (0);
 		j = 0;
 		while (*(char *)(curr->content + j))
 		{
@@ -544,7 +515,6 @@ void	player_init(t_player *p)
 int cub3d_init(t_cub3d *info)
 {
 	int i;
-	int	j;
 
 	if (!(info->buf = (int **)malloc(sizeof(int *) * info->win_height)))
 		return error_occur(ERROR_BUF_MALLOC);
@@ -552,18 +522,17 @@ int cub3d_init(t_cub3d *info)
 	while (i < info->win_height)
 	{
 		if (!(info->buf[i] = (int *)malloc(sizeof(int) * info->win_width)))
-		{
-			j = 0;
-			while (j < i)
-				free(info->buf[j++]);
 			return error_occur(ERROR_BUF_MALLOC);
-		}
+			// j = 0;
+			// while (j < i)
+			// 	free(info->buf[j++]);
+
 		i++;
 	}
 	return (1);
 }
 
-int raycasting_start(t_cub3d *info)
+void raycasting_start(t_cub3d *info)
 {
 
 	to_string(info);
@@ -574,7 +543,6 @@ int raycasting_start(t_cub3d *info)
 	mlx_loop_hook(info->mlx, &main_loop, info);
 	mlx_hook(info->win, X_EVENT_KEY_PRESS, 0, &key_press, info);
 	mlx_loop(info->mlx);
-	return (1);
 }
 
 int game_info_init(t_cub3d *info)
@@ -589,10 +557,7 @@ int game_info_init(t_cub3d *info)
 		return (error_occur(ERROR_MAP_MALLOC));
 	ft_lstclear(&info->map_buf, &del_line);
 	if (!edge_left_right_check(info) || !edge_up_down_check(info))
-	{
-		//map free
 		return error_occur(ERROR_MAP_FORMAT);
-	}
 	if (info->win_height > MAX_X)
 		info->win_height = MAX_X;
 	if (info->win_width > MAX_Y)
@@ -603,11 +568,11 @@ int game_info_init(t_cub3d *info)
 
 int main(int argc, const char *argv[])
 {
-	t_cub3d info;
+	t_cub3d	info;
 	int		r;
 	
-	if (!default_init(&info))
-		return error_occur(ERROR_DEFAULT_INIT);
+	ft_bzero(&info, sizeof(t_cub3d));
+	info.mlx = mlx_init();
 	if (argc == 2)
 		r = parse_file(&info, argv[1]);
 	else if (argc == 3)
@@ -620,8 +585,8 @@ int main(int argc, const char *argv[])
 	else
 		return (error_occur(ERROR_PARAM));
 	if (!r)
-		return error_occur(ERROR_PARSE_FILE);
+		exit(1);
 	if (!game_info_init(&info))
-		return (0);
-	raycasting_start(&info);
+		exit(1);
+	 raycasting_start(&info);
 }
