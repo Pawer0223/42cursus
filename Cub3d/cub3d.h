@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/01 11:40:50 by taesan            #+#    #+#             */
-/*   Updated: 2021/03/11 21:50:28 by taekang          ###   ########.fr       */
+/*   Updated: 2021/03/11 22:28:14 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,4 +162,9 @@ typedef struct s_cub3d
 int	main_loop(t_cub3d *info);
 int	key_press(int key, t_cub3d *info);
 void to_string(t_cub3d *info);
+
 int error_occur(const char *error_message);
+
+/* ray.c */
+void	ray_init(t_ray *ray, t_cub3d *info, int x);
+void	shoot_ray(t_ray *ray, t_cub3d *info);
