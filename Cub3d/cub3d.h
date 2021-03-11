@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/01 11:40:50 by taesan            #+#    #+#             */
-/*   Updated: 2021/03/11 03:40:04 by taekang          ###   ########.fr       */
+/*   Updated: 2021/03/11 21:50:28 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@ typedef struct s_player
 	t_d_pair plane;
 	t_draw draw;
 	double move_speed;
-	double rot_sppeed;
+	double rot_speed;
 	char point;
 } t_player;
 

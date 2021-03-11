@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/20 00:15:40 by taekang           #+#    #+#             */
-/*   Updated: 2021/03/11 03:43:05 by taekang          ###   ########.fr       */
+/*   Updated: 2021/03/11 21:55:29 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -380,49 +380,31 @@ int	main_loop(t_cub3d *info)
 
 int	key_press(int key, t_cub3d *info)
 {
-	int **map;
-	t_player p;
+    double speed;
+	double speed2;
+	double old_dir_x;
+	double old_plane_x;
+	t_player *p;
 
-	map = info->world_map;
-	p = info->player;
-	if (key == K_W)
-	{
-		if (!map[(int)(p.pos.x + p.dir.x * p.move_speed)][(int)(p.pos.y)])
-			p.pos.x += p.dir.x * p.move_speed;
-		if (!map[(int)(p.pos.x)][(int)(p.pos.y + p.dir.y * p.move_speed)])
-			p.pos.y += p.dir.y * p.move_speed;
-	}
-	//move backwards if no wall behind you
-	if (key == K_S)
-	{
-		if (!map[(int)(p.pos.x - p.dir.x * p.move_speed)][(int)(p.pos.y)])
-			p.pos.x -= p.dir.x * p.move_speed; 
-		if (!map[(int)(p.pos.x)][(int)(p.pos.y - p.dir.y * p.move_speed)])
-			p.pos.y -= p.dir.y * p.move_speed;
-	}
-	//rotate to the right
-	if (key == K_D)
-	{
-		//both camera direction and camera plane must be rotated
-		double oldDirX = p.dir.x;
-		p.dir.x = p.dir.x * cos(-p.rot_sppeed) - p.dir.y * sin(-p.rot_sppeed);
-		p.dir.y = oldDirX * sin(-p.rot_sppeed) + p.dir.y * cos(-p.rot_sppeed);
-		double oldPlaneX = p.plane.x;
-		p.plane.x = p.plane.x * cos(-p.rot_sppeed) - p.plane.y * sin(-p.rot_sppeed);
-		p.plane.y = oldPlaneX * sin(-p.rot_sppeed) + p.plane.y * cos(-p.rot_sppeed);
-	}
-	//rotate to the left
-	if (key == K_A)
-	{
-		//both camera direction and camera plane must be rotated
-		double oldDirX = p.dir.x;
-		p.dir.x = p.dir.x * cos(p.rot_sppeed) - p.dir.y * sin(p.rot_sppeed);
-		p.dir.y = oldDirX * sin(p.rot_sppeed) + p.dir.y * cos(p.rot_sppeed);
-		double oldPlaneX = p.plane.x;
-		p.plane.x = p.plane.x * cos(p.rot_sppeed) - p.plane.y * sin(p.rot_sppeed);
-		p.plane.y = oldPlaneX * sin(p.rot_sppeed) + p.plane.y * cos(p.rot_sppeed);
-	}
-	info->player = p;
+	p = &info->player;
+	speed = (key == K_D) ? p->rot_speed * -1 : p->rot_speed;
+	speed2 = (key == K_S) ? p->move_speed * -1 : p->move_speed;
+    if (key == K_W || key == K_S)
+    {
+        if (!info->world_map[(int)(p->pos.x + (p->dir.x * speed2))][(int)(p->pos.y)])
+            p->pos.x += p->dir.x * speed2;
+        if (!info->world_map[(int)(p->pos.x)][(int)(p->pos.y + (p->dir.y * speed2))])
+            p->pos.y += p->dir.y * speed2;
+    }
+    if (key == K_D || key == K_A)
+    {
+		old_dir_x = p->dir.x;
+        p->dir.x = p->dir.x * cos(speed) - p->dir.y * sin(speed);
+        p->dir.y = old_dir_x * sin(speed) + p->dir.y * cos(speed);
+        old_plane_x = p->plane.x;
+        p->plane.x = p->plane.x * cos(speed) - p->plane.y * sin(speed);
+        p->plane.y = old_plane_x * sin(speed) + p->plane.y * cos(speed);
+    }
 	if (key == K_ESC)
 		exit(0);
 	return (0);
