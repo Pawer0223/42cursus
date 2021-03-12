@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/01 11:40:50 by taesan            #+#    #+#             */
-/*   Updated: 2021/03/12 19:31:52 by taekang          ###   ########.fr       */
+/*   Updated: 2021/03/12 20:09:35 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,10 @@
 
 #define MAX_X 1920
 #define MAX_Y 1080
+
+#define U_DIV 1
+#define V_DIV 1
+#define V_MOVE 0.0
 
 
 // compile => gcc get_next_line.c get_next_line_utils.c main.c -L../libft -lft
