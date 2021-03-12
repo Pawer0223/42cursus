@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/01 11:40:50 by taesan            #+#    #+#             */
-/*   Updated: 2021/03/12 17:03:48 by taekang          ###   ########.fr       */
+/*   Updated: 2021/03/12 19:31:52 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,6 +142,19 @@ typedef struct	s_sprite
 
 }				t_sprite;
 
+typedef	struct	s_floor
+{
+	t_d_pair	floor_w;	
+	t_d_pair	current_f;
+	t_i_pair	tex_f;
+	t_tex		texture_f;
+	t_tex 		texture_c;
+	double		dist_p;
+	double		dist_curr;
+	double		weight;
+}				t_floor;
+
+
 typedef struct s_cub3d
 {
 	void *mlx;
@@ -167,3 +180,7 @@ int error_occur(const char *error_message);
 
 /* ray.c */
 void	shoot_ray(t_ray *ray, t_cub3d *info, int x);
+void	fill_data(t_ray *ray, t_draw *draw, t_cub3d *info, int x);
+void	fill_wall(t_ray *ray, t_cub3d *info, t_draw *draw, int x);
+void	fill_floor(t_ray *ray, t_cub3d *info, t_draw *draw, int x);
+void	fill_sprite(t_cub3d *info, t_sprite *sprites);

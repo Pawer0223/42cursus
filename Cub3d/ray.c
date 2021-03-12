@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/12 16:29:26 by taekang           #+#    #+#             */
-/*   Updated: 2021/03/12 17:08:15 by taekang          ###   ########.fr       */
+/*   Updated: 2021/03/12 17:13:28 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,10 @@ void	ray_init(t_ray *ray, t_player p, int x, int win_width)
 void	shoot_ray(t_ray *ray, t_cub3d *info, int x)
 {
 	double		dist;
+	double	*z_buffer;
 
+	z_buffer = info->sprites.z_buffer;
 	ray_init(ray, info->player, x, info->win_width);
 	shoot(ray, info->world_map, info->player);
+	z_buffer[x] = ray->perp_wall_dist;
 }
