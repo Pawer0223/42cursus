@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/20 00:15:40 by taekang           #+#    #+#             */
-/*   Updated: 2021/03/11 22:26:38 by taekang          ###   ########.fr       */
+/*   Updated: 2021/03/12 17:03:37 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ void	sort_sprite_desc(t_d_pair **sprite, double *dist, int amount)
 }
 
 /* up is test code */
-
 void	clear_buf(t_cub3d *info)
 {
 	for (int i = 0; i < info->win_height; i++)
@@ -277,8 +276,7 @@ void	calc(t_cub3d *info)
 	//WALL CASTING
 	while(x < info->win_width)
 	{
-		ray_init(&ray, info, x);
-		shoot_ray(&ray, info);
+		shoot_ray(&ray, info, x);
 		info->sprites.z_buffer[x] = ray.perp_wall_dist; //perpendicular distance is used
 		draw_buf_fill(&ray, info, x);
 		x++;

@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/01 11:40:50 by taesan            #+#    #+#             */
-/*   Updated: 2021/03/11 22:28:14 by taekang          ###   ########.fr       */
+/*   Updated: 2021/03/12 17:03:48 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,5 +166,4 @@ void to_string(t_cub3d *info);
 int error_occur(const char *error_message);
 
 /* ray.c */
-void	ray_init(t_ray *ray, t_cub3d *info, int x);
-void	shoot_ray(t_ray *ray, t_cub3d *info);
+void	shoot_ray(t_ray *ray, t_cub3d *info, int x);
