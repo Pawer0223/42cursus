@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/01 11:40:50 by taesan            #+#    #+#             */
-/*   Updated: 2021/03/14 03:21:18 by taekang          ###   ########.fr       */
+/*   Updated: 2021/03/14 03:53:07 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -209,3 +209,12 @@ void	fill_data(t_ray *ray, t_draw *draw, t_cub3d *info, int x);
 void	fill_wall(t_ray *ray, t_cub3d *info, t_draw *draw, int x);
 void	fill_floor(t_ray *ray, t_cub3d *info, t_draw *draw, int x);
 void	fill_sprite(t_cub3d *info, t_sprite *sprites);
+
+int		game_info_init(t_cub3d *info, t_sprite *sprites);
+
+/* list */
+void	del_line(void *line);
+
+int		make_world_map(int **map, int width, t_list *curr, t_per_sprite **ss);
+int		edge_left_right_check(t_cub3d *info, int limit);
+int		edge_up_down_check(t_cub3d *info, int limit);
