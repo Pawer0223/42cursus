@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/01 10:47:44 by taesan            #+#    #+#             */
-/*   Updated: 2021/01/06 14:06:13 by taesan           ###   ########.fr       */
+/*   Updated: 2021/03/14 04:10:14 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "cub3d.h"
 
 char		*append_content(char *buf, char *content)
 {

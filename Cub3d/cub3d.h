@@ -6,19 +6,25 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/01 11:40:50 by taesan            #+#    #+#             */
-/*   Updated: 2021/03/14 03:53:07 by taekang          ###   ########.fr       */
+/*   Updated: 2021/03/14 04:29:35 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mlx/mlx.h"
-#include "key.h"
-#include <math.h>
-#include <stdio.h>
-#include <fcntl.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include "libft/libft.h"
-#include "get_next_line.h"
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 256
+# endif
+
+# include "mlx/mlx.h"
+# include "key.h"
+# include <math.h>
+# include <stdio.h>
+# include <fcntl.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
+# include <limits.h>
+# include "libft/libft.h"
 
 #define X_EVENT_KEY_PRESS	2
 #define X_EVENT_KEY_EXIT	17
@@ -218,3 +224,10 @@ void	del_line(void *line);
 int		make_world_map(int **map, int width, t_list *curr, t_per_sprite **ss);
 int		edge_left_right_check(t_cub3d *info, int limit);
 int		edge_up_down_check(t_cub3d *info, int limit);
+
+int		get_next_line(int fd, char **line);
+int		ft_max(int a, int b);
+int		ft_isspace(char c);
+int		is_empty_line(char *line);
+char	*content_null(char *buf);
+int		error_occur(const char *error_message);

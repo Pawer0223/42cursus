@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/01 11:40:50 by taesan            #+#    #+#             */
-/*   Updated: 2021/03/14 03:50:35 by taekang          ###   ########.fr       */
+/*   Updated: 2021/03/14 04:29:08 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,13 +71,6 @@ void to_string(t_cub3d *info)
 	printf("point : %c\n", info->player.point);
 	printf("move_speed : %f, rot_speed : %f\n", info->player.move_speed, info->player.move_speed);
 	print_world_map(info);
-}
-
-int error_occur(const char *error_message)
-{
-	printf("Error\n");
-	printf(": [%s]\n", error_message);
-	return (0);
 }
 
 int check_identifier(char *line)
@@ -198,30 +191,6 @@ int parse_and_load_texture(t_cub3d *info, int id, char *line)
 	return (1);
 }
 
-int ft_isspace(char c)
-{
-	if (c == '\t' || c == '\n' || c == '\v' || c == '\f' || c == '\r' || c == ' ')
-		return (1);
-	return (0);
-}
-
-int is_empty_line(char *line)
-{
-	int i;
-
-	i = 0;
-	while (line[i])
-	{
-		if (!ft_isspace(line[i]) || line[i] != ' ' || line[i] != ',')
-			return (0);
-		i++;
-	}
-	return (1);
-}
-
-#define tex_w 1
-#define tex_h 1
-
 int set_color(char c, int *color, int *value, int *seq)
 {
 	if (c && ft_isdigit(c))
@@ -285,12 +254,6 @@ int	map_line_check(t_cub3d *info, char c, int width)
 	else
 		return error_occur(ERROR_MAP_LINE_FORMAT);
 }
-
-int ft_max(int a, int b)
-{
-	return (a > b) ? a : b;
-}
-
 
 int parse_map(t_cub3d *info, char *line)
 {
@@ -379,9 +342,6 @@ int parse_file(t_cub3d *info, const char *path)
 
 void raycasting_start(t_cub3d *info)
 {
-
-	// to_string(info);
-	
 	info->win = mlx_new_window(info->mlx, info->win_width, info->win_height, "cub3d");
 	info->img.img = mlx_new_image(info->mlx, info->win_width, info->win_height);
 	info->img.data = (int *)mlx_get_data_addr(info->img.img, &info->img.bpp, &info->img.size_l, &info->img.endian);
