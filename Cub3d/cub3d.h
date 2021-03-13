@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/01 11:40:50 by taesan            #+#    #+#             */
-/*   Updated: 2021/03/13 15:34:07 by taekang          ###   ########.fr       */
+/*   Updated: 2021/03/14 03:21:18 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,6 +164,21 @@ typedef	struct	s_floor
 	double		weight;
 }				t_floor;
 
+typedef struct	s_sprite_fill
+{
+		t_d_pair	spr;
+		t_d_pair	transform;
+		t_i_pair	tex;
+		double		inv_det;
+		int 		screen_x;
+		int 		v_move_screen;
+		int 		sprite_w;
+		int 		sprite_h;
+		int 		draw_start_y;
+		int 		draw_end_y;
+		int 		draw_start_x;
+		int 		draw_end_x;
+}				t_sprite_fill;
 
 typedef struct s_cub3d
 {
