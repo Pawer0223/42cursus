@@ -10,7 +10,7 @@
             "request": "launch",
             "program": "${fileDirname}/a.out",
             "args": [
-                "maps/3.cub"
+                "maps/1.cub"
             ],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",

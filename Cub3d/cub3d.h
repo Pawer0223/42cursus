@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/01 11:40:50 by taesan            #+#    #+#             */
-/*   Updated: 2021/03/12 20:09:35 by taekang          ###   ########.fr       */
+/*   Updated: 2021/03/13 15:34:07 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,12 +138,18 @@ typedef struct	s_tex
 	int			height;
 }				t_tex;
 
+typedef struct	s_per_sprite
+{
+	double	x;
+	double	y;
+	double	dist;
+}				t_per_sprite;
+
 typedef struct	s_sprite
 {
-	t_d_pair	**pos;
-	int			cnt;
-	double		*z_buffer;
-
+	t_per_sprite	**info;
+	int				cnt;
+	double			*z_buffer;
 }				t_sprite;
 
 typedef	struct	s_floor

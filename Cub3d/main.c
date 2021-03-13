@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/01 11:40:50 by taesan            #+#    #+#             */
-/*   Updated: 2021/03/11 21:52:09 by taekang          ###   ########.fr       */
+/*   Updated: 2021/03/13 16:22:45 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void print_world_map(t_cub3d *info)
 	}
 }
 
-void print_sprites(int cnt, t_d_pair **pos)
+void print_sprites(int cnt, t_per_sprite **pos)
 {
 	int i;
 	i = 0;
@@ -63,7 +63,7 @@ void to_string(t_cub3d *info)
 
 	ft_lstiter(info->map_buf, &print_list);
 	printf("### sprite info ###\n");
-	print_sprites(info->sprites.cnt, info->sprites.pos);
+	print_sprites(info->sprites.cnt, info->sprites.info);
 	printf("### player ###\n");
 	printf("pos.x : %f, pos.y : %f\n", info->player.pos.x, info->player.pos.y);
 	printf("dir.x : %f, dir.y : %f\n", info->player.dir.x, info->player.dir.y);
@@ -395,12 +395,12 @@ int world_map_malloc(int **map, int width, int i)
 	return (1);
 }
 
-int	add_sprite_info(int i, int j, int seq, t_d_pair **ss)
+int	add_sprite_info(int i, int j, int seq, t_per_sprite **ss)
 {
 	int free_n;
 
 	free_n = 0;
-	if (!(ss[seq] = (t_d_pair *)malloc(sizeof(t_d_pair))))
+	if (!(ss[seq] = (t_per_sprite *)malloc(sizeof(t_per_sprite))))
 	{
 		while (free_n < seq)
 			free(ss[free_n++]);
@@ -411,7 +411,7 @@ int	add_sprite_info(int i, int j, int seq, t_d_pair **ss)
 	return (1);
 }
 
-int make_world_map(int **map, int width, t_list *curr, t_d_pair **ss)
+int make_world_map(int **map, int width, t_list *curr, t_per_sprite **ss)
 {
 	int i;
 	int j;
@@ -549,13 +549,13 @@ int game_info_init(t_cub3d *info, t_sprite *sprites)
 {
 	if (!cub3d_init(info))
 		return (0);
-	if (!(sprites->pos = (t_d_pair **)malloc(sizeof(t_d_pair) * sprites->cnt)))
+	if (!(sprites->info = (t_per_sprite **)malloc(sizeof(t_per_sprite *) * sprites->cnt)))
 		return error_occur(ERROR_SPRITES_MALLOC);
 	if (!(sprites->z_buffer = (double *)malloc(sizeof(double) * info->win_width)))
 		return error_occur(ERROR_SPRITES_MALLOC);
 	if (!(info->world_map = (int **)malloc(sizeof(int *) * info->map_height)))
 		return error_occur(ERROR_SPRITES_MALLOC);
-	if (!make_world_map(info->world_map, info->win_width, info->map_buf, sprites->pos))
+	if (!make_world_map(info->world_map, info->win_width, info->map_buf, sprites->info))
 		return (error_occur(ERROR_MAP_MALLOC));
 	ft_lstclear(&info->map_buf, &del_line);
 	to_string(info);

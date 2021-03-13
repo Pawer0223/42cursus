@@ -1,103 +1,133 @@
 #include "cub3d.h"
 
-// first => 거리
-// second => texture 식별자 ?
-// 바꿔야함 win_width로 
-// distance 기준으로 내림차순 정렬
-void	sort_sprite_desc(t_d_pair **sprite, double *dist, int amount)
-{
-	t_d_pair	*temp_p;
-	double		temp;
-	int			i;
-	int			j;
+void	print(t_per_sprite **sprite) {
+	int i;
 
-	temp = 0.0;
+	i = 0;
+	printf("[");
+	while (sprite[i])
+	{
+		printf("%f", sprite[i]->dist);
+		i++;
+		if (sprite[i])
+			printf(", ");
+		else
+			printf("]\n");
+	}
+}
+
+void	sort_sprite_desc(t_per_sprite **sprite, int amount)
+{
+	t_per_sprite	*temp;
+	int				i;
+	int				j;
+
 	i = 0;
 	while (i < amount - 1)
 	{
 		j = i + 1;
 		while (j < amount)
 		{
-			if (dist[i] < dist[j])
+			if (sprite[i]->dist < sprite[j]->dist)
 			{
-				temp = dist[i];
-				temp_p = sprite[i];				
-				dist[i] = dist[j];
-				sprite[i] = sprite[j];			
-				dist[j] = temp;
-				sprite[j] = temp_p;
+				temp = sprite[i];
+				sprite[i] = sprite[j];
+				sprite[j] = temp;
 			}
+			j++;
+		}
+		i++;
+	}
+ }
+
+void fill(t_cub3d *info, t_sprite *sprites,	t_player p)
+{
+	t_per_sprite	**sprite;
+
+	sprite = sprites->info;
+	int i;
+	int	j;
+
+	i = 0;
+	while (i < sprites->cnt)
+	{
+		t_d_pair	spr;
+		t_d_pair	transform;
+		double		inv_det;
+
+		spr.x = sprite[i]->x - p.pos.x;
+		spr.y = sprite[i]->y - p.pos.y;
+
+		inv_det = 1.0 / (p.plane.x * p.dir.y - p.dir.x * p.plane.y);
+
+		transform.x = inv_det * (p.dir.y * spr.x - p.dir.x * spr.y);
+		transform.y = inv_det * (-p.plane.y * spr.x + p.plane.x * spr.y);
+
+		int screen_x;
+		int v_move_screen;
+		int sprite_w;
+		int sprite_h;
+		int draw_start_y;
+		int draw_end_y;
+		int draw_start_x;
+		int draw_end_x;
+		t_tex tex;
+
+		screen_x = (int)((info->win_width / 2) * (1 + transform.x / transform.y));
+		v_move_screen = (int)(V_MOVE / transform.y);
+		sprite_h = (int)fabs((info->win_height / transform.y) / V_DIV);
+		draw_start_y = -sprite_h / 2 + info->win_height / 2 + v_move_screen;
+
+		if (draw_start_y < 0)
+			draw_start_y = 0;
+		draw_end_y = sprite_h / 2 + info->win_height / 2 + v_move_screen;
+		if (draw_end_y >= info->win_height)
+			draw_end_y = info->win_height - 1;
+
+		sprite_w = (int)fabs((info->win_height / transform.y) / U_DIV);
+		draw_start_x = -sprite_w / 2 + screen_x;
+		if (draw_start_x < 0)
+			draw_start_x = 0;
+		draw_end_x = sprite_w / 2 + screen_x;
+		if (draw_end_x >= info->win_width)
+			draw_end_x = info->win_width - 1;
+
+		tex = info->texture[SPRITE];
+
+		j = draw_start_x;
+		while (j < draw_end_x)
+		{
+			int texX = (int)((256 * (j - (-sprite_w / 2 + screen_x)) * tex.width / sprite_w) / 256);
+			if (transform.y > 0 && j > 0 && j < info->win_width && transform.y < sprites->z_buffer[j])
+				for (int y = draw_start_y; y < draw_end_y; y++)
+				{
+					int d = (y - v_move_screen) * 256 - info->win_height * 128 + sprite_h * 128;
+					int texY = ((d * tex.height) / sprite_h) / 256;
+					int color = tex.texture[tex.width * texY + texX];
+					if ((color & 0x00FFFFFF) != 0)
+						info->buf[y][j] = color;
+				}
 			j++;
 		}
 		i++;
 	}
 }
 
-void temp(t_cub3d *info, t_sprite *sprites,	t_player p)
-{
-	t_d_pair	**sprite;
-
-	sprite = sprites->pos;
-	for (int i = 0; i < sprites->cnt; i++)
-	{
-		double spriteX = sprite[i]->x - p.pos.x;
-		double spriteY = sprite[i]->y - p.pos.y;
-
-		double invDet = 1.0 / (p.plane.x * p.dir.y - p.dir.x * p.plane.y);
-		double transformX = invDet * (p.dir.y * spriteX - p.dir.x * spriteY);
-		double transformY = invDet * (-p.plane.y * spriteX + p.plane.x * spriteY);
-
-		int spriteScreenX = (int)((info->win_width / 2) * (1 + transformX / transformY));
-		int vMoveScreen = (int)(V_MOVE / transformY);
-		int spriteHeight = (int)fabs((info->win_height / transformY) / V_DIV);
-		int drawStartY = -spriteHeight / 2 + info->win_height / 2 + vMoveScreen;
-		if (drawStartY < 0)
-			drawStartY = 0;
-		int drawEndY = spriteHeight / 2 + info->win_height / 2 + vMoveScreen;
-		if (drawEndY >= info->win_height)
-			drawEndY = info->win_height - 1;
-
-		int spriteWidth = (int)fabs((info->win_height / transformY) / U_DIV);
-		int drawStartX = -spriteWidth / 2 + spriteScreenX;
-		if (drawStartX < 0)
-			drawStartX = 0;
-		int drawEndX = spriteWidth / 2 + spriteScreenX;
-		if (drawEndX >= info->win_width)
-			drawEndX = info->win_width - 1;
-
-		t_tex tex = info->texture[SPRITE];
-		for (int stripe = drawStartX; stripe < drawEndX; stripe++)
-		{
-			int texX = (int)((256 * (stripe - (-spriteWidth / 2 + spriteScreenX)) * tex.width / spriteWidth) / 256);
-			if (transformY > 0 && stripe > 0 && stripe < info->win_width && transformY < sprites->z_buffer[stripe])
-				for (int y = drawStartY; y < drawEndY; y++)
-				{
-					int d = (y - vMoveScreen) * 256 - info->win_height * 128 + spriteHeight * 128;
-					int texY = ((d * tex.height) / spriteHeight) / 256;
-					int color = tex.texture[tex.width * texY + texX];
-					if ((color & 0x00FFFFFF) != 0)
-						info->buf[y][stripe] = color;
-				}
-		}
-	}
-}
-
 void	fill_sprite(t_cub3d *info, t_sprite *sprites)
 {
-	t_d_pair	**sprite;
-	double		*distance;
-	t_player	p;
-	p = info->player;
+	t_per_sprite	**sprite;
+	t_player		p;
+	int				i;
 
-	if (!(distance = (double *)malloc(sizeof(double) * sprites->cnt)))
+	p = info->player;
+	i = 0;
+	sprite = sprites->info;
+	while (i < sprites->cnt)
 	{
-		error_occur(ERROR_DISTANCE_MALLOC);
-		exit(1);
+		sprite[i]->dist = ((p.pos.x - sprite[i]->x) * (p.pos.x - sprite[i]->x) 
+							+ (p.pos.y - sprite[i]->y) * (p.pos.y - sprite[i]->y));
+		i++;
 	}
-	sprite = sprites->pos;
-	for (int i = 0; i < sprites->cnt; i++)
-		distance[i] = ((p.pos.x - sprite[i]->x) * (p.pos.x - sprite[i]->x) + (p.pos.y - sprite[i]->y) * (p.pos.y - sprite[i]->y));
-	sort_sprite_desc(sprite, distance, sprites->cnt);
-	temp(info, sprites, info->player);
-	free(distance);
+	sort_sprite_desc(sprite, sprites->cnt);
+	fill(info, sprites, info->player);
 }
