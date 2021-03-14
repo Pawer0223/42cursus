@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/01 11:40:50 by taesan            #+#    #+#             */
-/*   Updated: 2021/03/14 04:29:35 by taekang          ###   ########.fr       */
+/*   Updated: 2021/03/14 16:17:15 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -231,3 +231,13 @@ int		ft_isspace(char c);
 int		is_empty_line(char *line);
 char	*content_null(char *buf);
 int		error_occur(const char *error_message);
+int		parse_file(t_cub3d *info, const char *path);
+int		parse_color(t_cub3d *info, int id, char *line);
+int		fill_texture(t_tex *tex, int *data, int is_f_c);
+int		get_int_value(const char *line, int *i);
+
+int extension_check(const char *path, const char *extension);
+int check_identifier(char *line);
+int	map_line_check(t_cub3d *info, char *c, int width);
+int		load_image(t_cub3d *info, t_tex *tex, char *path, t_img *img);
+void	to_string(t_cub3d *info);
