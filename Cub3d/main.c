@@ -6,14 +6,16 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/01 11:40:50 by taesan            #+#    #+#             */
-/*   Updated: 2021/03/23 19:34:56 by taekang          ###   ########.fr       */
+/*   Updated: 2021/03/23 20:18:26 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	raycasting_start(t_cub3d *info)
+int		raycasting_start(t_cub3d *info)
 {
+	if (info->save)
+		return (save_bmp(info));
 	info->win = mlx_new_window(info->mlx,
 				info->win_width, info->win_height, "cub3d");
 	info->img.img = mlx_new_image(info->mlx,
@@ -23,6 +25,7 @@ void	raycasting_start(t_cub3d *info)
 	mlx_loop_hook(info->mlx, &main_loop, info);
 	mlx_hook(info->win, X_EVENT_KEY_PRESS, 0, &key_press, info);
 	mlx_loop(info->mlx);
+	return (1);
 }
 
 int		main(int argc, const char *argv[])
@@ -47,5 +50,6 @@ int		main(int argc, const char *argv[])
 		exit(1);
 	if (!game_info_init(&info, &info.sprites))
 		exit(1);
-	raycasting_start(&info);
+	if (!raycasting_start(&info))
+		exit(1);
 }

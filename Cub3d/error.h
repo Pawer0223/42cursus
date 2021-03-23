@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 14:12:48 by taekang           #+#    #+#             */
-/*   Updated: 2021/03/23 14:14:44 by taekang          ###   ########.fr       */
+/*   Updated: 2021/03/23 20:19:59 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,6 @@
 # define ERROR_SPRITES_MALLOC "Sprites Malloc Error"
 # define ERROR_ADD_SPRITE "Sprites Add Error"
 # define ERROR_DISTANCE_MALLOC "Sprite Distance Pointer Malloc Error"
+# define ERROR_SAVE "Bmp File Save Error"
+
 #endif

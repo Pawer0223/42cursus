@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 19:40:00 by taekang           #+#    #+#             */
-/*   Updated: 2021/03/23 20:11:18 by taekang          ###   ########.fr       */
+/*   Updated: 2021/03/23 20:24:21 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,15 +81,16 @@ int		save_bmp(t_cub3d *info)
 	int		file;
 	int		pad;
 
+	raycasting(info);
 	pad = (4 - ((int)info->win_width * 3) % 4) % 4;
 	filesize = 54 + (3 * (info->win_width + pad) * info->win_height);
 	if ((file = open("screenshot.bmp", O_WRONLY | O_CREAT
 									| O_TRUNC | O_APPEND)) < 0)
-		return (0);
+		return error_occur(ERROR_SAVE);
 	if (!write_bmp_header(file, filesize, info))
-		return (0);
+		return error_occur(ERROR_SAVE);
 	if (!write_bmp_data(file, info, pad))
-		return (0);
+		return error_occur(ERROR_SAVE);
 	close(file);
 	return (1);
 }
