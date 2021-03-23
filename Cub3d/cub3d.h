@@ -6,17 +6,17 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/01 11:40:50 by taesan            #+#    #+#             */
-/*   Updated: 2021/03/14 16:17:15 by taekang          ###   ########.fr       */
+/*   Updated: 2021/03/23 14:15:44 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 256
-# endif
+#ifndef CUB3D_H
+# define CUB3D_H
 
 # include "mlx/mlx.h"
 # include "key.h"
+# include "error.h"
+# include "defines.h"
 # include <math.h>
 # include <stdio.h>
 # include <fcntl.h>
@@ -25,59 +25,6 @@
 # include <unistd.h>
 # include <limits.h>
 # include "libft/libft.h"
-
-#define X_EVENT_KEY_PRESS	2
-#define X_EVENT_KEY_EXIT	17
-
-#define ERROR_PARAM "Parameter Error"
-#define ERROR_EXTENSION "File Extension Error"
-#define ERROR_FILE_PARSE ".cub Parse Error Constant IDENTIFIERS is Duplicated"
-#define ERROR_FILE_NOT_EXIST "File Not Exist"
-#define ERROR_TEXTURE_LOAD "Texture File Load Error"
-#define ERROR_TEXTURE_MALLOC "Texture Malloc Error"
-#define ERROR_RGB_FORMAT "Identifier RGB Format Error"
-#define ERROR_RGB_VALUE "RGB value Error"
-#define ERROR_DEFAULT_INIT "Default Init Error"
-#define ERROR_POINT_DUPLICATE "Point(N, S, E, W) Duplicate"
-#define ERROR_MAP_MALLOC "WorldMap Malloc Error"
-#define ERROR_MAP_FORMAT "WorldMap Format Error"
-#define ERROR_BUF_MALLOC "Buf Malloc Error"
-#define	ERROR_MAP_FORMAT_NSEW "Map Not Exist N or S or E or W"
-#define	ERROR_PARSE_FILE "Parse File Error"
-#define ERROR_MAP_LINE_FORMAT "WorldMap Line Format Error"
-#define	ERROR_MAP_BUF_MALLOC "Map Buf Malloc Error"
-#define	ERROR_FILL_TEXTURE "Texture Info Load Error"
-#define	ERROR_SPRITES_MALLOC "Sprites Malloc Error"
-#define	ERROR_ADD_SPRITE "Sprites Add Error"
-#define ERROR_DISTANCE_MALLOC "Sprite Distance Pointer Malloc Error"
-
-// #define TEX_WIDTH 64
-// #define TEX_HEIGHT 64
-
-#define IDENTIFIERS 9
-#define NORTH 0
-#define SOUTH 1
-#define WEST 2
-#define EAST 3
-#define SPRITE 4
-#define FLOOR 5
-#define CEILING 6
-#define RESOLUTION 7
-#define MAP_LINE 8
-
-#define MAP_EMPTY_PASS 9
-
-
-#define MAX_X 1920
-#define MAX_Y 1080
-
-#define U_DIV 1
-#define V_DIV 1
-#define V_MOVE 0.0
-
-
-// compile => gcc get_next_line.c get_next_line_utils.c main.c -L../libft -lft
-// compile => gcc -g get_next_line.c get_next_line_utils.c main.c -L../libft -lft -Lmlx -lmlx -framework OpenGL -framework Appkit
 
 typedef struct s_draw
 {
@@ -241,3 +188,5 @@ int check_identifier(char *line);
 int	map_line_check(t_cub3d *info, char *c, int width);
 int		load_image(t_cub3d *info, t_tex *tex, char *path, t_img *img);
 void	to_string(t_cub3d *info);
+
+#endif

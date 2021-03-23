@@ -24,6 +24,7 @@
         "memory": "c",
         "tuple": "c",
         "unordered_map": "c",
-        "utility": "c"
+        "utility": "c",
+        "math.h": "c"
     }
   }
