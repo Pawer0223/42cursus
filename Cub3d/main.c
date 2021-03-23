@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/01 11:40:50 by taesan            #+#    #+#             */
-/*   Updated: 2021/03/18 00:01:31 by taekang          ###   ########.fr       */
+/*   Updated: 2021/03/23 19:34:56 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int		main(int argc, const char *argv[])
 	{
 		if (ft_strcmp(argv[1], "--save") != 0)
 			return (error_occur(ERROR_PARAM));
-		// save 옵션 저장 해주기.
+		info.save = 1;
 		r = parse_file(&info, argv[2]);
 	}
 	else

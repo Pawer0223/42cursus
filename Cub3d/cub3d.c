@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/20 00:15:40 by taekang           #+#    #+#             */
-/*   Updated: 2021/03/14 03:40:10 by taekang          ###   ########.fr       */
+/*   Updated: 2021/03/23 20:05:57 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,22 +30,6 @@ void	clear_buf(t_cub3d *info)
 	}
 }
 
-void	raycasting(t_cub3d *info)
-{
-	int		x;
-	t_ray	ray;
-	t_draw	draw;
-
-	x = 0;
-	while (x < info->win_width)
-	{
-		shoot_ray(&ray, info, x);
-		fill_data(&ray, &draw, info, x);
-		x++;
-	}
-	fill_sprite(info, &info->sprites);
-}
-
 void	draw(t_cub3d *info)
 {
 	int y;
@@ -66,9 +50,37 @@ void	draw(t_cub3d *info)
 	clear_buf(info);
 }
 
+void	last_work(t_cub3d *info)
+{
+	if (info->save)
+	{
+		if (!(save_bmp(info)))
+			printf("save bmp error");
+		exit(1);
+	}
+	else
+		draw(info);	
+}
+
+void	raycasting(t_cub3d *info)
+{
+	int		x;
+	t_ray	ray;
+	t_draw	draw;
+
+	x = 0;
+	while (x < info->win_width)
+	{
+		shoot_ray(&ray, info, x);
+		fill_data(&ray, &draw, info, x);
+		x++;
+	}
+	fill_sprite(info, &info->sprites);
+}
+
 int		main_loop(t_cub3d *info)
 {
 	raycasting(info);
-	draw(info);
+	last_work(info);
 	return (0);
 }

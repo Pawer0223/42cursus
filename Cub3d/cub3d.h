@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/01 11:40:50 by taesan            #+#    #+#             */
-/*   Updated: 2021/03/23 14:15:44 by taekang          ###   ########.fr       */
+/*   Updated: 2021/03/23 19:58:01 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,6 +144,7 @@ typedef struct s_cub3d
 	int win_height;
 	int map_width;
 	int map_height;
+	int	save;
 	t_img img;
 	t_player player;
 	t_list *map_buf;
@@ -188,5 +189,7 @@ int check_identifier(char *line);
 int	map_line_check(t_cub3d *info, char *c, int width);
 int		load_image(t_cub3d *info, t_tex *tex, char *path, t_img *img);
 void	to_string(t_cub3d *info);
+int		save_bmp(t_cub3d *info);
+
 
 #endif
