@@ -1,6 +1,6 @@
 R 848 480
 F textures/plains.xpm
-C 51,198,227
+C textures/cloudy.xpm
 NO textures/wall_1.xpm
 EA textures/floor_1.xpm
 S textures/barrel.xpm
