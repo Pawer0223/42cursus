@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/01 11:40:50 by taesan            #+#    #+#             */
-/*   Updated: 2021/03/24 15:20:27 by taekang          ###   ########.fr       */
+/*   Updated: 2021/03/24 17:34:13 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ char	*content_null(char *buf);
 int		error_occur(const char *error_message);
 int		parse_file(t_cub3d *info, const char *path);
 int		parse_color(t_cub3d *info, int id, char *line);
+int		parse_and_load_texture(t_cub3d *info, int id, char *line);
 int		fill_texture(t_tex *tex, int *data, int is_f_c);
 int		get_int_value(const char *line, int *i);
 

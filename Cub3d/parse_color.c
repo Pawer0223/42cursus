@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/14 15:48:34 by taekang           #+#    #+#             */
-/*   Updated: 2021/03/14 15:49:00 by taekang          ###   ########.fr       */
+/*   Updated: 2021/03/24 17:44:20 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ int		parse_color(t_cub3d *info, int id, char *line)
 	value = 0;
 	seq = 0;
 	color = 0;
+	if (*line && !ft_isdigit(*line))
+		return (parse_and_load_texture(info, id, line - 2));
 	while (*line)
 	{
 		if (!set_color(*line, &color, &value, &seq))

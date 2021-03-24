@@ -1,9 +1,8 @@
 R 848 480
-F 184,113,39
+F textures/plains.xpm
 C 51,198,227
 NO textures/wall_1.xpm
 EA textures/floor_1.xpm
-
 S textures/barrel.xpm
 11111111111111111111111111111
 10000000001100000000000000001

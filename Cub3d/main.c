@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/01 11:40:50 by taesan            #+#    #+#             */
-/*   Updated: 2021/03/23 20:18:26 by taekang          ###   ########.fr       */
+/*   Updated: 2021/03/24 15:54:51 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int		main(int argc, const char *argv[])
 
 	ft_bzero(&info, sizeof(t_cub3d));
 	info.mlx = mlx_init();
+	r = 0;
 	if (argc == 2)
 		r = parse_file(&info, argv[1]);
 	else if (argc == 3)

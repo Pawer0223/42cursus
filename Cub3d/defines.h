@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 14:02:48 by taekang           #+#    #+#             */
-/*   Updated: 2021/03/23 14:12:34 by taekang          ###   ########.fr       */
+/*   Updated: 2021/03/24 17:19:30 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 
 # define X_EVENT_KEY_PRESS	2
 # define X_EVENT_KEY_EXIT	17
+
 # define IDENTIFIERS 9
 # define NORTH 0
 # define SOUTH 1
@@ -30,6 +31,9 @@
 # define RESOLUTION 7
 # define MAP_LINE 8
 # define MAP_EMPTY_PASS 9
+
+# define FLOOR_TEX 10
+
 # define MAX_X 1920
 # define MAX_Y 1080
 # define U_DIV 1

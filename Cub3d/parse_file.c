@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/14 16:10:23 by taekang           #+#    #+#             */
-/*   Updated: 2021/03/14 16:15:55 by taekang          ###   ########.fr       */
+/*   Updated: 2021/03/24 17:44:30 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int		parse_and_load_texture(t_cub3d *info, int id, char *line)
 	int		i;
 	t_img	img;
 
-	i = (id == SPRITE) ? 2 : 3;
+	i = (id >= SPRITE) ? 2 : 3;
 	if (!load_image(info, &info->texture[id], (line + i), &img))
 		return (error_occur(ERROR_TEXTURE_LOAD));
 	return (1);
