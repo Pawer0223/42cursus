@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 19:40:00 by taekang           #+#    #+#             */
-/*   Updated: 2021/03/23 20:24:21 by taekang          ###   ########.fr       */
+/*   Updated: 2021/03/24 14:33:11 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ int		get_color(t_cub3d *info, int x, int y)
 
 int		write_bmp_data(int file, t_cub3d *info, int pad)
 {
-	const unsigned char	zero[3] = {0, 0, 0};
-	int					color;
-	int					y;
-	int 				x;
+	const unsigned char		zero[3] = {0, 0, 0};
+	int						color;
+	int						y;
+	int						x;
 
 	y = info->win_height - 1;
 	while (y >= 0)
@@ -86,11 +86,11 @@ int		save_bmp(t_cub3d *info)
 	filesize = 54 + (3 * (info->win_width + pad) * info->win_height);
 	if ((file = open("screenshot.bmp", O_WRONLY | O_CREAT
 									| O_TRUNC | O_APPEND)) < 0)
-		return error_occur(ERROR_SAVE);
+		return (error_occur(ERROR_SAVE));
 	if (!write_bmp_header(file, filesize, info))
-		return error_occur(ERROR_SAVE);
+		return (error_occur(ERROR_SAVE));
 	if (!write_bmp_data(file, info, pad))
-		return error_occur(ERROR_SAVE);
+		return (error_occur(ERROR_SAVE));
 	close(file);
 	return (1);
 }

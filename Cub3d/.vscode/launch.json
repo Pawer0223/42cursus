@@ -10,6 +10,7 @@
             "request": "launch",
             "program": "${fileDirname}/a.out",
             "args": [
+                "--save", 
                 "maps/1.cub"
             ],
             "stopAtEntry": false,
