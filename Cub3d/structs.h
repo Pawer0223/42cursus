@@ -6,12 +6,14 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 14:46:12 by taekang           #+#    #+#             */
-/*   Updated: 2021/03/24 14:56:22 by taekang          ###   ########.fr       */
+/*   Updated: 2021/03/24 15:21:47 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
+
+# include "cub3d.h"
 
 typedef struct		s_draw
 {

@@ -6,14 +6,19 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/01 11:40:50 by taesan            #+#    #+#             */
-/*   Updated: 2021/03/24 15:02:15 by taekang          ###   ########.fr       */
+/*   Updated: 2021/03/24 15:20:27 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
+/*
+	**libs
+*/
 # include "mlx/mlx.h"
+# include "libft/libft.h"
+
 # include "key.h"
 # include "error.h"
 # include "defines.h"
@@ -25,7 +30,6 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <limits.h>
-# include "libft/libft.h"
 
 int		main_loop(t_cub3d *info);
 int		key_press(int key, t_cub3d *info);

@@ -6,11 +6,16 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/12 17:42:58 by taekang           #+#    #+#             */
-/*   Updated: 2021/03/12 17:55:04 by taekang          ###   ########.fr       */
+/*   Updated: 2021/03/24 15:44:07 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+int		more_dark(int color)
+{
+	return ((color >> 1) & 8355711);
+}
 
 void	fill_wall(t_ray *ray, t_cub3d *info, t_draw *d, int x)
 {
@@ -35,7 +40,7 @@ void	fill_wall(t_ray *ray, t_cub3d *info, t_draw *d, int x)
 		d->tex_pos += (d->step);
 		color = tex.texture[tex.height * tex_y + tex_x];
 		if (ray->side == 1)
-			color = (color >> 1) & 8355711;
+			color = more_dark(color);
 		info->buf[y][x] = color;
 		y++;
 	}

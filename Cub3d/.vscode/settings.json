@@ -27,6 +27,8 @@
         "utility": "c",
         "math.h": "c",
         "stdio.h": "c",
-        "fcntl.h": "c"
+        "fcntl.h": "c",
+        "bitset": "c",
+        "ostream": "c"
     }
   }
