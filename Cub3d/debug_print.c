@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/14 15:41:03 by taekang           #+#    #+#             */
-/*   Updated: 2021/03/14 15:43:47 by taekang          ###   ########.fr       */
+/*   Updated: 2021/03/26 17:10:27 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,9 @@ void	print_list(void *content)
 
 void	print_world_map(t_cub3d *info)
 {
-	int i;
-	int j;
+	int		i;
+	int		j;
+	char	c;
 
 	printf("### print_world_map ### \n");
 	i = 0;
@@ -29,7 +30,9 @@ void	print_world_map(t_cub3d *info)
 		j = 0;
 		while (j < info->map_width)
 		{
-			printf("%d", info->world_map[i][j]);
+			c = info->world_map[i][j];
+			c = (c == ' ') ? c : c + '0';
+			printf("%c", c);
 			j++;
 		}
 		printf("\n");

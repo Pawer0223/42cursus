@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/14 16:02:04 by taekang           #+#    #+#             */
-/*   Updated: 2021/03/24 17:31:03 by taekang          ###   ########.fr       */
+/*   Updated: 2021/03/26 17:31:38 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 
 int		map_line_check(t_cub3d *info, char *c, int width)
 {
+	int c_int;
+
+	c_int = *c - '0';
 	if (*c == 'N' || *c == 'S' || *c == 'E' || *c == 'W')
 	{
 		if (info->player.point)
@@ -24,12 +27,12 @@ int		map_line_check(t_cub3d *info, char *c, int width)
 		*c = '0';
 		return (1);
 	}
-	else if ((*c >= '0' && *c <= '5') || *c == ' ')
+	else if (c_int >= 0 && c_int <= (SPRITE + 1) || *c == ' ')
 	{
-		if (*c == '5')
+		if (c_int == (SPRITE + 1))
 			info->sprites.cnt++;
 		if (*c == ' ')
-			*c = '9';
+			*c += '0';
 		return (1);
 	}
 	else

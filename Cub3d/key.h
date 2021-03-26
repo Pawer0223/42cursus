@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   key.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 17:16:08 by taesan            #+#    #+#             */
-/*   Updated: 2021/02/19 17:16:11 by taesan           ###   ########.fr       */
+/*   Updated: 2021/03/26 17:35:45 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef KEY_MACOS_H
-# define KEY_MACOS_H
+#ifndef KEY_H
+# define KEY_H
 
 /*
 ** Keyboard LETTERS
