@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/01 11:40:50 by taesan            #+#    #+#             */
-/*   Updated: 2021/03/26 18:36:01 by taekang          ###   ########.fr       */
+/*   Updated: 2021/03/26 19:44:59 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int		fill_texture(t_tex *tex, int *data, int is_f_c);
 int		get_int_value(const char *line, int *i);
 
 int		extension_check(const char *path, const char *extension);
-int		map_valid_check(t_cub3d *info, int **map, int size);
+int		map_valid_check(t_cub3d *info);
 int		check_identifier(char *line);
 int		map_line_check(t_cub3d *info, char *c, int width);
 int		load_image(t_cub3d *info, t_tex *tex, char *path, t_img *img);

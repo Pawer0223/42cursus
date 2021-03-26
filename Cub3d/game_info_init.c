@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/14 03:45:14 by taekang           #+#    #+#             */
-/*   Updated: 2021/03/26 18:40:43 by taekang          ###   ########.fr       */
+/*   Updated: 2021/03/26 19:44:40 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,8 +90,7 @@ int		game_info_init(t_cub3d *info, t_sprite *s)
 			info->win_width, info->map_buf, s->info))
 		return (error_occur(ERROR_MAP_MALLOC));
 	ft_lstclear(&info->map_buf, &del_line);
-	if (!map_valid_check(info, info->world_map,
-			info->map_width * info->map_height))
+	if (!map_valid_check(info))
 		return (error_occur(ERROR_MAP_FORMAT));
 	if (info->win_height > MAX_X)
 		info->win_height = MAX_X;

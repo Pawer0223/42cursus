@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/26 17:28:33 by taekang           #+#    #+#             */
-/*   Updated: 2021/03/26 17:30:26 by taekang          ###   ########.fr       */
+/*   Updated: 2021/03/26 19:43:59 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int		bearing_exist(t_cub3d *info, int i, int j)
 	return (1);
 }
 
-int		map_valid_check(t_cub3d *info, int **map, int size)
+int		map_valid_check(t_cub3d *info)
 {
 	int	i;
 	int	j;
@@ -70,7 +70,7 @@ int		map_valid_check(t_cub3d *info, int **map, int size)
 		j = 0;
 		while (j < info->map_width)
 		{
-			if (map[i][j] == 0)
+			if (info->world_map[i][j] == 0)
 			{
 				if (!bearing_exist(info, i, j))
 					return (0);

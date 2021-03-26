@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/14 16:02:04 by taekang           #+#    #+#             */
-/*   Updated: 2021/03/26 17:31:38 by taekang          ###   ########.fr       */
+/*   Updated: 2021/03/26 19:43:10 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int		map_line_check(t_cub3d *info, char *c, int width)
 		*c = '0';
 		return (1);
 	}
-	else if (c_int >= 0 && c_int <= (SPRITE + 1) || *c == ' ')
+	else if ((c_int >= 0 && c_int <= (SPRITE + 1)) || *c == ' ')
 	{
 		if (c_int == (SPRITE + 1))
 			info->sprites.cnt++;

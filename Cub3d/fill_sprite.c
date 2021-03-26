@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/14 03:29:40 by taekang           #+#    #+#             */
-/*   Updated: 2021/03/14 03:35:10 by taekang          ###   ########.fr       */
+/*   Updated: 2021/03/26 19:45:19 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 void	sort_sprite_desc(t_per_sprite **sprite, int amount)
 {
 	t_per_sprite	*temp;
-	t_tex			tex;
 	int				i;
 	int				j;
 
