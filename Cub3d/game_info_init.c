@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/14 03:45:14 by taekang           #+#    #+#             */
-/*   Updated: 2021/03/26 17:19:53 by taekang          ###   ########.fr       */
+/*   Updated: 2021/03/26 18:40:43 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,30 @@ void	player_init(t_player *p)
 	}
 	p->move_speed = 0.35;
 	p->rot_speed = 0.35;
+}
+
+void	cub3d_free(t_cub3d *info)
+{
+	int i;
+
+	i = 0;
+	while (i < info->win_height)
+		free(info->buf[i++]);
+	free(info->buf);
+	i = 0;
+	while (i < info->sprites.cnt)
+		free(info->sprites.info[i++]);
+	free(info->sprites.z_buffer);
+	free(info->sprites.info);
+	i = 0;
+	while (i < info->map_height)
+		free(info->world_map[i++]);
+}
+
+void	exit_game(t_cub3d *info)
+{
+	cub3d_free(info);
+	exit(0);
 }
 
 int		cub3d_init(t_cub3d *info)

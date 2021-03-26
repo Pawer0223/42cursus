@@ -6,11 +6,17 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/01 11:40:50 by taesan            #+#    #+#             */
-/*   Updated: 2021/03/24 15:54:51 by taekang          ###   ########.fr       */
+/*   Updated: 2021/03/26 18:35:03 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+int		exit_hook(t_cub3d *info)
+{
+	exit_game(info);
+	return (1);
+}
 
 int		raycasting_start(t_cub3d *info)
 {
@@ -24,6 +30,7 @@ int		raycasting_start(t_cub3d *info)
 				&info->img.bpp, &info->img.size_l, &info->img.endian);
 	mlx_loop_hook(info->mlx, &main_loop, info);
 	mlx_hook(info->win, X_EVENT_KEY_PRESS, 0, &key_press, info);
+	mlx_hook(info->win, X_EVENT_KEY_EXIT, 0, &exit_hook, info);
 	mlx_loop(info->mlx);
 	return (1);
 }
