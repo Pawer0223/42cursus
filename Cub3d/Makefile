@@ -6,7 +6,7 @@
 #    By: taekang <taekang@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/29 12:45:02 by ncolomer          #+#    #+#              #
-#    Updated: 2021/03/27 12:52:47 by taekang          ###   ########.fr        #
+#    Updated: 2021/03/27 14:15:35 by taekang          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ NAME	= cub3D
 all:		$(NAME)
 
 $(NAME):	$(MLX) $(LIBFT) $(OBJS)
-			gcc ${CFLAGS} -o ${NAME} ${OBJS} ${LIBS}
+			$(CC) ${CFLAGS} -o ${NAME} ${OBJS} ${LIBS}
 
 $(MLX):
 			@$(MAKE) -C mlx
