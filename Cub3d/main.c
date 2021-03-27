@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/01 11:40:50 by taesan            #+#    #+#             */
-/*   Updated: 2021/03/26 18:35:03 by taekang          ###   ########.fr       */
+/*   Updated: 2021/03/27 15:34:55 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,5 +59,5 @@ int		main(int argc, const char *argv[])
 	if (!game_info_init(&info, &info.sprites))
 		exit(1);
 	if (!raycasting_start(&info))
-		exit(1);
+		exit_game(&info);
 }
