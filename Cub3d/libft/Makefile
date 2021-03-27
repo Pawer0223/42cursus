@@ -70,20 +70,16 @@ RMFLAGS = -rf
 AR = ar
 ARFLAGS = rcs
 
-$(NAME) : $(OBJS)
-		$(AR) $(ARFLAGS) $(NAME) $(OBJS)
-
+$(NAME) : $(OBJS) $(BONUS_OBJS)
+		$(AR) $(ARFLAGS) $(NAME) $(OBJS) $(BONUS_OBJS)
 all: $(NAME)
 
 clean: 	
-		$(RM) $(RMFLAGS) $(OBJS) $(BONUS_OBJS)
+	$(RM) $(RMFLAGS) $(OBJS) $(BONUS_OBJS)
 
 fclean: clean
-		$(RM) $(RMFLAGS) $(NAME)
+	$(RM) $(RMFLAGS) $(NAME)
 
-re:		fclean all
+re:	fclean all
 
-bonus: $(OBJS) $(BONUS_OBJS)
-		$(AR) $(ARFLAGS) $(NAME) $(OBJS) $(BONUS_OBJS)
-
-.PHONY: all clean fclean re bonus
+.PHONY: all clean fclean re
