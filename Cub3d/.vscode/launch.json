@@ -8,9 +8,9 @@
             "name": "(lldb) Launch",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${fileDirname}/a.out",
+            "program": "${fileDirname}/cub3D",
             "args": [
-                "--save", 
+//                "--save", 
                 "maps/1.cub"
             ],
             "stopAtEntry": false,

@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/14 03:45:14 by taekang           #+#    #+#             */
-/*   Updated: 2021/03/26 19:44:40 by taekang          ###   ########.fr       */
+/*   Updated: 2021/03/27 17:40:32 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ void	player_init(t_player *p)
 		p->plane.x = (point == 'W') ? -0.66 : 0.66;
 		p->plane.y = 0.0;
 	}
-	p->move_speed = 0.35;
-	p->rot_speed = 0.35;
+	p->move_speed = 0.5;
+	p->rot_speed = 0.1;
 }
 
 void	cub3d_free(t_cub3d *info)
