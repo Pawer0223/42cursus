@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/14 15:48:34 by taekang           #+#    #+#             */
-/*   Updated: 2021/03/24 17:44:20 by taekang          ###   ########.fr       */
+/*   Updated: 2021/03/27 20:55:48 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ int		set_color(char c, int *color, int *value, int *seq)
 		*value = 0;
 		*seq += 1;
 	}
+	else if (c == ' ')
+		return (1);
 	else
 		return ((error_occur(ERROR_RGB_FORMAT)));
 	return (1);

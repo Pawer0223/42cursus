@@ -6,8 +6,8 @@ WE textures/w.xpm
 EA textures/e.xpm
 S textures/barrel.xpm
 
-F 000,102,000
-C 255,204,000
+F 000, 102,      000
+C 255,    204 ,   000
 
 11111111111
 30500500004
