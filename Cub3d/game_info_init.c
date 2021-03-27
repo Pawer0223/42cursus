@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/14 03:45:14 by taekang           #+#    #+#             */
-/*   Updated: 2021/03/27 17:40:32 by taekang          ###   ########.fr       */
+/*   Updated: 2021/03/27 20:47:03 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,10 @@ int		cub3d_init(t_cub3d *info)
 
 int		game_info_init(t_cub3d *info, t_sprite *s)
 {
+	if (info->win_height > MAX_X)
+		info->win_height = MAX_X;
+	if (info->win_width > MAX_Y)
+		info->win_width = MAX_Y;
 	if (!cub3d_init(info))
 		return (0);
 	if (!(s->info = (t_per_sprite **)
@@ -92,10 +96,6 @@ int		game_info_init(t_cub3d *info, t_sprite *s)
 	ft_lstclear(&info->map_buf, &del_line);
 	if (!map_valid_check(info))
 		return (error_occur(ERROR_MAP_FORMAT));
-	if (info->win_height > MAX_X)
-		info->win_height = MAX_X;
-	if (info->win_width > MAX_Y)
-		info->win_width = MAX_Y;
 	player_init(&info->player);
 	return (1);
 }

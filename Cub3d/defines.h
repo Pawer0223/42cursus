@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 14:02:48 by taekang           #+#    #+#             */
-/*   Updated: 2021/03/24 17:19:30 by taekang          ###   ########.fr       */
+/*   Updated: 2021/03/27 20:49:03 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@
 
 # define FLOOR_TEX 10
 
-# define MAX_X 1920
-# define MAX_Y 1080
+# define MAX_X 800
+# define MAX_Y 1280
 # define U_DIV 1
 # define V_DIV 1
 # define V_MOVE 0.0
