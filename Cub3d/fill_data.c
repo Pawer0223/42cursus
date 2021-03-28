@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/12 17:42:58 by taekang           #+#    #+#             */
-/*   Updated: 2021/03/26 11:08:42 by taekang          ###   ########.fr       */
+/*   Updated: 2021/03/28 15:53:58 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	fill_wall(t_ray *ray, t_cub3d *info, t_draw *d, int x)
 	int		color;
 	t_tex	tex;
 
-	tex = info->texture[d->texture_num];
+	tex = info->texture[ray->eye];
 	d->step = 1.0 * tex.height / d->line_h;
 	d->tex_pos = (d->draw_s - info->win_height / 2 + d->line_h / 2) * d->step;
 	tex_x = (int)(d->wall_x * (double)tex.width);
@@ -58,7 +58,6 @@ void	draw_init(t_ray *ray, t_cub3d *info, t_draw *draw)
 	draw->draw_e = draw->line_h / 2 + height / 2;
 	if (draw->draw_e >= height)
 		draw->draw_e = height - 1;
-	draw->texture_num = info->world_map[ray->map.x][ray->map.y] - 1;
 	if (ray->side == 0)
 		draw->wall_x = info->player.pos.y + ray->perp_wall_dist * ray->dir.y;
 	else

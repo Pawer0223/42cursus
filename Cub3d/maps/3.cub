@@ -1,8 +1,12 @@
 R 848 480
 F textures/plains.xpm
 C textures/cloudy.xpm
+
 NO textures/weed_wall.xpm
-EA textures/floor_1.xpm
+SO textures/weed_wall.xpm
+WE textures/weed_wall.xpm
+EA textures/weed_wall.xpm
+
 S textures/cherry_blossom.xpm
 
 11111111111111111111111111111111111111111

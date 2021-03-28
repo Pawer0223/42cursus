@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/12 16:29:26 by taekang           #+#    #+#             */
-/*   Updated: 2021/03/26 19:45:54 by taekang          ###   ########.fr       */
+/*   Updated: 2021/03/28 15:48:09 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ void	shoot(t_ray *r, int **map, t_player p)
 			r->map.y += r->step.y;
 			r->side = 1;
 		}
-		if (map[r->map.x][r->map.y] > 0 && map[r->map.x][r->map.y] <= SPRITE)
+		if (map[r->map.x][r->map.y] > 0
+			&& map[r->map.x][r->map.y] != SPRITE + 1)
 			r->hit = 1;
 	}
 	if (r->side == 0)
@@ -59,6 +60,18 @@ void	set_step_side_dist(t_ray *ray, t_player p)
 		ray->side_dist.y = (ray->map.y + 1.0 - p.pos.y) * ray->delta_dist.y;
 }
 
+void	set_ray_direction(t_ray *ray)
+{
+	int	dir;
+
+	if (ray->side)
+		dir = (ray->dir.y < 0) ? (WEST) : (EAST);
+	else
+		dir = (ray->dir.x < 0) ? (NORTH) : (SOUTH);
+	ray->eye = dir;
+	return ;
+}
+
 void	ray_init(t_ray *ray, t_player p, int x, int win_width)
 {
 	double		camera_x;
@@ -72,6 +85,7 @@ void	ray_init(t_ray *ray, t_player p, int x, int win_width)
 	ray->delta_dist.x = fabs(1 / ray->dir.x);
 	ray->delta_dist.y = fabs(1 / ray->dir.y);
 	ray->hit = 0;
+	ray->eye = 0;
 	set_step_side_dist(ray, p);
 }
 
@@ -82,5 +96,6 @@ void	shoot_ray(t_ray *ray, t_cub3d *info, int x)
 	z_buffer = info->sprites.z_buffer;
 	ray_init(ray, info->player, x, info->win_width);
 	shoot(ray, info->world_map, info->player);
+	set_ray_direction(ray);
 	z_buffer[x] = ray->perp_wall_dist;
 }

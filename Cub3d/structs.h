@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 14:46:12 by taekang           #+#    #+#             */
-/*   Updated: 2021/03/24 15:21:47 by taekang          ###   ########.fr       */
+/*   Updated: 2021/03/28 15:54:23 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ typedef struct		s_draw
 	int		draw_s;
 	int		draw_e;
 	int		line_h;
-	int		texture_num;
 }					t_draw;
 
 typedef struct		s_double_pair
@@ -49,6 +48,7 @@ typedef struct		s_ray
 	t_i_pair	step;
 	int			hit;
 	int			side;
+	int			eye;
 }					t_ray;
 
 typedef struct		s_img
