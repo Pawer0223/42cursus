@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 14:12:48 by taekang           #+#    #+#             */
-/*   Updated: 2021/03/23 20:19:59 by taekang          ###   ########.fr       */
+/*   Updated: 2021/03/28 17:52:50 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # define ERROR_PARAM "Parameter Error"
 # define ERROR_EXTENSION "File Extension Error"
 # define ERROR_FILE_PARSE ".cub Parse Error Constant IDENTIFIERS is Duplicated"
+# define ERROR_FILE_FORMAT ".cub File Not Enough Elements"
 # define ERROR_FILE_NOT_EXIST "File Not Exist"
 # define ERROR_TEXTURE_LOAD "Texture File Load Error"
 # define ERROR_TEXTURE_MALLOC "Texture Malloc Error"

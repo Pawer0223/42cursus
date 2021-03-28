@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/26 17:28:33 by taekang           #+#    #+#             */
-/*   Updated: 2021/03/26 19:43:59 by taekang          ###   ########.fr       */
+/*   Updated: 2021/03/28 17:50:31 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ int		map_valid_check(t_cub3d *info)
 {
 	int	i;
 	int	j;
+	int value;
 
 	i = 0;
 	while (i < info->map_height)
@@ -70,11 +71,14 @@ int		map_valid_check(t_cub3d *info)
 		j = 0;
 		while (j < info->map_width)
 		{
-			if (info->world_map[i][j] == 0)
+			value = info->world_map[i][j];
+			if (value == 0)
 			{
 				if (!bearing_exist(info, i, j))
 					return (0);
 			}
+			else if (value > 1 && value != SPRITE)
+				return (0);
 			j++;
 		}
 		i++;

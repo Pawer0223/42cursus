@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/14 16:02:04 by taekang           #+#    #+#             */
-/*   Updated: 2021/03/28 16:23:52 by taekang          ###   ########.fr       */
+/*   Updated: 2021/03/28 18:01:45 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int		file_format_check(int visited[])
 	while (i < IDENTIFIERS)
 	{
 		if (!visited[i])
-			return (error_occur(ERROR_MAP_FORMAT));
+			return (error_occur(ERROR_FILE_FORMAT));
 		i++;
 	}
 	return (1);
@@ -41,9 +41,9 @@ int		map_line_check(t_cub3d *info, char *c, int width)
 		*c = '0';
 		return (1);
 	}
-	else if ((c_int >= 0 && c_int <= (SPRITE + 1)) || *c == ' ')
+	else if ((c_int >= 0 && c_int <= SPRITE) || *c == ' ')
 	{
-		if (c_int == (SPRITE + 1))
+		if (c_int == SPRITE)
 			info->sprites.cnt++;
 		if (*c == ' ')
 			*c += '0';

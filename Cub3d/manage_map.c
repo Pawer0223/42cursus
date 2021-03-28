@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/14 03:49:57 by taekang           #+#    #+#             */
-/*   Updated: 2021/03/26 17:29:00 by taekang          ###   ########.fr       */
+/*   Updated: 2021/03/28 18:00:48 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int		make_world_map(int **map, int width, t_list *curr, t_per_sprite **ss)
 		while (*(char *)(curr->content + j))
 		{
 			map[i][j] = *(char *)(curr->content + j) - '0';
-			if (map[i][j] == (SPRITE + 1) && !add_sprite_info(i, j, seq++, ss))
+			if (map[i][j] == SPRITE && !add_sprite_info(i, j, seq++, ss))
 				return (error_occur(ERROR_ADD_SPRITE));
 			j++;
 		}

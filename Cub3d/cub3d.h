@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/01 11:40:50 by taesan            #+#    #+#             */
-/*   Updated: 2021/03/28 16:17:50 by taekang          ###   ########.fr       */
+/*   Updated: 2021/03/28 17:33:46 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ int		edge_left_right_check(t_cub3d *info, int limit);
 int		edge_up_down_check(t_cub3d *info, int limit);
 
 int		get_next_line(int fd, char **line);
-int		ft_max(int a, int b);
 int		ft_isspace(char c);
 int		is_empty_line(char *line);
 char	*content_null(char *buf);

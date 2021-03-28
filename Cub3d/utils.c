@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/01 21:19:05 by taesan            #+#    #+#             */
-/*   Updated: 2021/03/14 04:32:08 by taekang          ###   ########.fr       */
+/*   Updated: 2021/03/28 17:33:32 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,6 @@ char	*content_null(char *buf)
 	return (new_content);
 }
 
-int		ft_max(int a, int b)
-{
-	return (a > b) ? a : b;
-}
-
 int		ft_isspace(char c)
 {
 	if (c == '\t' || c == '\n' || c == '\v'
@@ -48,7 +43,7 @@ int		is_empty_line(char *line)
 	i = 0;
 	while (line[i])
 	{
-		if (!ft_isspace(line[i]) || line[i] != ' ' || line[i] != ',')
+		if (!ft_isspace(line[i]) || line[i] != ' ')
 			return (0);
 		i++;
 	}

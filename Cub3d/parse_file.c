@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/14 16:10:23 by taekang           #+#    #+#             */
-/*   Updated: 2021/03/28 16:18:02 by taekang          ###   ########.fr       */
+/*   Updated: 2021/03/28 17:31:47 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int		parse_map(t_cub3d *info, char *line)
 		width++;
 		i++;
 	}
-	info->map_width = ft_max(info->map_width, width);
+	info->map_width = (info->map_width > width) ? info->map_width : width;
 	info->map_height++;
 	if (!(next = ft_lstnew(line)))
 	{
