@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/14 16:10:23 by taekang           #+#    #+#             */
-/*   Updated: 2021/03/26 18:24:16 by taekang          ###   ########.fr       */
+/*   Updated: 2021/03/28 16:18:02 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,8 @@ int		parse_file(t_cub3d *info, const char *path)
 		return (0);
 	if (!info->player.point)
 		return (error_occur(ERROR_MAP_FORMAT_NSEW));
+	if (!file_format_check(visited))
+		return (0);
 	free(line);
 	close(c_fd);
 	return (1);

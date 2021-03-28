@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 14:02:48 by taekang           #+#    #+#             */
-/*   Updated: 2021/03/27 20:49:03 by taekang          ###   ########.fr       */
+/*   Updated: 2021/03/28 16:11:48 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,6 @@
 # define CEILING 6
 # define RESOLUTION 7
 # define MAP_LINE 8
-# define MAP_EMPTY_PASS 9
-
-# define FLOOR_TEX 10
 
 # define MAX_X 800
 # define MAX_Y 1280

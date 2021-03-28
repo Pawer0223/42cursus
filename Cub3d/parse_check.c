@@ -6,11 +6,25 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/14 16:02:04 by taekang           #+#    #+#             */
-/*   Updated: 2021/03/26 19:43:10 by taekang          ###   ########.fr       */
+/*   Updated: 2021/03/28 16:23:52 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+int		file_format_check(int visited[])
+{
+	int i;
+
+	i = 0;
+	while (i < IDENTIFIERS)
+	{
+		if (!visited[i])
+			return (error_occur(ERROR_MAP_FORMAT));
+		i++;
+	}
+	return (1);
+}
 
 int		map_line_check(t_cub3d *info, char *c, int width)
 {
