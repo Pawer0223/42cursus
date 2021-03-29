@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/14 16:10:23 by taekang           #+#    #+#             */
-/*   Updated: 2021/03/29 15:20:17 by taekang          ###   ########.fr       */
+/*   Updated: 2021/03/29 15:45:57 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ int		parse_id_r(t_cub3d *info, char *line)
 	i = 1;
 	info->win_width = get_int_value(line, &i);
 	info->win_height = get_int_value(line, &i);
-	if (info->win_width == -1 || info->win_height == -1)
-		return (0);
+	if (info->win_width == -1 || info->win_height == -1 || line[i])
+		return (error_occur(ERROR_R_FORMAT));
 	i = 0;
 	return (1);
 }

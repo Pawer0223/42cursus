@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/14 15:48:34 by taekang           #+#    #+#             */
-/*   Updated: 2021/03/27 20:55:48 by taekang          ###   ########.fr       */
+/*   Updated: 2021/03/29 15:56:09 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,10 @@ int		parse_color(t_cub3d *info, int id, char *line)
 			return (0);
 		line++;
 	}
-	if (seq != 2 || !set_color(*line, &color, &value, &seq))
-		return ((error_occur(ERROR_RGB_FORMAT)));
+	if (seq != 2)
+		return (error_occur(ERROR_RGB_FORMAT));
+	if (!set_color(*line, &color, &value, &seq))
+		return (0);
 	info->texture[id].width = 64;
 	info->texture[id].height = 64;
 	if (!(fill_texture(&info->texture[id], &color, 1)))

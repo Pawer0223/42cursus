@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/14 16:05:27 by taekang           #+#    #+#             */
-/*   Updated: 2021/03/29 15:20:31 by taekang          ###   ########.fr       */
+/*   Updated: 2021/03/29 15:47:44 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ int		get_int_value(const char *line, int *i)
 {
 	int value;
 
+	if (!line[*i])
+		return (-1);
 	value = 0;
 	while (line[*i] && line[*i] == ' ')
 		*i += 1;

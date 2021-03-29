@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/26 17:28:33 by taekang           #+#    #+#             */
-/*   Updated: 2021/03/29 15:29:14 by taekang          ###   ########.fr       */
+/*   Updated: 2021/03/29 15:51:03 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ int		is_all_wall(t_cub3d *info, int i, int j, int k)
 			possible = 1;
 			break ;
 		}
+		else if (info->world_map[i][j] == ' ')
+			return (0);
 		i += x[k];
 		j += y[k];
 	}

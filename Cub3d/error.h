@@ -6,13 +6,14 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 14:12:48 by taekang           #+#    #+#             */
-/*   Updated: 2021/03/28 17:52:50 by taekang          ###   ########.fr       */
+/*   Updated: 2021/03/29 15:46:14 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ERROR_H
 # define ERROR_H
 
+# define ERROR_R_FORMAT "R format Error"
 # define ERROR_PARAM "Parameter Error"
 # define ERROR_EXTENSION "File Extension Error"
 # define ERROR_FILE_PARSE ".cub Parse Error Constant IDENTIFIERS is Duplicated"
