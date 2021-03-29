@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/12 16:29:26 by taekang           #+#    #+#             */
-/*   Updated: 2021/03/28 17:44:15 by taekang          ###   ########.fr       */
+/*   Updated: 2021/03/29 15:11:43 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,7 @@ void	shoot(t_ray *r, int **map, t_player p)
 			r->map.y += r->step.y;
 			r->side = 1;
 		}
-		if (map[r->map.x][r->map.y] > 0
-			&& map[r->map.x][r->map.y] != SPRITE)
+		if (map[r->map.x][r->map.y] == WALL)
 			r->hit = 1;
 	}
 	if (r->side == 0)

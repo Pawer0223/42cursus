@@ -6,20 +6,13 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/26 17:28:33 by taekang           #+#    #+#             */
-/*   Updated: 2021/03/28 17:50:31 by taekang          ###   ########.fr       */
+/*   Updated: 2021/03/29 15:29:14 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int		is_bearing(int n)
-{
-	if (n >= (NORTH + 1) && n <= (EAST + 1))
-		return (1);
-	return (0);
-}
-
-int		has_bearing(t_cub3d *info, int i, int j, int k)
+int		is_all_wall(t_cub3d *info, int i, int j, int k)
 {
 	const int	x[4] = {0, 0, 1, -1};
 	const int	y[4] = {1, -1, 0, 0};
@@ -32,7 +25,7 @@ int		has_bearing(t_cub3d *info, int i, int j, int k)
 			&& i >= 0 && j >= 0)
 	{
 		possible = 0;
-		if (is_bearing(info->world_map[i][j]))
+		if (info->world_map[i][j] == WALL)
 		{
 			possible = 1;
 			break ;
@@ -45,14 +38,14 @@ int		has_bearing(t_cub3d *info, int i, int j, int k)
 	return (1);
 }
 
-int		bearing_exist(t_cub3d *info, int i, int j)
+int		bearing_wall_check(t_cub3d *info, int i, int j)
 {
 	int k;
 
 	k = 0;
 	while (k < 4)
 	{
-		if (!has_bearing(info, i, j, k))
+		if (!is_all_wall(info, i, j, k))
 			return (0);
 		k++;
 	}
@@ -74,10 +67,10 @@ int		map_valid_check(t_cub3d *info)
 			value = info->world_map[i][j];
 			if (value == 0)
 			{
-				if (!bearing_exist(info, i, j))
+				if (!bearing_wall_check(info, i, j))
 					return (0);
 			}
-			else if (value > 1 && value != SPRITE)
+			else if (!(value == WALL || value == SPRITE || value == ' '))
 				return (0);
 			j++;
 		}

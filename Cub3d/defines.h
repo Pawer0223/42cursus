@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 14:02:48 by taekang           #+#    #+#             */
-/*   Updated: 2021/03/28 16:11:48 by taekang          ###   ########.fr       */
+/*   Updated: 2021/03/29 15:01:52 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,14 @@
 # define IDENTIFIERS 9
 # define NORTH 0
 # define SOUTH 1
-# define WEST 2
+# define SPRITE 2
 # define EAST 3
-# define SPRITE 4
+# define WEST 4
 # define FLOOR 5
 # define CEILING 6
 # define RESOLUTION 7
 # define MAP_LINE 8
+# define WALL 1
 
 # define MAX_X 800
 # define MAX_Y 1280

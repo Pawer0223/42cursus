@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/14 16:10:23 by taekang           #+#    #+#             */
-/*   Updated: 2021/03/29 14:36:27 by taekang          ###   ########.fr       */
+/*   Updated: 2021/03/29 15:20:17 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int		parse_and_load_texture(t_cub3d *info, int id, char *line)
 	int		i;
 	t_img	img;
 
-	i = (id >= SPRITE) ? 2 : 3;
+	i = (id == SPRITE || id >= FLOOR) ? 2 : 3;
 	if (!load_image(info, &info->texture[id], (line + i), &img))
 		return (error_occur(ERROR_TEXTURE_LOAD));
 	return (1);
@@ -77,7 +77,7 @@ int		parse_line(t_cub3d *info, char *line, int visited[])
 	visited[id] = 1;
 	if (id == RESOLUTION)
 		return (parse_id_r(info, line));
-	else if (id >= NORTH && id <= SPRITE)
+	else if (id >= NORTH && id <= WEST)
 		return (parse_and_load_texture(info, id, line));
 	else if (id == FLOOR || id == CEILING)
 		return (parse_color(info, id, line));
