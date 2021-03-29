@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/01 11:40:50 by taesan            #+#    #+#             */
-/*   Updated: 2021/03/29 19:06:15 by taekang          ###   ########.fr       */
+/*   Updated: 2021/03/29 19:11:51 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,5 @@ int		main(int argc, const char *argv[])
 		exit(1);
 	if (!raycasting_start(&info))
 		exit_game(&info);
+	system("leaks a.out > leaks_result; cat leaks_result | grep leaked && rm -rf leaks_result");
 }
