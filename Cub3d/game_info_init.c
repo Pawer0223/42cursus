@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/14 03:45:14 by taekang           #+#    #+#             */
-/*   Updated: 2021/03/29 16:13:19 by taekang          ###   ########.fr       */
+/*   Updated: 2021/03/29 19:02:51 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	player_init(t_player *p)
 	point = p->point;
 	if (point == 'N' || point == 'S')
 	{
-		p->dir.x = (point == 'S') ? 1.0 : -1.0;
+		p->dir.x = (point == 'S') ? 0.99 : -0.99;
 		p->dir.y = 0.0;
 		p->plane.x = 0.0;
 		p->plane.y = (point == 'S') ? -0.66 : 0.66;
