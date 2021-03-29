@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/14 16:05:27 by taekang           #+#    #+#             */
-/*   Updated: 2021/03/14 16:10:02 by taekang          ###   ########.fr       */
+/*   Updated: 2021/03/29 14:36:09 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,22 @@ int		get_int_value(const char *line, int *i)
 		*i += 1;
 	}
 	return (value);
+}
+
+void	line_trim(char *line)
+{
+	int i;
+	int	end;
+
+	end = ft_strlen(line) - 1;
+	i = end;
+	while (i >= 0)
+	{
+		if (line[i] != ' ')
+			break ;
+		i--;
+	}
+	line[i + 1] = 0;
 }
 
 int		load_image(t_cub3d *info, t_tex *tex, char *path, t_img *img)

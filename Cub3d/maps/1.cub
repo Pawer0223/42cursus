@@ -1,7 +1,7 @@
 R 1000000 10000000
 
 NO textures/n.xpm
-SO textures/s.xpm
+SO ./images/SO.xpm
 WE textures/w.xpm
 EA textures/e.xpm
 S textures/barrel.xpm

@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/14 16:10:23 by taekang           #+#    #+#             */
-/*   Updated: 2021/03/28 17:31:47 by taekang          ###   ########.fr       */
+/*   Updated: 2021/03/29 14:36:27 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ int		parse_line(t_cub3d *info, char *line, int visited[])
 {
 	int id;
 
+	line_trim(line);
 	if (is_empty_line(line))
 		return (1);
 	id = check_identifier(line);
