@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/01 11:40:50 by taesan            #+#    #+#             */
-/*   Updated: 2021/03/29 14:31:46 by taekang          ###   ########.fr       */
+/*   Updated: 2021/03/29 16:14:08 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ int		load_image(t_cub3d *info, t_tex *tex, char *path, t_img *img);
 void	to_string(t_cub3d *info);
 int		save_bmp(t_cub3d *info);
 void	raycasting(t_cub3d *info);
+void	cub3d_free(t_cub3d *info);
 void	exit_game(t_cub3d *info);
 
 #endif

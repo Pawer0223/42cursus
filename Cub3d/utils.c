@@ -6,11 +6,17 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/01 21:19:05 by taesan            #+#    #+#             */
-/*   Updated: 2021/03/28 17:33:32 by taekang          ###   ########.fr       */
+/*   Updated: 2021/03/29 16:11:53 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	exit_game(t_cub3d *info)
+{
+	cub3d_free(info);
+	exit(0);
+}
 
 int		error_occur(const char *error_message)
 {

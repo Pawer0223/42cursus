@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 14:02:48 by taekang           #+#    #+#             */
-/*   Updated: 2021/03/29 15:01:52 by taekang          ###   ########.fr       */
+/*   Updated: 2021/03/29 16:10:38 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,10 @@
 
 # define MAX_X 800
 # define MAX_Y 1280
+
+# define MIN_X 320
+# define MIN_Y 640
+
 # define U_DIV 1
 # define V_DIV 1
 # define V_MOVE 0.0

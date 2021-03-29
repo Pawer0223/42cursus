@@ -6,7 +6,7 @@
 /*   By: taekang <taekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/14 03:45:14 by taekang           #+#    #+#             */
-/*   Updated: 2021/03/27 20:47:03 by taekang          ###   ########.fr       */
+/*   Updated: 2021/03/29 16:13:19 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,6 @@ void	cub3d_free(t_cub3d *info)
 		free(info->world_map[i++]);
 }
 
-void	exit_game(t_cub3d *info)
-{
-	cub3d_free(info);
-	exit(0);
-}
-
 int		cub3d_init(t_cub3d *info)
 {
 	int i;
@@ -75,12 +69,21 @@ int		cub3d_init(t_cub3d *info)
 	return (1);
 }
 
-int		game_info_init(t_cub3d *info, t_sprite *s)
+void	check_window_size(t_cub3d *info)
 {
 	if (info->win_height > MAX_X)
 		info->win_height = MAX_X;
 	if (info->win_width > MAX_Y)
 		info->win_width = MAX_Y;
+	if (info->win_height < MIN_X)
+		info->win_height = MIN_X;
+	if (info->win_width < MIN_Y)
+		info->win_width = MIN_Y;
+}
+
+int		game_info_init(t_cub3d *info, t_sprite *s)
+{
+	check_window_size(info);
 	if (!cub3d_init(info))
 		return (0);
 	if (!(s->info = (t_per_sprite **)
