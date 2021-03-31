@@ -79,6 +79,6 @@
 <summary>cub3d</summary>
 	<ul>
 		<li><a href="https://ko.wikipedia.org/wiki/OpenGL">OpenGL</a>을 사용하여, 3d그래픽 표현하기.</li>
-		<li>최종적으로, 레이케스팅 기술을 구현하여 3d 그래픽을 구현한다.</li>
+		<li>[레이케스팅](https://lodev.org/cgtutor/raycasting.html)을 구현하여 3d 그래픽을 구현한다.</li>
 	</ul>
 </details>
