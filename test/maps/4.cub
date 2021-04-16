@@ -1,0 +1,20 @@
+R 1000000 10000000
+
+NO textures/n.xpm
+SO textures/s.xpm
+WE textures/w.xpm
+EA textures/e.xpm
+S textures/barrel.xpm
+
+F 000, 102,      000
+C 255,    204 ,  000
+
+11111111111
+10100000001
+10000000001
+10000001001
+10000N00001
+10000000001
+10100001001
+10000000001
+11111111111
