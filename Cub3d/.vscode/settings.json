@@ -29,6 +29,7 @@
         "stdio.h": "c",
         "fcntl.h": "c",
         "bitset": "c",
-        "ostream": "c"
+        "ostream": "c",
+        "cstdio": "cpp"
     }
   }
