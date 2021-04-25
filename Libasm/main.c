@@ -1,8 +1,17 @@
-#include "libasm.h"
+#include <stdio.h>
+#include <unistd.h>
 
-int		main(int argc, char *argv[])
+size_t	ft_strlen(const char *str);
+
+int	main(int argc, const char *argv[])
 {
-	char *s = "abc";
-	int len = ft_strlen(s);
-	printf("%s len is [%d]\n", s, len);
+    if (argc < 2)
+	printf("please input parameter\n");
+    else
+    {
+	for (int i = 1; i < argc; i++) {
+	    int len = ft_strlen(argv[i]);
+	    printf("[%s] : %d\n", argv[i], len);
+	}
+    }
 }
