@@ -6,6 +6,7 @@
 size_t	ft_strlen(const char *str);
 char	*ft_strcpy(char *dest, const char *src);
 int	ft_strcmp(const char *s1, const char *s2);
+ssize_t	ft_write(int fildes, const void *buf, size_t nbyte);
 
 int	func_check(const char *name)
 {
@@ -15,6 +16,8 @@ int	func_check(const char *name)
 	return (2);
     else if (strcmp(name, "strcmp") == 0)
 	return (3);
+    else if (strcmp(name, "write") == 0)
+	return (4);
     return (0);
 }
 
@@ -47,6 +50,12 @@ int	main(int argc, const char *argv[])
 		int result = ft_strcmp(argv[2], argv[3]);
 		printf("ft_strcmp(%s, %s) => [%d]\n", argv[2], argv[3], result);
 	    }
+	}
+	else if (seq == 4)
+	{
+	    char wn = '\n';
+	    ft_write(1, argv[2], ft_strlen(argv[2]));
+	    ft_write(1, &wn, 1);
 	}
     }
 }
