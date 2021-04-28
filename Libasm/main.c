@@ -5,6 +5,7 @@
 
 size_t	ft_strlen(const char *str);
 char	*ft_strcpy(char *dest, const char *src);
+int	ft_strcmp(const char *s1, const char *s2);
 
 int	func_check(const char *name)
 {
@@ -12,6 +13,8 @@ int	func_check(const char *name)
 	return (1);
     else if (strcmp(name, "strcpy") == 0)
 	return (2);
+    else if (strcmp(name, "strcmp") == 0)
+	return (3);
     return (0);
 }
 
@@ -35,6 +38,15 @@ int	main(int argc, const char *argv[])
 	    ft_strcpy(dest, argv[2]);
 	    printf("dest => [%s]\n", dest);
 	    free(dest);
+	}
+	else if (seq == 3)
+	{
+	    if (argc < 4)
+		printf("a.out strcmp $1, $2\n");
+	    else {
+		int result = ft_strcmp(argv[2], argv[3]);
+		printf("ft_strcmp(%s, %s) => [%d]\n", argv[2], argv[3], result);
+	    }
 	}
     }
 }

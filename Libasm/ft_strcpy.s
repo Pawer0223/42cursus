@@ -3,16 +3,16 @@ section .text
 
 ; dest in rdi, src int rsi
 _ft_strcpy:
-    mov	    rcx, 0x0	; i = 0
-    mov	    rdx, 0x0	; for get char
-    cmp	    rsi, 0x0	; if (!src)
+    mov	    rcx, 0	; i = 0
+    mov	    rdx, 0	; for get char
+    cmp	    rsi, 0	; if (!src)
     jz	    return
     jmp	    loop
 
 loop:
     mov	    dl, BYTE [rsi + rcx]    ; dl => using for 1byte data set => is src[i]
     mov	    BYTE [rdi + rcx], dl    ; dest[i] = src[i]
-    cmp	    dl, 0x0		    ; is end ? dl == 0 is zf 1
+    cmp	    dl, 0		    ; is end ? dl == 0 is zf 1
     jz	    return		    ; not zero
     inc	    rcx
     jmp	    loop
