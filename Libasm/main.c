@@ -18,6 +18,8 @@ int	func_check(const char *name)
 	return (7);
     else if (strcmp(name, "bonus2") == 0)
 	return (8);
+    else if (strcmp(name, "bonus3") == 0)
+	return (9);
 
     printf("[not found func nm]\n");
     return (0);
@@ -84,6 +86,43 @@ void	bonus2_test(const char *argv)
     print_list(start, "%d");
     int size = ft_list_size(start);
     printf("size : %d\n", size);
+}
+
+//int	cmp(void *d1, void *d2)
+//{
+//    if (!d1)
+//	printf("arr1 is null");
+//    if (!d2)
+//	printf("arr2 is null");
+//    char *arr1 = (char *)d1;
+//    char *arr2 = (char *)d2;
+//    printf("%c - %c = %d\n", arr1[0], arr2[0], arr1[0] - arr2[0]);
+//    return arr1[0] - arr2[0];
+//}
+
+void	bonus3_test(const char *argv)
+{
+    int len = ft_strlen(argv);
+
+    char *num = (char *)malloc(sizeof(char));
+    num[0] = argv[len - 1];
+
+    t_list *list = ft_create_elem(num);
+    for (int i = len - 2; i >= 0; i--)
+    {
+	if (argv[i] >= '0' && argv[i] <= '9') {
+	    num = (char *)malloc(sizeof(char));
+	    num[0] = argv[i];
+	    ft_list_push_front(&list, num);
+	}
+    }
+
+    printf("### before ###\n");
+    print_list(list, "%s");
+    
+    ft_list_sort(&list, &ft_strcmp);
+    printf("### after ###\n");
+    print_list(list, "%s");
 }
 
 int	main(int argc, const char *argv[])
@@ -181,5 +220,13 @@ int	main(int argc, const char *argv[])
 		return (0);
 	    }
 	    bonus2_test(argv[2]);
+	}
+	else if (seq == 9)
+	{
+	    if (argc < 3) {
+		printf("ex) a.out bonus3 \"1 2 3 4 5 8 6\" [\" is require!!]\n");
+		return (0);
+	    }
+	    bonus3_test(argv[2]);
 	}
 }

@@ -34,5 +34,6 @@ ssize_t         ft_read(int fildes, void *buf, size_t nbyte);
 char	        *ft_strdup(const char *s1);
 void		ft_list_push_front(t_list **begin_list, void *data);
 int		ft_list_size(t_list *begin_list);
+void		ft_list_sort(t_list **begin_list, int (*cmp)());
 
 # endif
