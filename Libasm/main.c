@@ -2,11 +2,14 @@
 #include <unistd.h>
 #include <string.h>
 #include <stdlib.h>
+#include <fcntl.h>
+#include "get_next_line.h"
 
-size_t	ft_strlen(const char *str);
-char	*ft_strcpy(char *dest, const char *src);
-int	ft_strcmp(const char *s1, const char *s2);
-ssize_t	ft_write(int fildes, const void *buf, size_t nbyte);
+size_t	    ft_strlen(const char *str);
+char	    *ft_strcpy(char *dest, const char *src);
+int	    ft_strcmp(const char *s1, const char *s2);
+ssize_t	    ft_write(int fildes, const void *buf, size_t nbyte);
+ssize_t     ft_read(int fildes, void *buf, size_t nbyte);
 
 int	func_check(const char *name)
 {
@@ -18,6 +21,8 @@ int	func_check(const char *name)
 	return (3);
     else if (strcmp(name, "write") == 0)
 	return (4);
+    else if (strcmp(name, "read") == 0)
+	return (5);
     return (0);
 }
 
@@ -56,6 +61,30 @@ int	main(int argc, const char *argv[])
 	    char wn = '\n';
 	    ft_write(1, argv[2], ft_strlen(argv[2]));
 	    ft_write(1, &wn, 1);
+	}
+	else if (seq == 5)
+	{
+	    if (argc < 4) {
+		printf("a.out read [file name] [buffer size]\n");
+		return (0);
+	    }
+
+	    int fd = open(argv[2], O_RDONLY);
+	    if (fd < 0)
+		printf("file open error\n");
+	    else {
+		char *str = 0;
+		int result = get_next_line(fd, &str);
+
+		int i = 1;
+		while (result != 0) {
+		    printf("line %d => [%s]\n", i++, str);
+		    result = get_next_line(fd, &str);
+		}
+		printf("line %d => [%s]\n", i++, str);
+		if (str)
+		    free(str);
+	    }
 	}
     }
 }
