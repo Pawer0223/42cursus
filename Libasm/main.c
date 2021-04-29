@@ -32,19 +32,25 @@ t_list	*ft_create_elem(void *data)
     return (list);
 }
 
-void	print_list(t_list *list)
+void	print_list(t_list *list, char *spec)
 {
+    // spec = specifier
+
     if (!list) {
 	printf("list is null\n");
 	return ;
     }
 
-    int i = 0;
-    t_list    *curr = list;
+    int	    i = 0;
+    t_list  *curr = list;
+    
     while (1)
     {
-	char *data = curr->data;
-	printf("list.get(%d) : %s\n", i++, data);
+	void *data = curr->data;
+	if (ft_strcmp(spec, "%s") == 0)
+	    printf("list.get(%d) : %s\n", i++, data);
+	else if (ft_strcmp(spec, "%d") == 0)
+	    printf("list.get(%d) : %d\n", i++, *(int *)data);
 	curr = curr->next;
 	if (!curr)
 	    return ;
@@ -61,7 +67,7 @@ void	bonus1_test(int argc, const char *argv[])
 	ft_list_push_front(&start, (char *)argv[i]);
 	i++;
     }
-    print_list(start);
+    print_list(start, "%s");
 }
 
 void	bonus2_test(const char *argv)
@@ -75,17 +81,7 @@ void	bonus2_test(const char *argv)
 	n[0] = i;
 	ft_list_push_front(&start, n);
     }
-    int i = 0;
-    
-    t_list  *curr = start ;
-    while (1)
-    {
-	int *data = (int *)curr->data;
-	printf("list.get(%d) : %d\n", i++, *data);
-	curr = curr->next;
-	if (!curr)
-	    break ;
-    }
+    print_list(start, "%d");
     int size = ft_list_size(start);
     printf("size : %d\n", size);
 }
