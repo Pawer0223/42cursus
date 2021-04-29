@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-size_t	    ft_strlen(const char *str);
 
 char		*content_null(char *buf)
 {
@@ -20,25 +19,6 @@ char		*content_null(char *buf)
 	if (!(new_content = ft_strdup(buf)))
 		return (0);
 	return (new_content);
-}
-
-char		*ft_strdup(char *s1)
-{
-	int		len;
-	int		i;
-	char	*s2;
-
-	len = ft_strlen(s1);
-	if (!(s2 = malloc(sizeof(char) * (len + 1))))
-		return (0);
-	i = 0;
-	while (i < len)
-	{
-		s2[i] = s1[i];
-		i++;
-	}
-	s2[i] = '\0';
-	return (s2);
 }
 
 size_t		ft_strlcpy(char *dest, const char *src, size_t dstsize)

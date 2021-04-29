@@ -23,13 +23,11 @@
 
 # include <stdio.h>
 # include <fcntl.h>
+# include "libasm.h"
 
-int		get_next_line(int fd, char **line);
-char	*ft_strdup(char *s1);
+int	get_next_line(int fd, char **line);
 size_t	ft_strlcpy(char *dest, const char *src, size_t dstsize);
 char	*ft_substr(char *s, int start, size_t len);
 char	*content_null(char *buf);
-size_t  ft_strlen(const char *str);
-ssize_t     ft_read(int fildes, void *buf, size_t nbyte);
 
 #endif

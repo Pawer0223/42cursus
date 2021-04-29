@@ -15,4 +15,5 @@ _err:
     call	___error	; call
     pop		rdx		; error value restore
     mov		[rax], rdx	; rax value = error value
+    mov		rax, -1		; return -1
     ret

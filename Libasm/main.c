@@ -12,6 +12,8 @@ int	func_check(const char *name)
 	return (4);
     else if (strcmp(name, "read") == 0)
 	return (5);
+    else if (strcmp(name, "strdup") == 0)
+	return (6);
     return (0);
 }
 
@@ -74,6 +76,15 @@ int	main(int argc, const char *argv[])
 		if (str)
 		    free(str);
 	    }
+	}
+	else if (seq == 6)
+	{
+	    char *dup = ft_strdup(argv[2]);
+	    if (!dup)
+		printf("ft_strdup result is 0\n");
+	    printf("duplicate => [%s]\n", dup);
+	    if (dup)
+		free(dup);
 	}
     }
 }
