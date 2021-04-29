@@ -14,24 +14,103 @@ int	func_check(const char *name)
 	return (5);
     else if (strcmp(name, "strdup") == 0)
 	return (6);
+    else if (strcmp(name, "bonus1") == 0)
+	return (7);
+    else if (strcmp(name, "bonus2") == 0)
+	return (8);
+
+    printf("[not found func nm]\n");
     return (0);
+}
+
+t_list	*ft_create_elem(void *data)
+{
+    t_list *list = malloc(sizeof(t_list));
+
+    list->data = data;
+    list->next = 0;
+    return (list);
+}
+
+void	print_list(t_list *list)
+{
+    if (!list) {
+	printf("list is null\n");
+	return ;
+    }
+
+    int i = 0;
+    t_list    *curr = list;
+    while (1)
+    {
+	char *data = curr->data;
+	printf("list.get(%d) : %s\n", i++, data);
+	curr = curr->next;
+	if (!curr)
+	    return ;
+    }
+}
+
+void	bonus1_test(int argc, const char *argv[])
+{
+    t_list *start = ft_create_elem("[start]");
+
+    int i = 2;
+    while (i < argc)
+    {
+	ft_list_push_front(&start, (char *)argv[i]);
+	i++;
+    }
+    print_list(start);
+}
+
+void	bonus2_test(const char *argv)
+{
+    int cnt = atoi(argv);
+    t_list *start = ft_create_elem(&cnt);
+
+    for (int i = cnt - 1; i > 0; i--)
+    {
+	int *n = malloc(sizeof(int));
+	n[0] = i;
+	ft_list_push_front(&start, n);
+    }
+    int i = 0;
+    
+    t_list  *curr = start ;
+    while (1)
+    {
+	int *data = (int *)curr->data;
+	printf("list.get(%d) : %d\n", i++, *data);
+	curr = curr->next;
+	if (!curr)
+	    break ;
+    }
+    int size = ft_list_size(start);
+    printf("size : %d\n", size);
 }
 
 int	main(int argc, const char *argv[])
 {
-    if (argc < 3)
-	printf("please input parameter\n");
-    else
-    {
 	int seq = func_check(argv[1]);
 
 	if (seq == 1)
 	{
+	    if (argc < 3)
+	    {
+		printf("a.out strlen [input]\n");
+		return (0);
+	    }
 	    int len = ft_strlen(argv[2]);
 	    printf("[%s] : %d\n", argv[2], len);
 	}
 	else if (seq == 2)
 	{
+	    if (argc < 3)
+	    {
+		printf("a.out strcpy [input]\n");
+		return (0);
+	    }
 	    int len = ft_strlen(argv[2]);
 	    char *dest = (char *)malloc(len);
 	    ft_strcpy(dest, argv[2]);
@@ -79,6 +158,11 @@ int	main(int argc, const char *argv[])
 	}
 	else if (seq == 6)
 	{
+	    if (argc < 3)
+	    {
+		printf("a.out strdup [input]\n");
+		return (0);
+	    }
 	    char *dup = ft_strdup(argv[2]);
 	    if (!dup)
 		printf("ft_strdup result is 0\n");
@@ -86,5 +170,20 @@ int	main(int argc, const char *argv[])
 	    if (dup)
 		free(dup);
 	}
-    }
+	else if (seq == 7)
+	{
+	    if (argc < 3) {
+		printf("a.out bonus1 [str1 str2 ...]\n");
+		return (0);
+	    } 
+	    bonus1_test(argc, argv);
+	}
+    	else if (seq == 8)
+	{
+	    if (argc < 3) {
+		printf("a.out bonus2 [size(int)]\n");
+		return (0);
+	    }
+	    bonus2_test(argv[2]);
+	}
 }
