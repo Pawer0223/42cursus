@@ -14,10 +14,10 @@ _ft_list_push_front:
     pop	    rdi		    ; restore begin_list
     cmp	    rax, 0 
     je	    return
-    mov	    [rax], rsi	    ; new_list.data = data
-    mov	    rcx, [rdi]	    ; for mov
-    mov	    [rax + 8], rcx  ; new_list.next = begin_list
-    mov	    [rdi], rax	    ; begin_list = new_list
+    mov	    [rax], rsi	    ; new_list->data = data
+    mov	    rcx, [rdi]	    ; rcx <- [rdi] , [rdx] is *begin_list
+    mov	    [rax + 8], rcx  ; new_list->next = *begin_list
+    mov	    [rdi], rax	    ; *begin_list = new_list
 
 return:
     ret

@@ -7,7 +7,8 @@ section	.text
 
 ; rdi = begin_list, rsi = int (*cmp)(n1, n2)
 
-; 최초 r8에 시작 위치를 지정 함. swap이 된다면 data <-> next swap한 후, 첫번 째 요소부터 다시 비교를 수행
+; 최초 r8에 시작 위치를 저장 함. swap이 된다면 curr.data <-> curr.next.data swap한다.
+; swap 시 rdi의 포인터 값이 변경된다. 1 , 3요소가 바뀌었다면 순서 변경 후, 3->next를 보도록 한다. line 42
 ; swap이 되지 않았다면, 다음 next로 이동. swap없이 마지막 요소로 가면 loop의 처음 cmp에 걸려서 종료
 
 _ft_list_sort:
