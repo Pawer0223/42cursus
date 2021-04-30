@@ -159,6 +159,16 @@ int	main(int argc, const char *argv[])
 	    else {
 		int result = ft_strcmp(argv[2], argv[3]);
 		printf("ft_strcmp(%s, %s) => [%d]\n", argv[2], argv[3], result);
+		int result2 = strcmp(argv[2], argv[3]);
+		printf("expect : [%d], my_result : [%d]\n", result2, result);
+		printf("### test code ###\n");	
+	//printf("\xff\xff, \xff => my : %d\n", ft_strcmp("\xff\xff", "\xff"));
+		int r;
+		int r2;
+		r = ft_strcmp("\xff\xff", "\xff");
+		r2= strcmp("\xff\xff", "\xff");
+		printf("my : [%d], computer : [%d]\n", r, r2);
+
 	    }
 	}
 	else if (seq == 4)

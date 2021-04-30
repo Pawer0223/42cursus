@@ -1,35 +1,23 @@
 section	.text
     global  _ft_strcmp
 
-; s1 = rdi, s2 = rsi 
-
 _ft_strcmp:
-    mov	    rcx, 0		    ; i = 0
-    mov	    rdx, 0		    ; register init
-    jmp	    compare	    
-    
-compare:	
-    mov	    dl, BYTE [rdi + rcx]    ; dl <- s1[i] 
-    sub	    dl, BYTE [rsi + rcx]    ; dl <- s1[i] - s2[i]
-    cmp	    dl, 0		    ; dl == 0 ?
-    je	    same		    ; dl == 0
-    jg	    above		    ; dl > 0
-    jl	    below		    ; dl < 0
+    xor		rax, rax
+    xor		rdx, rdx
+    xor		rcx, rcx
 
-same:
-    cmp	     BYTE [rdi + rcx], 0
-    jz 	     equal
-    inc	     rcx
-    jmp	     compare    
+compare:
+    mov		al, [rdi + rcx]
+    mov		dl, [rsi + rcx]
+    cmp		al, 0
+    jz		subtract
+    cmp		dl, 0
+    jz		subtract
+    cmp		al, dl
+    jnz		subtract
+    inc		rcx
+    jmp		compare
 
-equal:
-    mov	     rax, 0
-    ret
-
-above:
-    mov	     rax, 1
-    ret
-
-below:
-    mov	     rax, -1
+subtract:
+    sub		rax, rdx
     ret
