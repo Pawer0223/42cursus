@@ -16,6 +16,8 @@ _ft_list_sort:
     mov	    rdi,    [rdi]	; t_list *temp2 = *begin_list for calc
 
 loop:
+    cmp	    rdi,   0
+    je	    return
     mov	    r9,    [rdi + 8]	; void *data = begin_list[i]->next;
     cmp	    r9,    0		; is null ?
     je	    return
@@ -28,7 +30,7 @@ loop:
     call    rcx			; call cmp
     pop	    rsi			; restore func
     pop	    rdi			; restore begin_list
-    cmp	    rax,    0		;
+;   cmp	    rax,    0		; cmp is infinite
     jg	    swap		; if rax > 0 == (list->data > list->next->data)
     jmp	    next
 
