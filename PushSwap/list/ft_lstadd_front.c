@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/16 16:59:37 by taekang           #+#    #+#             */
-/*   Updated: 2021/05/06 15:15:19 by taesan           ###   ########.fr       */
+/*   Updated: 2021/05/06 18:03:33 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_lstadd_front(t_list **start, t_list *new)
 	t_list	*temp;
 	t_list	*last;
 
-	if (!start || !new)
+	if (is_null(start) || !new)
 		return ;
 	last = ft_lstlast(start);
 	temp = *start;

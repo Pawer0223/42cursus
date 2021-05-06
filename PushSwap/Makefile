@@ -6,7 +6,7 @@
 #    By: taesan <taesan@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/06 16:51:22 by taesan            #+#    #+#              #
-#    Updated: 2021/05/06 16:51:26 by taesan           ###   ########.fr        #
+#    Updated: 2021/05/06 17:32:20 by taesan           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ OBJS		=	$(SRCS:.c=.o)
 LIBFT_OBJS	=	$(addprefix $(LIBFT_DIR)/, $(notdir $(LIBFT_SRCS:.c=.o)))
 LIST_OBJS	=	$(addprefix $(LIST_DIR)/, $(notdir $(LIST_SRCS:.c=.o)))
 
-CC		= arch -x86_64 gcc
+CC		= arch -x86_64 gcc -g
 RM		= rm -f
 CFLAGS	= -Wall -Wextra -Werror
 

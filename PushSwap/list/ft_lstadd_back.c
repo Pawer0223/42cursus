@@ -6,23 +6,27 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/16 19:23:49 by taekang           #+#    #+#             */
-/*   Updated: 2021/05/05 18:34:53 by taesan           ###   ########.fr       */
+/*   Updated: 2021/05/06 18:03:30 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./list.h"
+#include <stdio.h>
 
-void	ft_lstadd_back(t_list **lst, t_list *new)
+void	ft_lstadd_back(t_list **start, t_list *new)
 {
-	t_list *last;
+	t_list	*temp;
+	t_list	*last;
 
-	if (!lst || !new)
+	if (is_null(start) || !new)
 		return ;
-	if (!*lst)
-		*lst = new;
-	else
-	{
-		last = ft_lstlast(&lst[0]);
-		last->next = new;
-	}
+	last = ft_lstlast(start);
+	temp = *start;
+	last->is_last = N;
+	new->is_last = Y;
+	last->next = new;
+	temp->prev = new;
+	new->next = temp;
+	new->prev = last;
 }
+

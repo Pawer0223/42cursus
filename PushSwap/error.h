@@ -1,24 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstiter.c                                       :+:      :+:    :+:   */
+/*   error.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/17 18:40:28 by taekang           #+#    #+#             */
-/*   Updated: 2021/05/05 15:39:06 by taesan           ###   ########.fr       */
+/*   Created: 2021/03/23 14:12:48 by taekang           #+#    #+#             */
+/*   Updated: 2021/05/06 17:44:13 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./list.h"
+#ifndef ERROR_H
+# define ERROR_H
 
-void	ft_lstiter(t_list *lst, void (*f)(void *))
-{
-	if (!lst || !f)
-		return ;
-	while (lst)
-	{
-		f(lst->content);
-		lst = lst->next;
-	}
-}
+# define LIST_IS_NULL "Error\nList Is Null"
+
+
+#endif

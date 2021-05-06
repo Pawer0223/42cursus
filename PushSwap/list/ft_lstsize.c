@@ -6,21 +6,25 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/16 19:02:44 by taekang           #+#    #+#             */
-/*   Updated: 2021/05/05 15:39:17 by taesan           ###   ########.fr       */
+/*   Updated: 2021/05/06 17:56:38 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./list.h"
 
-int	ft_lstsize(t_list *lst)
+int		ft_lstsize(t_list **start)
 {
-	int result;
+	t_list	*lst;
+	int		cnt;
 
-	result = 0;
+	lst = *start;
+	cnt = 0;
 	while (lst)
 	{
+		cnt++;
+		if (is_last(lst))
+			return (cnt);
 		lst = lst->next;
-		result++;
 	}
-	return (result);
+	return (cnt);
 }
