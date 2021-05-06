@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/16 16:16:51 by taekang           #+#    #+#             */
-/*   Updated: 2021/05/06 18:27:25 by taesan           ###   ########.fr       */
+/*   Updated: 2021/05/06 19:46:23 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ t_list	*ft_lstnew(t_list **start, void *content)
 
 	if (!(list = (t_list *)malloc(sizeof(t_list))))
 		return (0);
-	//ft_bzero(list, sizeof(t_list));
 	list->content = content;
 	if (!*start)
 	{

@@ -4,6 +4,7 @@
         "stdlib.h": "c",
         "memory": "c",
         "unistd.h": "c",
-        "list.h": "c"
+        "list.h": "c",
+        "push_swap.h": "c"
     }
 }

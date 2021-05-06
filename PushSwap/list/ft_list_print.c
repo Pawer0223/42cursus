@@ -6,11 +6,15 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 14:00:23 by taesan            #+#    #+#             */
-/*   Updated: 2021/05/06 18:00:29 by taesan           ###   ########.fr       */
+/*   Updated: 2021/05/06 19:50:07 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./list.h"
+
+/*
+	** content is int *
+*/
 
 void	ft_list_print(t_list **start)
 {
@@ -21,7 +25,8 @@ void	ft_list_print(t_list **start)
 	list = *start;
 	while (list->content)
 	{
-		ft_putendl_fd(list->content, 1);
+		ft_putnbr_fd(*(int *)list->content, 1);
+		ft_putstr_fd("\n", 1);
 		if (is_last(list))
 			break ;
 		list = list->next;

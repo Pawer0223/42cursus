@@ -1,33 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstclear.c                                      :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/17 16:27:14 by taekang           #+#    #+#             */
-/*   Updated: 2021/05/06 19:16:15 by taesan           ###   ########.fr       */
+/*   Created: 2021/05/06 19:29:44 by taesan            #+#    #+#             */
+/*   Updated: 2021/05/06 19:59:49 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./list.h"
-
-void	ft_lstclear(t_list **start)
+#include "push_swap.h"
+int		error_occur(t_list **start)
 {
-	t_list	*curr;
-	t_list	*next;
-
-	if (is_null(start))
-		return ;
-	curr = *start;
-	while (curr)
-	{
-		if (curr->prev)
-			ft_lstdelone(curr->prev);
-		next = curr->next;
-		curr->next = 0;
-		ft_lstdelone(curr);
-		curr = next;
-	}
-	*start = 0;
+	ft_putendl_fd("KO", 1);
+	if (!is_null(start))
+		ft_lstclear(start);
+	return (0);
 }

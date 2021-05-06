@@ -1,33 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstclear.c                                      :+:      :+:    :+:   */
+/*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/17 16:27:14 by taekang           #+#    #+#             */
-/*   Updated: 2021/05/06 19:16:15 by taesan           ###   ########.fr       */
+/*   Created: 2021/05/06 19:43:00 by taesan            #+#    #+#             */
+/*   Updated: 2021/05/06 19:59:58 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./list.h"
+#ifndef PUSH_SWAP_H
+# define PUSH_SWAP_H
 
-void	ft_lstclear(t_list **start)
-{
-	t_list	*curr;
-	t_list	*next;
+# include "libft/libft.h"
+# include "list/list.h"
+# include "error.h"
+# include <stdio.h> // remove !
 
-	if (is_null(start))
-		return ;
-	curr = *start;
-	while (curr)
-	{
-		if (curr->prev)
-			ft_lstdelone(curr->prev);
-		next = curr->next;
-		curr->next = 0;
-		ft_lstdelone(curr);
-		curr = next;
-	}
-	*start = 0;
-}
+int		error_occur(t_list **start);
+
+
+
+
+# endif
