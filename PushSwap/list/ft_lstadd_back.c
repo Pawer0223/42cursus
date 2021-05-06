@@ -1,30 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstclear.c                                      :+:      :+:    :+:   */
+/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taekang <taekang@student.42seoul.k>        +#+  +:+       +#+        */
+/*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/17 16:27:14 by taekang           #+#    #+#             */
-/*   Updated: 2020/10/17 16:52:25 by taekang          ###   ########.fr       */
+/*   Created: 2020/10/16 19:23:49 by taekang           #+#    #+#             */
+/*   Updated: 2021/05/05 18:34:53 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "./list.h"
 
-void	ft_lstclear(t_list **lst, void (*del)(void *))
+void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-	t_list *curr;
-	t_list *next;
+	t_list *last;
 
-	if (!lst || !del)
+	if (!lst || !new)
 		return ;
-	curr = lst[0];
-	while (curr)
+	if (!*lst)
+		*lst = new;
+	else
 	{
-		next = curr->next;
-		ft_lstdelone(curr, del);
-		curr = next;
+		last = ft_lstlast(&lst[0]);
+		last->next = new;
 	}
-	*lst = 0;
 }

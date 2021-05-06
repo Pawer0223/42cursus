@@ -1,20 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/15 18:40:27 by taekang           #+#    #+#             */
-/*   Updated: 2021/05/05 18:38:23 by taesan           ###   ########.fr       */
+/*   Created: 2020/10/16 16:59:37 by taekang           #+#    #+#             */
+/*   Updated: 2021/05/06 15:15:19 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "./list.h"
 
-void	ft_putstr_fd(char *s, int fd)
+void	ft_lstadd_front(t_list **start, t_list *new)
 {
-	if (!s)
+	t_list	*temp;
+	t_list	*last;
+
+	if (!start || !new)
 		return ;
-	write(fd, s, ft_strlen(s));
+	last = ft_lstlast(start);
+	temp = *start;
+	temp->is_first = N;
+	new->is_first = Y;
+	temp->prev = new;
+	new->next = temp;
+	new->prev = last;
+	*start = new;
 }

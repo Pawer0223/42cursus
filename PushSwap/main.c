@@ -1,11 +1,20 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
-#include "../Libft/libft.h"
+
+#include "libft/libft.h"
+#include "list/list.h"
 
 int		main(void)
 {
-	int len = ft_strlen("len");
-	printf("len : %d\n", len);
-	printf("hi");
+	t_list *start;
+	
+	start = 0;
+	start = ft_lstnew(&start, "start");
+	ft_lstadd_front(&start, ft_lstnew(&start, "add 1"));
+	ft_lstadd_front(&start, ft_lstnew(&start, "add 2"));
+	ft_lstadd_front(&start, ft_lstnew(&start, "add 3"));
+
+
+	ft_list_print(&start);
 }

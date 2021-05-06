@@ -1,24 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
+/*   ft_list_print.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taekang <taekang@student.42seoul.k>        +#+  +:+       +#+        */
+/*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/16 16:59:37 by taekang           #+#    #+#             */
-/*   Updated: 2020/10/16 17:36:23 by taekang          ###   ########.fr       */
+/*   Created: 2021/05/05 14:00:23 by taesan            #+#    #+#             */
+/*   Updated: 2021/05/06 15:19:56 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "./list.h"
 
-void	ft_lstadd_front(t_list **lst, t_list *new)
+void	ft_list_print(t_list **start)
 {
-	t_list *start;
+	t_list *list;
 
-	if (!lst || !new)
-		return ;
-	start = lst[0];
-	new->next = start;
-	lst[0] = new;
+	list = *start;
+	while (list->content)
+	{
+		ft_putendl_fd(list->content, 1);
+		if (is_last(list))
+			break ;
+		list = list->next;
+	}
 }

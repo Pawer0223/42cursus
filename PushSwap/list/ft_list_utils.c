@@ -1,28 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
+/*   ft_list_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taekang <taekang@student.42seoul.k>        +#+  +:+       +#+        */
+/*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/16 19:23:49 by taekang           #+#    #+#             */
-/*   Updated: 2020/10/19 17:15:45 by taekang          ###   ########.fr       */
+/*   Created: 2021/05/06 15:17:30 by taesan            #+#    #+#             */
+/*   Updated: 2021/05/06 15:19:24 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "list.h"
 
-void	ft_lstadd_back(t_list **lst, t_list *new)
+int		is_last(t_list *list)
 {
-	t_list *last;
+	if (!list)
+		return (0);
+	if (list->is_last == Y)
+		return (1);
+	return (0);
+}
 
-	if (!lst || !new)
-		return ;
-	if (!*lst)
-		*lst = new;
-	else
-	{
-		last = ft_lstlast(lst[0]);
-		last->next = new;
-	}
+int		is_first(t_list *list)
+{
+	if (!list)
+		return (0);
+	if (list->is_first == Y)
+		return (1);
+	return (0);
 }

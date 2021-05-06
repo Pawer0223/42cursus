@@ -1,26 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstsize.c                                       :+:      :+:    :+:   */
+/*   ft_lstiter.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taekang <taekang@student.42seoul.k>        +#+  +:+       +#+        */
+/*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/16 19:02:44 by taekang           #+#    #+#             */
-/*   Updated: 2020/10/16 19:08:56 by taekang          ###   ########.fr       */
+/*   Created: 2020/10/17 18:40:28 by taekang           #+#    #+#             */
+/*   Updated: 2021/05/05 15:39:06 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "./list.h"
 
-int	ft_lstsize(t_list *lst)
+void	ft_lstiter(t_list *lst, void (*f)(void *))
 {
-	int result;
-
-	result = 0;
+	if (!lst || !f)
+		return ;
 	while (lst)
 	{
+		f(lst->content);
 		lst = lst->next;
-		result++;
 	}
-	return (result);
 }
