@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 22:12:31 by taekang           #+#    #+#             */
-/*   Updated: 2021/05/06 18:06:43 by taesan           ###   ########.fr       */
+/*   Updated: 2021/05/06 18:11:06 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "../libft/libft.h"
 # include "../error.h"
+# include <stdio.h> // remove !!
 
 # define Y 'Y'
 # define N 'N'
