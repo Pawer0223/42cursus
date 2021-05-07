@@ -103,8 +103,8 @@ int		main(int argc, const char *argv[])
 		start = 0;
 		if (!make_list(argc, argv, &start))
 			return (error_occur(&start));
-		ft_list_print(&start);
-		while(1); // remove, for leak test
+		ft_list_print(&start); // for test
+		// while(1); // remove, for leak test
 		return (1);
 	}
 
