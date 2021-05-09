@@ -54,7 +54,7 @@ char		*ft_substr(char *s, int start, size_t len)
 		return (0);
 	if (!(dst = (char *)malloc(sizeof(char) * (len + 1))))
 		return (0);
-	if (start >= ft_strlen(s))
+	if (start >= (int)ft_strlen(s))
 		ft_strlcpy(dst, "", 2);
 	else
 		ft_strlcpy(dst, (s + start), len + 1);

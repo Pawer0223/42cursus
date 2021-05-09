@@ -1,5 +1,12 @@
 #include "libasm.h"
 
+void	error_occur(void)
+{
+    printf("### error occur ! ###\n");
+    printf("errno => [%d]\n", errno);
+    printf("ERROR : %s\n", strerror(errno));
+}
+
 int	func_check(const char *name)
 {
     if (strcmp(name, "strlen") == 0)
@@ -88,18 +95,6 @@ void	bonus2_test(const char *argv)
     printf("size : %d\n", size);
 }
 
-//int	cmp(void *d1, void *d2)
-//{
-//    if (!d1)
-//	printf("arr1 is null");
-//    if (!d2)
-//	printf("arr2 is null");
-//    char *arr1 = (char *)d1;
-//    char *arr2 = (char *)d2;
-//    printf("%c - %c = %d\n", arr1[0], arr2[0], arr1[0] - arr2[0]);
-//    return arr1[0] - arr2[0];
-//}
-
 void	bonus3_test(const char *argv)
 {
     int len = ft_strlen(argv);
@@ -176,6 +171,10 @@ int	main(int argc, const char *argv[])
 	    char wn = '\n';
 	    ft_write(1, argv[2], ft_strlen(argv[2]));
 	    ft_write(1, &wn, 1);
+
+	    char *error = 0;
+	    ft_write(1, error, 10); // error occur
+	    error_occur();
 	}
 	else if (seq == 5)
 	{
@@ -197,6 +196,9 @@ int	main(int argc, const char *argv[])
 		    result = get_next_line(fd, &str);
 		}
 		printf("line %d => [%s]\n", i++, str);
+			
+		ft_read(-1, str, 10); //error occur`
+		error_occur();
 		if (str)
 		    free(str);
 	    }
@@ -209,8 +211,10 @@ int	main(int argc, const char *argv[])
 		return (0);
 	    }
 	    char *dup = ft_strdup(argv[2]);
-	    if (!dup)
-		printf("ft_strdup result is 0\n");
+	    if (!dup) {
+		//error_occur();
+		return (0);
+	    }
 	    printf("duplicate => [%s]\n", dup);
 	    if (dup)
 		free(dup);
@@ -233,10 +237,11 @@ int	main(int argc, const char *argv[])
 	}
 	else if (seq == 9)
 	{
-	    if (argc < 3) {
+	    if (argc != 3) {
 		printf("ex) a.out bonus3 \"1 2 3 4 5 8 6\" [\" is require!!]\n");
 		return (0);
 	    }
 	    bonus3_test(argv[2]);
 	}
+	return (0);
 }
