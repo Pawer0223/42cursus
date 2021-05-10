@@ -1,27 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
+/*   ft_lstiter.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: taekang <taekang@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/16 19:36:57 by taekang           #+#    #+#             */
-/*   Updated: 2021/05/06 18:53:53 by taesan           ###   ########.fr       */
+/*   Created: 2020/10/17 18:40:28 by taekang           #+#    #+#             */
+/*   Updated: 2020/10/19 17:23:53 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./list.h"
+#include "libft.h"
 
-/*
-	** free start is idx 0
-	** prev -> content
-	** last->next is first free complete
-*/
-
-void	ft_lstdelone(t_list *list)
+void	ft_lstiter(t_list *lst, void (*f)(void *))
 {
-	if (list->content)
-		free(list->content);
-	list->content = 0;
-	list = 0;
+	if (!lst || !f)
+		return ;
+	while (lst)
+	{
+		f(lst->content);
+		lst = lst->next;
+	}
 }

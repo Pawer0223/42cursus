@@ -3,28 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: taekang <taekang@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/16 16:59:37 by taekang           #+#    #+#             */
-/*   Updated: 2021/05/06 18:03:33 by taesan           ###   ########.fr       */
+/*   Updated: 2020/10/16 17:36:23 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./list.h"
+#include "libft.h"
 
-void	ft_lstadd_front(t_list **start, t_list *new)
+void	ft_lstadd_front(t_list **lst, t_list *new)
 {
-	t_list	*temp;
-	t_list	*last;
+	t_list *start;
 
-	if (is_null(start) || !new)
+	if (!lst || !new)
 		return ;
-	last = ft_lstlast(start);
-	temp = *start;
-	temp->is_first = N;
-	new->is_first = Y;
-	temp->prev = new;
-	new->next = temp;
-	new->prev = last;
-	*start = new;
+	start = lst[0];
+	new->next = start;
+	lst[0] = new;
 }
