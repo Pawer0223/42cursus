@@ -5,6 +5,7 @@
         "memory": "c",
         "unistd.h": "c",
         "list.h": "c",
-        "push_swap.h": "c"
+        "push_swap.h": "c",
+        "error.h": "c"
     }
 }

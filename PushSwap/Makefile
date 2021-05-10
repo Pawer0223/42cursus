@@ -6,7 +6,7 @@
 #    By: taesan <taesan@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/06 16:51:22 by taesan            #+#    #+#              #
-#    Updated: 2021/05/10 17:43:00 by taesan           ###   ########.fr        #
+#    Updated: 2021/05/10 17:45:33 by taesan           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ CC		= arch -x86_64 gcc -g #modify !
 RM		= rm -f
 CFLAGS	= -Wall -Wextra -Werror
 
-NAME	= pushSwap
+NAME	= push_swap
 
 all:		$(NAME)
 
