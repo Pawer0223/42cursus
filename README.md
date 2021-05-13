@@ -86,7 +86,6 @@
 # [libasm](https://velog.io/@pawer/libasm)
 <summary>libasm</summary>
 	<ul>
-		<li>1</li>
-		<li>2</li>
+		<li>64bit 어셈블리 코드를 intel문법으로 작성하기</li>
 	</ul>
 </details>
