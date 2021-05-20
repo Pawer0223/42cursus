@@ -7,6 +7,9 @@
         "list.h": "c",
         "push_swap.h": "c",
         "error.h": "c",
-        "algorithm": "c"
+        "algorithm": "c",
+        "defines.h": "c",
+        "stack_funcs.h": "c",
+        "stack_interfcae.h": "c"
     }
 }

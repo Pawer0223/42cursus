@@ -1,42 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   stack_funcs.h                                      :+:      :+:    :+:   */
+/*   stack_interfcae.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 15:09:58 by taesan            #+#    #+#             */
-/*   Updated: 2021/05/20 19:53:16 by taesan           ###   ########.fr       */
+/*   Updated: 2021/05/20 19:43:18 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef STACK_FUNCS_H
-# define STACK_FUNCS_H
+#ifndef STACK_INTERFACE_H
+# define STACK_INTERFACE_H
 
-# include "../defines.h"
+# include "stack_funcs.h"
 
-// sa
-// sb
-// ss
-// pa
-// pb
-void	pa(t_stacks *stacks);
-void	pb(t_stacks *stacks);
+void	push(t_stacks *stacks, char name);
 
-// ra
-// rb
-// rr
-// rra
-// rrb
-// rrr
-
-/*
-	** utils
-*/
-int		check_stacks(t_stacks *stacks, char num);
-void	size_add(t_stacks *stacks, char num);
-void	size_minus(t_stacks *stacks, char num);
-void	swap(t_list **add_stack, t_list **rm_stack);
 
 
 # endif
