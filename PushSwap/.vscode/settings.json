@@ -6,6 +6,7 @@
         "unistd.h": "c",
         "list.h": "c",
         "push_swap.h": "c",
-        "error.h": "c"
+        "error.h": "c",
+        "algorithm": "c"
     }
 }

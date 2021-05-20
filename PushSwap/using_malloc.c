@@ -6,13 +6,13 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 18:38:24 by taesan            #+#    #+#             */
-/*   Updated: 2021/05/12 18:54:11 by taesan           ###   ########.fr       */
+/*   Updated: 2021/05/20 15:44:29 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int		*make_num(long long num)
+int			*make_num(long long num)
 {
 	int	*ptr;
 
@@ -24,7 +24,7 @@ int		*make_num(long long num)
 	return (ptr);
 }
 
-int		make_list(t_list **list, int argc, const char *argv[])
+int			init_list(t_list **list, int argc, const char *argv[])
 {
 	int		i;
 	int		*num;
@@ -47,5 +47,14 @@ int		make_list(t_list **list, int argc, const char *argv[])
 			ft_lstadd_back(list, data);
 		i++;
 	}
+	return (1);
+}
+
+int			init_stacks(t_stacks **stacks, t_list *stack_a)
+{
+	if (!(*stacks = (t_stacks *)malloc(sizeof(t_stacks))))
+		return (error_occur(&stack_a));
+	(*stacks)->a = stack_a;
+	(*stacks)->b = 0;
 	return (1);
 }
