@@ -10,6 +10,7 @@
         "algorithm": "c",
         "defines.h": "c",
         "stack_funcs.h": "c",
-        "stack_interfcae.h": "c"
+        "stack_interfcae.h": "c",
+        "ratio": "c"
     }
 }
