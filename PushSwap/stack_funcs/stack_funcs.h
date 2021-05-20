@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 15:09:58 by taesan            #+#    #+#             */
-/*   Updated: 2021/05/20 19:53:16 by taesan           ###   ########.fr       */
+/*   Updated: 2021/05/20 20:22:58 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 // ss
 // pa
 // pb
-void	pa(t_stacks *stacks);
-void	pb(t_stacks *stacks);
+int		pa(t_stacks *stacks);
+int		pb(t_stacks *stacks);
 
 // ra
 // rb
