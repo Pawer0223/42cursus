@@ -11,6 +11,9 @@
         "defines.h": "c",
         "stack_funcs.h": "c",
         "stack_interfcae.h": "c",
-        "ratio": "c"
+        "ratio": "c",
+        "__functional_03": "c",
+        "__mutex_base": "c",
+        "utility": "c"
     }
 }

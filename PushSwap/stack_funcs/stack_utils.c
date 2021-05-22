@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 17:15:58 by taesan            #+#    #+#             */
-/*   Updated: 2021/05/20 19:53:49 by taesan           ###   ########.fr       */
+/*   Updated: 2021/05/22 13:40:42 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	size_minus(t_stacks *stacks, char num)
 		stacks->b_size--;
 }
 
-void	swap(t_list **add_stack, t_list **rm_stack)
+void	p_swap(t_list **add_stack, t_list **rm_stack)
 {
 	t_list *temp;
 
