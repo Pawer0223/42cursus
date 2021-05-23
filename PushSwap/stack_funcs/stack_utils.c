@@ -6,11 +6,20 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 17:15:58 by taesan            #+#    #+#             */
-/*   Updated: 2021/05/22 13:40:42 by taesan           ###   ########.fr       */
+/*   Updated: 2021/05/23 14:36:38 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "stack_funcs.h"
+
+void	swap_content(void **data1, void **data2)
+{
+	void	*temp;
+
+	temp = *data1;
+	*data1 = *data2;
+	*data2 = temp;
+}
 
 int		check_stacks(t_stacks *stacks, char num)
 {
@@ -45,14 +54,4 @@ void	size_minus(t_stacks *stacks, char num)
 		stacks->a_size--;
 	else if (num == B && stacks->b_size > 0)
 		stacks->b_size--;
-}
-
-void	p_swap(t_list **add_stack, t_list **rm_stack)
-{
-	t_list *temp;
-
-	temp = *rm_stack;
-	*rm_stack = (*rm_stack)->next;
-	temp->next = *add_stack;
-	*add_stack = temp;
 }

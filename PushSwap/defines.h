@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 14:12:48 by taekang           #+#    #+#             */
-/*   Updated: 2021/05/22 13:33:19 by taesan           ###   ########.fr       */
+/*   Updated: 2021/05/23 15:40:48 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,10 @@ typedef	struct	s_stacks
 # define A 'A'
 # define B 'B'
 # define ALL 'Z'
+
+/*
+	** for test
+*/
+void		print_stack(t_stacks *stacks);
 
 #endif

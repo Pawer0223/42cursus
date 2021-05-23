@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 19:43:00 by taesan            #+#    #+#             */
-/*   Updated: 2021/05/21 02:23:10 by taesan           ###   ########.fr       */
+/*   Updated: 2021/05/23 15:33:15 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,6 @@ int			*check_param(const char *str);
 /*
 	** test_funcs
 */
-void		print_list(void *a, void *b);
 void		test(t_stacks *stacks);
-
 
 # endif

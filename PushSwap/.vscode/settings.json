@@ -14,6 +14,7 @@
         "ratio": "c",
         "__functional_03": "c",
         "__mutex_base": "c",
-        "utility": "c"
+        "utility": "c",
+        "iterator": "c"
     }
 }

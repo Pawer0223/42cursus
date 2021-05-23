@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 18:53:12 by taesan            #+#    #+#             */
-/*   Updated: 2021/05/23 01:33:26 by taesan           ###   ########.fr       */
+/*   Updated: 2021/05/23 14:12:57 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,7 +140,7 @@ void test(t_stacks *stacks) {
 		char inst[20];
 
 		printf("명령어 입력 해주세요. (exit 입력시 종료)\n");
-		printf("가능한 명령어 : pa, pb, sa, sb, ss(sa + sb), exit\n");
+		printf("가능한 명령어 : pa, pb, sa, sb, ss(sa + sb), ra, rb, rr(ra + rb), rra, rrb, rrr(rra + rrb), exit\n");
 		fgets(inst, sizeof(inst), stdin);
 		inst[strlen(inst) - 1] = 0;
 		if (ft_strcmp(inst, "exit") == 0)
@@ -155,6 +155,18 @@ void test(t_stacks *stacks) {
 			swap(stacks, B);
 		else if (ft_strcmp(inst, "ss") == 0)
 			swap(stacks, ALL);
+		else if (ft_strcmp(inst, "ra") == 0)
+			rotate(stacks, A, 0);
+		else if (ft_strcmp(inst, "rb") == 0)
+			rotate(stacks, B, 0);
+		else if (ft_strcmp(inst, "rr") == 0)
+			rotate(stacks, ALL, 0);
+		else if (ft_strcmp(inst, "rra") == 0)
+			rotate(stacks, A, 1);
+		else if (ft_strcmp(inst, "rrb") == 0)
+			rotate(stacks, B, 1);
+		else if (ft_strcmp(inst, "rrr") == 0)
+			rotate(stacks, ALL, 1);
 		else {
 			printf("[ %s ]는 존재하지 않는 명령어 입니다.\n", inst);
 			continue;
