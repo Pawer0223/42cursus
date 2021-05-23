@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 18:53:12 by taesan            #+#    #+#             */
-/*   Updated: 2021/05/23 14:12:57 by taesan           ###   ########.fr       */
+/*   Updated: 2021/05/23 16:20:36 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,29 @@ void print_stack(t_stacks *stacks)
 	}
 }
 
-void test(t_stacks *stacks) {
+void	show_command()
+{
+	printf("push : (pa, pb)\nswap : (sa, sb, ss)\nrotation_up : (ra, rb, rr)\nrotation_down : (rra, rrb, rrr)\nprogram : (exit)\n");
+}
+
+int		on_change(int on)
+{
+	if (on)
+	{
+		printf("** stack show off **\n");
+		return (0);
+	}
+	else
+	{
+		printf("** stack show on **\n");
+		return (1);
+	}
+}
+
+void	test(t_stacks *stacks)
+{
+
+	int on = 1;
 
 	printf("[ 최초 Stack ]\n");
 	print_stack(stacks);
@@ -139,8 +161,8 @@ void test(t_stacks *stacks) {
 	{
 		char inst[20];
 
-		printf("명령어 입력 해주세요. (exit 입력시 종료)\n");
-		printf("가능한 명령어 : pa, pb, sa, sb, ss(sa + sb), ra, rb, rr(ra + rb), rra, rrb, rrr(rra + rrb), exit\n");
+		printf("\n명렁어 보기: command, 프로그램 종료: exit, stack 출력 켜기, 끄기: on/off, stack 출력: show\n");
+		// show_command();
 		fgets(inst, sizeof(inst), stdin);
 		inst[strlen(inst) - 1] = 0;
 		if (ft_strcmp(inst, "exit") == 0)
@@ -167,11 +189,27 @@ void test(t_stacks *stacks) {
 			rotate(stacks, B, 1);
 		else if (ft_strcmp(inst, "rrr") == 0)
 			rotate(stacks, ALL, 1);
+		else if (ft_strcmp(inst, "command") == 0) {
+			show_command();
+			continue;
+		}
+		else if (ft_strcmp(inst, "on") == 0) {
+			on = on_change(on);
+			continue;
+		}
+		else if (ft_strcmp(inst, "off") == 0) {
+			on = on_change(on);
+			continue;
+		}
+		else if (ft_strcmp(inst, "show") == 0) {
+			print_stack(stacks);
+			continue;
+		}
 		else {
 			printf("[ %s ]는 존재하지 않는 명령어 입니다.\n", inst);
 			continue;
 		}
-
-		print_stack(stacks);
+		if (on)
+			print_stack(stacks);
 	}
 }
