@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 19:43:00 by taesan            #+#    #+#             */
-/*   Updated: 2021/05/23 15:33:15 by taesan           ###   ########.fr       */
+/*   Updated: 2021/05/23 18:27:14 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 /*
 	** error
 */
-int			error_occur(t_list **list);
+int			error_occur();
 void		delete_content(void *content);
 /*
 	** using_malloc
@@ -40,6 +40,8 @@ void		free_stacks(t_stacks *stacks);
 	** checks
 */
 int			*check_param(const char *str);
+int			duplicate_check(t_list **list, int num);
+
 /*
 	** test_funcs
 */

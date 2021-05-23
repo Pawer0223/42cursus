@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 18:55:11 by taesan            #+#    #+#             */
-/*   Updated: 2021/05/12 19:04:43 by taesan           ###   ########.fr       */
+/*   Updated: 2021/05/23 18:37:05 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 	**	next '-' or '+' possible, next only number
 */
 
-int		*check_param(const char *str)
+int			*check_param(const char *str)
 {
 	int			i;
 	int			flag;
@@ -39,5 +39,19 @@ int		*check_param(const char *str)
 	}
 	if (!str[i])
 		return (make_num(result * flag));
+	return (0);
+}
+
+int			duplicate_check(t_list **list, int num)
+{
+	t_list *lst;
+
+	lst = *list;
+	while (lst)
+	{
+		if (*(int *)lst->content == num)
+			return (1);
+		lst = lst->next;
+	}
 	return (0);
 }

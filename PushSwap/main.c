@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 19:06:11 by taesan            #+#    #+#             */
-/*   Updated: 2021/05/23 15:54:24 by taesan           ###   ########.fr       */
+/*   Updated: 2021/05/23 18:41:42 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,16 @@ int		main(int argc, const char *argv[])
 {
 	t_stacks	*stacks;
 
-	if (argc < 2)
-		return (error_occur(0));
-	else
+	stacks = 0;
+	if (argc < 2 || !init_stacks(&stacks, argc, argv))
 	{
-		if (!init_stacks(&stacks, argc, argv))
-			return (0);
+		free_stacks(stacks);
+		return (error_occur());
+	}
 		// printf("a->next == a->next->content ?? ---> %p, %p\n", a->next, a->next->content);
-		test(stacks); // for test
+	test(stacks); // for test
 		/* 
 			** list만드는 것 까지 했고, 이제 실제로 stack두개로 코드 적용하는거 만들어야 함.
 		*/
-	}
 	free_stacks(stacks);
 }

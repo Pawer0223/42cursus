@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 18:53:12 by taesan            #+#    #+#             */
-/*   Updated: 2021/05/23 16:20:36 by taesan           ###   ########.fr       */
+/*   Updated: 2021/05/23 18:16:08 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	print_line(int cnt, void *content, int is_last, int len)
 
 int		get_len_test(int n)
 {
-	int len = n < 0 ? 1 : 0;
+	int len = n <= 0 ? 1 : 0;
 	while (n != 0) {
 		len++;
 		n /= 10;

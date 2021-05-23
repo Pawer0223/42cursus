@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/10 18:13:58 by taesan            #+#    #+#             */
-/*   Updated: 2021/05/12 19:05:12 by taesan           ###   ########.fr       */
+/*   Updated: 2021/05/23 18:27:02 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,8 @@ void	delete_content(void *content)
 	free(content);
 }
 
-int		error_occur(t_list **list)
+int		error_occur()
 {
-	ft_lstclear(list, delete_content);
 	ft_putendl_fd(ERROR, 1);
 	return (0);
 }
