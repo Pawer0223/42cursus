@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 18:53:12 by taesan            #+#    #+#             */
-/*   Updated: 2021/05/24 15:35:08 by taesan           ###   ########.fr       */
+/*   Updated: 2021/05/24 17:41:54 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,11 @@
 
 #include "push_swap.h"
 #include <string.h>
+
+void	print_li(void *content)
+{
+	printf("%d ", *(int *)content);
+}
 
 void	print_space(int cnt)
 {

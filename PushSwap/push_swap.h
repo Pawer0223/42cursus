@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 19:43:00 by taesan            #+#    #+#             */
-/*   Updated: 2021/05/24 15:34:53 by taesan           ###   ########.fr       */
+/*   Updated: 2021/05/24 19:40:33 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ void	swap(t_stacks *s, char name);
 */
 int			error_occur();
 void		delete_content(void *content);
+void	disconnect_content(void *content);
+
 /*
 	** using_malloc
 */
@@ -79,5 +81,6 @@ void	merge_sort(t_stacks *stacks, int left, int right);
 	** test_funcs
 */
 void		test(t_stacks *stacks);
+void		print_li(void *content);
 
 # endif

@@ -6,11 +6,17 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/10 18:13:58 by taesan            #+#    #+#             */
-/*   Updated: 2021/05/23 18:27:02 by taesan           ###   ########.fr       */
+/*   Updated: 2021/05/24 19:40:43 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+void	disconnect_content(void *content)
+{
+	content = 0;
+	return ;
+}
 
 void	delete_content(void *content)
 {
