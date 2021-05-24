@@ -6,12 +6,11 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 13:11:26 by taesan            #+#    #+#             */
-/*   Updated: 2021/05/23 16:04:51 by taesan           ###   ########.fr       */
+/*   Updated: 2021/05/23 20:20:32 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "stack_funcs.h"
-#include <stdio.h>
+#include "push_swap.h"
 
 t_list	*get_prev(t_list *lst)
 {

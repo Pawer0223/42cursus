@@ -6,11 +6,11 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 13:33:42 by taesan            #+#    #+#             */
-/*   Updated: 2021/05/23 14:36:44 by taesan           ###   ########.fr       */
+/*   Updated: 2021/05/23 20:20:41 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "stack_funcs.h"
+#include "push_swap.h"
 
 void	swap_exec(t_list **stack)
 {

@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 19:43:00 by taesan            #+#    #+#             */
-/*   Updated: 2021/05/23 18:27:14 by taesan           ###   ########.fr       */
+/*   Updated: 2021/05/23 20:21:04 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,29 @@
 # define PUSH_SWAP_H
 
 # include "libft/libft.h"
-# include "defines.h"
-# include "stack_funcs/stack_interfcae.h"
 # include <limits.h>
 # include <stdio.h> // remove !
 
+# define ERROR "Error"
+# define STACK_N "Stacks is NULL"
+# define STACK_NM_ERROR "Stack Name Error"
+# define A 'A'
+# define B 'B'
+# define ALL 'Z'
+
+typedef	struct	s_stacks
+{
+	t_list	*a;
+	t_list	*b;
+	int		a_size;
+	int		b_size;
+}				t_stacks;
+/*
+	** stack funcs
+*/
+void	push(t_stacks *stacks, char name);
+void	rotate(t_stacks *stacks, char name, int is_reverse);
+void	swap(t_stacks *s, char name);
 /*
 	** error
 */
@@ -41,6 +59,14 @@ void		free_stacks(t_stacks *stacks);
 */
 int			*check_param(const char *str);
 int			duplicate_check(t_list **list, int num);
+
+/*
+	** utils
+*/
+int		check_stacks(t_stacks *stacks, char num);
+void	size_add(t_stacks *stacks, char num);
+void	size_minus(t_stacks *stacks, char num);
+void	swap_content(void **data1, void **data2);
 
 /*
 	** test_funcs
