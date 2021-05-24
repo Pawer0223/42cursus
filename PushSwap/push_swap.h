@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 19:43:00 by taesan            #+#    #+#             */
-/*   Updated: 2021/05/24 19:40:33 by taesan           ###   ########.fr       */
+/*   Updated: 2021/05/24 21:22:53 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,21 @@
 # define A 'A'
 # define B 'B'
 # define ALL 'Z'
+
+/*
+	for sort
+*/
+typedef	struct	s_sort
+{
+	t_list	*left;
+	t_list	*right;
+	t_list	*sorted;
+	int		idx_l;
+	int		idx_r;
+	int		idx_m;
+	int		curr_l;
+	int		curr_r;
+}				t_sort;
 
 typedef	struct	s_stacks
 {
@@ -43,7 +58,7 @@ void	swap(t_stacks *s, char name);
 */
 int			error_occur();
 void		delete_content(void *content);
-void	disconnect_content(void *content);
+void		disconnect_content(void *content);
 
 /*
 	** using_malloc
@@ -74,7 +89,7 @@ void	swap_content(void **data1, void **data2);
 /*
 	** sort
 */
-void	merge_sort(t_stacks *stacks, int left, int right);
+int		merge_sort(t_stacks *stacks, int idx_l, int idx_r);
 
 
 /*
@@ -82,5 +97,7 @@ void	merge_sort(t_stacks *stacks, int left, int right);
 */
 void		test(t_stacks *stacks);
 void		print_li(void *content);
+void		print_stack(t_stacks *stacks);
+
 
 # endif
