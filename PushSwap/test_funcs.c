@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 18:53:12 by taesan            #+#    #+#             */
-/*   Updated: 2021/05/23 18:16:08 by taesan           ###   ########.fr       */
+/*   Updated: 2021/05/24 15:35:08 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,11 +178,11 @@ void	test(t_stacks *stacks)
 		else if (ft_strcmp(inst, "ss") == 0)
 			swap(stacks, ALL);
 		else if (ft_strcmp(inst, "ra") == 0)
-			rotate(stacks, A, 0);
+			rotate(stacks, A, NO_REVERSE);
 		else if (ft_strcmp(inst, "rb") == 0)
-			rotate(stacks, B, 0);
+			rotate(stacks, B, NO_REVERSE);
 		else if (ft_strcmp(inst, "rr") == 0)
-			rotate(stacks, ALL, 0);
+			rotate(stacks, ALL, NO_REVERSE);
 		else if (ft_strcmp(inst, "rra") == 0)
 			rotate(stacks, A, 1);
 		else if (ft_strcmp(inst, "rrb") == 0)

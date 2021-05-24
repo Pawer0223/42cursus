@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 19:43:00 by taesan            #+#    #+#             */
-/*   Updated: 2021/05/23 20:21:04 by taesan           ###   ########.fr       */
+/*   Updated: 2021/05/24 15:34:53 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # define ERROR "Error"
 # define STACK_N "Stacks is NULL"
 # define STACK_NM_ERROR "Stack Name Error"
+# define NO_REVERSE -1
 # define A 'A'
 # define B 'B'
 # define ALL 'Z'
@@ -67,6 +68,12 @@ int		check_stacks(t_stacks *stacks, char num);
 void	size_add(t_stacks *stacks, char num);
 void	size_minus(t_stacks *stacks, char num);
 void	swap_content(void **data1, void **data2);
+
+/*
+	** sort
+*/
+void	merge_sort(t_stacks *stacks, int left, int right);
+
 
 /*
 	** test_funcs

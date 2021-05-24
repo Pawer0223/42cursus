@@ -6,28 +6,18 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 13:11:26 by taesan            #+#    #+#             */
-/*   Updated: 2021/05/23 20:20:32 by taesan           ###   ########.fr       */
+/*   Updated: 2021/05/24 15:44:39 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_list	*get_prev(t_list *lst)
+int		get_prev_idx(int size)
 {
-	t_list *prev;
-
-	prev = 0;
-	while (lst)
-	{
-		if (!lst->next)
-			return (prev);
-		prev = lst;
-		lst = lst->next;
-	}
-	return (prev);
+	return (size - 2);
 }
 
-void	exec_rotate(t_list **stack, int is_reverse)
+void	exec_rotate(t_list **stack, int last_prev)
 {
 	t_list	*start;
 	t_list	*last;
@@ -37,9 +27,9 @@ void	exec_rotate(t_list **stack, int is_reverse)
 		return ;
 	start = *stack;
 	last = ft_lstlast(start);
-	if (is_reverse)
+	if (last_prev != NO_REVERSE)
 	{
-		prev = get_prev(*stack);
+		prev = get_list(stack, last_prev);
 		prev->next = 0;
 		last->next = start;
 		*stack = last;
@@ -54,15 +44,12 @@ void	exec_rotate(t_list **stack, int is_reverse)
 
 void	rotate(t_stacks *stacks, char name, int is_reverse)
 {
-	if (name == A && stacks->a_size > 1)
+	if (is_reverse != NO_REVERSE)
+		is_reverse = get_prev_idx(stacks->a_size);
+	if ((name == A || name == ALL) && stacks->a_size > 1)
 		exec_rotate(&stacks->a, is_reverse);
-	else if (name == B && stacks->b_size > 1)
+	if (is_reverse != NO_REVERSE)
+		is_reverse = get_prev_idx(stacks->b_size);
+	if ((name == B || name == ALL) && stacks->b_size > 1)
 		exec_rotate(&stacks->b, is_reverse);
-	else if (name == ALL)
-	{
-		if (stacks->a_size > 1)
-			exec_rotate(&stacks->a, is_reverse);
-		if (stacks->b_size > 1)
-			exec_rotate(&stacks->b, is_reverse);
-	}
 }

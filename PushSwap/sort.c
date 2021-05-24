@@ -1,30 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   sort.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 19:06:11 by taesan            #+#    #+#             */
-/*   Updated: 2021/05/24 15:46:40 by taesan           ###   ########.fr       */
+/*   Updated: 2021/05/24 15:26:52 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int		main(int argc, const char *argv[])
+void	merge(t_stacks *stacks, int l, int m, int r)
 {
-	t_stacks	*stacks;
+	t_list *sorted;
 
-	stacks = 0;
-	if (argc < 2 || !init_stacks(&stacks, argc, argv))
-	{
-		free_stacks(stacks);
-		return (error_occur());
-	}
-	// test(stacks);
-	merge_sort(stacks, 0, stacks->a_size - 1);
+	printf("l : %d, m : %d, r : %d\n", l, m, r);
+	sorted = get_list(&stacks->a, l);
+	printf("%d content [%d]\n", l , *(int *)sorted->content);
 
+
+
+	// sorted = stack_a;
+}
+
+void	merge_sort(t_stacks *stacks, int left, int right)
+{
+	int	mid;
 	
-	free_stacks(stacks);
+	if (left < right){
+		mid = (left + right) / 2;
+		merge_sort(stacks, left, mid); // 왼쪽
+		merge_sort(stacks, mid + 1, right); // 오른쪽
+		merge(stacks, left, mid, right);
+	}
 }

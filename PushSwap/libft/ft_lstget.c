@@ -1,30 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstget.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/12 19:06:11 by taesan            #+#    #+#             */
-/*   Updated: 2021/05/24 15:46:40 by taesan           ###   ########.fr       */
+/*   Created: 2021/05/24 15:25:12 by taesan            #+#    #+#             */
+/*   Updated: 2021/05/24 15:26:08 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-int		main(int argc, const char *argv[])
+t_list	*get_list(t_list **list, int idx)
 {
-	t_stacks	*stacks;
+	t_list *temp;
 
-	stacks = 0;
-	if (argc < 2 || !init_stacks(&stacks, argc, argv))
+	if (!list || !*list)
+		return (0);
+	temp = *list;
+	while (idx > 0)
 	{
-		free_stacks(stacks);
-		return (error_occur());
+		temp = temp->next;
+		idx--;
 	}
-	// test(stacks);
-	merge_sort(stacks, 0, stacks->a_size - 1);
-
-	
-	free_stacks(stacks);
+	return (temp);
 }
