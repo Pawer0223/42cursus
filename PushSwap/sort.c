@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 19:06:11 by taesan            #+#    #+#             */
-/*   Updated: 2021/05/24 21:40:14 by taesan           ###   ########.fr       */
+/*   Updated: 2021/05/25 19:43:52 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,44 +21,18 @@ void	init_sort_info(t_list *stack, t_sort *info)
 	info->sorted = 0;
 }
 
-int		compare(t_sort *info, int *i, int *j)
+void	exec_merge(t_list *stack, t_sort *info)
 {
-	t_list *add_list;
+	t_list *temp;
 
-	while (info->left && info->right && *i <= info->idx_m && *j <= info->idx_r)
+	info->left = get_list(&stack, info->idx_l);
+	temp = info->sorted;
+	while (temp)
 	{
-		if (*(int *)(info->left->content) - *(int *)(info->right->content) <= 0)
-		{
-			add_list = info->left;
-			info->left = info->left->next;
-			*i += 1;
-		}
-		else
-		{
-			add_list = info->right;
-			info->right = info->right->next;
-			*j += 1;
-		}
-		if (!(add_list = ft_lstnew(add_list->content)))
-			return (0);
-		ft_lstadd_back(&info->sorted, add_list);
+		info->left->content = temp->content;
+		info->left = info->left->next;
+		temp = temp->next;
 	}
-	return (1);
-}
-
-int		remain_fill(int start, int end, t_list *sorted, t_list *remain)
-{
-	t_list	*add_list;
-
-	while (start <= end)
-	{
-		if (!(add_list = ft_lstnew(remain->content)))
-			return (0);
-		ft_lstadd_back(&sorted, add_list);
-		remain = remain->next;
-		start++;
-	}
-	return (1);
 }
 
 int		merge(t_stacks *stacks, t_sort *info)
@@ -75,17 +49,37 @@ int		merge(t_stacks *stacks, t_sort *info)
 	temp = (info->curr_l > info->idx_m) ? info->right : info->left;
 	if (!remain_fill(start, end, info->sorted, temp))
 		return (0);
-	info->left = get_list(&stacks->a, info->idx_l);
-	temp = info->sorted;
-	while (temp)
-	{
-		info->left->content = temp->content;
-		info->left = info->left->next;
-		temp = temp->next;
-	}
+	exec_merge(stacks->a, info);
 	return (1);
 }
+/*
+	분할은 log2^n번일어남
+	16일 때 -> n = 2^4 -> 4번 -> [16 -> 8 -> 4 -> 2 -> 1]
+	9일 때 -> n = 2^3보다 크니깐 -> 4번 -> [9 -> 5 -> 3 -> 2 -> 1]
+	8일 때 -> n = 2^3 -> 3번 -> [8 -> 4 -> 2 -> 1]
+	12 -> [12 -> 6 -> 3 -> 2 -> 1]
 
+	맨 밑에부터 병합하면서 올라옴
+
+	병합해야 할 원소의 갯수에서, 좌, 우측은 정렬을 수행한 후 다음 level로 올라가고 있음.
+	[ left ~ mid , mid + 1 ~ right] 반복
+
+	분할 된 갯수가 1개일 때
+
+	분할 된 갯수가 2개일 때
+
+	분할 된 갯수가 4(3)개일 때
+
+	분할된 갯수가 8(5~7)개일 때
+
+	...
+
+	이런식으로 감.
+
+	
+
+
+*/
 int		merge_sort(t_stacks *stacks, int idx_l, int idx_r)
 {
 	int		mid;
@@ -101,6 +95,7 @@ int		merge_sort(t_stacks *stacks, int idx_l, int idx_r)
 			return (0);
 		if (!merge_sort(stacks, mid + 1, idx_r))
 			return (0);
+		printf("%d ~ %d [%d] 개 merge !\n", idx_l, idx_r, (idx_r - idx_l) + 1 );
 		if (!merge(stacks, &info))
 			return (0);
 		ft_lstclear(&info.sorted, &disconnect_content);

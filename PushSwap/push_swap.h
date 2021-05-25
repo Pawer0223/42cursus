@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 19:43:00 by taesan            #+#    #+#             */
-/*   Updated: 2021/05/24 21:22:53 by taesan           ###   ########.fr       */
+/*   Updated: 2021/05/25 15:12:22 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ void		disconnect_content(void *content);
 int			*make_num(long long num);
 int			init_list(t_list **list, int argc, const char *argv[]);
 int			init_stacks(t_stacks **stacks, int argc, const char *argv[]);
+int			remain_fill(int start, int end, t_list *sorted, t_list *remain);
+int			compare(t_sort *info, int *i, int *j);
 
 /*
 	** using_free
