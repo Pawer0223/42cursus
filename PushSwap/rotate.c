@@ -6,11 +6,23 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 13:11:26 by taesan            #+#    #+#             */
-/*   Updated: 2021/05/24 15:44:39 by taesan           ###   ########.fr       */
+/*   Updated: 2021/05/27 15:44:41 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+void	loop_rotate(t_stacks *stacks, char name, int cnt, int is_reverse)
+{
+	int i;
+
+	i = 0;
+	while (i < cnt)
+	{
+		rotate(stacks, name, is_reverse);
+		i++;
+	}
+}
 
 int		get_prev_idx(int size)
 {
@@ -52,4 +64,8 @@ void	rotate(t_stacks *stacks, char name, int is_reverse)
 		is_reverse = get_prev_idx(stacks->b_size);
 	if ((name == B || name == ALL) && stacks->b_size > 1)
 		exec_rotate(&stacks->b, is_reverse);
+	if (is_reverse == NO_REVERSE)
+		print_inst(ROTATE, name);
+	else
+		print_inst(ROTATE_R, name);
 }

@@ -1,29 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_math.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/12 19:06:11 by taesan            #+#    #+#             */
-/*   Updated: 2021/05/27 15:30:30 by taesan           ###   ########.fr       */
+/*   Created: 2021/05/26 14:29:11 by taesan            #+#    #+#             */
+/*   Updated: 2021/05/27 15:31:49 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
-
-int		main(int argc, const char *argv[])
+int		ft_sqrt(unsigned int n)
 {
-	t_stacks	*stacks;
+	int cnt;
 
-	stacks = 0;
-	if (argc < 2 || !init_stacks(&stacks, argc, argv))
+	if (n == 0)
+		return (1);
+	cnt = 0;
+	while (n != 1)
 	{
-		free_stacks(stacks);
-		return (error_occur());
+		n /= 2;
+		cnt++;
 	}
-	merge_sort(stacks, 0, stacks->a_size - 1);
-	test(stacks);
+	return (cnt);
+}
 
-	free_stacks(stacks);
+int		ft_min(int a, int b)
+{
+	return (a < b) ? a : b;
 }

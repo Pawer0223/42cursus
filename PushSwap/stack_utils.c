@@ -6,11 +6,19 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 17:15:58 by taesan            #+#    #+#             */
-/*   Updated: 2021/05/24 15:19:28 by taesan           ###   ########.fr       */
+/*   Updated: 2021/05/26 16:49:14 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+int		peek(t_list *stack)
+{
+	int data;
+
+	data = *(int *)stack->content;
+	return (data);
+}
 
 void	swap_content(void **data1, void **data2)
 {
@@ -54,4 +62,8 @@ void	size_minus(t_stacks *stacks, char num)
 		stacks->a_size--;
 	else if (num == B && stacks->b_size > 0)
 		stacks->b_size--;
+	if (stacks->a_size == 0)
+		stacks->a = 0;
+	if (stacks->b_size == 0)
+		stacks->b = 0;
 }

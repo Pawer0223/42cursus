@@ -6,80 +6,194 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 19:06:11 by taesan            #+#    #+#             */
-/*   Updated: 2021/05/25 19:43:52 by taesan           ###   ########.fr       */
+/*   Updated: 2021/05/27 15:50:07 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	init_sort_info(t_list *stack, t_sort *info)
+void	init_sort_info(t_stacks *stacks, t_sort *info)
 {
-	info->curr_l = info->idx_l;
-	info->curr_r = info->idx_m + 1;
-	info->left = get_list(&stack, info->curr_l);
-	info->right = get_list(&stack, info->curr_r);
-	info->sorted = 0;
+	int	level;
+
+	info->block_cnt = info->idx_r - info->idx_l + 1;
+	level = stacks->tree_level - ft_sqrt(info->block_cnt);
+	info->level = level;
+	// 왼쪽 반을 정렬하는 경우는 idx_l == 0이면서 레벨이 루트가아닐 때
+	// (level == 0은 정렬 된 b의 데이터를 a로 옮겨야 하는상황)
+	info->data_nm = (level != 0) ? A : B;
+	info->data_nm = (stacks->tree_level == 1) ? A : info->data_nm;
+	info->data_size = (info->data_nm == A) ? stacks->a_size : stacks->b_size;
+	info->sorted_nm = (info->data_size <= 3) ? A : opposite(info->data_nm);
+	info->sorted_size = (info->sorted_nm == A) ? stacks->a_size : stacks->b_size;
+	printf("level : %d, [빈 공간으로 사용될 스택 : %c]\n",level, info->sorted_nm);
 }
 
-void	exec_merge(t_list *stack, t_sort *info)
+int		check_order_end(char name, int value, int push_d)
 {
-	t_list *temp;
+	if (name == B && value < push_d) // b로 옮길땐 오름차순
+		return (1);
+	else if (name == A && value > push_d) // a로 옮길땐 내림차순
+		return (1);
+	return (0);
+}
 
-	info->left = get_list(&stack, info->idx_l);
+int		get_insert_idx(t_sort *info, int push_d)
+{
+	int		idx;
+	int		value;
+	t_list	*temp;
+
 	temp = info->sorted;
+	idx = 0;
 	while (temp)
 	{
-		info->left->content = temp->content;
-		info->left = info->left->next;
+		value = *(int *)temp->content;
+		if (check_order_end(info->sorted_nm, value, push_d))
+			break ;
 		temp = temp->next;
+		idx++;
+	}
+	return (idx);
+}
+
+void	sorting_push(int idx, t_stacks *stacks, t_sort *info)
+{
+	int	mid;
+	int	cnt;
+
+	mid = (info->sorted_size / 2);
+	if (idx <= 1 || idx == info->sorted_size)
+	{
+		printf("### 1 ###\n");
+		push(stacks, info->sorted_nm);
+	}
+	if (idx == 1)
+	{
+		printf("### 2 ###\n");
+		swap(stacks, info->sorted_nm);
+	}
+	else if (idx == info->sorted_size)
+	{
+		printf("### 3 ###\n");
+		rotate(stacks, info->sorted_nm, NO_REVERSE);
+	}
+	else if (idx > mid)
+	{
+		printf("### 4 ###\n");
+		cnt = info->sorted_size - idx;
+		loop_rotate(stacks, info->sorted_nm, cnt, 1);
+		push(stacks, info->sorted_nm);
+		loop_rotate(stacks, info->sorted_nm, cnt + 1, NO_REVERSE);
+	}
+	else if (idx <= mid && idx > 1)
+	{
+		printf("### 5 ###\n");
+		loop_rotate(stacks, info->sorted_nm, idx, NO_REVERSE);
+		push(stacks, info->sorted_nm);
+		loop_rotate(stacks, info->sorted_nm, idx, 1);
+	}
+}
+
+void	int_swap(int i, int j, int data[3])
+{
+	int temp;
+
+	temp = data[i];
+	data[i] = data[j];
+	data[j] = temp;
+}
+
+void	no_push_sort(t_stacks *stacks, t_sort *info)
+{
+	t_list *stack;
+	int		data[3];
+	int		i;
+	int		min;
+
+	printf("no_push_sort ! \n");
+
+	stack = stacks->a;
+	if (info->data_size == 2)
+	{
+		if (*(int *)stack->content - *(int *)stack->next->content > 0)
+			swap(stacks, A);
+	}
+	else if (info->data_size == 3)
+	{
+		i = 0;
+		min = INT_MAX;
+		while (i < 3)
+		{
+			data[i++] = *(int *)stack->content;
+			stack = stack->next;
+			min = ft_min(min, data[i - 1]);
+		}
+		while (data[0] != min || data[1] > data[2])
+		{
+			printf("%d -> %d -> %d\n", data[0], data[1], data[2]);
+			// 가장 큰 수부터 정렬해준다. 처음이거나, 중간에 있는 경우
+			if (data[0] > data[1] && data[0] > data[2]) // 가장 큰 수가 가장 위에 있을 때
+			{
+				rotate(stacks, A, NO_REVERSE);
+				int_swap(0, 2, data);
+			}
+			else if (data[1] > data[0] && data[1] > data[2]) // 가장 큰 수가 중간에 있을 때
+			{
+				rotate(stacks, A, 1);
+				int_swap(1, 2, data);
+			}
+			else if (data[0] > data[1])
+			{
+				swap(stacks, A);
+				int_swap(0, 1, data);
+			}
+		}
 	}
 }
 
 int		merge(t_stacks *stacks, t_sort *info)
 {
-	t_list	*temp;
-	int		start;
-	int		end;
+	int	insert_idx;
+	int	push_cnt;
 
-	init_sort_info(stacks->a, info);
-	if (!compare(info, &info->curr_l, &info->curr_r))
-		return (0);
-	start = (info->curr_l > info->idx_m) ? info->curr_r : info->curr_l;
-	end = (info->curr_l > info->idx_m) ? info->idx_r : info->idx_m;
-	temp = (info->curr_l > info->idx_m) ? info->right : info->left;
-	if (!remain_fill(start, end, info->sorted, temp))
-		return (0);
-	exec_merge(stacks->a, info);
+	init_sort_info(stacks, info);
+
+	if (info->data_nm == A && info->data_size <= 3)
+		no_push_sort(stacks, info);
+	/* 
+		push가 필요 없는 경우
+		a에서 data가 3이하인 경우.
+		data가 3이하인 경우, 오름차순 
+
+	*/
+
+
+	push_cnt = 0;
+	// push를 하는 경우.
+	while (info->sorted_size + push_cnt < info->block_cnt)
+	{
+		info->data = (info->data_nm == A) ? stacks->a : stacks->b;
+		info->sorted = (info->sorted_nm == A) ? stacks->a : stacks->b;
+		info->sorted_size = (info->sorted_nm == A) ? stacks->a_size : stacks->b_size;
+
+		if (!info->sorted)
+		{
+			printf("### 0 ###\n");
+			push(stacks, info->sorted_nm);
+		}
+		else
+		{
+			insert_idx = get_insert_idx(info, peek(info->data));
+			printf("push data : %d --> insert idx : %d\n",peek(info->data), insert_idx);
+			sorting_push(insert_idx, stacks, info);
+		}
+		push_cnt++;
+		print_stack(stacks);
+	}
 	return (1);
 }
-/*
-	분할은 log2^n번일어남
-	16일 때 -> n = 2^4 -> 4번 -> [16 -> 8 -> 4 -> 2 -> 1]
-	9일 때 -> n = 2^3보다 크니깐 -> 4번 -> [9 -> 5 -> 3 -> 2 -> 1]
-	8일 때 -> n = 2^3 -> 3번 -> [8 -> 4 -> 2 -> 1]
-	12 -> [12 -> 6 -> 3 -> 2 -> 1]
 
-	맨 밑에부터 병합하면서 올라옴
-
-	병합해야 할 원소의 갯수에서, 좌, 우측은 정렬을 수행한 후 다음 level로 올라가고 있음.
-	[ left ~ mid , mid + 1 ~ right] 반복
-
-	분할 된 갯수가 1개일 때
-
-	분할 된 갯수가 2개일 때
-
-	분할 된 갯수가 4(3)개일 때
-
-	분할된 갯수가 8(5~7)개일 때
-
-	...
-
-	이런식으로 감.
-
-	
-
-
-*/
 int		merge_sort(t_stacks *stacks, int idx_l, int idx_r)
 {
 	int		mid;
@@ -95,10 +209,9 @@ int		merge_sort(t_stacks *stacks, int idx_l, int idx_r)
 			return (0);
 		if (!merge_sort(stacks, mid + 1, idx_r))
 			return (0);
-		printf("%d ~ %d [%d] 개 merge !\n", idx_l, idx_r, (idx_r - idx_l) + 1 );
+		printf("------------- %d ~ %d merge -------------\n", idx_l, idx_r);
 		if (!merge(stacks, &info))
 			return (0);
-		ft_lstclear(&info.sorted, &disconnect_content);
 	}
 	return (1);
 }

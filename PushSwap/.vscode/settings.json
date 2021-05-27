@@ -28,6 +28,8 @@
         "vector": "c",
         "__locale": "c",
         "locale": "c",
-        "ios": "c"
+        "ios": "c",
+        "chrono": "c",
+        "limits": "c"
     }
 }

@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 17:53:09 by taesan            #+#    #+#             */
-/*   Updated: 2021/05/24 13:54:55 by taesan           ###   ########.fr       */
+/*   Updated: 2021/05/26 21:45:43 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,5 @@ void	push(t_stacks *stacks, char name)
 	swap_stack(add_stack, rm_stack);
 	size_add(stacks, name);
 	size_minus(stacks, other);
+	print_inst(PUSH, name);
 }
