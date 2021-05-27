@@ -6,12 +6,16 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 19:06:11 by taesan            #+#    #+#             */
-/*   Updated: 2021/05/27 16:59:15 by taesan           ###   ########.fr       */
+/*   Updated: 2021/05/27 17:42:36 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
+/*
+	**	1. stack a->b sorting-push desc
+	**	2. last stack b->a sorting-push asc
+*/
 void	init_sort_info(t_stacks *stacks, t_sort *info)
 {
 	int	level;
@@ -19,16 +23,12 @@ void	init_sort_info(t_stacks *stacks, t_sort *info)
 	info->block_cnt = info->idx_r - info->idx_l + 1;
 	level = stacks->tree_level - ft_sqrt(info->block_cnt);
 	info->level = level;
-	// 최초 a->b갔다가 마지막에 한번만 b-a로.
-	// 데이터가 3개 이하인 경우에는, a에서 정렬 끝내기
-	// b에 데이터가 남아 있는 경우에는 한번더 소트.
 	info->data_nm = (level != 0 || stacks->tree_level == 1) ? A : B;
-	info->data_size = (info->data_nm == A) ? stacks->a_size : stacks->b_size;
-	// 데이터가 3개 이하면, a에서 정렬 끝내기.
-	info->sorted_nm = (info->data_size <= 3) ? A : opposite(info->data_nm);
-	info->sorted_size = (info->sorted_nm == A) ? stacks->a_size : stacks->b_size;
-
-	
+	info->data_size = (info->data_nm == A) ? &stacks->a_size : &stacks->b_size;
+	info->sorted_nm = (*info->data_size <= 3) ? A : opposite(info->data_nm);
+	info->sorted_size = (info->sorted_nm == A) ? &stacks->a_size : &stacks->b_size;
+	info->data = (info->data_nm == A) ? &stacks->a : &stacks->b;
+	info->sorted = (info->sorted_nm == A) ? &stacks->a : &stacks->b;
 	// printf("level : %d, [빈 공간으로 사용될 스택 : %c]\n",level, info->sorted_nm);
 }
 
@@ -47,7 +47,7 @@ int		get_insert_idx(t_sort *info, int push_d)
 	int		value;
 	t_list	*temp;
 
-	temp = info->sorted;
+	temp = *info->sorted;
 	idx = 0;
 	while (temp)
 	{
@@ -62,24 +62,24 @@ int		get_insert_idx(t_sort *info, int push_d)
 
 void	sorting_push(int idx, t_stacks *stacks, t_sort *info)
 {
-	int	mid;
 	int	cnt;
+	int	size;
 
-	mid = (info->sorted_size / 2);
-	if (idx <= 1 || idx == info->sorted_size)
+	size = *info->sorted_size;
+	if (idx <= 1 || idx == size)
 		push(stacks, info->sorted_nm);
 	if (idx == 1)
 		swap(stacks, info->sorted_nm);
-	else if (idx == info->sorted_size)
+	else if (idx == size)
 		rotate(stacks, info->sorted_nm, NO_REVERSE);
-	else if (idx > mid)
+	else if (idx > (size / 2))
 	{
-		cnt = info->sorted_size - idx;
+		cnt = size - idx;
 		loop_rotate(stacks, info->sorted_nm, cnt, 1);
 		push(stacks, info->sorted_nm);
 		loop_rotate(stacks, info->sorted_nm, cnt + 1, NO_REVERSE);
 	}
-	else if (idx <= mid && idx > 1)
+	else if (idx <= (size / 2) && idx > 1)
 	{
 		loop_rotate(stacks, info->sorted_nm, idx, NO_REVERSE);
 		push(stacks, info->sorted_nm);
@@ -103,14 +103,13 @@ void	no_push_sort(t_stacks *stacks, t_sort *info)
 	int		i;
 	int		min;
 
-	// printf("no push sort\n");
 	stack = stacks->a;
-	if (info->data_size == 2)
+	if (*info->data_size == 2)
 	{
 		if (*(int *)stack->content - *(int *)stack->next->content > 0)
 			swap(stacks, A);
 	}
-	else if (info->data_size == 3)
+	else if (*info->data_size == 3)
 	{
 		i = 0;
 		min = INT_MAX;
@@ -146,38 +145,28 @@ void	no_push_sort(t_stacks *stacks, t_sort *info)
 int		merge(t_stacks *stacks, t_sort *info)
 {
 	int	insert_idx;
+	int	push_cnt;
 
 	init_sort_info(stacks, info);
-
-	if (info->data_nm == A && info->data_size <= 3) {
+	if (info->data_nm == A && *info->data_size <= 3)
 		no_push_sort(stacks, info);
-		return (1);
-	}
-	/* 
-		push가 필요 없는 경우
-		a에서 data가 3이하인 경우.
-		data가 3이하인 경우, 오름차순 
-
-	*/
-	int temp = info->block_cnt - info->sorted_size;
-	// push를 하는 경우.
-	while (temp > 0)
+	else
 	{
-		info->data = (info->data_nm == A) ? stacks->a : stacks->b;
-		info->sorted = (info->sorted_nm == A) ? stacks->a : stacks->b;
-		info->sorted_size = (info->sorted_nm == A) ? stacks->a_size : stacks->b_size;
-
-		if (!info->sorted)
-			push(stacks, info->sorted_nm);
-		else
+		push_cnt = info->block_cnt - *info->sorted_size;
+		while (push_cnt > 0)
 		{
-			// printf("data : %c, sorted : %c\n", info->data_nm, info->sorted_nm);
-			insert_idx = get_insert_idx(info, peek(info->data));
-			// printf("push data : %d --> insert idx : %d\n",peek(info->data), insert_idx);
-			sorting_push(insert_idx, stacks, info);
+			if (!info->sorted)
+				push(stacks, info->sorted_nm);
+			else
+			{
+				//printf("data : %c, sorted : %c\n", info->data_nm, info->sorted_nm);
+				insert_idx = get_insert_idx(info, peek(*info->data));
+				//printf("push data : %d --> insert idx : %d\n",peek(*info->data), insert_idx);
+				sorting_push(insert_idx, stacks, info);
+			}
+			// print_stack(stacks);
+			push_cnt--;
 		}
-		//print_stack(stacks);
-		temp--;
 	}
 	return (1);
 }
@@ -200,7 +189,7 @@ int		merge_sort(t_stacks *stacks, int idx_l, int idx_r)
 		// printf("------------- %d ~ %d merge -------------\n", idx_l, idx_r);
 		if (!merge(stacks, &info))
 			return (0);
-		// print_stack(stacks);
+		//print_stack(stacks);
 	}
 	return (1);
 }
