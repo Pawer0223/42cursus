@@ -30,6 +30,15 @@
         "locale": "c",
         "ios": "c",
         "chrono": "c",
-        "limits": "c"
+        "limits": "c",
+        "__bit_reference": "c",
+        "__functional_base": "c",
+        "__node_handle": "c",
+        "atomic": "c",
+        "__memory": "c",
+        "optional": "c",
+        "system_error": "c",
+        "tuple": "c",
+        "type_traits": "c"
     }
 }

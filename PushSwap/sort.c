@@ -6,15 +6,15 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 19:06:11 by taesan            #+#    #+#             */
-/*   Updated: 2021/05/27 17:42:36 by taesan           ###   ########.fr       */
+/*   Updated: 2021/05/27 17:52:59 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 /*
-	**	1. stack a->b sorting-push desc
-	**	2. last stack b->a sorting-push asc
+	**	1. stack a->b sorting-push
+	**	2. b is sorted, finally stack b->a
 */
 void	init_sort_info(t_stacks *stacks, t_sort *info)
 {
@@ -30,15 +30,6 @@ void	init_sort_info(t_stacks *stacks, t_sort *info)
 	info->data = (info->data_nm == A) ? &stacks->a : &stacks->b;
 	info->sorted = (info->sorted_nm == A) ? &stacks->a : &stacks->b;
 	// printf("level : %d, [빈 공간으로 사용될 스택 : %c]\n",level, info->sorted_nm);
-}
-
-int		check_order_end(char name, int value, int push_d)
-{
-	if (name == B && value < push_d) // b로 옮길땐 오름차순
-		return (1);
-	else if (name == A && value > push_d) // a로 옮길땐 내림차순
-		return (1);
-	return (0);
 }
 
 int		get_insert_idx(t_sort *info, int push_d)
@@ -84,61 +75,6 @@ void	sorting_push(int idx, t_stacks *stacks, t_sort *info)
 		loop_rotate(stacks, info->sorted_nm, idx, NO_REVERSE);
 		push(stacks, info->sorted_nm);
 		loop_rotate(stacks, info->sorted_nm, idx, 1);
-	}
-}
-
-void	int_swap(int i, int j, int data[3])
-{
-	int temp;
-
-	temp = data[i];
-	data[i] = data[j];
-	data[j] = temp;
-}
-
-void	no_push_sort(t_stacks *stacks, t_sort *info)
-{
-	t_list *stack;
-	int		data[3];
-	int		i;
-	int		min;
-
-	stack = stacks->a;
-	if (*info->data_size == 2)
-	{
-		if (*(int *)stack->content - *(int *)stack->next->content > 0)
-			swap(stacks, A);
-	}
-	else if (*info->data_size == 3)
-	{
-		i = 0;
-		min = INT_MAX;
-		while (i < 3)
-		{
-			data[i++] = *(int *)stack->content;
-			stack = stack->next;
-			min = ft_min(min, data[i - 1]);
-		}
-		while (data[0] != min || data[1] > data[2])
-		{
-			// printf("%d -> %d -> %d\n", data[0], data[1], data[2]);
-			// 가장 큰 수부터 정렬해준다. 처음이거나, 중간에 있는 경우
-			if (data[0] > data[1] && data[0] > data[2]) // 가장 큰 수가 가장 위에 있을 때
-			{
-				rotate(stacks, A, NO_REVERSE);
-				int_swap(0, 2, data);
-			}
-			else if (data[1] > data[0] && data[1] > data[2]) // 가장 큰 수가 중간에 있을 때
-			{
-				rotate(stacks, A, 1);
-				int_swap(1, 2, data);
-			}
-			else if (data[0] > data[1])
-			{
-				swap(stacks, A);
-				int_swap(0, 1, data);
-			}
-		}
 	}
 }
 

@@ -6,17 +6,29 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 18:55:11 by taesan            #+#    #+#             */
-/*   Updated: 2021/05/23 20:16:51 by taesan           ###   ########.fr       */
+/*   Updated: 2021/05/27 17:53:11 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 /*
+	a->b desc
+	b->a asc
+*/
+int		check_order_end(char name, int value, int push_d)
+{
+	if (name == B && value < push_d) // b로 옮길땐 오름차순
+		return (1);
+	else if (name == A && value > push_d) // a로 옮길땐 내림차순
+		return (1);
+	return (0);
+}
+
+/*
 	**	first white space possible
 	**	next '-' or '+' possible, next only number
 */
-
 int			*check_param(const char *str)
 {
 	int			i;

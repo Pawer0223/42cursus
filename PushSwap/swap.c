@@ -6,11 +6,20 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 13:33:42 by taesan            #+#    #+#             */
-/*   Updated: 2021/05/26 21:46:32 by taesan           ###   ########.fr       */
+/*   Updated: 2021/05/27 18:20:29 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+void		swap_if(t_stacks *s, char name)
+{
+	t_list	*stack;
+
+	stack = (name == A) ? s->a : s->b;
+	if (*(int *)stack->content - *(int *)stack->next->content > 0)
+		swap(s, name);
+}
 
 void	swap_exec(t_list **stack)
 {
