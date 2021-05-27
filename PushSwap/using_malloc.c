@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 18:38:24 by taesan            #+#    #+#             */
-/*   Updated: 2021/05/26 18:16:43 by taesan           ###   ########.fr       */
+/*   Updated: 2021/05/27 21:12:07 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ int			make_stack_a(t_list **list, int argc, const char *argv[])
 
 int			init_stacks(t_stacks **stacks, int argc, const char *argv[])
 {
+	t_list	*temp;
+
 	if (!(*stacks = (t_stacks *)malloc(sizeof(t_stacks))))
 		return (0);
 	(*stacks)->a = 0;
@@ -60,5 +62,14 @@ int			init_stacks(t_stacks **stacks, int argc, const char *argv[])
 	(*stacks)->a_size = argc - 1;
 	(*stacks)->tree_level = ft_sqrt(argc - 1);
 	(*stacks)->b_size = 0;
+	(*stacks)->min = INT_MAX;
+	(*stacks)->max = INT_MIN;
+	temp = (*stacks)->a;
+	while (temp)
+	{
+		(*stacks)->min = ft_min((*stacks)->min, *(int *)temp->content);
+		(*stacks)->max = ft_max((*stacks)->max, *(int *)temp->content);
+		temp = temp->next;
+	}
 	return (1);
 }

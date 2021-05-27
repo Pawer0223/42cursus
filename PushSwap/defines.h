@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 17:48:51 by taesan            #+#    #+#             */
-/*   Updated: 2021/05/27 17:49:25 by taesan           ###   ########.fr       */
+/*   Updated: 2021/05/27 21:02:33 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ typedef	struct	s_stacks
 	int		a_size;
 	int		b_size;
 	int		tree_level;
+	int		min;
+	int		max;
 }				t_stacks;
 
 #endif

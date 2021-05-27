@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 19:06:11 by taesan            #+#    #+#             */
-/*   Updated: 2021/05/27 17:52:59 by taesan           ###   ########.fr       */
+/*   Updated: 2021/05/27 20:01:17 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,31 @@ void	sorting_push(int idx, t_stacks *stacks, t_sort *info)
 	}
 }
 
+void	last_sort(t_stacks *stacks)
+{
+	int		a_value;
+	int		big_cnt;
+	t_list	*temp;
+
+	if (!stacks->b)
+		return ;
+	a_value = peek(stacks->a);
+	temp = stacks->b;
+	big_cnt = 0;
+	while (temp && peek(temp) > a_value)
+	{
+		temp = temp->next;
+		big_cnt++;
+		push(stacks, A);
+	}
+	loop_rotate(stacks, A, big_cnt, NO_REVERSE);
+	while (temp)
+	{
+		temp = temp->next;
+		push(stacks, A);
+	}
+}
+
 int		merge(t_stacks *stacks, t_sort *info)
 {
 	int	insert_idx;
@@ -86,6 +111,8 @@ int		merge(t_stacks *stacks, t_sort *info)
 	init_sort_info(stacks, info);
 	if (info->data_nm == A && *info->data_size <= 3)
 		no_push_sort(stacks, info);
+	else if (info->level == 0)
+		last_sort(stacks);
 	else
 	{
 		push_cnt = info->block_cnt - *info->sorted_size;
@@ -125,7 +152,7 @@ int		merge_sort(t_stacks *stacks, int idx_l, int idx_r)
 		// printf("------------- %d ~ %d merge -------------\n", idx_l, idx_r);
 		if (!merge(stacks, &info))
 			return (0);
-		//print_stack(stacks);
+		// print_stack(stacks);
 	}
 	return (1);
 }

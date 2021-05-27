@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 19:43:00 by taesan            #+#    #+#             */
-/*   Updated: 2021/05/27 18:20:48 by taesan           ###   ########.fr       */
+/*   Updated: 2021/05/27 21:19:55 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,12 @@ void		rotate(t_stacks *stacks, char name, int is_reverse);
 void		loop_rotate(t_stacks *stacks, char name, int cnt, int is_reverse);
 void		swap(t_stacks *s, char name);
 void		swap_if(t_stacks *s, char name);
-
 /*
 	** error
 */
 int			error_occur();
 void		delete_content(void *content);
 void		disconnect_content(void *content);
-
 /*
 	** using_malloc
 */
@@ -42,18 +40,19 @@ int			init_list(t_list **list, int argc, const char *argv[]);
 int			init_stacks(t_stacks **stacks, int argc, const char *argv[]);
 int			remain_fill(int start, int end, t_list *sorted, t_list *remain);
 int			compare(t_stacks *stacks, t_sort *info);
-
 /*
 	** using_free
 */
 void		free_stacks(t_stacks *stacks);
-
 /*
 	** checks
 */
 int			*check_param(const char *str);
 int			duplicate_check(t_list **list, int num);
 int			check_order_end(char name, int value, int push_d);
+int			check_sorted(t_list *stack, int size);
+void		edge_check(t_stacks *stacks);
+
 /*
 	** utils
 */
@@ -72,7 +71,7 @@ int			merge_sort(t_stacks *stacks, int idx_l, int idx_r);
 */
 int			ft_sqrt(unsigned int n);
 int			ft_min(int a, int b);
-
+int			ft_max(int a, int b);
 /*
 	** common
 */
