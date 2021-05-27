@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 19:06:11 by taesan            #+#    #+#             */
-/*   Updated: 2021/05/27 15:50:07 by taesan           ###   ########.fr       */
+/*   Updated: 2021/05/27 16:59:15 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,17 @@ void	init_sort_info(t_stacks *stacks, t_sort *info)
 	info->block_cnt = info->idx_r - info->idx_l + 1;
 	level = stacks->tree_level - ft_sqrt(info->block_cnt);
 	info->level = level;
-	// 왼쪽 반을 정렬하는 경우는 idx_l == 0이면서 레벨이 루트가아닐 때
-	// (level == 0은 정렬 된 b의 데이터를 a로 옮겨야 하는상황)
-	info->data_nm = (level != 0) ? A : B;
-	info->data_nm = (stacks->tree_level == 1) ? A : info->data_nm;
+	// 최초 a->b갔다가 마지막에 한번만 b-a로.
+	// 데이터가 3개 이하인 경우에는, a에서 정렬 끝내기
+	// b에 데이터가 남아 있는 경우에는 한번더 소트.
+	info->data_nm = (level != 0 || stacks->tree_level == 1) ? A : B;
 	info->data_size = (info->data_nm == A) ? stacks->a_size : stacks->b_size;
+	// 데이터가 3개 이하면, a에서 정렬 끝내기.
 	info->sorted_nm = (info->data_size <= 3) ? A : opposite(info->data_nm);
 	info->sorted_size = (info->sorted_nm == A) ? stacks->a_size : stacks->b_size;
-	printf("level : %d, [빈 공간으로 사용될 스택 : %c]\n",level, info->sorted_nm);
+
+	
+	// printf("level : %d, [빈 공간으로 사용될 스택 : %c]\n",level, info->sorted_nm);
 }
 
 int		check_order_end(char name, int value, int push_d)
@@ -64,23 +67,13 @@ void	sorting_push(int idx, t_stacks *stacks, t_sort *info)
 
 	mid = (info->sorted_size / 2);
 	if (idx <= 1 || idx == info->sorted_size)
-	{
-		printf("### 1 ###\n");
 		push(stacks, info->sorted_nm);
-	}
 	if (idx == 1)
-	{
-		printf("### 2 ###\n");
 		swap(stacks, info->sorted_nm);
-	}
 	else if (idx == info->sorted_size)
-	{
-		printf("### 3 ###\n");
 		rotate(stacks, info->sorted_nm, NO_REVERSE);
-	}
 	else if (idx > mid)
 	{
-		printf("### 4 ###\n");
 		cnt = info->sorted_size - idx;
 		loop_rotate(stacks, info->sorted_nm, cnt, 1);
 		push(stacks, info->sorted_nm);
@@ -88,7 +81,6 @@ void	sorting_push(int idx, t_stacks *stacks, t_sort *info)
 	}
 	else if (idx <= mid && idx > 1)
 	{
-		printf("### 5 ###\n");
 		loop_rotate(stacks, info->sorted_nm, idx, NO_REVERSE);
 		push(stacks, info->sorted_nm);
 		loop_rotate(stacks, info->sorted_nm, idx, 1);
@@ -111,8 +103,7 @@ void	no_push_sort(t_stacks *stacks, t_sort *info)
 	int		i;
 	int		min;
 
-	printf("no_push_sort ! \n");
-
+	// printf("no push sort\n");
 	stack = stacks->a;
 	if (info->data_size == 2)
 	{
@@ -131,7 +122,7 @@ void	no_push_sort(t_stacks *stacks, t_sort *info)
 		}
 		while (data[0] != min || data[1] > data[2])
 		{
-			printf("%d -> %d -> %d\n", data[0], data[1], data[2]);
+			// printf("%d -> %d -> %d\n", data[0], data[1], data[2]);
 			// 가장 큰 수부터 정렬해준다. 처음이거나, 중간에 있는 경우
 			if (data[0] > data[1] && data[0] > data[2]) // 가장 큰 수가 가장 위에 있을 때
 			{
@@ -155,41 +146,38 @@ void	no_push_sort(t_stacks *stacks, t_sort *info)
 int		merge(t_stacks *stacks, t_sort *info)
 {
 	int	insert_idx;
-	int	push_cnt;
 
 	init_sort_info(stacks, info);
 
-	if (info->data_nm == A && info->data_size <= 3)
+	if (info->data_nm == A && info->data_size <= 3) {
 		no_push_sort(stacks, info);
+		return (1);
+	}
 	/* 
 		push가 필요 없는 경우
 		a에서 data가 3이하인 경우.
 		data가 3이하인 경우, 오름차순 
 
 	*/
-
-
-	push_cnt = 0;
+	int temp = info->block_cnt - info->sorted_size;
 	// push를 하는 경우.
-	while (info->sorted_size + push_cnt < info->block_cnt)
+	while (temp > 0)
 	{
 		info->data = (info->data_nm == A) ? stacks->a : stacks->b;
 		info->sorted = (info->sorted_nm == A) ? stacks->a : stacks->b;
 		info->sorted_size = (info->sorted_nm == A) ? stacks->a_size : stacks->b_size;
 
 		if (!info->sorted)
-		{
-			printf("### 0 ###\n");
 			push(stacks, info->sorted_nm);
-		}
 		else
 		{
+			// printf("data : %c, sorted : %c\n", info->data_nm, info->sorted_nm);
 			insert_idx = get_insert_idx(info, peek(info->data));
-			printf("push data : %d --> insert idx : %d\n",peek(info->data), insert_idx);
+			// printf("push data : %d --> insert idx : %d\n",peek(info->data), insert_idx);
 			sorting_push(insert_idx, stacks, info);
 		}
-		push_cnt++;
-		print_stack(stacks);
+		//print_stack(stacks);
+		temp--;
 	}
 	return (1);
 }
@@ -209,9 +197,10 @@ int		merge_sort(t_stacks *stacks, int idx_l, int idx_r)
 			return (0);
 		if (!merge_sort(stacks, mid + 1, idx_r))
 			return (0);
-		printf("------------- %d ~ %d merge -------------\n", idx_l, idx_r);
+		// printf("------------- %d ~ %d merge -------------\n", idx_l, idx_r);
 		if (!merge(stacks, &info))
 			return (0);
+		// print_stack(stacks);
 	}
 	return (1);
 }
