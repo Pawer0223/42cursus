@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 18:55:11 by taesan            #+#    #+#             */
-/*   Updated: 2021/05/27 21:20:17 by taesan           ###   ########.fr       */
+/*   Updated: 2021/05/28 17:13:06 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int		check_order_end(char name, int value, int push_d)
 	**	first white space possible
 	**	next '-' or '+' possible, next only number
 */
-int			*check_param(const char *str)
+int			*check_param(char *str)
 {
 	int			i;
 	int			flag;

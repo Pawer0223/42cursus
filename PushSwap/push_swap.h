@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 19:43:00 by taesan            #+#    #+#             */
-/*   Updated: 2021/05/27 21:19:55 by taesan           ###   ########.fr       */
+/*   Updated: 2021/05/28 17:21:45 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,17 +37,19 @@ void		disconnect_content(void *content);
 */
 int			*make_num(long long num);
 int			init_list(t_list **list, int argc, const char *argv[]);
-int			init_stacks(t_stacks **stacks, int argc, const char *argv[]);
+int			init_stacks(t_stacks **stacks, char **input);
 int			remain_fill(int start, int end, t_list *sorted, t_list *remain);
 int			compare(t_stacks *stacks, t_sort *info);
 /*
 	** using_free
 */
 void		free_stacks(t_stacks *stacks);
+void		free_input(char **input);
+void		heap_clean(t_stacks *stacks, char **input);
 /*
 	** checks
 */
-int			*check_param(const char *str);
+int			*check_param(char *str);
 int			duplicate_check(t_list **list, int num);
 int			check_order_end(char name, int value, int push_d);
 int			check_sorted(t_list *stack, int size);

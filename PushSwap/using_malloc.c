@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 18:38:24 by taesan            #+#    #+#             */
-/*   Updated: 2021/05/28 15:53:30 by taesan           ###   ########.fr       */
+/*   Updated: 2021/05/28 17:17:46 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,32 +24,30 @@ int			*make_num(long long num)
 	return (ptr);
 }
 
-int			make_stack_a(t_list **list, int argc, const char *argv[])
+int			make_stack_a(t_list **list, int *len, char **input)
 {
-	int		i;
 	int		*num;
 	t_list	*data;
 
-	i = 1;
-	while (i < argc)
+	while (input[*len])
 	{
-		if (!(num = check_param(argv[i])))
+		if (!(num = check_param(input[*len])))
 			return (0);
 		if (duplicate_check(list, *num) || !(data = ft_lstnew(num)))
 		{
 			free(num);
 			return (0);
 		}
-		if (i == 1)
+		if (*len == 1)
 			*list = data;
 		else
 			ft_lstadd_back(list, data);
-		i++;
+		*len += 1;
 	}
 	return (1);
 }
 
-int			init_stacks(t_stacks **stacks, int argc, const char *argv[])
+int			init_stacks(t_stacks **stacks, char **input)
 {
 	t_list	*temp;
 
@@ -57,10 +55,10 @@ int			init_stacks(t_stacks **stacks, int argc, const char *argv[])
 		return (0);
 	(*stacks)->a = 0;
 	(*stacks)->b = 0;
-	if (!make_stack_a(&(*stacks)->a, argc, argv))
+	(*stacks)->a_size = 0;
+	if (!make_stack_a(&(*stacks)->a, &(*stacks)->a_size, input))
 		return (0);
-	(*stacks)->a_size = argc - 1;
-	(*stacks)->tree_level = ft_sqrt(argc - 1);
+	(*stacks)->tree_level = ft_sqrt((*stacks)->a_size);
 	(*stacks)->b_size = 0;
 	(*stacks)->min = INT_MAX;
 	(*stacks)->max = INT_MIN;
