@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 19:06:11 by taesan            #+#    #+#             */
-/*   Updated: 2021/05/27 20:01:17 by taesan           ###   ########.fr       */
+/*   Updated: 2021/05/28 16:00:24 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	sorting_push(int idx, t_stacks *stacks, t_sort *info)
 		push(stacks, info->sorted_nm);
 	if (idx == 1)
 		swap(stacks, info->sorted_nm);
-	else if (idx == size)
+	else if (idx == size && size > 1)
 		rotate(stacks, info->sorted_nm, NO_REVERSE);
 	else if (idx > (size / 2))
 	{
@@ -78,31 +78,6 @@ void	sorting_push(int idx, t_stacks *stacks, t_sort *info)
 	}
 }
 
-void	last_sort(t_stacks *stacks)
-{
-	int		a_value;
-	int		big_cnt;
-	t_list	*temp;
-
-	if (!stacks->b)
-		return ;
-	a_value = peek(stacks->a);
-	temp = stacks->b;
-	big_cnt = 0;
-	while (temp && peek(temp) > a_value)
-	{
-		temp = temp->next;
-		big_cnt++;
-		push(stacks, A);
-	}
-	loop_rotate(stacks, A, big_cnt, NO_REVERSE);
-	while (temp)
-	{
-		temp = temp->next;
-		push(stacks, A);
-	}
-}
-
 int		merge(t_stacks *stacks, t_sort *info)
 {
 	int	insert_idx;
@@ -111,8 +86,6 @@ int		merge(t_stacks *stacks, t_sort *info)
 	init_sort_info(stacks, info);
 	if (info->data_nm == A && *info->data_size <= 3)
 		no_push_sort(stacks, info);
-	else if (info->level == 0)
-		last_sort(stacks);
 	else
 	{
 		push_cnt = info->block_cnt - *info->sorted_size;
@@ -122,9 +95,9 @@ int		merge(t_stacks *stacks, t_sort *info)
 				push(stacks, info->sorted_nm);
 			else
 			{
-				//printf("data : %c, sorted : %c\n", info->data_nm, info->sorted_nm);
+				// printf("data : %c, sorted : %c\n", info->data_nm, info->sorted_nm);
 				insert_idx = get_insert_idx(info, peek(*info->data));
-				//printf("push data : %d --> insert idx : %d\n",peek(*info->data), insert_idx);
+				// printf("push data : %d --> insert idx : %d\n",peek(*info->data), insert_idx);
 				sorting_push(insert_idx, stacks, info);
 			}
 			// print_stack(stacks);
