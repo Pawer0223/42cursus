@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 15:48:51 by taesan            #+#    #+#             */
-/*   Updated: 2021/05/28 17:21:14 by taesan           ###   ########.fr       */
+/*   Updated: 2021/05/29 00:08:39 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,11 @@ void	free_stacks(t_stacks *stacks)
 		ft_lstclear(&stacks->a, &delete_content);
 	if (stacks->b)
 		ft_lstclear(&stacks->b, &delete_content);
+	if (stacks->sort_stack)
+		ft_lstclear(&stacks->b, &delete_content);
 	stacks->a = 0;
 	stacks->b = 0;
+	stacks->sort_stack = 0;
 	stacks->a_size = 0;
 	stacks->b_size = 0;
 	stacks->tree_level = 0;

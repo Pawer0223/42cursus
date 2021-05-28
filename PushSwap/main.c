@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 19:06:11 by taesan            #+#    #+#             */
-/*   Updated: 2021/05/28 17:33:21 by taesan           ###   ########.fr       */
+/*   Updated: 2021/05/29 00:43:21 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,23 @@ int		main(int argc, const char *argv[])
 	t_stacks	*stacks;
 	char		**input;
 
-	if (argc < 2 || !(input = ft_split(argv[1], ' ')))
-		return (error_occur());
-	stacks = 0;
-	if (!init_stacks(&stacks, input))
+	if (argc > 1)
 	{
-		heap_clean(stacks, input);
-		return (error_occur());
+		if (!(input = ft_split(argv[1], ' ')))
+			return (error_occur());
+		stacks = 0;
+		if (!init_stacks(&stacks, input))
+		{
+			heap_clean(stacks, input);
+			return (error_occur());
+		}
+		// edge_check(stacks);
+		if(!check_sorted(stacks->a, stacks->a_size))
+			ft_sort(stacks, stacks->a_size);
+			//merge_sort(stacks, 0, stacks->a_size - 1);
+		test(stacks);
+		heap_clean(stacks, input);		
 	}
-	edge_check(stacks);
-	if(!check_sorted(stacks->a, stacks->a_size))
-		merge_sort(stacks, 0, stacks->a_size - 1);
-	test(stacks);
-	heap_clean(stacks, input);
 }
 
 void	test_case_print(int size, const char *arr[])

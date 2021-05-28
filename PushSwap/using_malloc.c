@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 18:38:24 by taesan            #+#    #+#             */
-/*   Updated: 2021/05/28 17:32:59 by taesan           ###   ########.fr       */
+/*   Updated: 2021/05/29 00:42:58 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,13 @@ int			*make_num(long long num)
 	return (ptr);
 }
 
-int			make_stack_a(t_list **list, int *len, char **input)
+int			make_stack(t_list **list, int *len, char **input)
 {
 	int		*num;
 	t_list	*data;
 
 	while (input[*len])
 	{
-		printf("[%s] ", input[*len]);
 		if (!(num = check_param(input[*len])))
 			return (0);
 		if (duplicate_check(list, *num) || !(data = ft_lstnew(num)))
@@ -51,14 +50,21 @@ int			make_stack_a(t_list **list, int *len, char **input)
 int			init_stacks(t_stacks **stacks, char **input)
 {
 	t_list	*temp;
+	int		i;
 
 	if (!(*stacks = (t_stacks *)malloc(sizeof(t_stacks))))
 		return (0);
 	(*stacks)->a = 0;
 	(*stacks)->b = 0;
+	(*stacks)->sort_stack = 0;
 	(*stacks)->a_size = 0;
-	if (!make_stack_a(&(*stacks)->a, &(*stacks)->a_size, input))
+	i = 0;
+	if (!make_stack(&(*stacks)->a, &i, input))
 		return (0);
+	i = 0;
+	if (!make_stack(&(*stacks)->sort_stack, &i, input))
+		return (0);
+	(*stacks)->a_size = i;
 	(*stacks)->tree_level = ft_sqrt((*stacks)->a_size);
 	(*stacks)->b_size = 0;
 	(*stacks)->min = INT_MAX;

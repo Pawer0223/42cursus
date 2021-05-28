@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 18:55:11 by taesan            #+#    #+#             */
-/*   Updated: 2021/05/28 17:13:06 by taesan           ###   ########.fr       */
+/*   Updated: 2021/05/28 18:48:43 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,11 @@ void	edge_check(t_stacks *stacks)
 	int 	last;
 	t_list	*temp;
 
+	if (stacks->a_size < 2)
+		return ;
 	temp = stacks->a;
 	start = *(int *)temp->content;
 	last = *(int *)ft_lstlast(temp)->content;
-
 	if (start == stacks->max)
 		rotate(stacks, A, NO_REVERSE);
 	else if (last == stacks->min)
