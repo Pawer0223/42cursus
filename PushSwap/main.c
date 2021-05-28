@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 19:06:11 by taesan            #+#    #+#             */
-/*   Updated: 2021/05/28 17:23:15 by taesan           ###   ########.fr       */
+/*   Updated: 2021/05/28 17:33:21 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int		main(int argc, const char *argv[])
 	edge_check(stacks);
 	if(!check_sorted(stacks->a, stacks->a_size))
 		merge_sort(stacks, 0, stacks->a_size - 1);
-	// test(stacks);
+	test(stacks);
 	heap_clean(stacks, input);
 }
 

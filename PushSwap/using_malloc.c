@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 18:38:24 by taesan            #+#    #+#             */
-/*   Updated: 2021/05/28 17:17:46 by taesan           ###   ########.fr       */
+/*   Updated: 2021/05/28 17:32:59 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int			make_stack_a(t_list **list, int *len, char **input)
 
 	while (input[*len])
 	{
+		printf("[%s] ", input[*len]);
 		if (!(num = check_param(input[*len])))
 			return (0);
 		if (duplicate_check(list, *num) || !(data = ft_lstnew(num)))
@@ -38,7 +39,7 @@ int			make_stack_a(t_list **list, int *len, char **input)
 			free(num);
 			return (0);
 		}
-		if (*len == 1)
+		if (*len == 0)
 			*list = data;
 		else
 			ft_lstadd_back(list, data);
