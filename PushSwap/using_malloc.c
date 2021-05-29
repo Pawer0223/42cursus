@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 18:38:24 by taesan            #+#    #+#             */
-/*   Updated: 2021/05/29 00:42:58 by taesan           ###   ########.fr       */
+/*   Updated: 2021/05/29 18:00:01 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,34 +47,47 @@ int			make_stack(t_list **list, int *len, char **input)
 	return (1);
 }
 
+int			make_sorted_data(t_stacks *stacks)
+{
+	int		**temp;
+	int		i;
+	t_list	*stack;
+
+	if (!(stacks->sorted = (int **)malloc(sizeof(int *) * stacks->a_size)))
+		return (0);
+	if (!(temp = (int **)malloc(sizeof(int *) * stacks->a_size)))
+		return (0);
+	i = 0;
+	stack = stacks->a;
+	while (stack)
+	{
+		if (!(stacks->sorted[i] = make_num(*(int *)stack->content)))
+		{
+			free(temp);
+			return (0);
+		}
+		i++;
+		stack = stack->next;
+	}
+	merge_sort(stacks->sorted, temp, 0, stacks->a_size - 1);
+	free(temp);
+	return (1);
+}
+
 int			init_stacks(t_stacks **stacks, char **input)
 {
-	t_list	*temp;
-	int		i;
-
 	if (!(*stacks = (t_stacks *)malloc(sizeof(t_stacks))))
 		return (0);
 	(*stacks)->a = 0;
 	(*stacks)->b = 0;
-	(*stacks)->sort_stack = 0;
 	(*stacks)->a_size = 0;
-	i = 0;
-	if (!make_stack(&(*stacks)->a, &i, input))
+	if (!make_stack(&(*stacks)->a, &(*stacks)->a_size, input))
 		return (0);
-	i = 0;
-	if (!make_stack(&(*stacks)->sort_stack, &i, input))
-		return (0);
-	(*stacks)->a_size = i;
 	(*stacks)->tree_level = ft_sqrt((*stacks)->a_size);
 	(*stacks)->b_size = 0;
-	(*stacks)->min = INT_MAX;
-	(*stacks)->max = INT_MIN;
-	temp = (*stacks)->a;
-	while (temp)
-	{
-		(*stacks)->min = ft_min((*stacks)->min, *(int *)temp->content);
-		(*stacks)->max = ft_max((*stacks)->max, *(int *)temp->content);
-		temp = temp->next;
-	}
+	if (!make_sorted_data(*stacks))
+		return (0);
+	// for (int i = 0; i < (*stacks)->a_size; i++)
+	// 	printf("%d => ", *(*stacks)->sorted[i]);
 	return (1);
 }

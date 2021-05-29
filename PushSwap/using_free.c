@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 15:48:51 by taesan            #+#    #+#             */
-/*   Updated: 2021/05/29 00:08:39 by taesan           ###   ########.fr       */
+/*   Updated: 2021/05/29 17:17:49 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,26 +22,32 @@ void	free_input(char **input)
 	while (input[i])
 		free(input[i++]);
 	free(input);
+	input = 0;
 }
 
 void	free_stacks(t_stacks *stacks)
 {
+	int i;
+
 	if (!stacks)
 		return ;
 	if (stacks->a)
 		ft_lstclear(&stacks->a, &delete_content);
 	if (stacks->b)
 		ft_lstclear(&stacks->b, &delete_content);
-	if (stacks->sort_stack)
-		ft_lstclear(&stacks->b, &delete_content);
+	if (stacks->sorted)
+	{
+		i = 0;
+		while (i < stacks->a_size)
+			free(stacks->sorted[i++]);
+		free(stacks->sorted);
+		stacks->sorted = 0;
+	}
 	stacks->a = 0;
 	stacks->b = 0;
-	stacks->sort_stack = 0;
 	stacks->a_size = 0;
 	stacks->b_size = 0;
 	stacks->tree_level = 0;
-	stacks->min = 0;
-	stacks->max = 0;
 	free(stacks);
 }
 

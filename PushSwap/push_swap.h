@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 19:43:00 by taesan            #+#    #+#             */
-/*   Updated: 2021/05/28 21:35:06 by taesan           ###   ########.fr       */
+/*   Updated: 2021/05/29 18:35:19 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,13 @@ void		disconnect_content(void *content);
 int			*make_num(long long num);
 int			init_list(t_list **list, int argc, const char *argv[]);
 int			init_stacks(t_stacks **stacks, char **input);
-int			remain_fill(int start, int end, t_list *sorted, t_list *remain);
 /*
 	** using_free
 */
 void		free_stacks(t_stacks *stacks);
 void		free_input(char **input);
 void		heap_clean(t_stacks *stacks, char **input);
+
 /*
 	** checks
 */
@@ -67,7 +67,10 @@ char		opposite(char c);
 	** sort
 */
 // int			merge_sort(t_stacks *stacks, int idx_l, int idx_r);
-int		ft_sort(t_stacks *stacks, int size);
+// int			merge_sort(t_list *stack, int idx_l, int idx_r);
+void		merge_sort(int **sorted, int **temp, int idx_l, int idx_r);
+int			ft_sort(t_stacks *stacks, int size);
+int			quick_sort(t_stacks *stacks, int idx_l, int idx_r);
 /*
 	** math
 */

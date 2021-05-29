@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort2.c                                            :+:      :+:    :+:   */
+/*   quick_sort.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 19:06:11 by taesan            #+#    #+#             */
-/*   Updated: 2021/05/29 01:17:56 by taesan           ###   ########.fr       */
+/*   Updated: 2021/05/29 18:39:27 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,122 +56,6 @@ void	sorting_push(int idx, t_stacks *stacks)
 	}
 }
 
-
-void	init_sort_info(t_list *stack, t_sort_2 *info)
-{
-	info->curr_l = info->idx_l;
-	info->curr_r = info->idx_m + 1;
-	info->left = get_list(&stack, info->curr_l);
-	info->right = get_list(&stack, info->curr_r);
-	info->sorted = 0;
-}
-
-int		compare(t_sort_2 *info, int *i, int *j)
-{
-	t_list *add_list;
-
-	while (info->left && info->right && *i <= info->idx_m && *j <= info->idx_r)
-	{
-		if (*(int *)(info->left->content) - *(int *)(info->right->content) <= 0)
-		{
-			add_list = info->left;
-			info->left = info->left->next;
-			*i += 1;
-		}
-		else
-		{
-			add_list = info->right;
-			info->right = info->right->next;
-			*j += 1;
-		}
-		if (!(add_list = ft_lstnew(add_list->content)))
-			return (0);
-		ft_lstadd_back(&info->sorted, add_list);
-	}
-	return (1);
-}
-
-int		remain_fill(int start, int end, t_list *sorted, t_list *remain)
-{
-	t_list	*add_list;
-
-	while (start <= end)
-	{
-		if (!(add_list = ft_lstnew(remain->content)))
-			return (0);
-		ft_lstadd_back(&sorted, add_list);
-		remain = remain->next;
-		start++;
-	}
-	return (1);
-}
-
-int		merge(t_list *stack, t_sort_2 *info)
-{
-	t_list	*temp;
-	int		start;
-	int		end;
-
-	init_sort_info(stack, info);
-	if (!compare(info, &info->curr_l, &info->curr_r))
-		return (0);
-	start = (info->curr_l > info->idx_m) ? info->curr_r : info->curr_l;
-	end = (info->curr_l > info->idx_m) ? info->idx_r : info->idx_m;
-	temp = (info->curr_l > info->idx_m) ? info->right : info->left;
-	if (!remain_fill(start, end, info->sorted, temp))
-		return (0);
-	info->left = get_list(&stack, info->idx_l);
-	temp = info->sorted;
-	while (temp)
-	{
-		info->left->content = temp->content;
-		info->left = info->left->next;
-		temp = temp->next;
-	}
-	return (1);
-}
-
-t_list		*merge_sort(t_list *stack, int idx_l, int idx_r)
-{
-	int			mid;
-	t_sort_2	info;
-
-	if (idx_l < idx_r)
-	{
-		info.idx_l = idx_l;
-		info.idx_r = idx_r;
-		mid = (idx_l + idx_r) / 2;
-		info.idx_m = mid;
-		if (!merge_sort(stack, idx_l, mid))
-			return (0);
-		if (!merge_sort(stack, mid + 1, idx_r))
-			return (0);
-		if (!merge(stack, &info))
-			return (0);
-		ft_lstclear(&info.sorted, &disconnect_content);
-	}
-	return (stack);
-}
-
-int		get_pivot(t_stacks *stacks)
-{
-	t_list *sorted;
-	int		mid;
-	int		i;
-	int		pivot;
-
-	mid = stacks->a_size / 2;
-	if (!(sorted = merge_sort(stacks->sort_stack, 0, stacks->a_size - 1)))
-		exit(EXIT_FAILURE);
-	i = 0;
-	while (i <= mid)
-	{
-		pivot = *(int *)sorted->content;
-		sorted = sorted->next;
-		i++;
-	}
-	return (pivot);
-}
 /*
 	A = 피벗보다 작은 값의 집합.
 	B = 피벗보다 큰 값의 집합이 된다.
@@ -182,28 +66,31 @@ int		get_pivot(t_stacks *stacks)
 	 마지막 원소를 기록하고 있다가, ra하기전에 마지막 값이 더 크다면? rra로 올리고, swap하고 두번을 ra, ra해준다.
 	 혹은, pb -> ra -> pa -> ra를해도 된다.
 */
-int		ft_sort(t_stacks *stacks, int size)
+
+int		partition(t_stacks *stacks, int idx_l, int idx_r)
 {
-	// pivot값을 찾는다.
-	int	pivot;
+	int pivot;
+
 	int	i;
 	int	data;
 	int	last;
 	int	insert_idx;
-	
-	// 5 1 2 3 4 일 때
-	// 3기준으로,
-	// 1 2를 b로
-	// 3 4 5 
-	pivot = get_pivot(stacks);
-	printf("\npivot : %d, size : %d\n", pivot, size);
+	int	size;
+	// 현재 범위에서 실제, 중간 값.
+	pivot = *stacks->sorted[(idx_l + idx_r) / 2];
+	size = idx_r - idx_l + 1;
+	if (size <= 3)
+	{
+		// a에서 끝내기.
+	}
+	// printf("\npivot : %d, size : %d\n", pivot, size);
 	// pivot이하의 값을 B로 내림차순하며 보낸다.
 	i = 0;
 	last = *(int *)ft_lstlast(stacks->a)->content;
 	while (stacks->a && i < size)
 	{
 		data = *(int *)stacks->a->content;
-		printf("pivot [%d] ---> data : %d\n", pivot, data);
+		// printf("pivot [%d] ---> data : %d\n", pivot, data);
 		if (data <= pivot)
 		{
 			if (stacks->b && data < peek(stacks->b))
@@ -230,12 +117,30 @@ int		ft_sort(t_stacks *stacks, int size)
 		}
 		if (stacks->b_size == 0 && check_sorted(stacks->a, stacks->a_size))
 			break ;
-		print_stack(stacks);
+		// print_stack(stacks);
 		i++;
 	}
 	// 재귀 해야 함..
 	// ft_sort(stacks, stacks->a_size);
 	// 마지막에 b stack을 비워주기.
+	return (1);
+}
+
+int		quick_sort(t_stacks *stacks, int idx_l, int idx_r)
+{
+	// 중간 값을 기준으로 분할 정렬.
+	int pivot_idx;
+
+	if (idx_l < idx_r)
+	{
+		// idx_l + idx_r / 2 
+		// pivot값을 기준으로 분할.
+		pivot_idx = (idx_l + idx_r) / 2;
+		// 파티션 나누기
+		partition(stacks, idx_l, idx_r);
+		quick_sort(stacks, idx_l, pivot_idx - 1);
+		quick_sort(stacks, pivot_idx + 1, idx_r);
+	}
 	while (stacks->b)
 		push(stacks, A);
 	return (1);
