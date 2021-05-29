@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 19:06:11 by taesan            #+#    #+#             */
-/*   Updated: 2021/05/29 18:39:27 by taesan           ###   ########.fr       */
+/*   Updated: 2021/05/29 20:19:50 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int		partition(t_stacks *stacks, int idx_l, int idx_r)
 	int	insert_idx;
 	int	size;
 	// 현재 범위에서 실제, 중간 값.
-	pivot = *stacks->sorted[(idx_l + idx_r) / 2];
+	pivot = *stacks->sorted[((idx_l + idx_r) / 2)];
 	size = idx_r - idx_l + 1;
 	if (size <= 3)
 	{
@@ -104,15 +104,25 @@ int		partition(t_stacks *stacks, int idx_l, int idx_r)
 		// stack A에 오름차순해서 저장하고 있는다.
 		else
 		{
+			if (i == size - 1)
+			{
+				if (data < last)
+				{
+					i++;
+					continue;
+				}
+			}
 			// 마지막 값이 더 작을 때 위로올리면, 3 . . . . 2 일 때 => . . . 2 3 이렇게 됨.
 			// 따라서 마지막 값이 더 크다면 ? 2 . . . 3일때 => 3 2 . . . 해서 swap하고 2 3 . . . 만들어서 두개를 밑으로 보내주기 . . . 2 3
-			if (last > data)
+			if (last > pivot && last > data)
 			{
 				// 데이터가 3개이하 일 때 따로 처리
 				rotate(stacks, A, 1);
 				swap(stacks, A);
 				rotate(stacks, A, NO_REVERSE);
 			}
+			else
+				last = data;
 			rotate(stacks, A, NO_REVERSE);
 		}
 		if (stacks->b_size == 0 && check_sorted(stacks->a, stacks->a_size))
@@ -121,7 +131,6 @@ int		partition(t_stacks *stacks, int idx_l, int idx_r)
 		i++;
 	}
 	// 재귀 해야 함..
-	// ft_sort(stacks, stacks->a_size);
 	// 마지막에 b stack을 비워주기.
 	return (1);
 }
@@ -129,18 +138,26 @@ int		partition(t_stacks *stacks, int idx_l, int idx_r)
 int		quick_sort(t_stacks *stacks, int idx_l, int idx_r)
 {
 	// 중간 값을 기준으로 분할 정렬.
-	int pivot_idx;
+	// int pivot_idx;
 
-	if (idx_l < idx_r)
+	while (idx_l < idx_r)
 	{
-		// idx_l + idx_r / 2 
-		// pivot값을 기준으로 분할.
-		pivot_idx = (idx_l + idx_r) / 2;
-		// 파티션 나누기
+		int mid;
 		partition(stacks, idx_l, idx_r);
-		quick_sort(stacks, idx_l, pivot_idx - 1);
-		quick_sort(stacks, pivot_idx + 1, idx_r);
+		mid = (idx_l + idx_r) / 2;
+		idx_l = mid + 1;
 	}
+
+	// if (idx_l < idx_r)
+	// {
+	// 	// idx_l + idx_r / 2 
+	// 	// pivot값을 기준으로 분할.
+	// 	pivot_idx = (idx_l + idx_r) / 2;
+	// 	// 파티션 나누기
+	// 	partition(stacks, idx_l, idx_r);
+	// 	quick_sort(stacks, idx_l, pivot_idx - 1);
+	// 	quick_sort(stacks, pivot_idx + 1, idx_r);
+	// }
 	while (stacks->b)
 		push(stacks, A);
 	return (1);
