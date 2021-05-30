@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 19:06:11 by taesan            #+#    #+#             */
-/*   Updated: 2021/05/29 20:19:50 by taesan           ###   ########.fr       */
+/*   Updated: 2021/05/30 13:23:38 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int		partition(t_stacks *stacks, int idx_l, int idx_r)
 	while (stacks->a && i < size)
 	{
 		data = *(int *)stacks->a->content;
-		// printf("pivot [%d] ---> data : %d\n", pivot, data);
+		// printf("pivot [%d] ---> working data : %d  || size : %d ---> i : %d\n", pivot, data, size, i);
 		if (data <= pivot)
 		{
 			if (stacks->b && data < peek(stacks->b))
@@ -125,8 +125,6 @@ int		partition(t_stacks *stacks, int idx_l, int idx_r)
 				last = data;
 			rotate(stacks, A, NO_REVERSE);
 		}
-		if (stacks->b_size == 0 && check_sorted(stacks->a, stacks->a_size))
-			break ;
 		// print_stack(stacks);
 		i++;
 	}
@@ -143,7 +141,15 @@ int		quick_sort(t_stacks *stacks, int idx_l, int idx_r)
 	while (idx_l < idx_r)
 	{
 		int mid;
+		// printf("----------------------- %d ~ %d -----------------------\n", idx_l , idx_r);
 		partition(stacks, idx_l, idx_r);
+		// 큰 값이 모두 넘어간 상태로 정렬이 되어 있으면 종료지점이다.
+		if (check_sorted(stacks->a, stacks->a_size))
+		{
+			// printf("# sorted #\n");
+			break ;
+		}
+		// print_stack(stacks);
 		mid = (idx_l + idx_r) / 2;
 		idx_l = mid + 1;
 	}
