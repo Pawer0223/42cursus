@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 17:48:51 by taesan            #+#    #+#             */
-/*   Updated: 2021/06/01 14:55:45 by taesan           ###   ########.fr       */
+/*   Updated: 2021/06/01 17:54:20 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # define ERROR "Error"
 # define STACK_N "Stacks is NULL"
 # define STACK_NM_ERROR "Stack Name Error"
-# define NO_REVERSE -1
+# define NO_REVERSE 0
 # define A 'A'
 # define B 'B'
 # define ALL 'Z'

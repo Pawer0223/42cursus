@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 18:38:24 by taesan            #+#    #+#             */
-/*   Updated: 2021/06/01 15:33:18 by taesan           ###   ########.fr       */
+/*   Updated: 2021/06/01 19:07:23 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ int			make_stack(t_list_db **list, int *len, char **input)
 int			make_sorted_data(t_stacks *stacks)
 {
 	int			**temp;
+	int			*num;
 	int			i;
 	t_list_db	*stack;
 
@@ -106,11 +107,13 @@ int			make_sorted_data(t_stacks *stacks)
 	stack = stacks->a;
 	while (stack)
 	{
-		if (!(stacks->sorted[i] = &stack->value))
+		if (!(num = (int *)malloc(sizeof(int))))
 		{
 			free(temp);
 			return (0);
 		}
+		num[0] = stack->value;
+		stacks->sorted[i] = num;
 		i++;
 		stack = stack->next;
 	}

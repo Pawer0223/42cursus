@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 15:48:51 by taesan            #+#    #+#             */
-/*   Updated: 2021/06/01 17:31:37 by taesan           ###   ########.fr       */
+/*   Updated: 2021/06/01 19:04:40 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ void	free_input(char **input)
 
 void	free_stacks(t_stacks *stacks)
 {
+	int i;
+
 	if (!stacks)
 		return ;
 	if (stacks->a)
@@ -34,7 +36,12 @@ void	free_stacks(t_stacks *stacks)
 	if (stacks->b)
 		ft_lstclear(&stacks->b);
 	if (stacks->sorted)
+	{
+		i = 0;
+		while (i < stacks->a_size)
+			free(stacks->sorted[i++]);
 		free(stacks->sorted);
+	}
 	stacks->sorted = 0;
 	stacks->a = 0;
 	stacks->b = 0;

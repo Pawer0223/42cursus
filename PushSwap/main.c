@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 19:06:11 by taesan            #+#    #+#             */
-/*   Updated: 2021/06/01 15:35:04 by taesan           ###   ########.fr       */
+/*   Updated: 2021/06/01 21:27:52 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,16 @@ int		main(int argc, const char *argv[])
 			return (error_occur());
 		}
 		// edge_check(stacks);
-		// if(!check_sorted(stacks->a, stacks->a_size))
-		// {
-		// 	if (stacks->a_size <= 3)
-		// 		no_push_sort(stacks);
-		// 	else
-		// 		exec_sort(stacks);
-		// }
-		//print_stack(stacks);
-
+		if(!check_sorted(stacks->a, stacks->a_size))
+		{
+			if (stacks->a_size <= 3)
+				no_push_sort(stacks);
+			else
+				exec_sort(stacks);
+		}
+		// print_stack(stacks);
 		// 	//merge_sort(stacks, 0, stacks->a_size - 1);
-		test(stacks);
+		//test(stacks);
 		heap_clean(stacks, input);		
 	}
 }
