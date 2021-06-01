@@ -6,42 +6,87 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 18:38:24 by taesan            #+#    #+#             */
-/*   Updated: 2021/05/31 20:04:00 by taesan           ###   ########.fr       */
+/*   Updated: 2021/06/01 15:33:18 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int			*make_num(long long num)
-{
-	int	*ptr;
+// int			*make_num(long long num)
+// {
+// 	int	*ptr;
 
-	if (num < INT_MIN || num > INT_MAX)
-		return (0);
-	if (!(ptr = (int *)malloc(sizeof(int))))
-		return (0);
-	*ptr = (int)num;
-	return (ptr);
+// 	if (num < INT_MIN || num > INT_MAX)
+// 		return (0);
+// 	if (!(ptr = (int *)malloc(sizeof(int))))
+// 		return (0);
+// 	*ptr = (int)num;
+// 	return (ptr);
+// }
+
+// int			make_stack(t_list_db **list, int *len, char **input)
+// {
+// 	int			*num;
+// 	t_list_db	*data;
+
+// 	while (input[*len])
+// 	{
+// 		if (!(num = check_param(input[*len])))
+// 			return (0);
+// 		if (duplicate_check(list, *num) || !(data = ft_lstnew(num)))
+// 		{
+// 			free(num);
+// 			return (0);
+// 		}
+// 		if (*len == 0)
+// 			*list = data;
+// 		else
+// 			ft_lstadd_back(list, data);
+// 		*len += 1;
+// 	}
+// 	return (1);
+// }
+/*
+	**	first white space possible
+	**	next '-' or '+' possible, next only number
+*/
+int			my_atoi(char *str)
+{
+	int			i;
+	int			flag;
+	long long	result;
+
+	flag = 1;
+	result = 0;
+	i = 0;
+	while (str[i] && ((str[i] >= 9 && str[i] <= 13) || str[i] == 32))
+		i++;
+	if (str[i] == '-')
+		flag *= -1;
+	if (str[i] == '-' || str[i] == '+')
+		i++;
+	while (str[i] && (str[i] >= '0' && str[i] <= '9'))
+	{
+		result = result * 10 + (str[i] - '0');
+		i++;
+	}
+	result *= flag;
+	return (result);
 }
 
-int			make_stack(t_list **list, int *len, char **input)
+int			make_stack(t_list_db **list, int *len, char **input)
 {
-	int		*num;
-	t_list	*data;
+	t_list_db	*data;
+	int			value;
 
 	while (input[*len])
 	{
-		if (!(num = check_param(input[*len])))
+		if (!check_param(input[*len]))
 			return (0);
-		if (duplicate_check(list, *num) || !(data = ft_lstnew(num)))
-		{
-			free(num);
+		value = my_atoi(input[*len]);
+		if (duplicate_check(*list, value) || !(data = ft_lstnew(value)))
 			return (0);
-		}
-		if (*len == 0)
-			*list = data;
-		else
-			ft_lstadd_back(list, data);
+		ft_lstadd_back(list, data);
 		*len += 1;
 	}
 	return (1);
@@ -49,9 +94,9 @@ int			make_stack(t_list **list, int *len, char **input)
 
 int			make_sorted_data(t_stacks *stacks)
 {
-	int		**temp;
-	int		i;
-	t_list	*stack;
+	int			**temp;
+	int			i;
+	t_list_db	*stack;
 
 	if (!(stacks->sorted = (int **)malloc(sizeof(int *) * stacks->a_size)))
 		return (0);
@@ -61,7 +106,7 @@ int			make_sorted_data(t_stacks *stacks)
 	stack = stacks->a;
 	while (stack)
 	{
-		if (!(stacks->sorted[i] = make_num(*(int *)stack->content)))
+		if (!(stacks->sorted[i] = &stack->value))
 		{
 			free(temp);
 			return (0);

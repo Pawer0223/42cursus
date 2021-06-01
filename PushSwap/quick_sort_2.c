@@ -6,36 +6,54 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 19:06:11 by taesan            #+#    #+#             */
-/*   Updated: 2021/05/31 21:46:52 by taesan           ###   ########.fr       */
+/*   Updated: 2021/06/01 15:30:14 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
+void		send_a_to_b_desc(t_list_db **start, int pivot, int size)
+{
+	int		data;
+	t_list_db	*last;
+
+	last = ft_lstlast(*start);
+	while (size > 0)
+	{
+		data = (*start)->value;
+		if (data < pivot)
+		{
+			// 상단에서부터 pivot미만의 값.
+
+			// 하단에서부터 pivot미만의 값. 찾은 후.
+
+			// 더 빨리 보낼 수 있는것부터 보낸다.
+
+			// 
+		
+		}
+		size--;
+	}
+}
 /*
 	피벗 기준으로 작은수를 B로 큰수를 A로 저장.
 
-	stacks->a ==> pivot >= value 
-	stacks->b ==> pivot < value
+	stacks->a ==> value >= pivot 
+	stacks->b ==> value < pivot
 */
 void		partition(t_stacks *stacks, int idx_l, int idx_r, int mid)
 {
 	int		pivot;
+	int		size;
 
 	pivot = *stacks->sorted[mid];
 
-	printf("idx_l : %d ~ idx_r : %d --> sorted[%d] : %d \n", idx_l, idx_r, mid, pivot);
+	// printf("idx_l : %d ~ idx_r : %d --> sorted[%d] : %d \n", idx_l, idx_r, mid, pivot);
+	size = idx_r - idx_l + 1;
+	// 크기 범위에서 pivot 미만의 값 찾기.
 
-	/* pivot 값을 기준으로 작은 값, 큰 값을 나눔.
-		 나눈다 = 대충 정렬
-		 최소단위로 쪼개졌다 = 자연스럽게 정렬 끝
-		 병합따위 필요 없음.
-	*/
-	/*
-		범위에서 pivot을 찾을 수 있다.
+	//send_a_to_b_desc(&stacks->a, pivot, (idx_r - idx_l + 1));
 
-		pivot을 기준으로 stack
-	*/
 
 
 }
@@ -49,7 +67,7 @@ void		quick_sort(t_stacks *stacks, int idx_l, int idx_r)
 		mid = (idx_l + idx_r) / 2;
 
 			partition(stacks, idx_l, idx_r, mid);
-			quick_sort(stacks, idx_l, mid);
+			quick_sort(stacks, idx_l, mid - 1);
 			quick_sort(stacks, mid + 1, idx_r);
 	}
 }

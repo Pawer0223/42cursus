@@ -3,22 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taekang <taekang@student.42seoul.k>        +#+  +:+       +#+        */
+/*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/16 16:59:37 by taekang           #+#    #+#             */
-/*   Updated: 2020/10/16 17:36:23 by taekang          ###   ########.fr       */
+/*   Updated: 2021/06/01 17:15:20 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "double_list.h"
 
-void	ft_lstadd_front(t_list **lst, t_list *new)
+void	ft_lstadd_front(t_list_db **lst, t_list_db *new)
 {
-	t_list *start;
+	t_list_db *start;
 
 	if (!lst || !new)
 		return ;
-	start = lst[0];
+	start = *lst;
+	if (!start)
+	{
+		*lst = new;
+		return;
+	}
 	new->next = start;
-	lst[0] = new;
+	new->prev = NULL;
+	start->prev = new;
+	*lst = new;
 }

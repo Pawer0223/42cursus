@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 17:48:51 by taesan            #+#    #+#             */
-/*   Updated: 2021/05/29 17:52:00 by taesan           ###   ########.fr       */
+/*   Updated: 2021/06/01 14:55:45 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,17 +59,6 @@
 /*
 	for sort
 */
-typedef	struct	s_sort_2
-{
-	t_list	*left;
-	t_list	*right;
-	t_list	*sorted;
-	int		idx_l;
-	int		idx_r;
-	int		idx_m;
-	int		curr_l;
-	int		curr_r;
-}				t_sort_2;
 
 typedef	struct	s_sort
 {
@@ -84,12 +73,12 @@ typedef	struct	s_sort
 
 typedef	struct	s_stacks
 {
-	t_list	*a;
-	t_list	*b;
-	int		**sorted;
-	int		a_size;
-	int		b_size;
-	int		tree_level;
+	t_list_db	*a;
+	t_list_db	*b;
+	int			**sorted;
+	int			a_size;
+	int			b_size;
+	int			tree_level;
 }				t_stacks;
 
 #endif

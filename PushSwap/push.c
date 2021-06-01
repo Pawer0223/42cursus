@@ -6,28 +6,23 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 17:53:09 by taesan            #+#    #+#             */
-/*   Updated: 2021/05/26 21:45:43 by taesan           ###   ########.fr       */
+/*   Updated: 2021/06/01 17:21:57 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	swap_stack(t_list **add_stack, t_list **rm_stack)
+void	swap_stack(t_list_db **add_stack, t_list_db **rm_stack)
 {
-	t_list *temp;
-
-	temp = *rm_stack;
-	*rm_stack = (*rm_stack)->next;
-	temp->next = *add_stack;
-	*add_stack = temp;
+	ft_lstadd_front(add_stack, pop(rm_stack));
 }
 
 void	push(t_stacks *stacks, char name)
 {
-	t_list	**add_stack;
-	t_list	**rm_stack;
-	int		rm_stack_size;
-	char	other;
+	t_list_db	**add_stack;
+	t_list_db	**rm_stack;
+	int			rm_stack_size;
+	char		other;
 
 	other = (name == A) ? B : A;
 	add_stack = (name == A) ? &stacks->a : &stacks->b;

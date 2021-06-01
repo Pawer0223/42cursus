@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 19:43:00 by taesan            #+#    #+#             */
-/*   Updated: 2021/05/31 20:43:30 by taesan           ###   ########.fr       */
+/*   Updated: 2021/06/01 15:12:34 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define PUSH_SWAP_H
 
 # include "libft/libft.h"
+# include "doubly_linked_list/double_list.h"
 # include "defines.h"
 # include <limits.h>
 # include <stdio.h> // remove !
@@ -36,7 +37,6 @@ void		disconnect_content(void *content);
 	** using_malloc
 */
 int			*make_num(long long num);
-int			init_list(t_list **list, int argc, const char *argv[]);
 int			init_stacks(t_stacks **stacks, char **input);
 /*
 	** using_free
@@ -48,10 +48,10 @@ void		heap_clean(t_stacks *stacks, char **input);
 /*
 	** checks
 */
-int			*check_param(char *str);
-int			duplicate_check(t_list **list, int num);
+int			check_param(char *str);
+int			duplicate_check(t_list_db *list, int num);
 int			check_order_end(char name, int value, int push_d);
-int			check_sorted(t_list *stack, int size);
+int			check_sorted(t_list_db *stack, int size);
 void		edge_check(t_stacks *stacks);
 
 /*
@@ -61,7 +61,6 @@ int			check_stacks(t_stacks *stacks, char num);
 void		size_add(t_stacks *stacks, char num);
 void		size_minus(t_stacks *stacks, char num);
 void		swap_content(void **data1, void **data2);
-int			peek(t_list *stack);
 char		opposite(char c);
 /*
 	** sort

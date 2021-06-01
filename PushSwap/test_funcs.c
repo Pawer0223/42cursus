@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 18:53:12 by taesan            #+#    #+#             */
-/*   Updated: 2021/05/24 17:41:54 by taesan           ###   ########.fr       */
+/*   Updated: 2021/06/01 15:32:16 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@ void	print_space(int cnt)
 		printf(" ");
 }
 
-void	print_line(int cnt, void *content, int is_last, int len)
+void	print_line(int cnt, int content, int is_last, int len)
 {
 	print_space(cnt);
 	if (content)
-		printf("%d", *(int *)content);
+		printf("%d", content);
 	if (len % 2 != 0)
 		cnt++;
 	print_space(cnt);
@@ -50,7 +50,7 @@ int		get_len_test(int n)
 	return len;
 }
 
-void	print_list(void *a_content, void *b_content)
+void	print_list(int a_content, int b_content)
 {
 	// null일 때, 기존 데이터 있는지 없는지
 	// 최대 13자리, 
@@ -58,9 +58,9 @@ void	print_list(void *a_content, void *b_content)
 	int a = 0;
 	int b = 0;
 	if (a_content)
-		a = *(int *)a_content;
+		a = a_content;
 	if (b_content)
-		b = *(int *)b_content;
+		b = b_content;
 	int a_len, b_len;
 	int a_cnt, b_cnt;
 	
@@ -94,8 +94,8 @@ void print_stack(t_stacks *stacks)
 	int max_stack;
 	int min;
 	int max;
-	t_list *min_li;
-	t_list *max_li;
+	t_list_db *min_li;
+	t_list_db *max_li;
 
 	if (stacks->a_size < stacks->b_size)
 	{
@@ -121,14 +121,14 @@ void print_stack(t_stacks *stacks)
 
 		if (i < min_start) {
 			if (max_stack == A) 
-				print_list(max_li->content, 0);
+				print_list(max_li->value, 0);
 		 	else if (max_stack == B)
-				print_list(0, max_li->content);
+				print_list(0, max_li->value);
 		} else {
 			if (max_stack == A) 
-				print_list(max_li->content, min_li->content);
+				print_list(max_li->value, min_li->value);
 			else if (max_stack == B)
-				print_list(min_li->content, max_li->content);
+				print_list(min_li->value, max_li->value);
 			min_li = min_li->next;
 		}
 		max_li = max_li->next;

@@ -43,6 +43,7 @@
         "__cxx_version": "c",
         "__string": "c",
         "typeinfo": "c",
-        "random": "c"
+        "random": "c",
+        "double_list.h": "c"
     }
 }

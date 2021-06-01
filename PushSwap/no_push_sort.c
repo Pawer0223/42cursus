@@ -6,17 +6,17 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 17:43:52 by taesan            #+#    #+#             */
-/*   Updated: 2021/05/30 14:24:08 by taesan           ###   ########.fr       */
+/*   Updated: 2021/06/01 15:29:49 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	set_data(t_list *stack, int data[3])
+void	set_data(t_list_db *stack, int data[3])
 {
-	data[0] = *(int *)stack->content;
-	data[1] = *(int *)stack->next->content;
-	data[2] = *(int *)stack->next->next->content;
+	data[0] = stack->value;
+	data[1] = stack->next->value;
+	data[2] = stack->next->next->value;
 }
 
 void	exec_no_push_sort(t_stacks *stacks)

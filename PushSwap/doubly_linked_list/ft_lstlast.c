@@ -6,13 +6,13 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/16 19:13:44 by taekang           #+#    #+#             */
-/*   Updated: 2021/05/23 15:53:53 by taesan           ###   ########.fr       */
+/*   Updated: 2021/06/01 14:47:02 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "double_list.h"
 
-t_list	*ft_lstlast(t_list *lst)
+t_list_db	*ft_lstlast(t_list_db *lst)
 {
 	while (lst)
 	{

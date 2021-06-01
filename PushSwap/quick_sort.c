@@ -6,7 +6,7 @@
 // /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 // /*                                                +#+#+#+#+#+   +#+           */
 // /*   Created: 2021/05/12 19:06:11 by taesan            #+#    #+#             */
-// /*   Updated: 2021/05/31 19:31:27 by taesan           ###   ########.fr       */
+// /*   Updated: 2021/06/01 14:04:19 by taesan           ###   ########.fr       */
 // /*                                                                            */
 // /* ************************************************************************** */
 
@@ -160,4 +160,9 @@
 // 		push(stacks, A);
 // 	// print_stack(stacks);
 // 	return (1);
+// }
+
+// void	exec_sort(t_stacks *stacks)
+// {
+// 	quick_sort(stacks, 0, stacks->a_size - 1);
 // }

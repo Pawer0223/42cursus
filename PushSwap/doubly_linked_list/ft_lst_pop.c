@@ -1,24 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   ft_lst_pop.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taekang <taekang@student.42seoul.k>        +#+  +:+       +#+        */
+/*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/16 16:16:51 by taekang           #+#    #+#             */
-/*   Updated: 2020/10/16 17:38:03 by taekang          ###   ########.fr       */
+/*   Created: 2021/06/01 17:03:20 by taesan            #+#    #+#             */
+/*   Updated: 2021/06/01 17:30:14 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "double_list.h"
 
-t_list	*ft_lstnew(void *content)
+t_list_db		*pop(t_list_db **list)
 {
-	t_list	*list;
+	t_list_db *start;
 
-	if (!(list = (t_list *)malloc(sizeof(t_list))))
+	start = *list;
+	if (!start)
 		return (0);
-	list->content = content;
-	list->next = NULL;
-	return (list);
+	*list = start->next;
+	if (*list)
+		(*list)->prev = NULL;
+	start->next = NULL;
+	return (start);
 }

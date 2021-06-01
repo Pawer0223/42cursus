@@ -1,21 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
+/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taekang <taekang@student.42seoul.k>        +#+  +:+       +#+        */
+/*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/16 19:36:57 by taekang           #+#    #+#             */
-/*   Updated: 2020/10/17 17:38:49 by taekang          ###   ########.fr       */
+/*   Created: 2020/10/16 19:23:49 by taekang           #+#    #+#             */
+/*   Updated: 2021/06/01 17:16:06 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "double_list.h"
 
-void	ft_lstdelone(t_list *lst, void (*del)(void *))
+void	ft_lstadd_back(t_list_db **lst, t_list_db *new)
 {
-	if (!lst || !del)
+	t_list_db *last;
+
+	if (!lst || !new)
 		return ;
-	del(lst->content);
-	free(lst);
+	if (!*lst)
+		*lst = new;
+	else
+	{
+		last = ft_lstlast(lst[0]);
+		new->next = NULL;
+		new->prev = last;
+		last->next = new;
+	}
 }

@@ -1,28 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstget.c                                        :+:      :+:    :+:   */
+/*   ft_lstclear.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/24 15:25:12 by taesan            #+#    #+#             */
-/*   Updated: 2021/05/24 15:26:08 by taesan           ###   ########.fr       */
+/*   Created: 2020/10/17 16:27:14 by taekang           #+#    #+#             */
+/*   Updated: 2021/06/01 17:32:29 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "double_list.h"
 
-t_list	*get_list(t_list **list, int idx)
+void	ft_lstclear(t_list_db **lst)
 {
-	t_list *temp;
+	t_list_db *curr;
+	t_list_db *next;
 
-	if (!list || !*list)
-		return (0);
-	temp = *list;
-	while (idx > 0)
+	if (!lst)
+		return ;
+	curr = lst[0];
+	while (curr)
 	{
-		temp = temp->next;
-		idx--;
+		next = curr->next;
+		free(curr);
+		curr = next;
 	}
-	return (temp);
+	*lst = 0;
 }

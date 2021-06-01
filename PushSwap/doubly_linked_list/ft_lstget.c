@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
+/*   ft_lstget.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taekang <taekang@student.42seoul.k>        +#+  +:+       +#+        */
+/*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/16 19:23:49 by taekang           #+#    #+#             */
-/*   Updated: 2020/10/19 17:15:45 by taekang          ###   ########.fr       */
+/*   Created: 2021/05/24 15:25:12 by taesan            #+#    #+#             */
+/*   Updated: 2021/06/01 14:47:39 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "double_list.h"
 
-void	ft_lstadd_back(t_list **lst, t_list *new)
+t_list_db	*get_list(t_list_db **list, int idx)
 {
-	t_list *last;
+	t_list_db *temp;
 
-	if (!lst || !new)
-		return ;
-	if (!*lst)
-		*lst = new;
-	else
+	if (!list || !*list)
+		return (0);
+	temp = *list;
+	while (idx > 0)
 	{
-		last = ft_lstlast(lst[0]);
-		last->next = new;
+		temp = temp->next;
+		idx--;
 	}
+	return (temp);
 }

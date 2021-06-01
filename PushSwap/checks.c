@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 18:55:11 by taesan            #+#    #+#             */
-/*   Updated: 2021/05/29 15:29:34 by taesan           ###   ########.fr       */
+/*   Updated: 2021/06/01 15:13:51 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,15 @@
 // 		rotate(stacks, A, 1);
 // }
 
-int		check_sorted(t_list *stack, int size)
+int		check_sorted(t_list_db *stack, int size)
 {
 	int		prev;
 	int		next;
 
 	if (size < 2)
 		return (0);
-	prev = *(int *)stack->content;
-	next = *(int *)stack->next->content;
+	prev = stack->value;
+	next = stack->next->value;
 	if (prev > next)
 		return (0);
 	while (stack)
@@ -47,7 +47,7 @@ int		check_sorted(t_list *stack, int size)
 		prev = next;
 		stack = stack->next;
 		if (stack)
-			next = *(int *)stack->content;
+			next = stack->value;
 	}
 	return (1);
 }
@@ -63,11 +63,8 @@ int		check_order_end(char name, int value, int push_d)
 		return (1);
 	return (0);
 }
-/*
-	**	first white space possible
-	**	next '-' or '+' possible, next only number
-*/
-int			*check_param(char *str)
+
+int			check_param(char *str)
 {
 	int			i;
 	int			flag;
@@ -87,21 +84,19 @@ int			*check_param(char *str)
 		result = result * 10 + (str[i] - '0');
 		i++;
 	}
-	if (!str[i])
-		return (make_num(result * flag));
+	result *= flag;
+	if (!str[i] && result >= INT_MIN && result <= INT_MAX)
+		return (1);
 	return (0);
 }
 
-int			duplicate_check(t_list **list, int num)
+int			duplicate_check(t_list_db *list, int num)
 {
-	t_list *lst;
-
-	lst = *list;
-	while (lst)
+	while (list)
 	{
-		if (*(int *)lst->content == num)
+		if (list->value == num)
 			return (1);
-		lst = lst->next;
+		list = list->next;
 	}
 	return (0);
 }

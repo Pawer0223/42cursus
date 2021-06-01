@@ -1,26 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstsize.c                                       :+:      :+:    :+:   */
+/*   ft_lstiter.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taekang <taekang@student.42seoul.k>        +#+  +:+       +#+        */
+/*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/16 19:02:44 by taekang           #+#    #+#             */
-/*   Updated: 2020/10/16 19:08:56 by taekang          ###   ########.fr       */
+/*   Created: 2020/10/17 18:40:28 by taekang           #+#    #+#             */
+/*   Updated: 2021/06/01 15:33:56 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "double_list.h"
 
-int	ft_lstsize(t_list *lst)
+void	ft_lstiter(t_list_db *lst, void (*f)(int))
 {
-	int result;
-
-	result = 0;
+	if (!lst || !f)
+		return ;
 	while (lst)
 	{
+		f(lst->value);
 		lst = lst->next;
-		result++;
 	}
-	return (result);
 }

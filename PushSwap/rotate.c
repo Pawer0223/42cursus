@@ -6,11 +6,22 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 13:11:26 by taesan            #+#    #+#             */
-/*   Updated: 2021/05/27 15:44:41 by taesan           ###   ########.fr       */
+/*   Updated: 2021/06/01 16:47:56 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+void	swap_value(t_list_db *v1, t_list_db *v2)
+{
+	int temp;
+
+	printf("v1 value : %d, v2 value : %d\n", v1->value, v2->value);
+
+	temp = v1->value;
+	v1->value = v2->value;
+	v2->value = temp;
+}
 
 void	loop_rotate(t_stacks *stacks, char name, int cnt, int is_reverse)
 {
@@ -24,44 +35,39 @@ void	loop_rotate(t_stacks *stacks, char name, int cnt, int is_reverse)
 	}
 }
 
-int		get_prev_idx(int size)
+void	exec_rotate(t_list_db **stack, int is_reverse)
 {
-	return (size - 2);
-}
-
-void	exec_rotate(t_list **stack, int last_prev)
-{
-	t_list	*start;
-	t_list	*last;
-	t_list	*prev;
+	t_list_db	*start;
+	t_list_db	*last;
+	t_list_db	*prev;
 
 	if (!stack || !*stack)
 		return ;
 	start = *stack;
 	last = ft_lstlast(start);
-	if (last_prev != NO_REVERSE)
+	if (is_reverse == NO_REVERSE)
 	{
-		prev = get_list(stack, last_prev);
-		prev->next = 0;
+		*stack = start->next;
+		(*stack)->prev = NULL;
+		start->next = 0;
+		start->prev = last;
 		last->next = start;
-		*stack = last;
 	}
 	else
 	{
-		*stack = start->next;
-		start->next = 0;
+		prev = last->prev;
+		prev->next = NULL;
 		last->next = start;
+		start->prev = last;
+		last->prev = NULL;
+		*stack = last;
 	}
 }
 
 void	rotate(t_stacks *stacks, char name, int is_reverse)
 {
-	if (is_reverse != NO_REVERSE)
-		is_reverse = get_prev_idx(stacks->a_size);
 	if ((name == A || name == ALL) && stacks->a_size > 1)
 		exec_rotate(&stacks->a, is_reverse);
-	if (is_reverse != NO_REVERSE)
-		is_reverse = get_prev_idx(stacks->b_size);
 	if ((name == B || name == ALL) && stacks->b_size > 1)
 		exec_rotate(&stacks->b, is_reverse);
 	if (is_reverse == NO_REVERSE)
