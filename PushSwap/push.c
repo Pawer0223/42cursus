@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 17:53:09 by taesan            #+#    #+#             */
-/*   Updated: 2021/06/01 17:21:57 by taesan           ###   ########.fr       */
+/*   Updated: 2021/06/02 17:55:09 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	push(t_stacks *stacks, char name)
 	int			rm_stack_size;
 	char		other;
 
-	other = (name == A) ? B : A;
+	other = opposite(name);
 	add_stack = (name == A) ? &stacks->a : &stacks->b;
 	rm_stack = (name == A) ? &stacks->b : &stacks->a;
 	rm_stack_size = (name == A) ? stacks->b_size : stacks->a_size;

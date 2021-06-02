@@ -6,9 +6,11 @@
 #    By: taesan <taesan@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/06 16:51:22 by taesan            #+#    #+#              #
-#    Updated: 2021/06/01 17:31:31 by taesan           ###   ########.fr        #
+#    Updated: 2021/06/02 18:41:34 by taesan           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+NAME	= push_swap
 
 LIBFT_DIR		= ./libft
 LIST_DIR		= ./doubly_linked_list
@@ -25,8 +27,6 @@ CC		= arch -x86_64 gcc -g #-g is modify !
 RM		= rm -f
 CFLAGS	= -Wall -Wextra -Werror
 
-NAME	= push_swap
-
 all:		$(NAME)
 
 $(NAME):	$(OBJS) $(LIBFT_OBJS) $(LIST_OBJS)
@@ -40,7 +40,7 @@ fclean:	clean
 
 re:		fclean $(NAME)
 
-leak: 
+leak:
 		leaks -atExit -- ./push_swap
 
-.PHONY:	all clean fclean re checkleak
+.PHONY:	all clean fclean re leak
