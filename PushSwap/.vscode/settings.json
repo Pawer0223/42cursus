@@ -44,6 +44,8 @@
         "__string": "c",
         "typeinfo": "c",
         "random": "c",
-        "double_list.h": "c"
+        "double_list.h": "c",
+        "__tree": "c",
+        "set": "c"
     }
 }

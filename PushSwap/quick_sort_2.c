@@ -6,11 +6,159 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 19:06:11 by taesan            #+#    #+#             */
-/*   Updated: 2021/06/02 18:06:23 by taesan           ###   ########.fr       */
+/*   Updated: 2021/06/03 18:11:12 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+int			check_remain_min(t_stacks *stacks)
+{
+	int			b_top;
+	t_list_db	*a;
+
+	if (!stacks->b)
+		return (1);
+	b_top = stacks->b->value;
+	a = stacks->a;
+	while (a)
+	{
+		if (a->value < b_top)
+			return (0);
+		a = a->next;
+	}
+	return (1);
+}
+
+void		sorting_push_2(t_stacks *stacks)
+{
+	int			idx;
+	int			b_top;
+	int			size;
+	int			mid;
+	t_list_db	*stack;
+	char		push_stack;
+
+	push_stack = A;
+	size = stacks->a_size;
+	mid = (size / 2);
+	while (stacks->b)
+	{
+		idx = 0;
+		stack = stacks->a;
+		b_top = stacks->b->value;
+		while (stack)
+		{
+			if (stack->value > b_top)
+				break;
+			stack = stack->next;
+			idx++;
+		}
+		// b-> a 삽입할껀데, 현재값보다 먼저 큰 값을 만났을 때 멈춘다.
+		/*
+			1. 일단 이동시켜서 맨위로 옮겨놓고,
+
+			2. 삽입을 한다.
+
+			3. 다음으로 top의 값을 계속해서 넣을 수 있는지 한번 더 확인한다.
+			  - is_possible ? 다 넣고 끝.
+			  - is_not_possible ? 처음으로 돌아가서 반복.
+		*/
+		if (idx == 0)
+			push(stacks, push_stack);
+		else if (idx == 1)
+		{
+			//printf("#1\n");
+			push(stacks, push_stack);
+			swap(stacks, push_stack);
+		}
+		else if (idx == size)
+		{
+			//printf("#2\n");
+			push(stacks, push_stack);
+			rotate(stacks, push_stack, NO_REVERSE);
+		}
+		else if (idx <= mid)
+		{
+			//printf("#3\n");
+			loop_rotate(stacks, push_stack, idx, NO_REVERSE);
+			loop_rotate(stacks, push_stack, idx - 1, NO_REVERSE);
+			int prev = stacks->a->value;
+			//printf("prev: %d, stacks->b->value : %d\n", prev, stacks->b->value);
+			rotate(stacks, push_stack, NO_REVERSE);
+			while (stacks->b && stacks->b->value > prev)
+				push(stacks, push_stack);
+			loop_rotate(stacks, push_stack, idx, 1);
+			return ;
+		}
+		else if (idx > mid)
+		{
+			// printf("#4\n");
+			idx = size - idx;
+			loop_rotate(stacks, push_stack, idx - 1, 1);
+			int prev = stacks->a->value;
+			//printf("prev: %d, stacks->b->value : %d\n", prev, stacks->b->value);
+			rotate(stacks, push_stack, 1);
+			while (stacks->b && stacks->b->value > prev)
+				push(stacks, push_stack);
+			loop_rotate(stacks, push_stack, idx + 1, NO_REVERSE);
+		}
+	}
+}
+
+void		check_ordered(t_stacks *stacks)
+{
+	t_list_db	*i;
+	t_list_db	*j;
+	int			seq;
+	int			mid;
+	int			prev;
+	int			idx;
+	int			idx_2;
+
+	idx = 0;
+	mid = stacks->a_size / 2;
+	i = stacks->a;
+	while (i)
+	{
+		seq = 0;
+		j = i->next;
+		prev = i->value;
+		while (j && prev < j->value)
+		{
+			prev = j->value;
+			j = j->next;
+			seq++;
+		}
+		if (seq > mid)
+		{
+			// printf("idx : %d, seq : %d, mid : %d\n", idx, seq, mid);
+			idx_2 = 0;
+			while (idx_2 < idx)
+			{
+				push(stacks, B);
+				idx_2++;
+			}
+			idx_2 = stacks->a_size - (seq + 1);
+			seq = idx_2;
+			// printf("idx_2 : %d\n", idx_2);
+			while (idx_2 > 0)
+			{
+				rotate(stacks, A, 1);
+				idx_2--;
+			}
+			while (seq > 0)
+			{
+				push(stacks, B);
+				seq--;
+			}
+			sorting_push_2(stacks);
+			return ;
+		}
+		i = i->next;
+		idx++;
+	}
+}
 
 void		sorting_push(t_stacks *stacks, char name, int push_d)
 {
@@ -72,15 +220,14 @@ int			send_a_to_b_desc(t_stacks *stacks, int pivot)
 	int			data;
 	int			front;
 	int			back;
-	//printf("pivot : %d, size : %d\n", pivot, size);
-
+	// printf("pivot : [%d]\n", pivot);
 	// size의 데이터를 1 ~ 4 과정을 통해서 보냄.
-	// 1. 앞에서 pivot보다 작은 값을 찾을때까지
 	while (stacks->a)
 	{
+		// 1. 앞에서 pivot보다 작은 값을 찾을때까지
 		start = stacks->a;
 		front = 0;
-		while (start && start->value >= pivot)
+		while (start && start->value > pivot) // 작거나 같으면 멈춰서 그 데이터 보내야 함
 		{
 			start = start->next;
 			front++;
@@ -88,15 +235,15 @@ int			send_a_to_b_desc(t_stacks *stacks, int pivot)
 		// 2. 뒤에서 pivot보다 작은 값을 찾을때까지
 		last = ft_lstlast(stacks->a);
 		back = 0;
-		while (last && last->value >= pivot)
+		while (last && last->value > pivot) // 작거나 같으면 멈춰서 그 데이터 보내야 함
 		{
 			last = last->prev;
 			back++;
 		}
 		if (front == stacks->a_size && back == stacks->a_size)
 			break;
-		//printf("front : %d, back : %d\n", front, back);
 		back++;
+		//printf("front : %d, back : %d\n", front, back);
 		// 3. 1, 2중 더 빨리 보낼 수 있는걸 먼저 보냄.
 		if (front <= back)
 		{
@@ -130,19 +277,18 @@ int			send_a_to_b_desc(t_stacks *stacks, int pivot)
 			//printf("push data : %d, b to : %d\n", data, stacks->b->value);
 			sorting_push(stacks, A, data);
 		}
-		
 		// 5. 정렬이 되어있는지 확인 후. 정렬이 되어있다면 더이상 push할 필요가 없음.
 		if (check_sorted(stacks->a, stacks->a_size))
 			return (1);
-		//print_stack(stacks);
+		// print_stack(stacks);
 	}
 	return (0);
 }
 /*
 	피벗 기준으로 작은수를 B로 큰수를 A로 저장.
 
-	stacks->a ==> value >= pivot 
-	stacks->b ==> value < pivot
+	stacks->a ==> value > pivot 
+	stacks->b ==> value <= pivot
 */
 int		partition(t_stacks *stacks, int mid)
 {
@@ -150,20 +296,23 @@ int		partition(t_stacks *stacks, int mid)
 	
 	pivot = *stacks->sorted[mid];
 
-	//printf("--------- idx_l : %d ~ idx_r : %d --> sorted[%d] : %d ---------\n", idx_l, idx_r, mid, pivot);
+	// 0 1 2 3      mid = 2
+	// 0 1 2 3 4    mid = 2
+
 	// pivot을 포함하지않는 n개의 데이터
 	if (stacks->a_size <= 3)
 		no_push_sort(stacks);
 	if (send_a_to_b_desc(stacks, pivot))
 	{
-		while (stacks->b)
-		{
-			// 여기서는, 정렬되어있기 때문에 한방에 넣어도 될듯.
-			// 되감기가 필요 없을듯.
-			sorting_push(stacks, B, stacks->b->value);
-			if (!stacks->b)
-				break ;
-		}
+		// while (stacks->b)
+		// {
+		// 	// 여기서는, 정렬되어있기 때문에 한방에 넣어도 될듯.
+		// 	// 되감기가 필요 없을듯.
+		// 	sorting_push(stacks, B, stacks->b->value);
+		// 	if (!stacks->b)
+		// 		break ;
+		// }
+		sorting_push_2(stacks);
 		//printf("### 2 ###\n");
 		//print_stack(stacks);
 		return (1);
@@ -180,21 +329,19 @@ void		quick_sort(t_stacks *stacks, int idx_l, int idx_r)
 	if (idx_l < idx_r)
 	{
 		mid = (idx_l + idx_r) / 2;
+		// printf("--------- idx_l : %d ~ idx_r : %d --> sorted[%d] : %d ---------\n", idx_l, idx_r, mid, *stacks->sorted[mid]);
 		if (!partition(stacks, mid))
 		{
+			// print_stack(stacks);
 			quick_sort(stacks, idx_l, mid);
-			quick_sort(stacks, mid + 1, idx_r);
+			//quick_sort(stacks, mid + 1, idx_r);
 		}
-		// if (!partition(stacks, idx_l, idx_r, mid))
-		// {
-		// 	// quick_sort(stacks, idx_l, mid);
-		// 	quick_sort(stacks, mid + 1, idx_r);
-		// }
 	}
 }
 
 void	exec_sort(t_stacks *stacks)
 {
+	check_ordered(stacks);
 	quick_sort(stacks, 0, stacks->a_size - 1);
 
 	//printf("--- sorting end stack .. ---");
@@ -202,5 +349,6 @@ void	exec_sort(t_stacks *stacks)
 
 	while (stacks->b)
 		push(stacks, A);
-	//print_stack(stacks);
+	
+	// print_stack(stacks);
 }
