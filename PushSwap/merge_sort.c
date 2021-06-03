@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 19:06:11 by taesan            #+#    #+#             */
-/*   Updated: 2021/06/02 20:21:01 by taesan           ###   ########.fr       */
+/*   Updated: 2021/06/04 01:36:33 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void		compare_fill(int **sorted, int **temp, t_sort *info)
 {
 	while (info->curr_l <= info->idx_m && info->curr_r <= info->idx_r)
 	{
-		if (*sorted[info->curr_l] >= *sorted[info->curr_r])
+		if (*sorted[info->curr_l] <= *sorted[info->curr_r])
 			temp[info->k++] = sorted[info->curr_l++];
 		else
 			temp[info->k++] = sorted[info->curr_r++];

@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 17:48:51 by taesan            #+#    #+#             */
-/*   Updated: 2021/06/01 17:54:20 by taesan           ###   ########.fr       */
+/*   Updated: 2021/06/04 02:45:03 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@
 # define RRA "rra"
 # define RRB "rrb"
 # define RRR "rrr"
+# define SECTION_STD 65
 
 /*
 	for sort

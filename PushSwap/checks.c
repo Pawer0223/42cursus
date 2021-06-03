@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 18:55:11 by taesan            #+#    #+#             */
-/*   Updated: 2021/06/01 15:13:51 by taesan           ###   ########.fr       */
+/*   Updated: 2021/06/03 20:36:00 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@
 // 	else if (last == stacks->min)
 // 		rotate(stacks, A, 1);
 // }
-
 int		check_sorted(t_list_db *stack, int size)
 {
 	int		prev;

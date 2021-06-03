@@ -6,11 +6,17 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 19:06:11 by taesan            #+#    #+#             */
-/*   Updated: 2021/06/03 18:11:03 by taesan           ###   ########.fr       */
+/*   Updated: 2021/06/04 03:42:24 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+void exec_sort(t_stacks * stacks)
+{
+	quick_sort(stacks);
+	sorting_push_b_to_a(stacks);
+}
 
 int		main(int argc, const char *argv[])
 {
@@ -27,7 +33,6 @@ int		main(int argc, const char *argv[])
 			heap_clean(stacks, input);
 			return (error_occur());
 		}
-		// edge_check(stacks);
 		if(!check_sorted(stacks->a, stacks->a_size))
 		{
 			if (stacks->a_size <= 3)
@@ -35,9 +40,6 @@ int		main(int argc, const char *argv[])
 			else
 				exec_sort(stacks);
 		}
-		// print_stack(stacks);
-		// 	//merge_sort(stacks, 0, stacks->a_size - 1);
-		//test(stacks);
 		heap_clean(stacks, input);		
 	}
 }

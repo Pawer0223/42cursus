@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 19:43:00 by taesan            #+#    #+#             */
-/*   Updated: 2021/06/02 17:38:44 by taesan           ###   ########.fr       */
+/*   Updated: 2021/06/04 03:38:39 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,12 +65,9 @@ char		opposite(char c);
 /*
 	** sort
 */
-// int			merge_sort(t_stacks *stacks, int idx_l, int idx_r);
-// int			merge_sort(t_list *stack, int idx_l, int idx_r);
 void		merge_sort(int **sorted, int **temp, int idx_l, int idx_r);
-//int			ft_sort(t_stacks *stacks, int size);
-//int			quick_sort(t_stacks *stacks, int idx_l, int idx_r);
-void		exec_sort(t_stacks *stacks);
+void		quick_sort(t_stacks *stacks);
+void		sorting_push_b_to_a(t_stacks *stacks);
 /*
 	** math
 */
