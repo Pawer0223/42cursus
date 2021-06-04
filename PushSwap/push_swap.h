@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 19:43:00 by taesan            #+#    #+#             */
-/*   Updated: 2021/06/04 15:18:10 by taesan           ###   ########.fr       */
+/*   Updated: 2021/06/04 20:48:45 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,9 @@ void		sorting_push_b_to_a(t_stacks *stacks);
 */
 void		print_inst(char *instruction, char name);
 /*
-	no_push_sort
+	below_four
 */
-void		no_push_sort(t_stacks *stacks);
+void		below_five(t_stacks *stacks);
 /*
 	** test_funcs
 */

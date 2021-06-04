@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 19:06:11 by taesan            #+#    #+#             */
-/*   Updated: 2021/06/04 03:46:37 by taesan           ###   ########.fr       */
+/*   Updated: 2021/06/04 21:22:46 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,12 @@ int		main(int argc, const char *argv[])
 		}
 		if(!check_sorted(stacks->a, stacks->a_size))
 		{
-			if (stacks->a_size <= 3)
-				no_push_sort(stacks);
+			if (stacks->a_size <= 5)
+				below_five(stacks);
 			else
 				exec_sort(stacks);
 		}
-		heap_clean(stacks, input);		
+		heap_clean(stacks, input);
+		printf("test\n");		
 	}
 }

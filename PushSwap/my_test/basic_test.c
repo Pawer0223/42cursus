@@ -18,7 +18,6 @@ void		permutation(int seq, char *visited, char *pos)
 		setenv(ARG, pos, 1);
 		// system("echo $ARG");
 		system("./test.sh");
-		//print_data(pos);
 		return ;
 	}
 	for (int i = 0; i < size; i++)
