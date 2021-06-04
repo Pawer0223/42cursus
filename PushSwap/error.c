@@ -6,17 +6,11 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/10 18:13:58 by taesan            #+#    #+#             */
-/*   Updated: 2021/06/01 15:17:52 by taesan           ###   ########.fr       */
+/*   Updated: 2021/06/04 15:17:32 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-void	disconnect_content(void *content)
-{
-	content = 0;
-	return ;
-}
 
 int		error_occur()
 {

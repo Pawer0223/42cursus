@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 17:48:51 by taesan            #+#    #+#             */
-/*   Updated: 2021/06/04 02:45:03 by taesan           ###   ########.fr       */
+/*   Updated: 2021/06/04 15:16:33 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,30 +40,10 @@
 # define SECTION_STD 65
 
 /*
-	for sort
+	using stacks->sorted
 */
-// typedef	struct	s_sort
-// {
-// 	int		idx_l;
-// 	int		idx_r;
-// 	int		idx_m;
-// 	int		level;
-// 	int		block_cnt;
-// 	int		*sorted_size;
-// 	int		*data_size;
-// 	char	data_nm;
-// 	char	sorted_nm;
-// 	t_list	**data;
-// 	t_list	**sorted;
-// }				t_sort;
-
-/*
-	for sort
-*/
-
 typedef	struct	s_sort
 {
-	//sorted is s_stacks->sorted
 	int		idx_l;
 	int		idx_r;
 	int		idx_m;
@@ -79,7 +59,6 @@ typedef	struct	s_stacks
 	int			**sorted;
 	int			a_size;
 	int			b_size;
-	int			tree_level;
 }				t_stacks;
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 15:48:51 by taesan            #+#    #+#             */
-/*   Updated: 2021/06/01 19:04:40 by taesan           ###   ########.fr       */
+/*   Updated: 2021/06/04 15:19:06 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ void	free_stacks(t_stacks *stacks)
 	stacks->b = 0;
 	stacks->a_size = 0;
 	stacks->b_size = 0;
-	stacks->tree_level = 0;
 	free(stacks);
 }
 

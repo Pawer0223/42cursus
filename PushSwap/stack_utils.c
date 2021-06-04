@@ -6,11 +6,18 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 17:15:58 by taesan            #+#    #+#             */
-/*   Updated: 2021/06/01 15:21:30 by taesan           ###   ########.fr       */
+/*   Updated: 2021/06/04 15:42:55 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+char	opposite(char c)
+{
+	if (c == A)
+		return (B);
+	return (A);
+}
 
 int		check_stacks(t_stacks *stacks, char num)
 {

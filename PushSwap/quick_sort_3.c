@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 19:06:11 by taesan            #+#    #+#             */
-/*   Updated: 2021/06/04 03:41:26 by taesan           ###   ########.fr       */
+/*   Updated: 2021/06/04 15:38:14 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,33 +38,36 @@ void	rotate_stack(t_stacks *stacks, int front, int back)
 		}
 	}
 }
+
+int			get_start_seq(t_stacks *stacks, int pivot, int is_back)
+{
+	t_list_db	*temp;
+	int			seq;
+
+	temp = stacks->a;
+	if (is_back)
+		temp = ft_lstlast(temp);
+	seq = 0;
+	while (temp && temp->value > pivot)
+	{
+		temp = (is_back) ? temp->prev : temp->next;
+		seq++;
+	}	
+	return (seq);
+}
 /*
 	**	stacks->a ==> value > pivot 
 	**	stacks->b ==> value <= pivot
 */
-void	partition(t_stacks *stacks, int pivot)
+void		partition(t_stacks *stacks, int pivot)
 {
 	int			front;
 	int			back;
-	t_list_db	*last;
-	t_list_db	*start;
 	
 	while (stacks->a)
 	{
-		start = stacks->a;
-		front = 0;
-		while (start && start->value > pivot)
-		{
-			start = start->next;
-			front++;
-		}
-		last = ft_lstlast(stacks->a);
-		back = 0;
-		while (last && last->value > pivot)
-		{
-			last = last->prev;
-			back++;
-		}
+		front = get_start_seq(stacks, pivot, 0);
+		back = get_start_seq(stacks, pivot, 1);
 		if (front == stacks->a_size && back == stacks->a_size)
 			break;
 		back++;
@@ -72,7 +75,6 @@ void	partition(t_stacks *stacks, int pivot)
 		push(stacks, B);
 	}
 }
-
 /*
 	**	size 165 more than, 65range plus 1 section
 */

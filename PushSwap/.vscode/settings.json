@@ -46,6 +46,13 @@
         "random": "c",
         "double_list.h": "c",
         "__tree": "c",
-        "set": "c"
+        "set": "c",
+        "__debug": "c",
+        "exception": "c",
+        "istream": "c",
+        "mutex": "c",
+        "ostream": "c",
+        "sstream": "c",
+        "streambuf": "c"
     }
 }

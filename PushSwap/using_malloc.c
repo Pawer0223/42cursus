@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 18:38:24 by taesan            #+#    #+#             */
-/*   Updated: 2021/06/01 19:07:23 by taesan           ###   ########.fr       */
+/*   Updated: 2021/06/04 15:14:57 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,6 @@ int			init_stacks(t_stacks **stacks, char **input)
 	(*stacks)->a_size = 0;
 	if (!make_stack(&(*stacks)->a, &(*stacks)->a_size, input))
 		return (0);
-	(*stacks)->tree_level = ft_sqrt((*stacks)->a_size);
 	(*stacks)->b_size = 0;
 	if (!make_sorted_data(*stacks))
 		return (0);

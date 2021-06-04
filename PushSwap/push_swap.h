@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 19:43:00 by taesan            #+#    #+#             */
-/*   Updated: 2021/06/04 03:38:39 by taesan           ###   ########.fr       */
+/*   Updated: 2021/06/04 15:18:10 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,6 @@ void		swap_if(t_stacks *s, char name);
 	** error
 */
 int			error_occur();
-void		delete_content(void *content);
-void		disconnect_content(void *content);
 /*
 	** using_malloc
 */
@@ -44,23 +42,17 @@ int			init_stacks(t_stacks **stacks, char **input);
 void		free_stacks(t_stacks *stacks);
 void		free_input(char **input);
 void		heap_clean(t_stacks *stacks, char **input);
-
 /*
 	** checks
 */
 int			check_param(char *str);
 int			duplicate_check(t_list_db *list, int num);
-int			check_order_end(char name, int value, int push_d);
 int			check_sorted(t_list_db *stack, int size);
-void		edge_check(t_stacks *stacks);
-
 /*
 	** utils
 */
-int			check_stacks(t_stacks *stacks, char num);
 void		size_add(t_stacks *stacks, char num);
 void		size_minus(t_stacks *stacks, char num);
-void		swap_content(void **data1, void **data2);
 char		opposite(char c);
 /*
 	** sort
@@ -68,12 +60,6 @@ char		opposite(char c);
 void		merge_sort(int **sorted, int **temp, int idx_l, int idx_r);
 void		quick_sort(t_stacks *stacks);
 void		sorting_push_b_to_a(t_stacks *stacks);
-/*
-	** math
-*/
-int			ft_sqrt(unsigned int n);
-int			ft_min(int a, int b);
-int			ft_max(int a, int b);
 /*
 	** common
 */
