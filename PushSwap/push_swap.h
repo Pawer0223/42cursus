@@ -6,15 +6,15 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 19:43:00 by taesan            #+#    #+#             */
-/*   Updated: 2021/06/04 20:48:45 by taesan           ###   ########.fr       */
+/*   Updated: 2021/06/06 02:00:55 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-# include "libft/libft.h"
 # include "doubly_linked_list/double_list.h"
+# include "libft/libft.h"
 # include "defines.h"
 # include <limits.h>
 # include <stdio.h> // remove !
@@ -65,7 +65,7 @@ void		sorting_push_b_to_a(t_stacks *stacks);
 */
 void		print_inst(char *instruction, char name);
 /*
-	below_four
+	** below_four
 */
 void		below_five(t_stacks *stacks);
 /*

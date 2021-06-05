@@ -6,14 +6,14 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 17:48:51 by taesan            #+#    #+#             */
-/*   Updated: 2021/06/04 15:16:33 by taesan           ###   ########.fr       */
+/*   Updated: 2021/06/05 21:44:45 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef DEFINES_H
 # define DEFINES_H
 
-#include "libft/libft.h"
+#include "doubly_linked_list/double_list.h"
 
 # define ERROR "Error"
 # define STACK_N "Stacks is NULL"

@@ -53,6 +53,8 @@
         "mutex": "c",
         "ostream": "c",
         "sstream": "c",
-        "streambuf": "c"
+        "streambuf": "c",
+        "limits.h": "c",
+        "stdio.h": "c"
     }
 }

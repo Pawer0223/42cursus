@@ -6,51 +6,17 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 18:38:24 by taesan            #+#    #+#             */
-/*   Updated: 2021/06/04 15:14:57 by taesan           ###   ########.fr       */
+/*   Updated: 2021/06/05 21:40:17 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-// int			*make_num(long long num)
-// {
-// 	int	*ptr;
-
-// 	if (num < INT_MIN || num > INT_MAX)
-// 		return (0);
-// 	if (!(ptr = (int *)malloc(sizeof(int))))
-// 		return (0);
-// 	*ptr = (int)num;
-// 	return (ptr);
-// }
-
-// int			make_stack(t_list_db **list, int *len, char **input)
-// {
-// 	int			*num;
-// 	t_list_db	*data;
-
-// 	while (input[*len])
-// 	{
-// 		if (!(num = check_param(input[*len])))
-// 			return (0);
-// 		if (duplicate_check(list, *num) || !(data = ft_lstnew(num)))
-// 		{
-// 			free(num);
-// 			return (0);
-// 		}
-// 		if (*len == 0)
-// 			*list = data;
-// 		else
-// 			ft_lstadd_back(list, data);
-// 		*len += 1;
-// 	}
-// 	return (1);
-// }
 /*
 	**	first white space possible
 	**	next '-' or '+' possible, next only number
 */
-int			my_atoi(char *str)
+int			push_swap_atoi(char *str)
 {
 	int			i;
 	int			flag;
@@ -83,7 +49,7 @@ int			make_stack(t_list_db **list, int *len, char **input)
 	{
 		if (!check_param(input[*len]))
 			return (0);
-		value = my_atoi(input[*len]);
+		value = push_swap_atoi(input[*len]);
 		if (duplicate_check(*list, value) || !(data = ft_lstnew(value)))
 			return (0);
 		ft_lstadd_back(list, data);
@@ -134,7 +100,5 @@ int			init_stacks(t_stacks **stacks, char **input)
 	(*stacks)->b_size = 0;
 	if (!make_sorted_data(*stacks))
 		return (0);
-	// for (int i = 0; i < (*stacks)->a_size; i++)
-	// 	printf("%d => ", *(*stacks)->sorted[i]);
 	return (1);
 }
