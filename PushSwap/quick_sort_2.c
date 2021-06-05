@@ -6,7 +6,7 @@
 // /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 // /*                                                +#+#+#+#+#+   +#+           */
 // /*   Created: 2021/05/12 19:06:11 by taesan            #+#    #+#             */
-// /*   Updated: 2021/06/04 03:22:30 by taesan           ###   ########.fr       */
+// /*   Updated: 2021/06/05 20:00:30 by taesan           ###   ########.fr       */
 // /*                                                                            */
 // /* ************************************************************************** */
 
@@ -33,60 +33,7 @@
 // /*
 // 	a -> b
 // */
-// // void		sorting_push(t_stacks *stacks, char name, int push_d)
-// // {
-// // 	int			idx;
-// // 	int			size;
-// // 	int			mid;
-// // 	t_list_db	*stack;
-// // 	char		push_stack;
-
-// // 	push_stack = (name == A) ? B : A;
-// // 	stack = (name == A) ? stacks->b : stacks->a;
-// // 	size = (name == A) ? stacks->b_size : stacks->a_size;
-// // 	mid = (size / 2);
-
-// // 	idx = 0;
-// // 	while (stack)
-// // 	{
-// // 		if (name == A && push_d > stack->value)
-// // 			break ;
-// // 		if (name == B && push_d <= stack->value)
-// // 			break ;
-// // 		stack = stack->next;
-// // 		idx++;
-// // 	}
-// // 	//printf("insert idx : %d\n", idx);
-// // 	if (idx == 1)
-// // 	{
-// // 		//printf("#1\n");
-// // 		push(stacks, push_stack);
-// // 		swap(stacks, push_stack);
-// // 	}
-// // 	else if (idx == size)
-// // 	{
-// // 		//printf("#2\n");
-// // 		push(stacks, push_stack);
-// // 		rotate(stacks, push_stack, NO_REVERSE);
-// // 	}
-// // 	else if (idx <= mid)
-// // 	{
-// // 		//printf("#3\n");
-// // 		loop_rotate(stacks, push_stack, idx, NO_REVERSE);
-// // 		push(stacks, push_stack);
-// // 		loop_rotate(stacks, push_stack, idx, 1);
-// // 	}
-// // 	else if (idx > mid)
-// // 	{
-// // 		//printf("#4\n");
-// // 		idx = size - idx;
-// // 		loop_rotate(stacks, push_stack, idx, 1);
-// // 		push(stacks, push_stack);
-// // 		loop_rotate(stacks, push_stack, idx + 1, NO_REVERSE);
-// // 	}
-// // }
-
-// void		sorting_push(t_stacks *stacks, char name)
+// void		sorting_push(t_stacks *stacks, char name, int push_d)
 // {
 // 	int			idx;
 // 	int			size;
@@ -96,53 +43,49 @@
 
 // 	push_stack = (name == A) ? B : A;
 // 	stack = (name == A) ? stacks->b : stacks->a;
-
+// 	size = (name == A) ? stacks->b_size : stacks->a_size;
+// 	mid = (size / 2);
 
 // 	idx = 0;
-// 	int		min;
-// 	int		min_idx;
-
-// 	min = INT_MAX;
 // 	while (stack)
 // 	{
-// 		if (stack->value <= min)
-// 		{
-// 			min_idx = idx;
-// 			min = stack->value;
-// 		}
+// 		if (name == A && push_d > stack->value)
+// 			break ;
+// 		if (name == B && push_d <= stack->value)
+// 			break ;
 // 		stack = stack->next;
 // 		idx++;
 // 	}
-
-// 	size = (name == A) ? stacks->b_size : stacks->a_size;
-// 	mid = (size / 2) - 1;
 // 	//printf("insert idx : %d\n", idx);
-// 	if (min_idx == 1)
+// 	if (idx == 1)
 // 	{
 // 		//printf("#1\n");
-// 		swap(stacks, push_stack);
 // 		push(stacks, push_stack);
+// 		swap(stacks, push_stack);
 // 	}
-// 	else if (min_idx == size - 1)
+// 	else if (idx == size)
 // 	{
 // 		//printf("#2\n");
-// 		rotate(stacks, push_stack, 1);
 // 		push(stacks, push_stack);
+// 		rotate(stacks, push_stack, NO_REVERSE);
 // 	}
-// 	else if (min_idx <= mid)
+// 	else if (idx <= mid)
 // 	{
 // 		//printf("#3\n");
-// 		loop_rotate(stacks, push_stack, min_idx, NO_REVERSE);
+// 		loop_rotate(stacks, push_stack, idx, NO_REVERSE);
 // 		push(stacks, push_stack);
+// 		loop_rotate(stacks, push_stack, idx, 1);
 // 	}
-// 	else if (min_idx > mid)
+// 	else if (idx > mid)
 // 	{
 // 		//printf("#4\n");
-// 		idx = size - min_idx;
+// 		idx = size - idx;
 // 		loop_rotate(stacks, push_stack, idx, 1);
 // 		push(stacks, push_stack);
+// 		loop_rotate(stacks, push_stack, idx + 1, NO_REVERSE);
 // 	}
 // }
+
 
 // void		sorting_push_2(t_stacks *stacks)
 // {
@@ -220,61 +163,6 @@
 // 	}
 // }
 
-// void		check_ordered(t_stacks *stacks)
-// {
-// 	t_list_db	*i;
-// 	t_list_db	*j;
-// 	int			seq;
-// 	int			mid;
-// 	int			prev;
-// 	int			idx;
-// 	int			idx_2;
-
-// 	idx = 0;
-// 	mid = stacks->a_size / 2;
-// 	i = stacks->a;
-// 	while (i)
-// 	{
-// 		seq = 0;
-// 		j = i->next;
-// 		prev = i->value;
-// 		while (j && prev < j->value)
-// 		{
-// 			prev = j->value;
-// 			j = j->next;
-// 			seq++;
-// 		}
-// 		if (seq > mid)
-// 		{
-// 			// printf("idx : %d, seq : %d, mid : %d\n", idx, seq, mid);
-// 			idx_2 = 0;
-// 			while (idx_2 < idx)
-// 			{
-// 				sorting_push(stacks, A);
-// 				idx_2++;
-// 			}
-// 			idx_2 = stacks->a_size - (seq + 1);
-// 			seq = idx_2;
-// 			// printf("idx_2 : %d\n", idx_2);
-// 			while (idx_2 > 0)
-// 			{
-// 				rotate(stacks, A, 1);
-// 				idx_2--;
-// 			}
-// 			while (seq > 0)
-// 			{
-// 				sorting_push(stacks, A);
-// 				seq--;
-// 			}
-// 			sorting_push_2(stacks);
-// 			return ;
-// 		}
-// 		i = i->next;
-// 		idx++;
-// 	}
-
-// }
-
 // int			send_a_to_b_desc(t_stacks *stacks, int pivot)
 // {
 // 	t_list_db	*last;
@@ -328,20 +216,20 @@
 // 			}
 // 		}
 // 		// 4 - 1. push하기전에 확인. -> 정렬이 되어있는지
-// 		// if (check_sorted(stacks->a, stacks->a_size))
-// 		// 	return (1);
+// 		if (check_sorted(stacks->a, stacks->a_size))
+// 			return (1);
 // 		data = stacks->a->value;
 // 		// 4. push하기전에 확인. -> 큰 값이 가장 상단에 유지될 수 있도록 (desc)
 // 		if (!stacks->b || data > stacks->b->value)
 // 			push(stacks, B);
 // 		else
 // 		{
-// 			// printf("push data : %d, top of b  : %d\n", data, stacks->b->value);
-// 			sorting_push(stacks, A);
+// 			printf("push data : %d, top of b  : %d\n", data, stacks->b->value);
+// 			sorting_push(stacks, A, data);
 // 		}
 // 		// 5. 정렬이 되어있는지 확인 후. 정렬이 되어있다면 더이상 push할 필요가 없음.
-// 		// if (check_sorted(stacks->a, stacks->a_size))
-// 		// 	return (1);
+// 		if (check_sorted(stacks->a, stacks->a_size))
+// 			return (1);
 // 		// print_stack(stacks);
 // 	}
 // 	return (0);
@@ -362,29 +250,16 @@
 // 	// 0 1 2 3 4    mid = 2
 
 // 	// pivot을 포함하지않는 n개의 데이터
-// 	if (stacks->a_size <= 3)
-// 		no_push_sort(stacks);
-// 	// if (send_a_to_b_desc(stacks, pivot))
-// 	// {
-// 	// 	// while (stacks->b)
-// 	// 	// {
-// 	// 	// 	// 여기서는, 정렬되어있기 때문에 한방에 넣어도 될듯.
-// 	// 	// 	// 되감기가 필요 없을듯.
-// 	// 	// 	sorting_push(stacks, B, stacks->b->value);
-// 	// 	// 	if (!stacks->b)
-// 	// 	// 		break ;
-// 	// 	// }
-// 	// 	sorting_push_2(stacks);
-// 	// 	//printf("### 2 ###\n");
-// 	// 	//print_stack(stacks);
-// 	// 	return (1);
-// 	// }
-// 	send_a_to_b_desc(stacks, pivot);
+// 	if (send_a_to_b_desc(stacks, pivot))
+// 	{
+// 		sorting_push_2(stacks);
+// 		return (1);
+// 	}
 // 	//print_stack(stacks);
 // 	return (0);
 // }
 
-// void		quick_sort(t_stacks *stacks, int idx_l, int idx_r)
+// void		quick_sort_test(t_stacks *stacks, int idx_l, int idx_r)
 // {
 // 	int mid;
 
@@ -400,71 +275,17 @@
 // 		mid = (idx_l + idx_r) / 2;
 // 		// printf("--------- idx_l : %d ~ idx_r : %d --> sorted[%d] : %d ---------\n", idx_l, idx_r, mid, *stacks->sorted[mid]);
 // 		if (!partition(stacks, mid))
-// 			quick_sort(stacks, idx_l, mid);
+// 			quick_sort_test(stacks, idx_l, mid);
 // 	}
 // }
 
-// void	exec_sort(t_stacks *stacks)
+// void	quick_sort(t_stacks *stacks)
 // {
-// 	check_ordered(stacks);
-// 	quick_sort(stacks, 0, stacks->a_size - 1);
+// 	quick_sort_test(stacks, 0, stacks->a_size - 1);
 
 // 	// printf("--- sorting end stack .. ---\n");
 // 	//print_stack(stacks);
 // 	while (stacks->b)
-// 	{
-// 		t_list_db 	*temp;
-// 		int			max;
-// 		int			max_idx;
-// 		int			idx;
-// 		int			size;
-// 		int			mid;
-
-// 		max = INT_MIN;
-// 		max_idx = 0;
-// 		temp = stacks->b;
-// 		idx = 0;
-// 		// print_stack(stacks);
-// 		while (temp)
-// 		{
-// 			if (temp->value >= max)
-// 			{
-// 				max_idx = idx;
-// 				max = temp->value;
-// 			}
-// 			temp = temp->next;
-// 			idx++;
-// 		}
-// 		size = stacks->b_size;
-// 		mid = size / 2 - 1;
-// 		// printf("max_idx : %d, size : %d, mid : %d\n", max_idx, size, mid);
-// 		if (max_idx == 0)
-// 			push(stacks, A);
-// 		else if (max_idx == 1)
-// 		{
-// 			// printf("#1\n");
-// 			swap(stacks, B);
-// 			push(stacks, A);
-// 		}
-// 		else if (max_idx == size - 1)
-// 		{
-// 			// printf("#2\n");
-// 			rotate(stacks, B, 1);
-// 			push(stacks, A);
-// 		}
-// 		else if (max_idx <= mid)
-// 		{
-// 			// printf("#3\n");
-// 			loop_rotate(stacks, B, max_idx, NO_REVERSE);
-// 			push(stacks, A);
-// 		}
-// 		else if (max_idx > mid)
-// 		{
-// 			// printf("#4\n");
-// 			idx = size - max_idx;
-// 			loop_rotate(stacks, B, idx, 1);
-// 			push(stacks, A);
-// 		}
-// 	}
-// 	// print_stack(stacks);
+//         push(stacks, A);
+// 	//print_stack(stacks);
 // }

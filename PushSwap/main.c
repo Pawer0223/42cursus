@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 19:06:11 by taesan            #+#    #+#             */
-/*   Updated: 2021/06/04 21:22:46 by taesan           ###   ########.fr       */
+/*   Updated: 2021/06/05 19:36:23 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,6 @@ int		main(int argc, const char *argv[])
 				exec_sort(stacks);
 		}
 		heap_clean(stacks, input);
-		printf("test\n");		
+		//printf("test\n");		
 	}
 }

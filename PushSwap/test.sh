@@ -10,7 +10,7 @@ make
 
 echo "${RED}*** Warning [2]는 중간에 못멈춰서..4이상은 쓰지마세요.. 멈출라면 process kill해야함.. ***${NO_COLOR}"
 echo "${GREEN}[1] ./test.sh [num] => count of elements";
-echo "[2] ./test.sh all [num](0 ~ 9) => [num] element permutation test${NO_COLOR}"
+echo "[2] ./test.sh all [num](3 ~ 9) => [num] element permutation test${NO_COLOR}"
 
 CHECKER_R="";
 INST_CNT="";
@@ -40,10 +40,6 @@ function    exec_push_swap()
 			echo ${INST_CNT};
 		else
 			echo ${RED}${CHECKER_R}${NO_COLOR};
-			INST_CNT=`./push_swap "$ARG" | wc -l | tr -d " "`;
-			echo "inst cnt : "${INST_CNT};
-			export TEST=$INST_CNT;
-			echo "test :"${TEST};
 		fi
 	fi
 }
