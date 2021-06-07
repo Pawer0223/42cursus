@@ -90,10 +90,10 @@
 	</ul>
 </details>
 
-# [push_swap](https://velog.io/@pawer/push_swap)
+# [push_swap](https://velog.io/@pawer/pushswap)
 <summary>push_swap</summary>
 	<ul>
 		<li>stack 2개로 정렬하기</li>
-		<li>요구하는 stack명령어, [push, rotate(r), swap] 최소로 사용하기</li>
+		<li>요구하는 stack명령어, [push, rotate(r), swap] 최소로 사용해야 함</li>
 	</ul>
 </details>
