@@ -84,16 +84,22 @@
 </details>
 
 # [libasm](https://velog.io/@pawer/libasm)
-<summary>libasm</summary>
+<details>
+<summary>어셈블리 코드작성하기</summary>
 	<ul>
-		<li>64bit 어셈블리 코드를 intel문법으로 작성하기</li>
+		<li>64bit 어셈블리 코드를 intel문법 사용</li>
+		<li>기본 함수 구현하기</li>
 	</ul>
 </details>
 
-# [push_swap](https://velog.io/@pawer/push_swap)
-<summary>push_swap</summary>
+# [push_swap](https://velog.io/@pawer/pushswap)
+<details>
+<summary>stack 2개로 정렬하기</summary>
 	<ul>
-		<li>stack 2개로 정렬하기</li>
-		<li>요구하는 stack명령어, [push, rotate(r), swap] 최소로 사용하기</li>
+		<li>요구하는 stack명령어를 최소로 사용해야 함</li>
+		<li>pa, pb => push기능 => ex) pa는 a스택 top의 데이터를 b스택 top으로 push 함 </li>
+		<li>sa, sb => swap기능 => ex) sa는 a스택 최상위 데이터2개를 swap 함</li>
+		<li>ra, rb => 위로 한칸씩 올리기 => ex) ra는 a스택 모든데이터의 위치를 한칸씩 위로 올림, 최상단 데이터는 최하단으로 감</li>
+		<li>rra, rrb => 아래로 한칸씩 내리기 => ex) rra는 a스택 모든데이터의 위치를 한칸씩 아래로 내림, 최하단 데이터는 최상단으로 감</li>
 	</ul>
 </details>
