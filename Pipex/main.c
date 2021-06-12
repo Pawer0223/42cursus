@@ -28,16 +28,14 @@ void	exec_gogo()
 
 void	pipe_gogo()
 {
-	int		read_write[2];
+	int		fd[2];
 	int		pid;
 	int		status;
 
 	// 파이프 호출하면 현재 프로세스에서 read, write할 fd를 알아서 지정해준다.
-	pipe(read_write);
-	// printf("read : %d, write : %d\n", read_write[0], read_write[1]);
+	pipe(fd);
 
 	pid = fork();
-
 	if (pid == -1)
 	{
 		printf("[ ### pid == -1 ### ]\n");
@@ -45,21 +43,19 @@ void	pipe_gogo()
 	else if (pid == 0)
 	{
 		printf("[ ### pid == 0 ### ]\n");
-		dup2(read_write[1], 1);
-		close(read_write[0]);
-		close(read_write[1]);
+		dup2(fd[1], 1);
 		exec_gogo();
 	}
 	else
 	{
 		waitpid(pid, &status, 0);
-		// exec_gogo2();
 		printf("======= here =======\n");
 		char	*param[4] = {"tr", "\n", " ", 0};
-		// 이거 env의 Path때문에 쓰는 갑다. 그래서 ls로 쓸 수 있는듯
 		char	*envp[2] = {ENV_PATH, 0};
+		dup2(fd[0], 0);
 		execve("/usr/bin/tr", param, envp);
 		printf("[ ### pid > 0 ### ]\n");
+		close(fd[1]);
 	}
 }
 
