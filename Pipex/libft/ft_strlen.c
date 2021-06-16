@@ -1,19 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: taekang <taekang@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/10 19:55:53 by taesan            #+#    #+#             */
-/*   Updated: 2021/06/16 21:58:17 by taesan           ###   ########.fr       */
+/*   Created: 2020/09/28 20:12:27 by taekang           #+#    #+#             */
+/*   Updated: 2020/09/28 22:12:23 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#include "libft.h"
 
-# include "./libft/libft.h"
-# define ENV_PATH "PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+size_t		ft_strlen(const char *s)
+{
+	size_t i;
 
-#endif
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
+}

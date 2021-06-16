@@ -6,7 +6,7 @@
 #    By: taesan <taesan@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/06 16:51:22 by taesan            #+#    #+#              #
-#    Updated: 2021/06/10 21:19:15 by taesan           ###   ########.fr        #
+#    Updated: 2021/06/16 21:56:29 by taesan           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,6 @@ LIBFT_DIR		= ./libft
 
 SRCS				=	$(wildcard *.c)
 LIBFT_SRCS			=	$(wildcard $(LIBFT_DIR)/*.c)
-LIST_SRCS			=	$(wildcard $(LIST_DIR)/*.c)
 
 OBJS				=	$(SRCS:.c=.o)
 LIBFT_OBJS			=	$(addprefix $(LIBFT_DIR)/, $(notdir $(LIBFT_SRCS:.c=.o)))
