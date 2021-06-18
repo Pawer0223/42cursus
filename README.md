@@ -103,3 +103,12 @@
 		<li>rra, rrb => 아래로 한칸씩 내리기 => ex) rra는 a스택 모든데이터의 위치를 한칸씩 아래로 내림, 최하단 데이터는 최상단으로 감</li>
 	</ul>
 </details>
+
+# [pipex](https://velog.io/@pawer/)
+<details>
+<summary>unix pipe명령어 구현하기</summary>
+	<ul>
+		<li>입, 출력 스트림의 이해</li>
+		<li>프로세스 fork</li>
+	</ul>
+</details>
