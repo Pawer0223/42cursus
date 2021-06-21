@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 19:43:00 by taesan            #+#    #+#             */
-/*   Updated: 2021/06/06 02:01:58 by taesan           ###   ########.fr       */
+/*   Updated: 2021/06/21 20:37:11 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,6 @@ void		ft_putstr_fd(char *s, int fd);
 int			ft_strcmp(const char *s1, const char *s2);
 size_t		ft_strlen(const char *s);
 size_t		ft_strlcpy(char *dest, const char *src, size_t dstsize);
+char		*ft_strjoin(char const *s1, char const *s2);
 
 # endif
