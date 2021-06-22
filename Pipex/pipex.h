@@ -6,14 +6,30 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/10 19:55:53 by taesan            #+#    #+#             */
-/*   Updated: 2021/06/16 21:58:17 by taesan           ###   ########.fr       */
+/*   Updated: 2021/06/22 21:19:41 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PIPEX_H
 # define PIPEX_H
 
-# include "./libft/libft.h"
-# define ENV_PATH "PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+#define STDIN_PIPE 0x1
+#define STDOUT_PIPE 0x2
+
+#include "./libft/libft.h"
+#include <stdio.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <string.h>
+#include <sys/errno.h>
+#include "pipex.h"
+
+int		error_occur();
+char	*set_path(char *envp[]);
+int		pipe_input_set(int pipe_line[2], const char *file);
+char	*check_command(const char *path, char *cmd, int len);
+void	split_free(char **data);
+
 
 #endif

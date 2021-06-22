@@ -50,9 +50,8 @@
 // void three_inst()
 // {
 // 	int pipefd1[2], pipefd2[2];
-// 	// fd1, fd2
+
 // 	pipe(pipefd1);
-// 	// fd3, fd4
 // 	pipe(pipefd2);
 
 // 	exec_command("/bin/ls", pipefd1, STDOUT_PIPE);
@@ -73,32 +72,13 @@
 // void two_inst()
 // {
 // 	int pipefd1[2];
-// 	// 파이프 생성, 표준 입력, 출력에 대한 fd가 지정 됨.
 // 	pipe(pipefd1);
 
-// 	/*
-// 		** 따로 입력이 필요없는 프로그램. 파라미터로 호출 가능함. 파라미터 없어도 호출 가능 함.
-// 		** pipe를 보낸다.
-// 		** 출력을 stdout(1)으로 보냄
-//         ** 프로그램의 실행결과가, 파일로 전송된다. pipefd1[1]에 있다.
-// 	*/
 // 	exec_command("/bin/ls", pipefd1, STDOUT_PIPE);
-// 	/*
-// 		** stdout안쓰니깐 닫아준다 ?
-// 		** 맞음 ?
-// 	*/
 // 	close(pipefd1[1]);
-// 	/*
-// 		** 입력을 대기하는 프로그램
-// 		** 어떻게 위의 결과를 입력으로 받을 수 있는거지 ?
-// 	*/
 // 	exec_command("/usr/bin/wc", pipefd1, STDIN_PIPE);
-// 	/*
-// 		** 다 끝내고 입력도 다썼으니깐 닫아주기 ?
-// 	*/
 // 	close(pipefd1[0]);
 
-// 	// 이것도 모르겠고..
 // 	int wstatus;
 // 	while (wait(&wstatus) > 0);
 // }
