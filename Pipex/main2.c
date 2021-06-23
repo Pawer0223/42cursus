@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 21:19:34 by taesan            #+#    #+#             */
-/*   Updated: 2021/06/22 21:55:39 by taesan           ###   ########.fr       */
+/*   Updated: 2021/06/23 18:26:35 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,50 +23,51 @@ void		fill_buf(int fds[2])
 	}
 }
 
-int		fill_buf2(int fds[2])
+int		input_pipe_fill(const char *file, int fds[2])
 {
 
 	int		fd;
 	char	*buf;
 
-	char	*file = "ls.txt";
 	if ((fd = open(file, O_RDONLY)) == -1)
 		return (error_occur());
-	buf = (char *)malloc(sizeof(char) * 10);
-	while (read(fd, buf, 10))
+	buf = (char *)malloc(sizeof(char) * BUFFER_SIZE);
+	while (read(fd, buf, BUFFER_SIZE))
 	{
-		write(fds[1], buf, 10);
+		write(fds[1], buf, BUFFER_SIZE);
 	}
 	return (1);
 }
 
 int first(const char *file, char **param)
 {
-	file = 0;
-	int fds[2];         // an array that will hold two file descriptors
+	int		fds[2];         // an array that will hold two file descriptors
+	int		status;
+	pid_t	pid;
+	pid_t	wpid;
+
 	pipe(fds);          // populates fds with two file descriptors
-	pid_t pid = fork(); // create child process that is a clone of the parent
+	input_pipe_fill(file, fds);
+	pid = fork(); // create child process that is a clone of the parent
 
-	char *cmd = param[0];
 
+	// child process
 	if (pid == 0)
-	{                                          // if pid == 0, then this is the child process
-		dup2(fds[0], STDIN_FILENO);            // fds[0] (the read end of pipe) donates its data to file descriptor 0
-		close(fds[0]);                         // file descriptor no longer needed in child since stdin is a copy
-		close(fds[1]);                         // file descriptor unused in child
-		if (execvp(cmd, param) < 0)
+	{
+		dup2(fds[0], STDIN_FILENO); // 표준 입력이 pipe[0]이 됨.
+		close(fds[0]); // dup2에 의해 표준 입력이 fds[0]을 가르키니깐, 기존 fd는 close해주기.
+		close(fds[1]); // 자식 프로세스에는 읽기만하고, 쓰지는 않는다.
+
+		if (execvp(param[0], param) < 0) // 표준입력(fds[0]을 바라봄)을 이용한, 명령어 수행.
 			exit(0); // run sort command (exit if something went wrong)
 	}
-
-	// if we reach here, we are in parent process
-	close(fds[0]); // file descriptor unused in parent
-
-	fill_buf2(fds);
-	
-	// send EOF so child can continue (child blocks until all input has been processed):
+	// parent process
+	close(fds[0]); // 부모프로세스에서는 파이프의 입력은 하지 않음.
+	// 출력을 닫을 때, EOF가 전송되어 자식 프로세스에게 전송되었음을 알릴 수 있다.
 	close(fds[1]);
-	int status;
-	pid_t wpid = waitpid(pid, &status, 0); // wait for child to finish before exiting
+	// 자식 프로세스가 종료된 후, signal을 받아야 함.
+	// why? stdout이 닫힌 후, 부모프로세스로 복귀해야 함.
+	wpid = waitpid(pid, &status, 0); // wait for child to finish before exiting
 	return wpid == pid && WIFEXITED(status) ? WEXITSTATUS(status) : -1;
 }
 
