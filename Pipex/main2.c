@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 21:19:34 by taesan            #+#    #+#             */
-/*   Updated: 2021/06/23 18:26:35 by taesan           ###   ########.fr       */
+/*   Updated: 2021/06/24 22:11:42 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,14 @@ void		fill_buf(int fds[2])
 	}
 }
 
+/*
+	 pipe 이해하기..
+*/
 int		input_pipe_fill(const char *file, int fds[2])
 {
 
 	int		fd;
 	char	*buf;
-
 	if ((fd = open(file, O_RDONLY)) == -1)
 		return (error_occur());
 	buf = (char *)malloc(sizeof(char) * BUFFER_SIZE);
