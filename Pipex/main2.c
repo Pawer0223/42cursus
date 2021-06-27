@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 21:19:34 by taesan            #+#    #+#             */
-/*   Updated: 2021/06/26 18:03:53 by taesan           ###   ########.fr       */
+/*   Updated: 2021/06/27 21:43:01 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,15 @@ void	exec_command_print(char *param[], int pipefd[2], int flags)
 	pid_t cpid = fork();
 
 	if (cpid > 0) // parent
+	{
+		printf("parent processing .... \n");
 		return;
+	}
 	else if (cpid < 0) // error
 		perror("fork");
 	else // child
 	{
+		printf("child processing .... \n");
 		char *const envp[] = {NULL};
 
 		printf("flags : %d, flags & STDIN_PIPE : %d, flags & STDOUT_PIPE : %d\n"
@@ -39,8 +43,10 @@ void	exec_command_print(char *param[], int pipefd[2], int flags)
 			if (dup2(pipefd[1], STDOUT_FILENO) < 0)
 				perror("dup2");
 		}
+		printf("before close\n");
 		close(pipefd[0]);
 		close(pipefd[1]);
+		printf("before execve\n");
 		execve(param[0], param, envp);
 		perror("execv");
 	}	
@@ -48,17 +54,15 @@ void	exec_command_print(char *param[], int pipefd[2], int flags)
 
 void	exec_command(char *param[], int pipefd[2], int flags)
 {
-	printf("cmd : %s\n", param[0]);
 	pid_t	cpid;
 
 	cpid = fork();
+	
 	if (cpid > 0)
 		return;
 	else if (cpid < 0)
 		perror("fork");
-
 	char *const envp[] = {NULL};
-
 	if (flags & STDIN_PIPE)
 		if (dup2(pipefd[0], STDIN_FILENO) < 0)
 			perror("dup2");
@@ -71,9 +75,6 @@ void	exec_command(char *param[], int pipefd[2], int flags)
 	perror("execv");
 }
 
-/*
-	 pipe 이해하기..
-*/
 int		input_pipe_fill(const char *file, int fds[2])
 {
 	int		fd;
@@ -82,8 +83,9 @@ int		input_pipe_fill(const char *file, int fds[2])
 	if ((fd = open(file, O_RDONLY)) == -1)
 		return (error_occur());
 	buf = (char *)malloc(sizeof(char) * BUFFER_SIZE);
-	while (read(fd, buf, BUFFER_SIZE))
+	while (read(fd, buf, BUFFER_SIZE)) // need free check
 		write(fds[WRITE_FD_PIPE], buf, BUFFER_SIZE);
+	free(buf);
 	return (1);
 }
 
@@ -130,28 +132,30 @@ int		main(int argc, const char *argv[], char *envp[])
 		pipe(fds);          // populates fds with two file descriptors
 		pipe(fds_2);
 
-
 		// 첫번째 파이프에 데이터 쓰기.
-		input_pipe_fill(argv[1], fds);
+		if (!(input_pipe_fill(argv[1], fds)))
+			return (0);
 		close(fds[1]);
 
 		char **cmd_info;
+		// printf("fds[0] : %d, fds[1] : %d, fds_2[0] : %d, fds_2[1] : %d\n", fds[0], fds[1], fds_2[0], fds_2[1]);
 
+		// 두번 째 명령어를 입력 대기 상태로.
+		cmd_info = temp(argv[3], path);
 
-
-		printf("fds[0] : %d, fds[1] : %d, fds_2[0] : %d, fds_2[1] : %d\n", fds[0], fds[1], fds_2[0], fds_2[1]);
-		
-
-		// 두번 째 파이프를 입력 대기 상태로.
-		cmd_info = temp(argv[2], path);
-		exec_command_print(cmd_info, fds_2, STDIN_PIPE);
+		// 그 전에 출력 디스크립터를 파일로 변경하기.
+		int fd;
+		if ((fd = open(argv[4], O_WRONLY | O_CREAT | O_TRUNC | O_APPEND, S_IRUSR)) == -1)
+			return (error_occur());
+		exec_command(cmd_info, fds_2, STDIN_PIPE);
 		close(fds_2[0]);
+
 		// 파이프를 연결하기.
 		int connect_fds[2] = {fds[0], fds_2[1]};
 
 		split_free(cmd_info);
-		cmd_info = temp(argv[3], path);
-		exec_command_print(cmd_info, connect_fds, STDIN_PIPE | STDOUT_PIPE);
+		cmd_info = temp(argv[2], path);
+		exec_command(cmd_info, connect_fds, STDIN_PIPE | STDOUT_PIPE);
 		close(fds[0]);
 		close(fds_2[1]);
 

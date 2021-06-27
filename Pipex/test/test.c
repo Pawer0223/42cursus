@@ -7,17 +7,20 @@
 #define STDIN_PIPE 0x1
 #define STDOUT_PIPE 0x2
 
-void exec_command(char *command, int pipefd[2], int flags)
+void exec_command_print(char *command, int pipefd[2], int flags)
 {
-	// printf("command : [%s]\n", command);
 	pid_t cpid = fork();
 
 	if (cpid > 0) // parent
+	{
+		printf("parent processing .... \n");
 		return;
+	}
 	else if (cpid < 0) // error
 		perror("fork");
 	else // child
 	{
+		printf("child processing .... \n");
 		char *const argv[] = {command, NULL};
 		char *const envp[] = {NULL};
 
@@ -33,6 +36,39 @@ void exec_command(char *command, int pipefd[2], int flags)
 
 		if (flags & STDOUT_PIPE) {
 			printf("[%s], STDOUT_PIPE ... fd => [%d]\n", command, pipefd[1]);
+			if (dup2(pipefd[1], STDOUT_FILENO) < 0)
+				perror("dup2");
+		}
+		printf("before close\n");
+		close(pipefd[0]);
+		close(pipefd[1]);
+		printf("before execve\n");
+		execve(command, argv, envp);
+		perror("execv");
+	}	
+}
+
+
+void exec_command(char *command, int pipefd[2], int flags)
+{
+	// printf("command : [%s]\n", command);
+	pid_t cpid = fork();
+
+	if (cpid > 0) // parent
+		return;
+	else if (cpid < 0) // error
+		perror("fork");
+	else // child
+	{
+		char *const argv[] = {command, NULL};
+		char *const envp[] = {NULL};
+
+		if (flags & STDIN_PIPE) {
+			if (dup2(pipefd[0], STDIN_FILENO) < 0)
+				perror("dup2");
+		}
+
+		if (flags & STDOUT_PIPE) {
 			if (dup2(pipefd[1], STDOUT_FILENO) < 0)
 				perror("dup2");
 		}
@@ -89,31 +125,59 @@ void three_inst()
 	pipe(pipefd1);
 	pipe(pipefd2);
 
-	printf("fds[0] : %d, fds[1] : %d, fds_2[0] : %d, fds_2[1] : %d\n", pipefd1[0], pipefd1[1], pipefd2[0], pipefd2[1]);
+	// printf("fds[0] : %d, fds[1] : %d, fds_2[0] : %d, fds_2[1] : %d\n", pipefd1[0], pipefd1[1], pipefd2[0], pipefd2[1]);
 
-	exec_command("/bin/ls", pipefd1, STDOUT_PIPE);
+	char *ls = "/bin/ls";
+	char *wc = "/usr/bin/wc";
+	char *echo = "/bin/echo";
+
+
+	// pipe1에 데이터 저장
+	exec_command(ls, pipefd1, STDOUT_PIPE);
 	close(pipefd1[1]);
-	exec_command("/usr/bin/wc", pipefd2, STDIN_PIPE);
+	/*
+		표준 입력을 pipefd2[0]의 fd정보로써, 대기하는 wc명령이 수행된다.
+		따라서 close(pipefd2[1]);이후에 명령어가 수행 됨. (파이프의 출력이 종료되었음을 알리기 때문에.)
+	*/ 
+	exec_command(echo, pipefd2, STDIN_PIPE);
 	close(pipefd2[0]);
-
+	/*
+		두개의 파이프를 연결한 새로운 파이프가 된다.
+	*/
 	int temp_pipefd[] = {pipefd1[0], pipefd2[1]};
-	exec_command("/usr/bin/wc", temp_pipefd, STDIN_PIPE | STDOUT_PIPE);
-	printf("STDIN_PIPE | STDOUT_PIPE => [%d]\n", (STDIN_PIPE | STDOUT_PIPE));
+	/* 
+		해당 명령어는, pipefd1[0]을 표준 입력으로써, pipefd2로 출력 하게된다.
+		
+		즉, 세번째 명령어가 pipefd1[0]에 저장된 데이터로 명령어를 수행하는건가 ??
+		그 결과가 pipefd2에 저장이 되면은,
 
+		이후에 close(pipefd2[1]);됐을 때는 두번째 명령어가 수행되는겨 ?
+
+		결국, 마지막에 표준 출력은 2번째 명령어라는 소린건가 ?
+	*/ 
+	exec_command(wc, temp_pipefd, STDIN_PIPE | STDOUT_PIPE);
 	close(pipefd1[0]);
-	close(pipefd2[1]);
+	
+	close(pipefd2[1]); // 이게 호출 될 때 처리되는데.. 동시에 처리된다?
 
 	int wstatus;
 	while (wait(&wstatus) > 0);
 }
 
+/*
+ 첫번째 명령의 결과를 가지고
+ 두번째 명령어 수행하기.
+*/
 void two_inst()
 {
 	int pipefd1[2];
 	pipe(pipefd1);
 
+	// 첫번째 명령어를 파이프에 저장하고
 	exec_command("/bin/ls", pipefd1, STDOUT_PIPE);
 	close(pipefd1[1]);
+
+	// 해당 파이프를 표준입력으로 데이터를 받아, 두번째 명령어 수행하기.
 	exec_command("/usr/bin/wc", pipefd1, STDIN_PIPE);
 	close(pipefd1[0]);
 
