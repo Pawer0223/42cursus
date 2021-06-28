@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 21:17:34 by taesan            #+#    #+#             */
-/*   Updated: 2021/06/22 21:18:24 by taesan           ###   ########.fr       */
+/*   Updated: 2021/06/28 17:46:52 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,11 @@ void		split_free(char **data)
 		return ;
 	i = 0;
 	while (data[i])
-		free(data[i++]);
+	{
+		if (data[i])
+			free(data[i]);
+		i++;
+	}
 	free(data);
+	data = 0;
 }

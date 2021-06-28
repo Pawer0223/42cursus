@@ -6,11 +6,23 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 21:17:56 by taesan            #+#    #+#             */
-/*   Updated: 2021/06/22 21:18:02 by taesan           ###   ########.fr       */
+/*   Updated: 2021/06/28 17:32:13 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
+
+char			*create_new_cmd(char *cmd, int len)
+{
+	char	*new_cmd;
+
+	new_cmd = 0;
+	if (!(new_cmd = (char *)malloc(sizeof(len + 1))))
+		return (0);
+	new_cmd[0] = '/';
+	ft_strlcpy(new_cmd + 1, cmd, len + 1);
+	return (new_cmd);
+}
 
 char			*check_command(const char *path, char *cmd, int len)
 {
@@ -19,24 +31,23 @@ char			*check_command(const char *path, char *cmd, int len)
 	char	*new_cmd;
 	int		i;
 
+	full_path = 0;
 	if (!(paths = ft_split(path, ':')))
 		return (0);
-	if (!(new_cmd = (char *)malloc(sizeof(len + 1))))
-		return (0);
-	new_cmd[0] = '/';
-	ft_strlcpy(new_cmd + 1, cmd, len + 1);
-	i = 0;
-	while (paths[i])
+	if ((new_cmd = create_new_cmd(cmd, len)))
 	{
-		if (!(full_path = ft_strjoin(paths[i], new_cmd)))
+		i = 0;
+		while (paths[i])
 		{
-			split_free(paths);
-			return (0);
+			full_path = ft_strjoin(paths[i], new_cmd);
+			if (!full_path || access(full_path, X_OK) == 0)
+				break ;
+			free(full_path);
+			i++;
 		}
-		if (access(full_path, X_OK) == 0)
-			return (full_path);
-		i++;
+		free(new_cmd);
 	}
+	free(cmd);
 	split_free(paths);
-	return (0);
+	return (full_path);
 }

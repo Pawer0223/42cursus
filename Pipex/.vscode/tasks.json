@@ -3,13 +3,8 @@
         {
             "type": "cppbuild",
             "label": "C/C++: gcc 활성 파일 빌드",
-            "command": "./pipex",
-            "args": [
-                "-g",
-                "${file}",
-                "-o",
-                "${fileDirname}/${fileBasenameNoExtension}"
-            ],
+            "command": "make",
+            "args": [],
             "options": {
                 "cwd": "${fileDirname}"
             },
