@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 21:19:34 by taesan            #+#    #+#             */
-/*   Updated: 2021/06/28 20:26:06 by taesan           ###   ########.fr       */
+/*   Updated: 2021/06/29 17:30:16 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,41 +19,32 @@ int		clear_info(t_pipe *info)
 	i = 0;
 	while (i < 2)
 	{
-		if (info->pipe_1[i] > 0)
-			close(info->pipe_1[i]);
-		if (info->pipe_2[i] > 0)
-			close(info->pipe_2[i]);
+		if (info->pipe_in[i] > 0)
+			close(info->pipe_in[i]);
+		if (info->pipe_out[i] > 0)
+			close(info->pipe_out[i]);
 		i++;
 	}
 	if (info->result_fd > 0)
 		close(info->result_fd);
+	if (info->param)
+		split_free(info->param);
 	return (0);
 }
 
-int		input_pipe_fill(const char *file, int pipe[2])
-{
-	int		fd;
-	char	buf[BUFFER_SIZE];
-
-	if ((fd = open(file, O_RDONLY)) == -1)
-		return (error_occur_perror(INPUT_OPEN_ERR));
-	while (read(fd, buf, BUFFER_SIZE))
-		write(pipe[WRITE_FD_IDX], buf, BUFFER_SIZE);
-	close(pipe[WRITE_FD_IDX]);
-	return (1);
-}
-
-char		**get_cmd_info(const char *cmd, char *path)
+char	**get_cmd_info(const char *cmd, char **paths)
 {
 	char	**cmd_info;
 
 	if (!(cmd_info = ft_split(cmd, ' ')))
 	{
+		split_free(paths);
 		error_occur_std(SPLIT_ERR);
 		return (0);
 	}
-	if (!(cmd_info[0] = check_command(path + 5, cmd_info[0], ft_strlen(cmd_info[0]))))
+	if (!(cmd_info[0] = check_command(paths, cmd_info[0], ft_strlen(cmd_info[0]))))
 	{
+		split_free(paths);
 		split_free(cmd_info);
 		error_occur_std(COMMAND_NOT_EXIST);
 		return (0);
@@ -61,27 +52,69 @@ char		**get_cmd_info(const char *cmd, char *path)
 	return (cmd_info);
 }
 
-int		start(const char *argv[], char *envp[], t_pipe *info)
+int		start(int argc, const char *argv[], char *envp[], t_pipe *info)
 {
-	if (!init_pipe(argv[4], envp, info))
-		return (0);
-	if (!(input_pipe_fill(argv[1], info->pipe_1)))
-		return (0);
+	char	**paths;
 
-
-	if (!(info->param = get_cmd_info(argv[3], info->path)))
+	if (!init_pipe(argv[1], argv[argc - 1], envp, info))
 		return (0);
-	exec_command(info, info->pipe_2, STDIN_PIPE | STDOUT_PIPE, 1);
-	
-	if (!(info->param = get_cmd_info(argv[2], info->path)))
+	if (!(paths = set_path(envp)))
+		return (0);
+	if (!(info->param = get_cmd_info(argv[2], paths)))
 		return (0);
 	exec_command(info, info->connect_pipe, STDIN_PIPE | STDOUT_PIPE, 0);
+	if (!(info->param = get_cmd_info(argv[argc - 2], paths)))
+		return (0);
+	exec_command(info, info->pipe_out, STDIN_PIPE | STDOUT_PIPE, 1);
+	split_free(paths);
 	return (1);
 }
 
 /*
+	[ ]에 있는 데이터를 읽어 [ ]로 보냄.
+	시작: in -> out
+	두번째: out -> in
+*/
+int		start_multi(int argc, const char *argv[], char *envp[], t_pipe *info)
+{
+	int		i;
+	char	**paths;
+
+	if (!init_pipe(argv[1], argv[argc - 1], envp, info))
+		return (0);
+	if (!(paths = set_path(envp)))
+		return (0);
+	i = 2;
+	while (i < argc - 2)
+	{
+		if (i > 2)
+		{
+			info->pipe_in[0] = info->pipe_out[0];
+			if (pipe(info->pipe_out) == -1)
+				return (0);
+		}
+		info->connect_pipe[0] = info->pipe_in[0];
+		info->connect_pipe[1] = info->pipe_out[1];
+		if (!(info->param = get_cmd_info(argv[i], paths)))
+			return (0);
+		exec_command(info, info->connect_pipe, STDIN_PIPE | STDOUT_PIPE, 0);
+		i++;
+	}
+	if (!(info->param = get_cmd_info(argv[i], paths)))
+		return (0);
+	exec_command(info, info->pipe_out, STDIN_PIPE | STDOUT_PIPE, 1);
+	split_free(info->param);
+	split_free(paths);
+	return (1);
+}
+
+
+/*
 	** file1, cmd1, cmd2, file2
 	ex) ./pipex ls.txt "grep zip" "wc -l" result.txt
+
+	** multiple...
+	ex) ./pipex ls.txt "grep zip" "grep u" "wc -l" result.txt
 */
 int		main(int argc, const char *argv[], char *envp[])
 {
@@ -91,7 +124,7 @@ int		main(int argc, const char *argv[], char *envp[])
 		return (error_occur_std(PARAM_ERR));
 	else
 	{
-		if (!start(argv, envp, &info))
+		if (!start_multi(argc, argv, envp, &info))
 			clear_info(&info);
 	}
 	return (1);

@@ -9,7 +9,7 @@
             "type": "cppdbg",
             "request": "launch",
             "program": "${fileDirname}/pipex",
-            "args": ["ls.txt", "grep zip", "wc -l", "result.txt"],
+            "args": ["ls.txt", "grep zip", "grep u", "grep x", "wc -l", "result.txt"],//["ls.txt", "grep zip", "wac -l", "result.txt"],
             "stopAtEntry": false,
             "cwd": "${fileDirname}",
             "environment": [],

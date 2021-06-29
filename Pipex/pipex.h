@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/10 19:55:53 by taesan            #+#    #+#             */
-/*   Updated: 2021/06/28 15:39:47 by taesan           ###   ########.fr       */
+/*   Updated: 2021/06/29 14:53:12 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,11 @@
 
 int		error_occur_perror(char *msg);
 int		error_occur_std(char *msg);
-char	*set_path(char *envp[]);
+char	**set_path(char *envp[]);
 int		pipe_input_set(int pipe_line[2], const char *file);
-char	*check_command(const char *path, char *cmd, int len);
+char	*check_command(char **paths, char *cmd, int len);
 void	split_free(char **data);
 void	exec_command(t_pipe *info, int pipe[2], int flags, int is_last);
-int		init_pipe(const char *result_file, char *envp[], t_pipe *info);
-
+int		init_pipe(const char *input, const char *output, char *envp[], t_pipe *info);
 
 #endif

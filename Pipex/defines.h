@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/28 15:05:24 by taesan            #+#    #+#             */
-/*   Updated: 2021/06/28 18:04:57 by taesan           ###   ########.fr       */
+/*   Updated: 2021/06/29 13:47:44 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,14 @@
 #define COMMAND_NOT_EXIST "command program not exist"
 #define ENV_PATH_NOT_EXIST "system env PATH not exist"
 #define DUP2_ERR "dup2"
+#define PATH "PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
 
 typedef struct	s_pipe
 {
-	char	*path;
 	char	**param;
 	char	**envp;
-	int		pipe_1[2];
-	int		pipe_2[2];
+	int		pipe_in[2];
+	int		pipe_out[2];
 	int		connect_pipe[2];
 	int		result_fd;
 }				t_pipe;

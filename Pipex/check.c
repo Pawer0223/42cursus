@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 21:17:56 by taesan            #+#    #+#             */
-/*   Updated: 2021/06/28 17:32:13 by taesan           ###   ########.fr       */
+/*   Updated: 2021/06/29 14:42:15 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,13 @@ char			*create_new_cmd(char *cmd, int len)
 	return (new_cmd);
 }
 
-char			*check_command(const char *path, char *cmd, int len)
+char			*check_command(char **paths, char *cmd, int len)
 {
-	char	**paths;
 	char	*full_path;
 	char	*new_cmd;
 	int		i;
 
 	full_path = 0;
-	if (!(paths = ft_split(path, ':')))
-		return (0);
 	if ((new_cmd = create_new_cmd(cmd, len)))
 	{
 		i = 0;
@@ -43,11 +40,12 @@ char			*check_command(const char *path, char *cmd, int len)
 			if (!full_path || access(full_path, X_OK) == 0)
 				break ;
 			free(full_path);
+			full_path = 0;
 			i++;
 		}
 		free(new_cmd);
 	}
 	free(cmd);
-	split_free(paths);
+	cmd = 0;
 	return (full_path);
 }
