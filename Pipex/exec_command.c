@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/28 14:45:56 by taesan            #+#    #+#             */
-/*   Updated: 2021/06/29 17:28:40 by taesan           ###   ########.fr       */
+/*   Updated: 2021/06/29 19:50:15 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,15 @@ void	child_process(t_pipe *info, int pipe[2], int flags, int is_last)
 	{
 		command = info->param[0];
 		execve(command, info->param, info->envp);
-		perror("execv");
+		perror("execve");
+		exit(0);
 	}
 }
 
 void	parent_process(t_pipe *info, int pipe[2], int flags, int is_last)
 {
 	split_free(info->param);
+	info->param = 0;
 	if (flags & STDIN_PIPE)
 		close(pipe[READ_FD_IDX]);
 	if (flags & STDOUT_PIPE)

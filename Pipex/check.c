@@ -6,13 +6,13 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 21:17:56 by taesan            #+#    #+#             */
-/*   Updated: 2021/06/29 17:41:43 by taesan           ###   ########.fr       */
+/*   Updated: 2021/06/29 17:51:24 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-char			*create_new_cmd(char *cmd, int len)
+char	*create_new_cmd(char *cmd, int len)
 {
 	char	*new_cmd;
 
@@ -24,7 +24,7 @@ char			*create_new_cmd(char *cmd, int len)
 	return (new_cmd);
 }
 
-char			*check_command(char **paths, char *cmd, int len)
+char	*check_command(char **paths, char *cmd, int len)
 {
 	char	*full_path;
 	char	*new_cmd;
