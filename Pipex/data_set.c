@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 21:16:03 by taesan            #+#    #+#             */
-/*   Updated: 2021/06/29 19:24:16 by taesan           ###   ########.fr       */
+/*   Updated: 2021/06/29 20:24:22 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,29 +69,6 @@ int		init_pipe(const char *input, const char *output, char *envp[], t_pipe *info
 	return (1);
 }
 
-// int		set_param_info(t_pipe *info, const char *cmd, char **paths)
-// {
-// 	char	**cmd_info;
-// 	char	*command;
-
-// 	if (!(cmd_info = ft_split(cmd, ' ')))
-// 	{
-// 		split_free(paths);
-// 		return (error_occur_std(SPLIT_ERR));
-// 	}
-// 	if (!(command = check_command(paths, cmd_info[0], ft_strlen(cmd_info[0]))))
-// 	{
-// 		split_free(paths);
-// 		split_free(cmd_info);
-// 		return (error_occur_std(COMMAND_NOT_EXIST));
-// 	}
-// 	free(cmd_info[0]);
-// 	cmd_info[0] = 0;
-// 	cmd_info[0] = command;
-// 	info->param = cmd_info;
-// 	return (1);
-// }
-
 int		set_param_info(t_pipe *info, const char *cmd, char **paths)
 {
 	char	**cmd_info;
@@ -103,7 +80,6 @@ int		set_param_info(t_pipe *info, const char *cmd, char **paths)
 		return (error_occur_std(SPLIT_ERR));
 	}
 	command = check_command(paths, cmd_info[0], ft_strlen(cmd_info[0]));
-
 	if (command)
 	{
 		free(cmd_info[0]);
