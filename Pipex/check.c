@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 21:17:56 by taesan            #+#    #+#             */
-/*   Updated: 2021/06/29 14:42:15 by taesan           ###   ########.fr       */
+/*   Updated: 2021/06/29 17:41:43 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,5 @@ char			*check_command(char **paths, char *cmd, int len)
 		}
 		free(new_cmd);
 	}
-	free(cmd);
-	cmd = 0;
 	return (full_path);
 }

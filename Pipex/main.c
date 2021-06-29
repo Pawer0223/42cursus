@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 21:19:34 by taesan            #+#    #+#             */
-/*   Updated: 2021/06/29 17:30:16 by taesan           ###   ########.fr       */
+/*   Updated: 2021/06/29 17:42:35 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,11 @@ int		clear_info(t_pipe *info)
 	i = 0;
 	while (i < 2)
 	{
-		if (info->pipe_in[i] > 0)
-			close(info->pipe_in[i]);
-		if (info->pipe_out[i] > 0)
-			close(info->pipe_out[i]);
+		close(info->pipe_in[i]);
+		close(info->pipe_out[i]);
 		i++;
 	}
-	if (info->result_fd > 0)
-		close(info->result_fd);
+	close(info->result_fd);
 	if (info->param)
 		split_free(info->param);
 	return (0);
@@ -35,6 +32,7 @@ int		clear_info(t_pipe *info)
 char	**get_cmd_info(const char *cmd, char **paths)
 {
 	char	**cmd_info;
+	char	*command;
 
 	if (!(cmd_info = ft_split(cmd, ' ')))
 	{
@@ -42,32 +40,17 @@ char	**get_cmd_info(const char *cmd, char **paths)
 		error_occur_std(SPLIT_ERR);
 		return (0);
 	}
-	if (!(cmd_info[0] = check_command(paths, cmd_info[0], ft_strlen(cmd_info[0]))))
+	if (!(command = check_command(paths, cmd_info[0], ft_strlen(cmd_info[0]))))
 	{
 		split_free(paths);
 		split_free(cmd_info);
 		error_occur_std(COMMAND_NOT_EXIST);
 		return (0);
 	}
+	free(cmd_info[0]);
+	cmd_info[0] = 0;
+	cmd_info[0] = command;
 	return (cmd_info);
-}
-
-int		start(int argc, const char *argv[], char *envp[], t_pipe *info)
-{
-	char	**paths;
-
-	if (!init_pipe(argv[1], argv[argc - 1], envp, info))
-		return (0);
-	if (!(paths = set_path(envp)))
-		return (0);
-	if (!(info->param = get_cmd_info(argv[2], paths)))
-		return (0);
-	exec_command(info, info->connect_pipe, STDIN_PIPE | STDOUT_PIPE, 0);
-	if (!(info->param = get_cmd_info(argv[argc - 2], paths)))
-		return (0);
-	exec_command(info, info->pipe_out, STDIN_PIPE | STDOUT_PIPE, 1);
-	split_free(paths);
-	return (1);
 }
 
 /*
