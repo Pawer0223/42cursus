@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/28 14:45:56 by taesan            #+#    #+#             */
-/*   Updated: 2021/06/30 19:42:30 by taesan           ###   ########.fr       */
+/*   Updated: 2021/06/30 21:35:09 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,6 @@ void	child_process(t_pipe *info, int pipe[2], int flags, int is_last)
 	{
 		command = info->param[0];
 		execve(command, info->param, info->envp);
-		if (is_last && unlink(info->out_file) == -1)
-			error_occur_std(UNLINK_ERR);
 		perror("execve");
 		exit(0);
 	}
