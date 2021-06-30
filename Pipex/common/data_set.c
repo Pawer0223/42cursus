@@ -6,11 +6,11 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 21:16:03 by taesan            #+#    #+#             */
-/*   Updated: 2021/06/29 20:24:22 by taesan           ###   ########.fr       */
+/*   Updated: 2021/06/30 19:38:56 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "pipex.h"
+#include "../pipex.h"
 
 char	**set_path(char *envp[])
 {
@@ -49,12 +49,15 @@ int		input_pipe_fill(const char *file, int pipe[2])
 		return (error_occur_perror(INPUT_OPEN_ERR));
 	while (read(fd, buf, BUFFER_SIZE))
 		write(pipe[WRITE_FD_IDX], buf, BUFFER_SIZE);
+	close(fd);
 	close(pipe[WRITE_FD_IDX]);
 	return (1);
 }
 
 int		init_pipe(const char *input, const char *output, char *envp[], t_pipe *info)
-{		
+{
+	info->param = 0;
+	info->out_file = output;
 	if (pipe(info->pipe_in) == -1)
 		return (error_occur_perror(PIPE_ERR));
 	if (pipe(info->pipe_out) == -1)
@@ -65,7 +68,6 @@ int		init_pipe(const char *input, const char *output, char *envp[], t_pipe *info
 	info->envp = envp;
 	if (!(input_pipe_fill(input, info->pipe_in)))
 		return (0);
-	info->param = 0;
 	return (1);
 }
 

@@ -6,11 +6,13 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/06 07:10:06 by taekang           #+#    #+#             */
-/*   Updated: 2021/06/06 01:56:45 by taesan           ###   ########.fr       */
+/*   Updated: 2021/06/30 15:32:32 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
+#include <stdio.h>
 
 int	ft_strcmp(const char *s1, const char *s2)
 {

@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/28 15:05:24 by taesan            #+#    #+#             */
-/*   Updated: 2021/06/29 18:58:13 by taesan           ###   ########.fr       */
+/*   Updated: 2021/06/30 19:39:14 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 #define PATH "PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
 #define SPLIT_ERR "ft_split Error"
 #define PARAM_ERR "Please Call [./pipex file1 \"cmd1\" \"cmd2\" file2]"
+#define PARAM_ERR_BONUS "Please Call [./pipex here_doc LIMITER \"cmd1\" \"cmd2\" file]"
 #define INPUT_OPEN_ERR "input file open"
 #define OUTPUT_OPEN_ERR "output file open"
 #define COMMAND_NOT_EXIST "command program not exist"
@@ -29,16 +30,19 @@
 #define DUP2_ERR "dup2"
 #define ENV_PATH_NOT_EXIST "system env PATH not exist"
 #define PIPE_ERR "create pipe Error"
+#define	READ_ERR "read result [-1]"
+#define UNLINK_ERR "file remove Error"
 
 
 typedef struct	s_pipe
 {
-	char	**param;
-	char	**envp;
-	int		pipe_in[2];
-	int		pipe_out[2];
-	int		connect_pipe[2];
-	int		result_fd;
+	char		**param;
+	char		**envp;
+	const char	*out_file;
+	int			pipe_in[2];
+	int			pipe_out[2];
+	int			connect_pipe[2];
+	int			result_fd;
 }				t_pipe;
 
 #endif

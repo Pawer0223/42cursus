@@ -1,33 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   using_free.c                                       :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/22 21:17:34 by taesan            #+#    #+#             */
-/*   Updated: 2021/06/29 18:18:16 by taesan           ###   ########.fr       */
+/*   Created: 2021/06/30 19:03:01 by taesan            #+#    #+#             */
+/*   Updated: 2021/06/30 19:03:01 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "../pipex.h"
 
-void		split_free(char **data)
+int		error_occur_perror(char *msg)
 {
-	int i;
+	perror(msg);
+	return (0);
+}
 
-	if (!data || !*data)
-		return ;
-	i = 0;
-	while (data[i])
-	{
-		if (data[i])
-		{
-			free(data[i]);
-			data[i] = 0;
-		}
-		i++;
-	}
-	free(data);
-	data = 0;
+int		error_occur_std(char *msg)
+{
+	ft_putendl_fd(msg, 1);
+	return (0);
 }

@@ -6,31 +6,46 @@
 #    By: taesan <taesan@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/06 16:51:22 by taesan            #+#    #+#              #
-#    Updated: 2021/06/16 21:56:29 by taesan           ###   ########.fr        #
+#    Updated: 2021/06/30 19:18:31 by taesan           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= pipex
 
 LIBFT_DIR		= ./libft
-
-SRCS				=	$(wildcard *.c)
-LIBFT_SRCS			=	$(wildcard $(LIBFT_DIR)/*.c)
-
-OBJS				=	$(SRCS:.c=.o)
-LIBFT_OBJS			=	$(addprefix $(LIBFT_DIR)/, $(notdir $(LIBFT_SRCS:.c=.o)))
+COMMON_DIR		= ./common
+BONUS_DIR		= ./bonus
 
 CC		= arch -x86_64 gcc -g #-g is modify !
 RM		= rm -f
 CFLAGS	= -Wall -Wextra -Werror
 
+SRCS				=	$(wildcard *.c)
+LIBFT_SRCS			=	$(wildcard $(LIBFT_DIR)/*.c)
+COMMON_SRCS			=	$(wildcard $(COMMON_DIR)/*.c)
+BONUS_SRCS			=	$(wildcard $(BONUS_DIR)/*.c)
+
+OBJS				=	$(SRCS:.c=.o)
+LIBFT_OBJS			=	$(addprefix $(LIBFT_DIR)/, $(notdir $(LIBFT_SRCS:.c=.o)))
+COMMON_OBJS			=	$(addprefix $(COMMON_DIR)/, $(notdir $(COMMON_SRCS:.c=.o)))
+BONUS_OBJS			=	$(addprefix $(BONUS_DIR)/, $(notdir $(BONUS_SRCS:.c=.o)))
+
+ifdef BONUS
+	OBJ_FILES = $(BONUS_OBJS) $(LIBFT_OBJS) $(COMMON_OBJS)
+else
+	OBJ_FILES = $(OBJS) $(LIBFT_OBJS) $(COMMON_OBJS)
+endif
+
 all:		$(NAME)
 
-$(NAME):	$(OBJS) $(LIBFT_OBJS)
-		$(CC) ${CFLAGS} -o ${NAME} ${OBJS} $(LIBFT_OBJS)
+$(NAME):	$(OBJ_FILES)
+		$(CC) ${CFLAGS} -o ${NAME} $(OBJ_FILES)
+
+bonus:
+		make BONUS=1 all
 
 clean:
-		$(RM) $(OBJS) $(LIBFT_OBJS)
+		$(RM) $(OBJS) $(LIBFT_OBJS) $(COMMON_OBJS) $(BONUS_OBJS)
 
 fclean:	clean
 		$(RM) $(NAME)
@@ -40,4 +55,4 @@ re:		fclean $(NAME)
 leak:
 		leaks -atExit -- ./pipex
 
-.PHONY:	all clean fclean re leak
+.PHONY:	all bonus clean fclean re leak

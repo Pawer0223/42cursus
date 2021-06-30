@@ -6,11 +6,11 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/28 14:45:56 by taesan            #+#    #+#             */
-/*   Updated: 2021/06/29 19:50:15 by taesan           ###   ########.fr       */
+/*   Updated: 2021/06/30 19:42:30 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "../pipex.h"
 
 int		exec_dup2(t_pipe *info, int pipe[2], int flags, int is_last)
 {
@@ -42,6 +42,8 @@ void	child_process(t_pipe *info, int pipe[2], int flags, int is_last)
 	{
 		command = info->param[0];
 		execve(command, info->param, info->envp);
+		if (is_last && unlink(info->out_file) == -1)
+			error_occur_std(UNLINK_ERR);
 		perror("execve");
 		exit(0);
 	}
@@ -73,4 +75,15 @@ void	exec_command(t_pipe *info, int pipe[2], int flags, int is_last)
 		perror("fork");
 	else
 		child_process(info, pipe, flags, is_last);
+}
+
+int		exec_call(t_pipe *info, const char *param, char **paths, int is_last)
+{
+	if (!set_param_info(info, param, paths))
+		return (0);
+	if (!is_last)
+		exec_command(info, info->connect_pipe, STDIN_PIPE | STDOUT_PIPE, 0);
+	else
+		exec_command(info, info->pipe_out, STDIN_PIPE | STDOUT_PIPE, 1);	
+	return (1);
 }

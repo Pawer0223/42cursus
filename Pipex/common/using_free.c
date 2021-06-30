@@ -1,30 +1,49 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   using_free.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/22 21:19:34 by taesan            #+#    #+#             */
-/*   Updated: 2021/06/30 19:27:40 by taesan           ###   ########.fr       */
+/*   Created: 2021/06/22 21:17:34 by taesan            #+#    #+#             */
+/*   Updated: 2021/06/30 19:03:09 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "../pipex.h"
 
-int		main(int argc, const char *argv[], char *envp[])
+void		split_free(char **data)
 {
-	t_pipe	info;
-	int		r;
+	int i;
 
-	if (argc < 5)
-		return (error_occur_std(PARAM_ERR));
-	else
+	if (!data || !*data)
+		return ;
+	i = 0;
+	while (data[i])
 	{
-		r = start(argc, argv, envp, &info);
-		if (!r && unlink(argv[argc - 1]) == -1)
-			return (error_occur_std(UNLINK_ERR));
-		clear_info(&info);
+		if (data[i])
+		{
+			free(data[i]);
+			data[i] = 0;
+		}
+		i++;
 	}
-	return (r);
+	free(data);
+	data = 0;
+}
+
+int		clear_info(t_pipe *info)
+{
+	int i;
+
+	i = 0;
+	while (i < 2)
+	{
+		close(info->pipe_in[i]);
+		close(info->pipe_out[i]);
+		i++;
+	}
+	close(info->result_fd);
+	split_free(info->param);
+	return (0);
 }

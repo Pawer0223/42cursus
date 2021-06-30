@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   pipex_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/10 19:55:53 by taesan            #+#    #+#             */
-/*   Updated: 2021/06/30 18:58:38 by taesan           ###   ########.fr       */
+/*   Updated: 2021/06/30 19:14:16 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#ifndef PIPEX_BONUS_H
+# define PIPEX_BONUS_H
 
-#include "./libft/libft.h"
-#include "defines.h"
+#include "../libft/libft.h"
+#include "../defines.h"
 #include <fcntl.h>
 #include <unistd.h>
 #include <stdlib.h>
@@ -31,7 +31,7 @@ int		exec_call(t_pipe *info, const char *param, char **paths, int is_last);
 int		clear_info(t_pipe *info);
 void	split_free(char **data);
 
-int		init_pipe(const char *input, const char *output, char *envp[], t_pipe *info);
+int		init_pipe_bonus(const char *limiter, const char *output, char *envp[], t_pipe *info);
 int		set_connect_pipe(t_pipe *info, int i);
 int		set_param_info(t_pipe *info, const char *cmd, char **paths);
 char	**set_path(char *envp[]);

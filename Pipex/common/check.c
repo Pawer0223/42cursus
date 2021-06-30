@@ -6,11 +6,11 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 21:17:56 by taesan            #+#    #+#             */
-/*   Updated: 2021/06/29 17:51:24 by taesan           ###   ########.fr       */
+/*   Updated: 2021/06/30 19:02:51 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "../pipex.h"
 
 char	*create_new_cmd(char *cmd, int len)
 {
