@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 21:16:03 by taesan            #+#    #+#             */
-/*   Updated: 2021/06/30 19:38:56 by taesan           ###   ########.fr       */
+/*   Updated: 2021/07/02 00:06:27 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,22 +40,10 @@ char	**set_path(char *envp[])
 	return (paths);
 }
 
-int		input_pipe_fill(const char *file, int pipe[2])
-{
-	int		fd;
-	char	buf[BUFFER_SIZE];
-
-	if ((fd = open(file, O_RDONLY)) == -1)
-		return (error_occur_perror(INPUT_OPEN_ERR));
-	while (read(fd, buf, BUFFER_SIZE))
-		write(pipe[WRITE_FD_IDX], buf, BUFFER_SIZE);
-	close(fd);
-	close(pipe[WRITE_FD_IDX]);
-	return (1);
-}
-
 int		init_pipe(const char *input, const char *output, char *envp[], t_pipe *info)
 {
+	int	fd;
+
 	info->param = 0;
 	info->out_file = output;
 	if (pipe(info->pipe_in) == -1)
@@ -66,8 +54,37 @@ int		init_pipe(const char *input, const char *output, char *envp[], t_pipe *info
 									S_IRUSR | S_IWUSR)) == -1)
 		return (error_occur_perror(OUTPUT_OPEN_ERR));
 	info->envp = envp;
-	if (!(input_pipe_fill(input, info->pipe_in)))
+	if ((fd = open(input, O_RDONLY)) == -1)
+		return (error_occur_perror(INPUT_OPEN_ERR));
+	dup2(fd, info->pipe_in[READ_FD_IDX]);
+	close(fd);
+	close(info->pipe_in[WRITE_FD_IDX]);
+	return (1);
+}
+
+int		set_single_quote(t_pipe *info, const char *cmd, char **paths)
+{
+	char	**cmd_info;
+	char	*command;
+	char	*temp;
+	int		i;
+	int		len;
+
+	if (!(cmd_info = (char **)malloc(sizeof(char *) * 3)))
 		return (0);
+	i = 1;
+	while (cmd[i] && cmd[i] != ' ')
+		i++;
+	if (!(temp = ft_substr(cmd, 1, i - 1)))
+		return (0);
+	len = ft_strlen(temp);
+	command = check_command(paths, temp, len);
+	free(temp);
+	cmd_info[0] = command;
+	if (!(cmd_info[1] = ft_substr(cmd, len + 2, ft_strlen(cmd) - len - 3)))
+		return (0);
+	cmd_info[2] = 0;
+	info->param = cmd_info;
 	return (1);
 }
 
@@ -76,19 +93,24 @@ int		set_param_info(t_pipe *info, const char *cmd, char **paths)
 	char	**cmd_info;
 	char	*command;
 
-	if (!(cmd_info = ft_split(cmd, ' ')))
+	if (cmd[0] == '\'')
+		return (set_single_quote(info, cmd, paths));
+	else
 	{
-		split_free(paths);
-		return (error_occur_std(SPLIT_ERR));
+		if (!(cmd_info = ft_split(cmd, ' ')))
+		{
+			split_free(paths);
+			return (error_occur_std(SPLIT_ERR));
+		}
+		command = check_command(paths, cmd_info[0], ft_strlen(cmd_info[0]));
+		if (command)
+		{
+			free(cmd_info[0]);
+			cmd_info[0] = 0;
+			cmd_info[0] = command;
+		}
+		info->param = cmd_info;
 	}
-	command = check_command(paths, cmd_info[0], ft_strlen(cmd_info[0]));
-	if (command)
-	{
-		free(cmd_info[0]);
-		cmd_info[0] = 0;
-		cmd_info[0] = command;
-	}
-	info->param = cmd_info;
 	return (1);
 }
 

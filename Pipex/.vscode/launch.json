@@ -9,7 +9,7 @@
             "type": "cppdbg",
             "request": "launch",
             "program": "${fileDirname}/pipex",
-            "args": ["here_doc", "end", "cat", "wc -l", "result.txt"],//["ls.txt", "grep zip", "grep u", "grep x", "wc -l", "result.txt"],//["ls.txt", "grep zip", "wac -l", "result.txt"],
+            "args":["user1.txt", "grep b", "'awk {count++} END {print count}'", "outfile"],// ["ls.txt", "grep zip", "grep u", "result.txt"],//["here_doc", "end", "cat", "wc -l", "result.txt"],//["ls.txt", "grep zip", "wac -l", "result.txt"],
             "stopAtEntry": false,
             "cwd": "${fileDirname}",
             "environment": [],
