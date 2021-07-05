@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/30 19:17:06 by taesan            #+#    #+#             */
-/*   Updated: 2021/07/01 21:16:10 by taesan           ###   ########.fr       */
+/*   Updated: 2021/07/05 20:21:30 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ int		start(int argc, const char *argv[], char *envp[], t_pipe *info)
 {
 	int		i;
 	char	**paths;
-	int		status;
 
 	if (!init_pipe(argv[1], argv[argc - 1], envp, info))
 		return (0);
@@ -33,7 +32,6 @@ int		start(int argc, const char *argv[], char *envp[], t_pipe *info)
 	}
 	if (!exec_call(info, argv[i], paths, 1))
 		return (0);
-	wait(&status);
 	split_free(paths);
 	return (1);
 }
