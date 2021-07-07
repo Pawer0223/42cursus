@@ -10,6 +10,8 @@
         "pipex.h": "c",
         "__locale": "c",
         "ios": "c",
-        "libft.h": "c"
+        "libft.h": "c",
+        "get_next_line.h": "c",
+        "pipex_bonus.h": "c"
     }
 }

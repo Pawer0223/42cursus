@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/10 19:55:53 by taesan            #+#    #+#             */
-/*   Updated: 2021/06/30 19:14:16 by taesan           ###   ########.fr       */
+/*   Updated: 2021/07/07 13:29:16 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define PIPEX_BONUS_H
 
 #include "../libft/libft.h"
+#include "../gnl/get_next_line.h"
 #include "../defines.h"
 #include <fcntl.h>
 #include <unistd.h>

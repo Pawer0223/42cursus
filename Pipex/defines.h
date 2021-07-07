@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/28 15:05:24 by taesan            #+#    #+#             */
-/*   Updated: 2021/07/05 20:20:28 by taesan           ###   ########.fr       */
+/*   Updated: 2021/07/07 13:27:57 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@
 #define UNLINK_ERR "file remove Error"
 #define HERE_DOC "here_doc"
 #define WAIT_ERR "wait func return error [-1]"
-
+#define TEMP_FILE ".temp"
+#define MAKE_TEMP_FILE "make temp file error"
 
 typedef struct	s_pipe
 {

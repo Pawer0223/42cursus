@@ -6,28 +6,33 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 21:16:03 by taesan            #+#    #+#             */
-/*   Updated: 2021/06/30 19:44:09 by taesan           ###   ########.fr       */
+/*   Updated: 2021/07/07 13:36:27 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "pipex_bonus.h"
 
-int		input_pipe_fill_bonus(const char *limiter, int pipe[2])
+int		make_temp_file(const char *limiter)
 {
-	char	buf[BUFFER_SIZE];
+	char	*buf;
 	int		r;
-	char	last;
+	int		fd;
 
-	while ((r = read(STDIN_FILENO, buf, BUFFER_SIZE)) > 0)
+	fd = open(TEMP_FILE, O_WRONLY | O_CREAT | O_TRUNC , S_IRUSR | S_IWUSR);
+	if (fd == -1)
+		return (error_occur_perror(MAKE_TEMP_FILE));
+	r = get_next_line(STDIN_FILENO, &buf);
+	while (r > 0)
 	{
-		last = buf[r - 1];
-		buf[r - 1] = 0;
 		if (ft_strcmp(buf, limiter) == 0)
 			break ;
-		buf[r - 1] = last;
-		write(pipe[WRITE_FD_IDX], buf, BUFFER_SIZE);
+		write(fd, buf, ft_strlen(buf));
+		write(fd, "\n", 1);
+		r = get_next_line(STDIN_FILENO, &buf);
 	}
-	close(pipe[WRITE_FD_IDX]);
+	close(fd);
+	if (!buf)
+		free(buf);
 	if (r == -1)
 		return error_occur_std(READ_ERR);
 	return (1);
@@ -45,7 +50,5 @@ int		init_pipe_bonus(const char *limiter, const char *output, char *envp[], t_pi
 									S_IRUSR | S_IWUSR)) == -1)
 		return (error_occur_perror(OUTPUT_OPEN_ERR));
 	info->envp = envp;
-	if (!(input_pipe_fill_bonus(limiter, info->pipe_in)))
-		return (0);
-	return (1);
+	return (make_temp_file(limiter));
 }
