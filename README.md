@@ -79,7 +79,7 @@
 <summary>cub3d</summary>
 	<ul>
 		<li><a href="https://ko.wikipedia.org/wiki/OpenGL">OpenGL</a>을 활용하여, 3d그래픽 표현하기</li>
-		<li>[레이케스팅](https://lodev.org/cgtutor/raycasting.html)구현</li>
+		<li><a href="https://lodev.org/cgtutor/raycasting.html">레이케스팅 구현</a></li>
 	</ul>
 </details>
 
@@ -104,11 +104,11 @@
 	</ul>
 </details>
 
-# [pipex](https://velog.io/@pawer/)
+# [pipex](https://www.notion.so/pipex-dec43b7e53664b1c8b0005452db22970)
 <details>
 <summary>unix pipe명령어 구현하기</summary>
 	<ul>
-		<li>입, 출력 스트림의 이해</li>
-		<li>프로세스 fork</li>
+		<li>파이프를 사용한 IPC(Inter-Process Communication)</li>
+		<li>fork, wait, dup, pipe, execve함수 사용</li>
 	</ul>
 </details>
