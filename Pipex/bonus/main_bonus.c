@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 21:19:34 by taesan            #+#    #+#             */
-/*   Updated: 2021/07/05 13:59:30 by taesan           ###   ########.fr       */
+/*   Updated: 2021/07/07 12:42:13 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,11 @@ int		main(int argc, const char *argv[], char *envp[])
 			if (argc != 6)
 				return (error_occur_std(PARAM_ERR_BONUS));
 			r = start_here_doc(argc, argv, envp, &info);
+			if (!r && unlink(argv[argc - 1]) == -1)
+				return (error_occur_std(UNLINK_ERR));
 		}
 		else
 			r = start(argc, argv, envp, &info);
-		if (!r && unlink(argv[argc - 1]) == -1)
-			return (error_occur_std(UNLINK_ERR));
 		clear_info(&info);
 	}
 	return (r);
