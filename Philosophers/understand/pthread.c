@@ -8,15 +8,19 @@ void	*thread_main(void *param)
 	int	seq;
 
 	seq = *(int *)param; // 무한루프 빠질 때
+	printf("this code .. [%d]\n", seq);
 	// seq = (int)param;
-	i = 0;
-	while (!done[seq])
-	{
-		printf("Thread : [%d] - i : %d\n", seq, i);
-		i++;
-		//usleep(SECOND);
-	}
+	// i = 0;
+	// while (i < 3)
+	// {
+	// 	printf("Thread : [%d] - i : %d\n", seq, i);
+	// 	printf("done[%d] : %d\n", seq, done[seq]);
+	// 	i++;
+	// 	//usleep(SECOND);
+	// }
+	printf("Thread : [%d]\n", seq);
 	// pthread_exit((void *) 0);
+	printf("Thread : [%d] before Return\n", seq);
 	return (void *)(long)seq; // (long)하니까 warning이 사라지네 ?
 }
 
@@ -43,7 +47,7 @@ int	understand_thread(int n)
 			return (0);
 		printf("############ create [%d] ############\n", i);
 		pthread_create(thread_arr[i], NULL, thread_main, &i); // 무한루프 빠짐
-		// pthread_create(thread_arr[i], NULL, thread_main, (void *)i);
+		//pthread_create(thread_arr[i], NULL, thread_main, (void *)i);
 		// usleep(SECOND);
 		i++;
 	}
@@ -54,14 +58,21 @@ int	understand_thread(int n)
 	while (i >= 0)
 	{
 		done[i] = 1;
-		if (pthread_join(*thread_arr[i], (void **)&return_v) == 0)
-			printf("[%d] finish\n", return_v);
+		printf("### done[%d] set 1 ###\n", i);
+		int r = pthread_join(*thread_arr[i], (void **)&return_v);
+		printf("after join : [%d]\n", i);
+		if (r == 0)
+		{
+			printf("Completed join with thread %d status= %d\n", i, return_v);
+		//	printf("[%d] finish\n", return_v);
+		}
 		else
 		{
 			printf("pthread_join error : [%d]\n", i);
 			return (0);
 		}
 		i--;
+		printf("here : %d\n", i);
 	}
 	printf("### understand_thread finish ###\n");
 	return (1);

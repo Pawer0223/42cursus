@@ -35,7 +35,7 @@ int main(void)
 		else
 		{
 			printf("ERROR; return code from pthread_join() is %d, thread %d\n", rc, i);
-		 				 return -1;
+		 	return -1;
 		}
 	}
 
