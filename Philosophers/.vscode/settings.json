@@ -1,5 +1,10 @@
 {
     "files.associations": {
-        "philo.h": "c"
-    }
+        "philo.h": "c",
+        "string.h": "c",
+        "unistd.h": "c",
+        "ratio": "c",
+        "__threading_support": "c"
+    },
+    "C_Cpp.errorSquiggles": "Disabled"
 }

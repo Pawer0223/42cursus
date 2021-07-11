@@ -7,7 +7,5 @@
 #include <pthread.h>
 #include <stdlib.h>
 
-void	test_1();
-
 
 #endif
