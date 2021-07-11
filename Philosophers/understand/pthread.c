@@ -7,33 +7,26 @@ void	*thread_main(void *param)
 	int	i;
 	int	seq;
 
-	seq = *(int *)param; // 무한루프 빠질 때
-	printf("this code .. [%d]\n", seq);
-	// seq = (int)param;
-	// i = 0;
-	// while (i < 3)
-	// {
-	// 	printf("Thread : [%d] - i : %d\n", seq, i);
-	// 	printf("done[%d] : %d\n", seq, done[seq]);
-	// 	i++;
-	// 	//usleep(SECOND);
-	// }
-	printf("Thread : [%d]\n", seq);
-	// pthread_exit((void *) 0);
-	printf("Thread : [%d] before Return\n", seq);
+	seq = (int)param;
+	i = 0;
+	while (!done[seq])
+	{
+		printf("Thread : [%d] - i : %d\n", seq, i);
+		i++;
+	}
 	return (void *)(long)seq; // (long)하니까 warning이 사라지네 ?
 }
 
-/*
-	**	create하는데 시간이 걸린다. 돌려놓고 하위코드 수행. (비동기 처리 느낌이네..)
-	** 그래서 참고한 예제에서는 join을 마지막에 생성한 쓰레드부터 가나보다... 근데 그래도 순서가 보장되지 않는다... 
-	** 그래서 usleep으로 지연을 조금 시키니깐 의도한대로 순서는 흘러 감.
-*/
 int	understand_thread(int n)
 {
 	pthread_t	**thread_arr;
 	int			i;
-	int			return_v;
+	int			r;
+	int			j;
+		long		return_v;
+
+
+
 
 	thread_arr = (pthread_t **)malloc(sizeof(pthread_t *) * n);
 	if (!thread_arr)
@@ -45,35 +38,26 @@ int	understand_thread(int n)
 		done[i] = 0;
 		if (!thread_arr[i])
 			return (0);
-		printf("############ create [%d] ############\n", i);
-		pthread_create(thread_arr[i], NULL, thread_main, &i); // 무한루프 빠짐
-		//pthread_create(thread_arr[i], NULL, thread_main, (void *)i);
-		// usleep(SECOND);
+		pthread_create(thread_arr[i], NULL, thread_main, (void *)(long)i);
 		i++;
 	}
 
 	printf("--------- middle ---------\n");
-
-	i = n - 1;
-	while (i >= 0)
+	j = n - 1; 
+	while (j >= 0)
 	{
-		done[i] = 1;
-		printf("### done[%d] set 1 ###\n", i);
-		int r = pthread_join(*thread_arr[i], (void **)&return_v);
-		printf("after join : [%d]\n", i);
+		printf(" j : %d\n", j);
+		done[j] = 1;
+		r = pthread_join(*thread_arr[j], (void **)&return_v);
+		printf("after j : %d\n", j);
 		if (r == 0)
-		{
-			printf("Completed join with thread %d status= %d\n", i, return_v);
-		//	printf("[%d] finish\n", return_v);
-		}
+			printf("Completed join with thread %d status= %ld\n", j, return_v);
 		else
 		{
-			printf("pthread_join error : [%d]\n", i);
+			printf("pthread_join error : [%d]\n", j);
 			return (0);
 		}
-		i--;
-		printf("here : %d\n", i);
+		j--;
 	}
-	printf("### understand_thread finish ###\n");
 	return (1);
 }
