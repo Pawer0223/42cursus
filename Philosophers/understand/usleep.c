@@ -7,7 +7,7 @@ void	understand_usleep()
 	unsigned int sec;
 
 	while (i < 10) {
-		useconds_t sec = SECOND + 10000;
+		useconds_t sec = INT32_MAX;
 		int result = usleep(sec);
 		printf("i : %d, result : %d\n", i, result);
 		i++;

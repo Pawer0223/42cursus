@@ -30,7 +30,7 @@ int	understand_thread_fail(int n)
 {
 	pthread_t	**thread_arr;
 	int			i;
-	int			return_v;
+	int			return_v; // 이것의 위치가 중요. why? join에 인자로던지기 때문에.
 
 	thread_arr = (pthread_t **)malloc(sizeof(pthread_t *) * n);
 	if (!thread_arr)

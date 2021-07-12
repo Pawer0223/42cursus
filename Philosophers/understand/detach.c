@@ -2,7 +2,7 @@
 
 int	done[3];
 
-void	*thread_main(void *param)
+void	*thread_main_detach(void *param)
 {
 	int	i;
 	int	seq;
@@ -17,7 +17,7 @@ void	*thread_main(void *param)
 	return (void *)(long)seq; // (long)하니까 warning이 사라지네 ?
 }
 
-int	understand_thread(int n)
+int	understand_detach(int n)
 {
 	pthread_t	**thread_arr;
 	int			i;
@@ -35,7 +35,7 @@ int	understand_thread(int n)
 		done[i] = 0;
 		if (!thread_arr[i])
 			return (0);
-		pthread_create(thread_arr[i], NULL, thread_main, (void *)(long)i);
+		pthread_create(thread_arr[i], NULL, thread_main_detach, (void *)(long)i);
 		i++;
 	}
 
@@ -44,7 +44,8 @@ int	understand_thread(int n)
 	while (j >= 0)
 	{
 		done[j] = 1;
-		r = pthread_join(*thread_arr[j], (void **)&return_v);
+		r = pthread_detach(*thread_arr[j]);
+		// r = pthread_join(*thread_arr[j], (void **)&return_v);
 		if (r == 0)
 			printf("Completed join with thread %d status= %ld\n", j, return_v);
 		else

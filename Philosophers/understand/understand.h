@@ -7,11 +7,15 @@
 #include <unistd.h>
 #include <pthread.h>
 #include <stdlib.h>
+#include <sys/time.h>
 
 #include "../philo/defines.h"
 
-int 	understand_thread(int n);
+int		understand_thread(int n);
+int		understand_detach(int n);
 void	understand_usleep();
+void	undestand_time();
+
 
 
 #endif
