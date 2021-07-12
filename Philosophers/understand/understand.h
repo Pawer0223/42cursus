@@ -15,6 +15,7 @@ int		understand_thread(int n);
 int		understand_detach(int n);
 void	understand_usleep();
 void	undestand_time();
+void	undestand_mutex();
 
 
 

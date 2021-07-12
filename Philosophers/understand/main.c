@@ -2,7 +2,7 @@
 
 int		main(int argc, char *argv[]) {
 
-	printf("./understand \"{usleep, pthread, detach, time}\" \"[n]\" \n");
+	printf("./understand \"{usleep, pthread, detach, time mutex}\" \"[n]\" \n");
 	int idx = 1;
 
 	if (argc < 2) {
@@ -31,6 +31,8 @@ int		main(int argc, char *argv[]) {
 	}
 	else if (strcmp(inst, "time") == 0)
 		undestand_time(); 
+	else if (strcmp(inst, "mutex") == 0)
+		undestand_mutex(); 
 	else {
 		printf("Error: [%s] is not valid\n", inst);
 		return (0);
