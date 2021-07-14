@@ -8,7 +8,7 @@ typedef struct	s_per_mutex
 	int				*fork;
 	int				*left;
 	int				*right;
-	pthread_mutex_t mutex;
+	pthread_mutex_t	mutex;
 }				t_per_mutex;
 
 void	to_string(t_per_mutex *per)
@@ -19,22 +19,19 @@ void	to_string(t_per_mutex *per)
 void	*thread_main_mutex(void	*arg)
 {
 	t_per_mutex *mut = (t_per_mutex *)arg;
-	int	visit;
 
-	visit = 0;
-	while (!visit)
+	int cnt = 0;
+	while (cnt < 3)
 	{
-		pthread_mutex_lock(&mut->mutex);
+		//pthread_mutex_lock(&mut->mutex);
 		printf("########## Thread [%d] ##########\n", mut->idx);
-		*mut->fork = mut->idx;
-		*mut->left = mut->idx;
-		*mut->right = mut->idx;
+		*mut->fork += mut->idx;
+		*mut->left += mut->idx;
+		*mut->right += mut->idx;
 		to_string(mut);
 		usleep(MS * MS * 1);
-		visit = 1;
-		pthread_mutex_unlock(&mut->mutex);
-
-		printf("[%d] waiting ...\n", mut->idx);
+		cnt++;
+		//pthread_mutex_unlock(&mut->mutex);
 	}
 	//printf("--- Thread [%d] ---\n", mut->idx);
 	return (0);
