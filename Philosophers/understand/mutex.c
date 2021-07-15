@@ -1,77 +1,82 @@
 #include "understand.h"
 
-#define SIZE 3
+#define SIZE 5
+#define ONE_SEC 1000000
 
-typedef struct	s_per_mutex
-{
-	int				idx;
-	int				*fork;
-	int				*left;
-	int				*right;
-	pthread_mutex_t	mutex;
-}				t_per_mutex;
+char	*meal[3] = {"breakfast", "lunch", "dinner"};
 
-void	to_string(t_per_mutex *per)
+typedef struct	s_phil
 {
-	printf("my : %d, left : %d, right : %d\n", *per->fork, *per->left, *per->right);
-}
+	int				seq;
+	int				eat;
+	pthread_mutex_t *left;
+	pthread_mutex_t *right;
+}				t_phil;
+
 
 void	*thread_main_mutex(void	*arg)
 {
-	t_per_mutex *mut = (t_per_mutex *)arg;
+	t_phil *philo;
 
-	int cnt = 0;
-	while (cnt < 3)
+	philo = (t_phil *)(arg);
+
+	// 밥을 3번먹을 동안 계속돈다.
+	// 밥을 한번 먹고난다음에는 1초동안 쉰다.
+	while (philo->eat < 3)
 	{
-		//pthread_mutex_lock(&mut->mutex);
-		printf("########## Thread [%d] ##########\n", mut->idx);
-		*mut->fork += mut->idx;
-		*mut->left += mut->idx;
-		*mut->right += mut->idx;
-		to_string(mut);
-		usleep(MS * MS * 1);
-		cnt++;
-		//pthread_mutex_unlock(&mut->mutex);
+		// 포크가 살아있을 때 잡기.
+		pthread_mutex_lock(philo->left);
+		pthread_mutex_lock(philo->right);
+		printf("[%d] philosopher eat [%s] !\n", philo->seq, meal[philo->eat]);
+		// 밥을 먹고.
+		philo->eat++;
+		// 1초동안 잔다.
+		usleep(ONE_SEC);
+		// 포크 놓아주기.
+		pthread_mutex_unlock(philo->left);
+		pthread_mutex_unlock(philo->right);
 	}
-	//printf("--- Thread [%d] ---\n", mut->idx);
 	return (0);
 }
 
 /*
-	Thread [0, ]
+	자기자신(왼쪽) + 오른쪽의 포크를 사용가능. 
+
+	1 -> 2 , 2 -> 3, . . . N -> 1
+
+	5개의 철학자가 3번의 식사를 해야한다.
+		- 최대 2명의 철학자가 함께 밥을먹을 수 있다.
+		- i번째 철학자는 i + 1번째 철학자와 동시에 같은 seq의 식사를 병행할 수 없다.(i가 끝나고, 바로 i + 1이 수행될 순 있음)
 */
 void	undestand_mutex()
 {
-	int			key[SIZE] = {0, 0, 0};
-	pthread_t	threads[SIZE];
-	t_per_mutex	mutexs[SIZE];
+	pthread_t		threads[SIZE];
+	pthread_mutex_t	forks[SIZE];
+	t_phil			philos[SIZE];
+	int				i;
 
-	for (int i = 0; i < SIZE; i++) {
-		mutexs[i].idx = i;
-		mutexs[i].fork = &key[i];
-		if (i == 0)
-			mutexs[i].left = &key[SIZE - 1];
-		else
-			mutexs[i].left = &key[i - 1];
-
-		if (i == SIZE - 1)
-			mutexs[i].right = &key[0];
-		else
-			mutexs[i].right = &key[i + 1];
-
-		pthread_mutex_init(&mutexs[i].mutex, NULL);
-		pthread_create(&threads[i], NULL, thread_main_mutex, (void *)&mutexs[i]);
+	// 포크를 만들기
+	i = 0;
+	while (i < SIZE)
+		pthread_mutex_init(&forks[i++], NULL);
+	i = 0;
+	// 각자 포크 쥐어주기
+	while (i < SIZE)
+	{
+		philos[i].eat = 0;
+		philos[i].seq = i + 1;
+		philos[i].left = &forks[i];
+		philos[i].right = &forks[((i + 1) % SIZE)];
+		i++;
 	}
-
+	i = 0;
+	// 각 철학자를 앉혀놓기
+	while (i < SIZE)
+	{
+		pthread_create(&threads[i], NULL, thread_main_mutex, &philos[i]);
+		i++;
+	}
 	for (int i = 0; i < SIZE; i++) {
 		pthread_join(threads[i], NULL);
-	}
-
-	for (int i = 0; i < SIZE; i++) {
-		printf("key[%d] : %d", i, key[i]);
-		if (i != SIZE - 1)
-			printf(", ");
-		else
-			printf("\n");
 	}
 }
