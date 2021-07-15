@@ -1,29 +1,26 @@
 #include "understand.h"
 
-void	time_loop(int t)
-{
-	useconds_t remain = t * MS;
-
-	int sec = t / MS;
-	int usec = (t * MS) - (sec * (MS * MS));
-
-	printf("sec : %d, usec : %d\n", sec, usec);
-	usleep(remain);
-}
 
 void	undestand_time()
 {
 	printf("time\n");
 
-	struct timeval tv;
+	struct timeval start;
+	struct timeval curr;
+
 
 	int t = 1000;
 
 	int prev = 0;
+
+	gettimeofday(&start, NULL);
+	long long s = start.tv_sec * MS + start.tv_usec / MS;
 	for (int i = 0; i < 10; i++) {
-		gettimeofday(&tv, 0);
-		printf("sec : %ld, usec : %d, usec diff : %d\n", tv.tv_sec, tv.tv_usec, tv.tv_usec - prev);
-		time_loop(1500);
-		prev = tv.tv_usec;
+		usleep(500000);
+		gettimeofday(&curr, NULL);
+		long long c = curr.tv_sec * MS + curr.tv_usec / MS;
+		printf("start time : [%lld], curr time : [%lld], working time : [%lld]ms\n", s, c, (c - s));
+		
+		// printf("start : %ld, curr : %ld, working : %ldms\n", start.tv_sec, curr.tv_sec, (curr.tv_sec - start.tv_sec) * MS);
 	}
 }

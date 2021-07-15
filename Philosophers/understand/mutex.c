@@ -13,25 +13,38 @@ typedef struct	s_phil
 	pthread_mutex_t *right;
 }				t_phil;
 
+long long	get_working_time(long long start)
+{
+	struct timeval	end;
+	long long		e;
+	gettimeofday(&end, NULL);
+	e = end.tv_sec * MS + end.tv_usec / MS;
+	return e - start;
+}
 
 void	*thread_main_mutex(void	*arg)
 {
 	t_phil *philo;
+	struct timeval start;
 
 	philo = (t_phil *)(arg);
 
 	// 밥을 3번먹을 동안 계속돈다.
 	// 밥을 한번 먹고난다음에는 1초동안 쉰다.
+	gettimeofday(&start, NULL);
+	long long s = start.tv_sec * MS + start.tv_usec / MS;
+
 	while (philo->eat < 3)
 	{
 		// 포크가 살아있을 때 잡기.
 		pthread_mutex_lock(philo->left);
 		pthread_mutex_lock(philo->right);
-		printf("[%d] philosopher eat [%s] !\n", philo->seq, meal[philo->eat]);
+		long long working = get_working_time(s);
+		printf("%lldms [%d] philosopher eat [%s]!\n", working, philo->seq, meal[philo->eat]);
 		// 밥을 먹고.
 		philo->eat++;
 		// 1초동안 잔다.
-		usleep(ONE_SEC);
+		usleep(ONE_SEC / 2);
 		// 포크 놓아주기.
 		pthread_mutex_unlock(philo->left);
 		pthread_mutex_unlock(philo->right);
