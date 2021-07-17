@@ -15,7 +15,9 @@ int		error_occur(char *msg);
 	data
 */
 int		init_param(t_param *common, char *argv[]);
-int		init_philos(t_philo **philos, pthread_mutex_t **forks, t_param common);
+//int		init_philos(t_philo **philos, pthread_mutex_t **forks, t_param common);
+void	init_philos(t_program_data data, int cnt);
+
 
 /*
 	thread
@@ -24,9 +26,11 @@ void	*thread_main(void *arg);
 /*
 	free
 */
-void	double_ptr_free(void **ptr, int end); 
-void	clear_data(t_philo **p, pthread_mutex_t	**f, pthread_t	**ths, int cnt);
-
+int		clear_data(t_program_data data, int end);
+/*
+	malloc
+*/
+int	program_data_malloc(t_program_data	*data, int cnt);
 /*
 	** test
 */

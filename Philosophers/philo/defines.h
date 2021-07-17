@@ -20,6 +20,14 @@ typedef struct	s_philo
 	t_param			*common;
 }				t_philo;
 
+typedef struct	s_program_data
+{
+	t_param	common;
+	t_philo	**philos;
+	pthread_mutex_t **forks;
+	pthread_t	**threads;
+}				t_program_data;
+
 #define	PARAM_ERROR "parameter error"
 #define	MALLOC_ERROR "malloc fail"
 #define CREATE "has taken a fork"

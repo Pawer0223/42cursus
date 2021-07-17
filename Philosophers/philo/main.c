@@ -1,62 +1,45 @@
 #include "philo.h"
 
-int	make_thread(t_philo **philos, pthread_t	**threads, t_param common)
+int	make_thread(t_program_data data, int cnt)
 {
 	int	i;
 
 	i = 0;
-	while (i < common.num_of_philo)
+	while (i < cnt)
 	{
-		threads[i] = (pthread_t *)malloc(sizeof(pthread_t));
-		printf("philos[%d]->seq : %d\n", i, philos[i]->seq);
-		pthread_create(threads[i], NULL, thread_main, philos[i]);
+		printf("philos[%d]->seq : %d\n", i, data.philos[i]->seq);
+		pthread_create(data.threads[i], NULL, thread_main, data.philos[i]);
 		i++;
 	}
-
 	i = 0;
-	while (i < common.num_of_philo)
-		pthread_join(*threads[i++], NULL);
+	while (i < cnt)
+		pthread_join(*data.threads[i++], NULL);
 	return (1);
 	
 }
 
 int	main(int argc, char *argv[])
 {
-	t_param	common;
-	t_philo	**philos;
-	pthread_mutex_t **forks;
-	pthread_t	**threads;
-	int			i;
+	int	i;
+	int	cnt;
+	t_program_data	data;
 
+	ft_bzero(&data, sizeof(t_program_data));
 	if (argc < 5)
 		return (error_occur(PARAM_ERROR));
 	// param error
-	if (!init_param(&common, argv))
+	if (!init_param(&data.common, argv))
 		return (error_occur(PARAM_ERROR));
-
-
-	philos = (t_philo **)malloc(sizeof(t_philo *) * common.num_of_philo);
-	if (!philos)
-		return (error_occur(MALLOC_ERROR));
-	forks = (pthread_mutex_t **)malloc(sizeof(pthread_mutex_t *) * common.num_of_philo);
-	if (!forks)
-	{
-		free(philos);
-		return (error_occur(MALLOC_ERROR));
-	}
-	threads = (pthread_t **)malloc(sizeof(pthread_t *) * common.num_of_philo);
-	if (!threads)
-		return (0);
+	cnt = data.common.num_of_philo;
+	if (!program_data_malloc(&data, cnt))
+		return (clear_data(data, cnt));
 	// set fork
-	if (!init_philos(philos, forks, common))
-		return (error_occur(MALLOC_ERROR));
+	init_philos(data, cnt);
 	// make thread
-	if (!make_thread(philos, threads, common))
-		return (error_occur(MALLOC_ERROR));
+	make_thread(data, cnt);
 	// to_string_common(common);
 	// destroy fork -> pthread_mutex_destroy(philo[i].left);
-	clear_data(philos, forks, threads, common.num_of_philo);
-
+	clear_data(data, cnt);
 
 	return (0);
 }

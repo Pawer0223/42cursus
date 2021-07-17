@@ -1,54 +1,56 @@
 #include "philo.h"
 
-void	double_ptr_free(void **ptr, int end)
-{
-	int i;
-
-	i = 0;
-	while (i < end)
-	{
-		free(ptr[i++]);
-		ptr[i] = 0;
-	}
-	free(ptr);
-	ptr = 0;	
-}
-
 void	clear_philo(t_philo *p)
 {
 	if (!p)
 		return ;
 	if (p->common)
+	{
 		free(p->common);
+		p->common = 0;
+	}
 	ft_bzero(p, sizeof(p));
 	free(p);
 	p = 0;
 }
 
-void	clear_data(t_philo **p, pthread_mutex_t	**f, pthread_t	**ths, int cnt)
+void	clear_fork(pthread_mutex_t *fork)
+{
+	if (fork)
+	{
+		pthread_mutex_destroy(fork);
+		free(fork);
+	}
+	fork = 0;
+}
+
+void	clear_thread(pthread_t *thread)
+{
+	if (thread)
+		free(thread);
+	thread = 0;
+}
+
+int	clear_data(t_program_data data, int end)
 {
 	int	i;
 
 	i = 0;
-	while (i < cnt)
+	while (i < end)
 	{
-		clear_philo(p[i]);
-		pthread_mutex_destroy(f[i]);
-		if (ths[i])
-			free(ths[i]);
-		if (f[i])
-			free(f[i]);
-		ths[i] = 0;
-		f[i] = 0;	
+		clear_philo(data.philos[i]);
+		clear_fork(data.forks[i]);
+		clear_thread(data.threads[i]);
 		i++;
 	}
-	if (p)
-		free(p);
-	if (f)
-		free(f);
-	if (ths)
-		free(ths);
-	p = 0;
-	f = 0;
-	ths = 0;
+	if (data.philos)
+		free(data.philos);
+	if (data.forks)
+		free(data.forks);
+	if (data.threads)
+		free(data.threads);
+	data.philos = 0;
+	data.forks = 0;
+	data.threads = 0;
+	return (0);
 }
