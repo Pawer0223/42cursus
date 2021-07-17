@@ -1,45 +1,61 @@
 #include "philo.h"
 
-int		set_fork(t_philo *philos, int cnt)
+int	make_thread(t_philo **philos, pthread_t	**threads, t_param common)
 {
-	int				i;
-	pthread_mutex_t	*forks;
+	int	i;
 
-	forks = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t) * cnt);
-	if (!forks)
-		return (0);
-	philos = (t_philo *)malloc(sizeof(t_philo) * cnt);
-	if (!philos)
-		return (0);
 	i = 0;
-	while (i < cnt)
-		pthread_mutex_init(&forks[i++], NULL);
-	i = 0;
-	while (i < cnt)
+	while (i < common.num_of_philo)
 	{
-		philos[i].left = &forks[i];
-		philos[i].right = &forks[(i + 1) % cnt];
+		threads[i] = (pthread_t *)malloc(sizeof(pthread_t));
+		printf("philos[%d]->seq : %d\n", i, philos[i]->seq);
+		pthread_create(threads[i], NULL, thread_main, philos[i]);
 		i++;
 	}
+
+	i = 0;
+	while (i < common.num_of_philo)
+		pthread_join(*threads[i++], NULL);
 	return (1);
+	
 }
 
-int		main(int argc, char *argv[])
+int	main(int argc, char *argv[])
 {
-	t_param			common;
-	t_philo			*philos;
-	
+	t_param	common;
+	t_philo	**philos;
+	pthread_mutex_t **forks;
+	pthread_t	**threads;
+	int			i;
+
 	if (argc < 5)
 		return (error_occur(PARAM_ERROR));
 	// param error
 	if (!init_param(&common, argv))
 		return (error_occur(PARAM_ERROR));
-	// set fork
-	if (!set_fork(philos, common.num_of_philo))
+
+
+	philos = (t_philo **)malloc(sizeof(t_philo *) * common.num_of_philo);
+	if (!philos)
 		return (error_occur(MALLOC_ERROR));
-	
-	
+	forks = (pthread_mutex_t **)malloc(sizeof(pthread_mutex_t *) * common.num_of_philo);
+	if (!forks)
+	{
+		free(philos);
+		return (error_occur(MALLOC_ERROR));
+	}
+	threads = (pthread_t **)malloc(sizeof(pthread_t *) * common.num_of_philo);
+	if (!threads)
+		return (0);
+	// set fork
+	if (!init_philos(philos, forks, common))
+		return (error_occur(MALLOC_ERROR));
+	// make thread
+	if (!make_thread(philos, threads, common))
+		return (error_occur(MALLOC_ERROR));
+	// to_string_common(common);
 	// destroy fork -> pthread_mutex_destroy(philo[i].left);
+	clear_data(philos, forks, threads, common.num_of_philo);
 
 
 	return (0);
