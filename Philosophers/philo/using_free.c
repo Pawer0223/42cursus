@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/18 01:32:00 by taesan            #+#    #+#             */
-/*   Updated: 2021/07/19 16:16:24 by taesan           ###   ########.fr       */
+/*   Updated: 2021/07/19 22:12:55 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int	clear_data(t_program_data data)
         pthread_mutex_destroy(&data.forks[i]);
 		i++;
 	}
+    pthread_mutex_destroy(&data.common.finish_mutex);
     if (data.forks)
         free(data.forks);
     if (data.philos)

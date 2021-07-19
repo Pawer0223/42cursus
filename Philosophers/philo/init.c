@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/16 18:09:34 by taesan            #+#    #+#             */
-/*   Updated: 2021/07/19 16:05:13 by taesan           ###   ########.fr       */
+/*   Updated: 2021/07/19 22:13:54 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,27 +18,33 @@ int	init_param(t_common *common, char *argv[])
 
 	i = 1;
 	common->num_of_philo = ft_atoi(argv[i++]);
-	if (!common->num_of_philo)
+	if (common->num_of_philo < 0)
 		return (0);
 	common->time_to_die = ft_atoi(argv[i++]);
-	if (!common->time_to_die)
+	if (common->time_to_die < 0)
 		return (0);
 	common->time_to_eat = ft_atoi(argv[i++]);
-	if (!common->time_to_eat)
+	if (common->time_to_eat < 0)
 		return (0);
 	common->time_to_sleep = ft_atoi(argv[i++]);
-	if (!common->time_to_sleep)
+	if (common->time_to_sleep < 0)
 		return (0);
 	if (argv[i])
 	{
 		common->time_each_must_eat = ft_atoi(argv[i]);
-		if (!common->time_each_must_eat)
+		if (common->time_each_must_eat < 0)
 			return (0);
 	}
 	else
 		common->time_each_must_eat = -1;
-	common->start = get_curr_time();
 	return (1);
+}
+
+void	init_common(t_common *common)
+{
+	common->start = get_curr_time();
+	common->is_finish = 0;
+	pthread_mutex_init(&common->finish_mutex, NULL);
 }
 
 int	malloc_data(t_program_data *data, int cnt)
@@ -88,6 +94,7 @@ int	init(t_program_data *data, char *argv[])
 {
 	if (!init_param(&data->common, argv))
 		return (error_occur(PARAM_ERROR));
+	init_common(&data->common);
 	if (!init_philos(data, data->common.num_of_philo))
 		return (error_occur(MALLOC_ERROR));
 	return (1);

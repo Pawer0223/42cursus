@@ -5,12 +5,14 @@
 
 typedef struct	s_common
 {
+	int	is_finish;
 	int	num_of_philo;
 	int	time_to_die;
 	int	time_to_eat;
 	int	time_to_sleep;
 	int	time_each_must_eat;
 	long long start;
+	pthread_mutex_t	finish_mutex;
 }				t_common;
 
 typedef struct	s_philo
@@ -21,19 +23,6 @@ typedef struct	s_philo
 	t_common		common;
 	long long		last_time;
 }				t_philo;
-
-/*
-	act를 시작한 시간.
-*/
-typedef	struct	s_timestamp
-{
-	long long start;
-	long long take;
-	long long eat;
-	long long sleep;
-	long long think;
-	long long die;
-}				t_timestamp;
 
 typedef struct	s_program_data
 {

@@ -18,7 +18,6 @@ void	make_thread(t_program_data data, int cnt)
 int	main(int argc, char *argv[])
 {
 	int	i;
-	int	cnt;
 	t_program_data	data;
 
 	ft_bzero(&data, sizeof(t_program_data));
@@ -31,7 +30,5 @@ int	main(int argc, char *argv[])
 	}
 	else
 		return (error_occur(PARAM_ERROR));
-
-
 	return (0);
 }
