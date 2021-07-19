@@ -7,7 +7,7 @@ void	make_thread(t_program_data data, int cnt)
 	i = 0;
 	while (i < cnt)
 	{
-		pthread_create(&data.threads[i], NULL, thread_main, &data.philos[i]);
+		pthread_create(&data.threads[i], NULL, philosopher, &data.philos[i]);
 		i++;
 	}
 	i = 0;

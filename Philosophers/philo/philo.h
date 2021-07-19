@@ -20,7 +20,7 @@ int	init(t_program_data *data, char *argv[]);
 /*
 	thread
 */
-void	*thread_main(void *arg);
+void	*philosopher(void *arg);
 /*
 	free
 */
