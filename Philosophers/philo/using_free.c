@@ -1,56 +1,35 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   using_free.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/07/18 01:32:00 by taesan            #+#    #+#             */
+/*   Updated: 2021/07/19 16:16:24 by taesan           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
-void	clear_philo(t_philo *p)
-{
-	if (!p)
-		return ;
-	if (p->common)
-	{
-		free(p->common);
-		p->common = 0;
-	}
-	ft_bzero(p, sizeof(p));
-	free(p);
-	p = 0;
-}
-
-void	clear_fork(pthread_mutex_t *fork)
-{
-	if (fork)
-	{
-		pthread_mutex_destroy(fork);
-		free(fork);
-	}
-	fork = 0;
-}
-
-void	clear_thread(pthread_t *thread)
-{
-	if (thread)
-		free(thread);
-	thread = 0;
-}
-
-int	clear_data(t_program_data data, int end)
+int	clear_data(t_program_data data)
 {
 	int	i;
 
 	i = 0;
-	while (i < end)
+	while (i < data.common.num_of_philo)
 	{
-		clear_philo(data.philos[i]);
-		clear_fork(data.forks[i]);
-		clear_thread(data.threads[i]);
+        pthread_mutex_destroy(&data.forks[i]);
 		i++;
 	}
-	if (data.philos)
-		free(data.philos);
-	if (data.forks)
-		free(data.forks);
-	if (data.threads)
-		free(data.threads);
-	data.philos = 0;
-	data.forks = 0;
-	data.threads = 0;
+    if (data.forks)
+        free(data.forks);
+    if (data.philos)
+        free(data.philos);
+    if (data.threads)
+        free(data.threads);
+    data.forks = 0;
+    data.philos = 0;
+    data.threads = 0;
 	return (0);
 }
