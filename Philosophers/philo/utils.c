@@ -6,11 +6,18 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/17 21:14:08 by taesan            #+#    #+#             */
-/*   Updated: 2021/07/17 21:14:12 by taesan           ###   ########.fr       */
+/*   Updated: 2021/07/21 05:14:36 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+void ft_usleep(long long end_time)
+{
+	long long curr;
+
+	while (get_curr_time() < end_time);
+}
 
 int	ft_atoi(const char *str)
 {

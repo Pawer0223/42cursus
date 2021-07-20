@@ -1,49 +1,64 @@
 #include "philo.h"
 
-void	logging(t_philo *philo, int act)
+void	print_log(t_philo *philo, long long timestamp, char *message)
 {
-	long long timestamp;
-	char *message;
-
-	if (act == ACT_EAT)
-	{
-		pthread_mutex_lock(&philo->philo_status);
-		timestamp = philo->last_time - philo->common->start;
-		pthread_mutex_unlock(&philo->philo_status);
-	}
-	else
-		timestamp = get_curr_time() - philo->common->start;
-	if (act == ACT_TAKE)
-		message = PRINT_TAKE;
-	else if (act == ACT_EAT)
-		message = PRINT_EAT;
-	else if (act == ACT_SLEEP)
-		message = PRINT_SLEEP;
-	else if (act == ACT_THINK)
-		message= PRINT_THINK;
 	pthread_mutex_lock(&philo->common->finish_mutex);
 	if (!philo->common->is_finish)
 		printf("%lld\t%d\t%s\n", timestamp, philo->seq, message);
 	pthread_mutex_unlock(&philo->common->finish_mutex);
 }
 
+long long	logging(t_philo *philo, int act)
+{
+	long long timestamp;
+	long long curr;
+
+	curr = get_curr_time();
+	if (act == ACT_EAT)
+	{
+		pthread_mutex_lock(&philo->philo_status);
+		timestamp = philo->last_time - philo->common->start;
+		curr = philo->last_time;
+		pthread_mutex_unlock(&philo->philo_status);
+	}
+	else
+		timestamp = curr - philo->common->start;
+	if (act == ACT_TAKE)
+		print_log(philo, timestamp, PRINT_TAKE);
+	else if (act == ACT_EAT)
+		print_log(philo, timestamp, PRINT_EAT);
+	else if (act == ACT_SLEEP)
+		print_log(philo, timestamp, PRINT_SLEEP);
+	else if (act == ACT_THINK)
+		print_log(philo, timestamp, PRINT_THINK);
+	return (curr);
+}
+
 void	change_status(t_philo *philo)
 {
+	long long curr;
+
 	pthread_mutex_lock(&philo->philo_status);
-	philo->last_time = get_curr_time();
+	curr = get_curr_time();
+	philo->last_time = curr;
 	if (philo->common->time_each_must_eat != -1)
 		philo->eat_cnt++;
 	if (philo->eat_cnt == philo->common->time_each_must_eat)
 		philo->common->must_eat_cnt++;
-	pthread_mutex_unlock(&philo->philo_status);
 	pthread_mutex_lock(&philo->common->finish_mutex);
 	if (philo->common->must_eat_cnt == philo->common->num_of_philo)
+	{
+		printf("%lld\t%d\t%s\n", curr - philo->common->start, philo->seq, PRINT_EAT);
 		philo->common->is_finish = 1;
+	}
 	pthread_mutex_unlock(&philo->common->finish_mutex);
+	pthread_mutex_unlock(&philo->philo_status);
 }
 
 void	acting(t_philo *philo, int act)
 {
+	long long sleep_end_time;
+
 	if (act == ACT_TAKE)
 	{
 		pthread_mutex_lock(philo->left);
@@ -53,15 +68,16 @@ void	acting(t_philo *philo, int act)
 	else if (act == ACT_EAT)
 	{
 		change_status(philo);
-		logging(philo, act);
-		usleep(philo->common->time_to_eat * MS);
+		long long curr = logging(philo, act);
+		sleep_end_time = curr + philo->common->time_to_eat;
+		ft_usleep(sleep_end_time);
 		pthread_mutex_unlock(philo->left);
 		pthread_mutex_unlock(philo->right);
 	}
 	else
-		logging(philo, act);
+		sleep_end_time = logging(philo, act) + philo->common->time_to_sleep;
 	if (act == ACT_SLEEP)
-		usleep(philo->common->time_to_sleep * MS);
+		ft_usleep(sleep_end_time);
 }
 
 void	*philosopher(void *arg)

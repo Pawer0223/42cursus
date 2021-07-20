@@ -11,6 +11,7 @@
 int		ft_atoi(const char *str);
 void	ft_bzero(void *s, size_t n);
 int		error_occur(char *msg);
+void	ft_usleep(long long end_time);
 
 /*
 	data
