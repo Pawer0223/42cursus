@@ -1,23 +1,10 @@
 #include "philo.h"
 
-int	done(t_philo *philo)
-{
-	int r;
-	r = 0;
-	pthread_mutex_lock(&philo->common->finish_mutex);
-	if (philo->common->is_finish)
-		r = 1;
-	pthread_mutex_unlock(&philo->common->finish_mutex);
-	return (r);
-}
-
 void	logging(t_philo *philo, int act)
 {
 	long long timestamp;
 	char *message;
 
-	if (done(philo))
-		return ;
 	if (act == ACT_EAT)
 	{
 		pthread_mutex_lock(&philo->philo_status);
@@ -34,7 +21,10 @@ void	logging(t_philo *philo, int act)
 		message = PRINT_SLEEP;
 	else if (act == ACT_THINK)
 		message= PRINT_THINK;
-	printf("%lld\t%d\t%s\n", timestamp, philo->seq, message);
+	pthread_mutex_lock(&philo->common->finish_mutex);
+	if (!philo->common->is_finish)
+		printf("%lld\t%d\t%s\n", timestamp, philo->seq, message);
+	pthread_mutex_unlock(&philo->common->finish_mutex);
 }
 
 void	change_status(t_philo *philo)
@@ -90,5 +80,3 @@ void	*philosopher(void *arg)
 	}
 	return (0);
 } 
-
-
