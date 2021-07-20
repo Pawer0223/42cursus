@@ -6,28 +6,27 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <string.h>
 #include "defines.h"
 
-int		ft_atoi(const char *str);
-void	ft_bzero(void *s, size_t n);
-int		error_occur(char *msg);
-void	ft_usleep(long long end_time);
-
 /*
-	data
+	error
+*/
+int		error_occur(char *msg);
+/*
+	utils
+*/
+int		ft_atoi(const char *str);
+void	ft_usleep(long long end_time);
+/*
+	init
 */
 int	init(t_program_data *data, char *argv[]);
-
 /*
 	thread
 */
 void	*philosopher(void *arg);
 void	*monitor(void *arg);
-int		done(t_philo *philo);
-/*
-	free
-*/
-int		clear_data(t_program_data data);
 /*
 	** test
 */

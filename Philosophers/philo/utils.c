@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/17 21:14:08 by taesan            #+#    #+#             */
-/*   Updated: 2021/07/21 05:14:36 by taesan           ###   ########.fr       */
+/*   Updated: 2021/07/21 05:29:59 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,15 +40,4 @@ int	ft_atoi(const char *str)
 		i++;
 	}
 	return (int)(result * is_minus);
-}
-
-void	ft_bzero(void *s, size_t n)
-{
-	unsigned char	*result;
-	size_t			i;
-
-	result = s;
-	i = 0;
-	while (i < n)
-		result[i++] = 0;
 }
