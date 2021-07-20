@@ -20,7 +20,8 @@ typedef struct	s_philo
 	int				seq;
 	pthread_mutex_t	*left;
 	pthread_mutex_t	*right;
-	t_common		common;
+	pthread_mutex_t	last_time_mutex;
+	t_common		*common;
 	long long		last_time;
 }				t_philo;
 

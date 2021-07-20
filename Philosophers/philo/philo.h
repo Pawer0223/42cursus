@@ -21,6 +21,8 @@ int	init(t_program_data *data, char *argv[]);
 	thread
 */
 void	*philosopher(void *arg);
+void	*monitor(void *arg);
+int		done(t_philo *philo);
 /*
 	free
 */
