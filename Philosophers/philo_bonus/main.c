@@ -1,24 +1,22 @@
 #include "philo.h"
 
-// void	philosopher_died(t_program_data data, int cnt)
-// {
-// 	int	i;
+void	clear_data(t_program_data data, int cnt)
+{
+	int	i;
+	int	status;
 
-// 	sem_wait(data.common.finish_sem);
-// 	printf("here\n");
-// 	i = 0;
-// 	while (i < cnt)
-// 		kill(data.philos[i++].pid, SIGINT);
-// 	i = 0;
-// 	while (i < cnt)
-// 		sem_close(data.philos[i++].status);
-// 	if (data.philos)
-// 		free(data.philos);
-// 	data.philos = 0;
-// 	printf("philo main died\n");
-// 	sem_close(data.common.finish_sem);
-// 	sem_close(data.common.forks);
-// }
+	i = 0;
+	while (i < cnt)
+		waitpid(data.philos[i++].pid, &status, 0);
+	i = 0;
+	while (i < cnt)
+		sem_close(data.philos[i++].status);
+	free(data.philos);
+	data.philos = 0;
+	sem_close(data.common.finish_sem);
+	sem_close(data.common.muset_eat_sem);
+	sem_close(data.common.forks);
+}
 
 void	make_process(t_program_data data, int cnt, int argc)
 {
@@ -44,9 +42,6 @@ void	make_process(t_program_data data, int cnt, int argc)
 	if (argc == 6)
 		pthread_create(&must_eat_th, NULL, must_eat_monitor, &data);
 	pthread_create(&finish_th, NULL, philosopher_died, &data);
-	i = 0;
-	while (i < cnt)
-		waitpid(data.philos[i++].pid, 0, 0);
 }
 
 int	main(int argc, char *argv[])
@@ -59,6 +54,7 @@ int	main(int argc, char *argv[])
 		if (!init(&data, argv))
 			return (0);
 		make_process(data, data.common.num_of_philo, argc);
+		clear_data(data, data.common.num_of_philo);
 	}
 	else
 		return (error_occur(PARAM_ERROR));
