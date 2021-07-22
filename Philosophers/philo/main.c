@@ -44,7 +44,6 @@ void	make_thread(t_program_data data, int cnt)
 
 int	main(int argc, char *argv[])
 {
-	int	i;
 	t_program_data	data;
 
 	memset(&data, 0, sizeof(data));

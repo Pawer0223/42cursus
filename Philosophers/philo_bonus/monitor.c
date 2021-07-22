@@ -6,11 +6,40 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/20 04:18:19 by taesan            #+#    #+#             */
-/*   Updated: 2021/07/22 00:12:47 by taesan           ###   ########.fr       */
+/*   Updated: 2021/07/22 15:58:27 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+void	*must_eat_monitor(void *arg)
+{
+	t_program_data *data;
+	int	i;
+
+	data = (t_program_data *)arg;
+	i = 0;
+	while (i < data->common.num_of_philo)
+	{
+		sem_wait(data->common.muset_eat_sem);
+		i++;
+	}
+	sem_post(data->common.finish_sem);
+	return (0);
+}
+
+void	*philosopher_died(void *arg)
+{
+	t_program_data *data;
+	int	i;
+
+	data = (t_program_data *)arg;
+	sem_wait(data->common.finish_sem);
+	i = 0;
+	while (i < data->common.num_of_philo)
+		kill(data->philos[i++].pid, SIGINT);
+	return (0);
+}
 
 void	*monitor(void *arg)
 {
@@ -20,20 +49,19 @@ void	*monitor(void *arg)
 	long long	timestamp;
 
 	philo = (t_philo *)arg;
-	while (!philo->common->is_finish)
+	while (1)
 	{
-		pthread_mutex_lock(&philo->philo_status);
-		pthread_mutex_lock(&philo->common->finish_mutex);
+		sem_wait(philo->status);
 		curr = get_curr_time();
 		wait_time = curr - philo->last_time;
-		if (wait_time >= philo->common->time_to_die && !philo->common->is_finish)
+		if (wait_time >= philo->common->time_to_die)
 		{
-			philo->common->is_finish = 1;
 			timestamp = curr - philo->common->start;
 			printf("%lld\t%d\t%s\n", timestamp, philo->seq, PRINT_DIE);
+			sem_post(philo->common->finish_sem);
+			return (0);
 		}
-		pthread_mutex_unlock(&philo->common->finish_mutex);
-		pthread_mutex_unlock(&philo->philo_status);
+		sem_post(philo->status);
 	}
 	return (0);
 }

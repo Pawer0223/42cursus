@@ -17,6 +17,7 @@ long long	get_working_time(long long start)
 {
 	struct timeval	end;
 	long long		e;
+
 	gettimeofday(&end, NULL);
 	e = end.tv_sec * MS + end.tv_usec / MS;
 	return e - start;
