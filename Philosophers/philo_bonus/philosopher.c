@@ -7,8 +7,8 @@ void	print_log(t_philo *philo, long long timestamp, char *message)
 
 long long	logging(t_philo *philo, int act)
 {
-	long long timestamp;
-	long long curr;
+	long long	timestamp;
+	long long	curr;
 
 	curr = get_curr_time();
 	if (act == ACT_EAT)
@@ -33,7 +33,7 @@ long long	logging(t_philo *philo, int act)
 
 void	change_status(t_philo *philo)
 {
-	long long curr;
+	long long	curr;
 
 	sem_wait(philo->status);
 	curr = get_curr_time();
@@ -47,7 +47,8 @@ void	change_status(t_philo *philo)
 
 void	acting(t_philo *philo, int act)
 {
-	long long sleep_end_time;
+	long long	sleep_end_time;
+	long long	curr;
 
 	if (act == ACT_TAKE)
 	{
@@ -58,7 +59,7 @@ void	acting(t_philo *philo, int act)
 	else if (act == ACT_EAT)
 	{
 		change_status(philo);
-		long long curr = logging(philo, act);
+		curr = logging(philo, act);
 		sleep_end_time = curr + philo->common->time_to_eat;
 		ft_usleep(sleep_end_time);
 		sem_post(philo->common->forks);
@@ -85,4 +86,4 @@ void	philosopher(t_philo *philo)
 		acting(philo, ACT_THINK);
 	}
 	exit(0);
-} 
+}

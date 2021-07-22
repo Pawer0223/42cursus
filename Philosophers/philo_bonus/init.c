@@ -49,18 +49,10 @@ sem_t	*create_sem(char *name, int value)
 	return (sem);
 }
 
-void	init_common(t_common *common)
-{
-	common->start = get_curr_time();
-	common->finish_sem = create_sem(SEM_FINISH, 0);
-	common->muset_eat_sem = create_sem(SEM_MUST_EAT, 0);
-	common->forks = create_sem(SEM_FORKS, common->num_of_philo);
-}
-
 void	set_status(t_philo *philo, int seq)
 {
-	int size;
-	int	n;
+	int		size;
+	int		n;
 	char	name[50];
 
 	memset(name, 0, 50);
@@ -82,10 +74,14 @@ void	set_status(t_philo *philo, int seq)
 	philo->status = create_sem(SEM_FORKS, 1);
 }
 
-void	init_philos(t_program_data *data, int cnt)
+void	init_philos(t_program_data *data, t_common *common, int cnt)
 {
 	int	i;
 
+	common->start = get_curr_time();
+	common->finish_sem = create_sem(SEM_FINISH, 0);
+	common->muset_eat_sem = create_sem(SEM_MUST_EAT, 0);
+	common->forks = create_sem(SEM_FORKS, common->num_of_philo);
 	i = 0;
 	while (i < cnt)
 	{
@@ -100,15 +96,14 @@ void	init_philos(t_program_data *data, int cnt)
 
 int	init(t_program_data *data, char *argv[])
 {
-	t_philo *philos;
+	t_philo	*philos;
 
 	if (!init_param(&data->common, argv))
 		return (error_occur(PARAM_ERROR));
-	init_common(&data->common);
 	philos = (t_philo *)malloc(sizeof(t_philo) * data->common.num_of_philo);
 	if (!philos)
 		return (error_occur(MALLOC_ERROR));
 	data->philos = philos;
-	init_philos(data, data->common.num_of_philo);
+	init_philos(data, &data->common, data->common.num_of_philo);
 	return (1);
 }

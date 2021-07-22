@@ -12,9 +12,9 @@
 
 NAME	= philo_bonus
 
-CC		= arch -x86_64 gcc -g #-g is modify !
+CC		= gcc 
 RM		= rm -f
-#CFLAGS	= -Wall -Wextra -Werror
+CFLAGS	= -Wall -Wextra -Werror
 
 SRCS				=	$(wildcard *.c)
 
@@ -32,8 +32,5 @@ fclean:	clean
 		$(RM) $(NAME)
 
 re:		fclean $(NAME)
-
-leak:
-		leaks -atExit -- ./philo
 
 .PHONY:	all clean fclean re

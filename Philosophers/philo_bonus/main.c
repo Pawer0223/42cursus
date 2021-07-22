@@ -20,10 +20,10 @@ void	clear_data(t_program_data data, int cnt)
 
 void	make_process(t_program_data data, int cnt, int argc)
 {
-	int	i;
-	int	pid;
-	pthread_t finish_th;
-	pthread_t must_eat_th;
+	int			i;
+	int			pid;
+	pthread_t	finish_th;
+	pthread_t	must_eat_th;
 
 	i = 0;
 	while (i < cnt)

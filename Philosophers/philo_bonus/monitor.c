@@ -14,8 +14,8 @@
 
 void	*must_eat_monitor(void *arg)
 {
-	t_program_data *data;
-	int	i;
+	t_program_data	*data;
+	int				i;
 
 	data = (t_program_data *)arg;
 	i = 0;
@@ -30,8 +30,8 @@ void	*must_eat_monitor(void *arg)
 
 void	*philosopher_died(void *arg)
 {
-	t_program_data *data;
-	int	i;
+	t_program_data	*data;
+	int				i;
 
 	data = (t_program_data *)arg;
 	sem_wait(data->common.finish_sem);
@@ -43,7 +43,7 @@ void	*philosopher_died(void *arg)
 
 void	*monitor(void *arg)
 {
-	t_philo *philo;
+	t_philo		*philo;
 	long long	wait_time;
 	long long	curr;
 	long long	timestamp;

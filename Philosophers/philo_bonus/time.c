@@ -12,11 +12,11 @@
 
 #include "philo.h"
 
-long long	get_curr_time()
+long long	get_curr_time(void)
 {
 	struct timeval	tv;
-	long long	curr;
-	
+	long long		curr;
+
 	gettimeofday(&tv, NULL);
 	curr = (tv.tv_sec * MS) + (tv.tv_usec / MS);
 	return (curr);
