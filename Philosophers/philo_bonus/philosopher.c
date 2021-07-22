@@ -59,7 +59,7 @@ void	acting(t_philo *philo, int act)
 		change_status(philo);
 		curr = logging(philo, act);
 		if (philo->eat_cnt == philo->common->time_each_must_eat)
-			sem_post(philo->common->muset_eat_sem);
+			sem_post(philo->common->must_eat_sem);
 		sleep_end_time = curr + philo->common->time_to_eat;
 		ft_usleep(sleep_end_time);
 		sem_post(philo->common->forks);
