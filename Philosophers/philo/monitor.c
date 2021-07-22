@@ -14,7 +14,7 @@
 
 void	*monitor(void *arg)
 {
-	t_philo *philo;
+	t_philo		*philo;
 	long long	wait_time;
 	long long	curr;
 	long long	timestamp;
@@ -26,7 +26,8 @@ void	*monitor(void *arg)
 		pthread_mutex_lock(&philo->common->finish_mutex);
 		curr = get_curr_time();
 		wait_time = curr - philo->last_time;
-		if (wait_time >= philo->common->time_to_die && !philo->common->is_finish)
+		if (wait_time >= philo->common->time_to_die \
+			 && !philo->common->is_finish)
 		{
 			philo->common->is_finish = 1;
 			timestamp = curr - philo->common->start;

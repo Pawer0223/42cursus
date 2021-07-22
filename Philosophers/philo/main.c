@@ -26,8 +26,8 @@ int	clear_data(t_program_data data)
 
 void	make_thread(t_program_data data, int cnt)
 {
-	int	i;
-	pthread_t monitor_th;
+	int			i;
+	pthread_t	monitor_th;
 
 	i = 0;
 	while (i < cnt)

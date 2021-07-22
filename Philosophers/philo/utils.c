@@ -12,11 +12,11 @@
 
 #include "philo.h"
 
-void ft_usleep(long long end_time)
+void	ft_usleep(long long end_time)
 {
-	long long curr;
-
-	while (get_curr_time() < end_time);
+	while (get_curr_time() < end_time)
+	{
+	}
 }
 
 int	ft_atoi(const char *str)
@@ -39,5 +39,5 @@ int	ft_atoi(const char *str)
 		result = result * 10 + (str[i] - '0');
 		i++;
 	}
-	return (int)(result * is_minus);
+	return ((int)(result * is_minus));
 }
