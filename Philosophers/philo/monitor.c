@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/20 04:18:19 by taesan            #+#    #+#             */
-/*   Updated: 2021/07/23 03:11:07 by taesan           ###   ########.fr       */
+/*   Updated: 2021/07/24 02:48:51 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	*monitor(void *arg)
 			timestamp = curr - philo->common->start;
 			printf("%lld\t%d\t%s\n", timestamp, philo->seq, PRINT_DIE);
 			if (philo->common->num_of_philo == 1)
-				pthread_mutex_unlock(philo->right);
+				pthread_mutex_unlock(philo->left);
 		}
 		pthread_mutex_unlock(&philo->common->finish_mutex);
 		pthread_mutex_unlock(&philo->philo_status);
