@@ -116,16 +116,22 @@
 # [Philosophers](https://jolly-fuchsia-126.notion.site/philosophers-553143a709b642e3ac4c3148a919f8cf)
 <details>
 <summary>식사하는 철학자 문제 - 교착 상태 해결하기</summary>
-	<ul>
-		<li>thread와 mutex를 활용하여, 상호배제 구현하기</li>
-			- thread는 자원을 공유한다. 공유되는 자원 들(상태가 변경되거나, 참조되는)을 mutex를 통해 상호배제 한다.
-			- 종료를 알리는 공유자원의 flag가 변경될 때, 모든 쓰레드를 종료한다.
-			- 모든 쓰레드가 종료되었는지 확인하기 위해 동기화기법 모니터를 사용한다. 이는 N개의 철학자의 상태를 N개의 모니터에서 관리한다.
-			- 뮤텍스는 lock과 unlock함수를 통해 상호배제 한다.
-		<li>process와 semaphore를 활용하여, 상호배제 구현하기</li>
-			- process는 자원을 복사한다. 따라서 finish쓰레드를 추가적으로 구현한다.
-			- finish쓰레드는 monitor쓰레드에서 종료플레그를 알리는 세마포어가 +1이 되는 경우, 모든 프로세스를 강제로 kill해준다.
-			- 세마포어는 wait를 통해 세마포어를 -1감소, post를 통해 +1 증가한다. (따라서 세마포어 생성시 초기 값을 정수로 함께 전달한다.)
-			- wait함수는 세마포가 1이상의 값이 될때까지 기다린다.
-	</ul>
+	<details>
+	<summary>thread와 mutex를 활용하여, 상호배제 구현하기</summary>
+		<ul>
+			<li>thread는 자원을 공유한다. 공유되는 자원 들(상태가 변경되거나, 참조되는)을 mutex를 통해 상호배제 한다</li>
+			<li>종료를 알리는 공유자원의 flag가 변경될 때, 모든 쓰레드를 종료한다.</li>
+			<li>모든 쓰레드가 종료되었는지 확인하기 위해 동기화기법 모니터를 사용한다. 이는 N개의 철학자의 상태를 N개의 모니터에서 관리한다.</li>
+			<li>뮤텍스는 lock과 unlock함수를 통해 상호배제 한다.</li>
+		</ul>
+	</details>
+	<details>
+	<summary>process와 semaphore를 활용하여, 상호배제 구현하기</summary>
+		<ul>
+			<li>process는는자원을 복사한다. 따라서 finish쓰레드를 추가적으로 구현한다.</li>
+			<li>종료를 monitor쓰레드에서 종료플레그를 알리는 세마포어가 +1이 되는 경우, 모든 프로세스를 강제로 kill해준다.</li>
+			<li>세마포어는 wait를 통해 세마포어를 -1감소, post를 통해 +1 증가한다. (따라서 세마포어 생성시 초기 값을 정수로 함께 전달한다.)</li>
+			<li> 세마포가 1이상의 값이 될때까지 기다린다.</li>
+		</ul>
+	</details>
 </details>
