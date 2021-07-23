@@ -14,7 +14,7 @@ void	clear_data(t_program_data data, int cnt)
 	free(data.philos);
 	data.philos = 0;
 	sem_close(data.common.finish_sem);
-	sem_close(data.common.muset_eat_sem);
+	sem_close(data.common.must_eat_sem);
 	sem_close(data.common.forks);
 }
 

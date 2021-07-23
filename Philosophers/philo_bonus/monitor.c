@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/20 04:18:19 by taesan            #+#    #+#             */
-/*   Updated: 2021/07/22 15:58:27 by taesan           ###   ########.fr       */
+/*   Updated: 2021/07/23 02:49:43 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	*must_eat_monitor(void *arg)
 	i = 0;
 	while (i < data->common.num_of_philo)
 	{
-		sem_wait(data->common.muset_eat_sem);
+		sem_wait(data->common.must_eat_sem);
 		i++;
 	}
 	sem_post(data->common.finish_sem);

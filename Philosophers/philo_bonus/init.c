@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/16 18:09:34 by taesan            #+#    #+#             */
-/*   Updated: 2021/07/22 15:56:18 by taesan           ###   ########.fr       */
+/*   Updated: 2021/07/23 02:49:07 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	init_philos(t_program_data *data, t_common *common, int cnt)
 
 	common->start = get_curr_time();
 	common->finish_sem = create_sem(SEM_FINISH, 0);
-	common->muset_eat_sem = create_sem(SEM_MUST_EAT, 0);
+	common->must_eat_sem = create_sem(SEM_MUST_EAT, 0);
 	common->forks = create_sem(SEM_FORKS, common->num_of_philo);
 	i = 0;
 	while (i < cnt)

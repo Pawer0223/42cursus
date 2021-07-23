@@ -13,7 +13,7 @@ typedef struct s_common
 	long long	start;
 	sem_t		*finish_sem;
 	sem_t		*forks;
-	sem_t		*muset_eat_sem;
+	sem_t		*must_eat_sem;
 }				t_common;
 
 typedef struct s_philo
