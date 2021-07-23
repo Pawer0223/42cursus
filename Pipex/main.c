@@ -12,7 +12,7 @@
 
 #include "pipex.h"
 
-int		main(int argc, const char *argv[], char *envp[])
+int	main(int argc, const char *argv[], char *envp[])
 {
 	t_pipe	info;
 	int		r;

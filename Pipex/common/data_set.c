@@ -22,25 +22,24 @@ char	**set_path(char *envp[])
 	{
 		path = *envp;
 		if (ft_strlen(path) < 4)
-			continue;
-		if (path[0] == 'P' && path[1] == 'A' && path[2] == 'T' && path[3] == 'H')
+			continue ;
+		if (path[0] == 'P' && path[1] == 'A' && \
+				path[2] == 'T' && path[3] == 'H')
 		{
 			path = *envp;
-			break;
+			break ;
 		}
 		envp++;
 	}
 	if (!path)
 		path = PATH;
-	if (!(paths = ft_split(path + 5, ':')))
-	{
+	paths = ft_split(path + 5, ':');
+	if (!paths)
 		error_occur_std(SPLIT_ERR);
-		return (0);
-	}
 	return (paths);
 }
 
-int		init_pipe(const char *input, const char *output, char *envp[], t_pipe *info)
+int	init_pipe(const char *input, const char *output, char *envp[], t_pipe *info)
 {
 	int	fd;
 
@@ -50,11 +49,13 @@ int		init_pipe(const char *input, const char *output, char *envp[], t_pipe *info
 		return (error_occur_perror(PIPE_ERR));
 	if (pipe(info->pipe_out) == -1)
 		return (error_occur_perror(PIPE_ERR));
-	if ((info->result_fd = open(output, O_WRONLY | O_CREAT | O_TRUNC | O_APPEND, 
-									S_IRUSR | S_IWUSR)) == -1)
+	info->result_fd = open(output, O_WRONLY | O_CREAT | O_TRUNC | O_APPEND, \
+							S_IRUSR | S_IWUSR);
+	if (info->result_fd == -1)
 		return (error_occur_perror(OUTPUT_OPEN_ERR));
 	info->envp = envp;
-	if ((fd = open(input, O_RDONLY)) == -1)
+	fd = open(input, O_RDONLY);
+	if (fd == -1)
 		return (error_occur_perror(INPUT_OPEN_ERR));
 	dup2(fd, info->pipe_in[READ_FD_IDX]);
 	close(fd);
@@ -62,7 +63,7 @@ int		init_pipe(const char *input, const char *output, char *envp[], t_pipe *info
 	return (1);
 }
 
-int		set_single_quote(t_pipe *info, const char *cmd, char **paths)
+int	set_single_quote(t_pipe *info, const char *cmd, char **paths)
 {
 	char	**cmd_info;
 	char	*command;
@@ -70,25 +71,28 @@ int		set_single_quote(t_pipe *info, const char *cmd, char **paths)
 	int		i;
 	int		len;
 
-	if (!(cmd_info = (char **)malloc(sizeof(char *) * 3)))
+	cmd_info = (char **)malloc(sizeof(char *) * 3);
+	if (!cmd_info)
 		return (0);
 	i = 1;
 	while (cmd[i] && cmd[i] != ' ')
 		i++;
-	if (!(temp = ft_substr(cmd, 1, i - 1)))
+	temp = ft_substr(cmd, 1, i - 1);
+	if (!temp)
 		return (0);
 	len = ft_strlen(temp);
 	command = check_command(paths, temp, len);
 	free(temp);
 	cmd_info[0] = command;
-	if (!(cmd_info[1] = ft_substr(cmd, len + 2, ft_strlen(cmd) - len - 3)))
+	cmd_info[1] = ft_substr(cmd, len + 2, ft_strlen(cmd) - len - 3);
+	if (!cmd_info[1])
 		return (0);
 	cmd_info[2] = 0;
 	info->param = cmd_info;
 	return (1);
 }
 
-int		set_param_info(t_pipe *info, const char *cmd, char **paths)
+int	set_param_info(t_pipe *info, const char *cmd, char **paths)
 {
 	char	**cmd_info;
 	char	*command;
@@ -97,7 +101,8 @@ int		set_param_info(t_pipe *info, const char *cmd, char **paths)
 		return (set_single_quote(info, cmd, paths));
 	else
 	{
-		if (!(cmd_info = ft_split(cmd, ' ')))
+		cmd_info = ft_split(cmd, ' ');
+		if (!cmd_info)
 		{
 			split_free(paths);
 			return (error_occur_std(SPLIT_ERR));
@@ -114,7 +119,7 @@ int		set_param_info(t_pipe *info, const char *cmd, char **paths)
 	return (1);
 }
 
-int		set_connect_pipe(t_pipe *info, int i)
+int	set_connect_pipe(t_pipe *info, int i)
 {
 	if (i > 2)
 	{

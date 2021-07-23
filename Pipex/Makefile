@@ -6,7 +6,7 @@
 #    By: taesan <taesan@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/06 16:51:22 by taesan            #+#    #+#              #
-#    Updated: 2021/07/07 13:31:01 by taesan           ###   ########.fr        #
+#    Updated: 2021/06/30 19:18:31 by taesan           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ GNL_DIR			= ./gnl
 COMMON_DIR		= ./common
 BONUS_DIR		= ./bonus
 
-CC		= arch -x86_64 gcc -g #-g is modify !
+CC		= gcc
 RM		= rm -f
 CFLAGS	= -Wall -Wextra -Werror
 
@@ -48,14 +48,11 @@ bonus:
 		make BONUS=1 all
 
 clean:
-		$(RM) $(OBJS) $(LIBFT_OBJS) $(GNL_OBJS) $(COMMON_OBJS) $(BONUS_OBJS)
+		$(RM) $(OBJS) $(BONUS_OBJS) $(LIBFT_OBJS) $(GNL_OBJS) $(COMMON_OBJS)
 
 fclean:	clean
 		$(RM) $(NAME)
 
 re:		fclean $(NAME)
 
-leak:
-		leaks -atExit -- ./pipex
-
-.PHONY:	all bonus clean fclean re leak
+.PHONY:	all bonus clean fclean re

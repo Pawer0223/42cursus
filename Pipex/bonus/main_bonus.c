@@ -6,26 +6,27 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 21:19:34 by taesan            #+#    #+#             */
-/*   Updated: 2021/07/07 13:36:51 by taesan           ###   ########.fr       */
+/*   Updated: 2021/07/05 13:59:30 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex_bonus.h"
 
-int		start_here_doc(int argc, const char *argv[], char *envp[], t_pipe *info)
+int	start_here_doc(int argc, const char *argv[], char *envp[], t_pipe *info)
 {
 	char	**paths;
 	int		fd;
 
 	if (!init_pipe_bonus(argv[2], argv[argc - 1], envp, info))
 		return (0);
+	paths = set_path(envp);
 	fd = open(TEMP_FILE, O_RDONLY);
 	if (fd == -1)
 		return (error_occur_perror(INPUT_OPEN_ERR));
 	dup2(fd, info->pipe_in[READ_FD_IDX]);
 	close(fd);
 	close(info->pipe_in[WRITE_FD_IDX]);
-	if (!(paths = set_path(envp)))
+	if (!paths)
 		return (0);
 	if (!set_connect_pipe(info, 2))
 		return (0);
@@ -37,7 +38,7 @@ int		start_here_doc(int argc, const char *argv[], char *envp[], t_pipe *info)
 	return (1);
 }
 
-int		main(int argc, const char *argv[], char *envp[])
+int	main(int argc, const char *argv[], char *envp[])
 {
 	t_pipe	info;
 	int		r;

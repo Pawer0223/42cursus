@@ -12,14 +12,15 @@
 
 #include "../pipex.h"
 
-int		start(int argc, const char *argv[], char *envp[], t_pipe *info)
+int	start(int argc, const char *argv[], char *envp[], t_pipe *info)
 {
 	int		i;
 	char	**paths;
 
 	if (!init_pipe(argv[1], argv[argc - 1], envp, info))
 		return (0);
-	if (!(paths = set_path(envp)))
+	paths = set_path(envp);
+	if (!paths)
 		return (0);
 	i = 2;
 	while (i < argc - 2)

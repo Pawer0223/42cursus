@@ -12,7 +12,7 @@
 
 #include "../pipex.h"
 
-int		exec_dup2(t_pipe *info, int pipe[2], int flags, int is_last)
+int	exec_dup2(t_pipe *info, int pipe[2], int flags, int is_last)
 {
 	if ((flags & STDIN_PIPE) && dup2(pipe[READ_FD_IDX], STDIN_FILENO) < 0)
 		return (error_occur_perror(DUP2_ERR));
@@ -51,9 +51,8 @@ void	parent_process(t_pipe *info, int pipe[2], int flags, int is_last)
 {
 	int	status;
 
-	if (wait(&status) == -1) {
+	if (wait(&status) == -1)
 		perror(WAIT_ERR);
-	}
 	split_free(info->param);
 	info->param = 0;
 	if (flags & STDIN_PIPE)
@@ -80,13 +79,13 @@ void	exec_command(t_pipe *info, int pipe[2], int flags, int is_last)
 		child_process(info, pipe, flags, is_last);
 }
 
-int		exec_call(t_pipe *info, const char *param, char **paths, int is_last)
+int	exec_call(t_pipe *info, const char *param, char **paths, int is_last)
 {
 	if (!set_param_info(info, param, paths))
 		return (0);
 	if (!is_last)
 		exec_command(info, info->connect_pipe, STDIN_PIPE | STDOUT_PIPE, 0);
 	else
-		exec_command(info, info->pipe_out, STDIN_PIPE | STDOUT_PIPE, 1);	
+		exec_command(info, info->pipe_out, STDIN_PIPE | STDOUT_PIPE, 1);
 	return (1);
 }

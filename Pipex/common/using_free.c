@@ -12,9 +12,9 @@
 
 #include "../pipex.h"
 
-void		split_free(char **data)
+void	split_free(char **data)
 {
-	int i;
+	int	i;
 
 	if (!data || !*data)
 		return ;
@@ -32,9 +32,9 @@ void		split_free(char **data)
 	data = 0;
 }
 
-int		clear_info(t_pipe *info)
+int	clear_info(t_pipe *info)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < 2)
