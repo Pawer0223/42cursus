@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/17 21:14:08 by taesan            #+#    #+#             */
-/*   Updated: 2021/07/21 05:29:59 by taesan           ###   ########.fr       */
+/*   Updated: 2021/07/28 02:56:24 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,7 @@
 void	ft_usleep(long long end_time)
 {
 	while (get_curr_time() < end_time)
-	{
-	}
+		usleep(100);
 }
 
 int	ft_atoi(const char *str)

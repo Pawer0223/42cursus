@@ -6,11 +6,24 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/20 04:18:19 by taesan            #+#    #+#             */
-/*   Updated: 2021/07/23 02:49:43 by taesan           ###   ########.fr       */
+/*   Updated: 2021/07/28 02:55:19 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+void	*philosopher_died(void *arg)
+{
+	t_program_data	*data;
+	int				i;
+
+	data = (t_program_data *)arg;
+	sem_wait(data->common.finish_sem);
+	i = 0;
+	while (i < data->common.num_of_philo)
+		kill(data->philos[i++].pid, SIGINT);
+	return (0);
+}
 
 void	*must_eat_monitor(void *arg)
 {
@@ -25,19 +38,6 @@ void	*must_eat_monitor(void *arg)
 		i++;
 	}
 	sem_post(data->common.finish_sem);
-	return (0);
-}
-
-void	*philosopher_died(void *arg)
-{
-	t_program_data	*data;
-	int				i;
-
-	data = (t_program_data *)arg;
-	sem_wait(data->common.finish_sem);
-	i = 0;
-	while (i < data->common.num_of_philo)
-		kill(data->philos[i++].pid, SIGINT);
 	return (0);
 }
 
@@ -62,6 +62,7 @@ void	*monitor(void *arg)
 			return (0);
 		}
 		sem_post(philo->status);
+		usleep(1000);
 	}
 	return (0);
 }

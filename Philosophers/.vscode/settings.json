@@ -22,7 +22,9 @@
         "unordered_map": "c",
         "vector": "c",
         "complex": "c",
-        "system_error": "c"
+        "system_error": "c",
+        "algorithm": "c",
+        "locale": "c"
     },
     "C_Cpp.errorSquiggles": "Disabled"
 }

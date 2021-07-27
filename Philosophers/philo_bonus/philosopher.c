@@ -13,10 +13,8 @@ long long	logging(t_philo *philo, int act)
 	curr = get_curr_time();
 	if (act == ACT_EAT)
 	{
-		sem_wait(philo->status);
 		timestamp = philo->last_time - philo->common->start;
 		curr = philo->last_time;
-		sem_post(philo->status);
 	}
 	else
 		timestamp = curr - philo->common->start;
