@@ -32,6 +32,8 @@ void	make_thread(t_program_data data, int cnt)
 	i = 0;
 	while (i < cnt)
 	{
+		data.philos[i].start = get_curr_time();
+		data.philos[i].last_time = data.philos[i].start;
 		pthread_create(&data.threads[i], NULL, philosopher, &data.philos[i]);
 		pthread_create(&monitor_th, NULL, monitor, &data.philos[i]);
 		pthread_detach(monitor_th);

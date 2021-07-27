@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/16 18:09:34 by taesan            #+#    #+#             */
-/*   Updated: 2021/07/20 20:36:39 by taesan           ###   ########.fr       */
+/*   Updated: 2021/07/28 00:08:55 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ int	init_param(t_common *common, char *argv[])
 
 void	init_common(t_common *common)
 {
-	common->start = get_curr_time();
 	common->is_finish = 0;
 	common->must_eat_cnt = 0;
 	pthread_mutex_init(&common->finish_mutex, NULL);
@@ -77,11 +76,10 @@ int	init_philos(t_program_data *data, int cnt)
 		return (0);
 	i = 0;
 	while (i < cnt)
+		pthread_mutex_init(&data->forks[i++], NULL);
+	i = 0;
+	while (i < cnt)
 	{
-		pthread_mutex_init(&data->forks[i], NULL);
-		if (i < cnt - 1)
-			pthread_mutex_init(&data->forks[i + 1], NULL);
-		data->philos[i].last_time = data->common.start;
 		data->philos[i].seq = i + 1;
 		data->philos[i].left = &data->forks[i];
 		data->philos[i].right = &data->forks[(i + 1) % cnt];

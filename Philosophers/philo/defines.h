@@ -12,7 +12,6 @@ typedef struct s_common
 	int				time_to_sleep;
 	int				time_each_must_eat;
 	int				must_eat_cnt;
-	long long		start;
 	pthread_mutex_t	finish_mutex;
 }				t_common;
 
@@ -25,6 +24,7 @@ typedef struct s_philo
 	pthread_mutex_t	philo_status;
 	t_common		*common;
 	long long		last_time;
+	long long		start;
 }				t_philo;
 
 typedef struct s_program_data
