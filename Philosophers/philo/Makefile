@@ -6,7 +6,7 @@
 #    By: taesan <taesan@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/06 16:51:22 by taesan            #+#    #+#              #
-#    Updated: 2021/07/21 05:25:56 by taesan           ###   ########.fr        #
+#    Updated: 2021/07/27 19:54:21 by taesan           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,8 @@ CC		= gcc
 RM		= rm -f
 CFLAGS	= -Wall -Wextra -Werror
 
-SRCS				=	$(wildcard *.c)
+SRCS				=	init.c error.c time.c utils.c \
+						main.c monitor.c philosopher.c
 
 OBJS				=	$(SRCS:.c=.o)
 
