@@ -35,15 +35,20 @@ void	wait_closing_quote(char start_q);
 /*
 	init
 */
-int		init_info(t_info *info, char *input, char *envp[]);
+int		init_info(t_info *info, char *input);
 /*
 	using free
 */
 void	split_free(char **data);
+void	ft_free(void *data);
 /*
 	input filter
 */
-char	*input_space_filter(char *input);
+char	*input_space_filter(char *input, int len);
+/*
+	exec
+*/
+void	exec_command(t_info *info, int pipe[2], int flags, int is_last);
 
 
 #endif
