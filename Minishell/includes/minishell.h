@@ -4,7 +4,10 @@
 # include <stdio.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <sys/stat.h>
+# include <errno.h>
 # include <stdlib.h>
+# include <unistd.h>
 # include "../libft/libft.h"
 # include "defines.h"
 
