@@ -31,6 +31,7 @@ int		is_quotation(char c);
 */
 int		check_builtin(char *cmd);
 char	*check_command(char **paths, char *cmd, int len);
+int		exist_dollar(char *input, int s, int e);
 /*
 	readline
 */

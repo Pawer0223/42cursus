@@ -27,52 +27,109 @@ char	*space_filter(char *input, int len)
 	}
 	return (new_input);
 }
+/*
+	str의 s ~ e범위에 존재하는 $를 치환한 새로운 문자열로 변경한다.
 
-
-
-void	change_quotation(char **envp, char **ptr, int s, int *e)
+	다음 탐색 인덱스 (e)를 여기서 함께 변경해준다.
+*/
+int		replace_env(char **envp, char **ptr, int s, int *next_idx)
 {
-	char	*new_input;
-	int		temp;
+	int i;
+	char *result;
 
-	if ((*ptr)[s] == SINGLE_Q)
+	result = 0;
+	// printf("str : [%s], idx : [%d], (*ptr) + s : [%s]\n", *ptr, s, (*ptr) + s);
+	while (*envp)
 	{
-		(*ptr)[s] = ' ';
-		(*ptr)[*e] = ' ';
-		return ;
-	}
-	while ((*ptr)[s])
-	{
-		if ((*ptr)[s] == DOLLAR)
+		i = 0;
+		while ((*envp)[i] && (*ptr)[s + i + 1] && ((*envp)[i] == (*ptr)[s + i + 1]))
+			i++;
+		if ((*envp)[i] == '=')
 		{
+			int len = ft_strlen(*envp + i + 1);
+			char *value = ft_substr(*envp + i + 1, 0, len);
+			
+			// printf("value : [%s], len : %d\n", value, len);
+
+			char *front = ft_substr(*ptr, 0, s);
+			// printf("front : [%s]\n", front);
+
+			// $ 미만까지 substr
+			// s + i + 1
+			len = ft_strlen(*ptr);
+			char *back = ft_substr(*ptr + s + i + 1, 0, len - i);
+			// printf("back : [%s]\n", back);
+
+			char *temp = ft_strjoin(front, value);
+			*next_idx = ft_strlen(temp);
+			result = ft_strjoin(temp, back);
+
+			// printf("replace result : [%s]\n", result);
+			// printf("[%s]\n", *ptr + i + 1);
+			break ;
 		}
-		s++;
+		envp++;
 	}
+	if (result)
+	{
+		free(*ptr);
+		*ptr = result;
+	}
+	// replace 된 경우에는 다시 처음부터 변경될 수 있도록.
+	return (1);
 }
 
-void	temp_func(t_info *info, char *input)
+int		quote_filter(t_info *info, char **input, int s, int *e)
+{
+	int		dollar_idx;
+	char	is_db_q;
+
+	is_db_q = (*input)[s];
+	(*input)[s] = ' ';
+	(*input)[*e] = ' ';
+	if (is_db_q == DOUBLE_Q)
+	{
+		dollar_idx = exist_dollar(*input, s, *e);
+		if (dollar_idx)
+		{
+			if(!replace_env(info->envp, input, dollar_idx, e))
+				return (0);
+		}
+	}
+	return (1);
+}
+
+int	filter_input(t_info *info, char **input)
 {
 	int		s;
 	int		e;
 
 	e = 0;
-	while (input[e])
+	while ((*input)[e])
 	{
-		if (is_quotation(input[e]))
+		if (is_quotation((*input)[e]))
 		{
 			s = e++;
-			while (input[e] && input[e] != input[s])
+			while ((*input)[e] && (*input)[e] != (*input)[s])
 				e++;
-			printf("before : [%s]\n", input);
-			if (input[s] == input[e])
-				change_quotation(info->envp, &input, s, &e);
-			printf("after : [%s]\n", input);
+			// printf("before : [%s]\n", *input);
+			if ((*input)[s] == (*input)[e])
+			{
+				if (!quote_filter(info, input, s, &e))
+					return (0);
+			}
+			// printf("after : [%s]\n", *input);
 		}
-		if (input[e] == DOLLAR)
+		else if ((*input)[e] == DOLLAR)
 		{
+			// printf("before : [%s]\n", input);
+			if (!replace_env(info->envp, input, e, &e))
+				return (0);
+			// printf("after : [%s]\n", input);
 		}
 		e++;
 	}
+	return (1);
 }
 
 
@@ -84,11 +141,17 @@ int	command_filter(t_info *info)
 	while (info->commands)
 	{
 		printf("cmd : [%s]\n", info->commands->content);
-		// len = ft_strlen((char *)info->commands->content);
-		// temp = space_filter(info->commands->content, len);
-		// if (!temp)
-		// 	return (error_occur_std(MALLOC_ERR));
-		temp_func(info, info->commands->content);
+		if (!filter_input(info, (char **)&(info->commands->content)))
+		{
+			printf("filter input error\n");
+			return (0);
+		}
+		len = ft_strlen((char *)info->commands->content);
+		temp = space_filter(info->commands->content, len);
+		if (!temp)
+			return (error_occur_std(MALLOC_ERR));
+		info->commands->content = temp;
+		printf("final : [%s]\n", info->commands->content);
 		info->commands = info->commands->next;
 	}
 	return (0);
