@@ -25,9 +25,7 @@ int		error_occur_perror(char *msg);
 /*
 	utils
 */
-void	jump_space(char **input);
-char	*get_str(char **input);
-int		manage_chars(char c);
+int		is_quotation(char c);
 /*
 	check
 */
@@ -54,6 +52,10 @@ void	exec_command(t_info *info);
 	make command list
 */
 int		make_command_list(t_info *info, char *input);
-
+void	move_end_point(char *line, int *e, char end_c);
+/*
+	filter
+*/
+int		command_filter(t_info *info);
 
 #endif
