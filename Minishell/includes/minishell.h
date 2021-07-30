@@ -26,6 +26,7 @@ int		error_occur_perror(char *msg);
 */
 void	jump_space(char **input);
 char	*get_str(char **input);
+int		manage_chars(char c);
 /*
 	check
 */

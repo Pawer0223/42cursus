@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/28 15:05:24 by taesan            #+#    #+#             */
-/*   Updated: 2021/07/28 22:25:13 by taesan           ###   ########.fr       */
+/*   Updated: 2021/07/29 21:39:10 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct s_info
 	int		single_q;
 	int		double_q;
 	int 	pipe_cnt;
+	int		is_builtin;
 	char 	start_q;
 }				t_info;
 
@@ -52,6 +53,8 @@ typedef struct s_pipe
 # define SINGLE_Q '\''
 # define DOUBLE_Q '\"'
 # define PIPE '|'
+# define DOLLAR '$'
+
 
 # define PATH "PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
 # define SPLIT_ERR "ft_split Error"

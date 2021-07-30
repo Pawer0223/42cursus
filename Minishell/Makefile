@@ -1,6 +1,6 @@
 NAME	= minishell
 
-CC		= gcc -g #arch -x86_64
+CC		= gcc -g #-fsanitize=address #arch -x86_64
 #CFLAGS	= -Wall -Wextra -Werror
 
 SRCDIR		= ./srcs/

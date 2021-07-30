@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/28 14:45:56 by taesan            #+#    #+#             */
-/*   Updated: 2021/07/29 12:23:35 by taesan           ###   ########.fr       */
+/*   Updated: 2021/07/30 11:39:10 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,12 @@ void	child_process(t_info *info, int pipe[2], int flags, int is_last)
 void	parent_process(t_info *info, int pipe[2], int flags, int is_last)
 {
 	int	status;
+	int	r;
 
-	if (wait(&status) == -1)
+	r = wait(&status);
+	while (r == -1 && errno == EINTR)
+		r = wait(&status);
+	if (r == -1)
 		perror(WAIT_ERR);
 	split_free(info->param);
 	info->param = 0;

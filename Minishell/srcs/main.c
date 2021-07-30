@@ -6,14 +6,17 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/25 22:00:23 by taesan            #+#    #+#             */
-/*   Updated: 2021/07/29 15:31:31 by taesan           ###   ########.fr       */
+/*   Updated: 2021/07/29 21:25:50 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	start(t_info *info)
+int	start(t_info *info, char *input)
 {
+
+	if (!init_info(info, input))
+		return (0);
 	if (info->pipe_cnt > 0)
 	{
 		printf("pipe 코드 타도록 !\n");
@@ -28,7 +31,6 @@ int	start(t_info *info)
 int main(int argc, char *argv[], char *envp[])
 {
 	char	*input;
-	char	*filter_input;
 	char	*prompt;
 	t_info	info;
 
@@ -44,19 +46,13 @@ int main(int argc, char *argv[], char *envp[])
 	while(1)
 	{
 		input = readline(prompt);
-		if (ft_strcmp(input, "") == 0)
+		if (ft_strcmp(input, "") != 0)
 		{
-			ft_free(input);
-			continue;
+			add_history(input);
+			if (start(&info, input))
+				break ;
 		}
-		add_history(input);
-		filter_input = input_space_filter(input, ft_strlen(input) + 1);
-		if (!filter_input)
-			return (error_occur_std(MALLOC_ERR));
-		init_info(&info, filter_input);
-		start(&info);
 		ft_free(input);
-		ft_free(filter_input);
 	}
 	// clear heap
 }

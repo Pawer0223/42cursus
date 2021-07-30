@@ -11,10 +11,10 @@ char	*input_space_filter(char *input, int len)
 	new_input = (char *)malloc(sizeof(char) * len);
 	ft_bzero(new_input, len);
 	if (!new_input)
-		return (new_input);
+		error_occur_std(MALLOC_ERR);
 	s = 0;
 	idx = 0;
-	while (input[s])
+	while (new_input && input[s])
 	{
 		e = s;
 		while (input[e] && input[e] == ' ')
