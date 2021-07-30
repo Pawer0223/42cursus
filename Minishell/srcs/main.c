@@ -6,25 +6,29 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/25 22:00:23 by taesan            #+#    #+#             */
-/*   Updated: 2021/07/29 21:25:50 by taesan           ###   ########.fr       */
+/*   Updated: 2021/07/30 17:27:50 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	start(t_info *info, char *input)
+void	command_string(t_info info)
 {
+	while (info.commands)
+	{
+		printf("[%s]\n", info.commands->content);
+		info.commands = info.commands->next;
+	}
+}
 
-	if (!init_info(info, input))
+int	start(t_info *info)
+{
+	/*
+		init할 때, 파싱 제대로해서 2개이상의 명령어가 존재하는 경우.
+		pipecnt말고, 명령어 갯수로 변경
+	*/
+	if (!init_info(info))
 		return (0);
-	if (info->pipe_cnt > 0)
-	{
-		printf("pipe 코드 타도록 !\n");
-	}
-	else
-	{
-		exec_command(info, 0, 0, 0);
-	}
 	return (0);
 }
 
@@ -38,7 +42,7 @@ int main(int argc, char *argv[], char *envp[])
 	prompt = "$";
 	// 종료 시그널 받으면 프로그램 끝내야 함.
 
-	ft_bzero(&info, sizeof(t_info));
+	ft_memset(&info, 0, sizeof(t_info));
 	info.paths = set_path(envp);
 	if (!info.paths)
 		return (error_occur_std(SPLIT_ERR));
@@ -49,8 +53,12 @@ int main(int argc, char *argv[], char *envp[])
 		if (ft_strcmp(input, "") != 0)
 		{
 			add_history(input);
-			if (start(&info, input))
+			if (!make_command_list(&info, input))
 				break ;
+			// command_string(info);
+			if (start(&info))
+			 	break ;
+			ft_lstclear(&info.commands, ft_free);
 		}
 		ft_free(input);
 	}

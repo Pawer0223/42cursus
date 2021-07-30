@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/28 15:05:24 by taesan            #+#    #+#             */
-/*   Updated: 2021/07/29 21:39:10 by taesan           ###   ########.fr       */
+/*   Updated: 2021/07/30 13:01:12 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,13 @@ typedef struct s_info
 	char	**paths;
 	char	**param;
 	char	**envp;
+	int		command_cnt;
 	int		single_q;
 	int		double_q;
 	int 	pipe_cnt;
 	int		is_builtin;
 	char 	start_q;
+	t_list	*commands;
 }				t_info;
 
 typedef struct s_pipe

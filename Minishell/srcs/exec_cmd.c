@@ -6,13 +6,13 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/28 14:45:56 by taesan            #+#    #+#             */
-/*   Updated: 2021/07/30 11:39:10 by taesan           ###   ########.fr       */
+/*   Updated: 2021/07/30 17:28:14 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	child_process(t_info *info, int pipe[2], int flags, int is_last)
+void	child_process(t_info *info)
 {
 	int		dup_r;
 	char	*command;
@@ -23,7 +23,7 @@ void	child_process(t_info *info, int pipe[2], int flags, int is_last)
 	exit(0);
 }
 
-void	parent_process(t_info *info, int pipe[2], int flags, int is_last)
+void	parent_process(t_info *info)
 {
 	int	status;
 	int	r;
@@ -37,15 +37,15 @@ void	parent_process(t_info *info, int pipe[2], int flags, int is_last)
 	info->param = 0;
 }
 
-void	exec_command(t_info *info, int pipe[2], int flags, int is_last)
+void	exec_command(t_info *info)
 {
 	pid_t	cpid;
 
 	cpid = fork();
 	if (cpid > 0)
-		parent_process(info, pipe, flags, is_last);
+		parent_process(info);
 	else if (cpid < 0)
 		perror("fork");
 	else
-		child_process(info, pipe, flags, is_last);
+		child_process(info);
 }
