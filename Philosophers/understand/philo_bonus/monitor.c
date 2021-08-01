@@ -6,56 +6,62 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/20 04:18:19 by taesan            #+#    #+#             */
-/*   Updated: 2021/07/28 02:40:57 by taesan           ###   ########.fr       */
+/*   Updated: 2021/07/28 02:55:19 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	over_time(t_philo *philo, long long curr)
+void	*philosopher_died(void *arg)
 {
-	long long	wait_time;
+	t_program_data	*data;
+	int				i;
 
-	wait_time = curr - philo->last_time;
-	if (wait_time >= philo->common->time_to_die)
-	{
-		if (philo->common->num_of_philo == 1)
-			pthread_mutex_unlock(philo->left);
-		return (1);
-	}
+	data = (t_program_data *)arg;
+	sem_wait(data->common.finish_sem);
+	i = 0;
+	while (i < data->common.num_of_philo)
+		kill(data->philos[i++].pid, SIGINT);
 	return (0);
 }
 
-int	all_must_eat(t_philo *philo)
+void	*must_eat_monitor(void *arg)
 {
-	if (philo->common->must_eat_cnt == -1)
-		return (0);
-	if (philo->common->must_eat_cnt == philo->common->num_of_philo)
-		return (1);
+	t_program_data	*data;
+	int				i;
+
+	data = (t_program_data *)arg;
+	i = 0;
+	while (i < data->common.num_of_philo)
+	{
+		sem_wait(data->common.must_eat_sem);
+		i++;
+	}
+	sem_post(data->common.finish_sem);
 	return (0);
 }
 
 void	*monitor(void *arg)
 {
 	t_philo		*philo;
+	long long	wait_time;
 	long long	curr;
 	long long	timestamp;
 
 	philo = (t_philo *)arg;
-	while (!philo->common->is_finish)
+	while (1)
 	{
-		pthread_mutex_lock(&philo->philo_status);
+		sem_wait(philo->status);
 		curr = get_curr_time();
-		timestamp = curr - philo->start;
-		pthread_mutex_lock(&philo->common->finish_mutex);
-		if (!philo->common->is_finish && \
-			(over_time(philo, curr) || all_must_eat(philo)))
+		wait_time = curr - philo->last_time;
+		if (wait_time >= philo->common->time_to_die)
 		{
-			philo->common->is_finish = 1;
+			timestamp = curr - philo->common->start;
 			printf("%lld\t%d\t%s\n", timestamp, philo->seq, PRINT_DIE);
+			sem_post(philo->common->finish_sem);
+			return (0);
 		}
-		pthread_mutex_unlock(&philo->common->finish_mutex);
-		pthread_mutex_unlock(&philo->philo_status);
+		sem_post(philo->status);
 		usleep(1000);
 	}
 	return (0);

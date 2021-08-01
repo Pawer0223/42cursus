@@ -12,7 +12,7 @@
 
 #include "philo.h"
 
-int	over_time(t_philo *philo, long long curr)
+int		over_time(t_philo *philo, long long curr)
 {
 	long long	wait_time;
 
@@ -26,7 +26,7 @@ int	over_time(t_philo *philo, long long curr)
 	return (0);
 }
 
-int	all_must_eat(t_philo *philo)
+int		all_must_eat(t_philo *philo)
 {
 	if (philo->common->must_eat_cnt == -1)
 		return (0);
@@ -48,8 +48,7 @@ void	*monitor(void *arg)
 		curr = get_curr_time();
 		timestamp = curr - philo->start;
 		pthread_mutex_lock(&philo->common->finish_mutex);
-		if (!philo->common->is_finish && \
-			(over_time(philo, curr) || all_must_eat(philo)))
+		if (!philo->common->is_finish && (over_time(philo, curr) || all_must_eat(philo)))
 		{
 			philo->common->is_finish = 1;
 			printf("%lld\t%d\t%s\n", timestamp, philo->seq, PRINT_DIE);
