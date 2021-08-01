@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/20 04:18:19 by taesan            #+#    #+#             */
-/*   Updated: 2021/07/28 02:55:19 by taesan           ###   ########.fr       */
+/*   Updated: 2021/08/01 14:53:55 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,15 @@ void	*philosopher_died(void *arg)
 {
 	t_program_data	*data;
 	int				i;
+	long long		timestamp;
 
 	data = (t_program_data *)arg;
 	sem_wait(data->common.finish_sem);
 	i = 0;
+	timestamp = get_curr_time() - data->common.start;
 	while (i < data->common.num_of_philo)
 		kill(data->philos[i++].pid, SIGINT);
+	printf("%lld\tall philosophers must eat\n", timestamp);
 	return (0);
 }
 
