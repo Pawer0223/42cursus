@@ -21,6 +21,7 @@ int		error_occur_perror(char *msg);
 */
 int		is_quotation(char c);
 int		pass_possible(char c);
+int		is_empty(char *temp);
 /*
 	check
 */
