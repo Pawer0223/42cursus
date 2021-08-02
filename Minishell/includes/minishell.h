@@ -7,15 +7,9 @@
 # include <sys/stat.h>
 # include <errno.h>
 # include <stdlib.h>
-# include <unistd.h>
+# include <fcntl.h>
 # include "../libft/libft.h"
 # include "defines.h"
-
-/*
-	data_set.c
-*/
-char	**set_path(char *envp[]);
-char	*get_env_value(char *envp[], char *input, int len);
 
 /*
 	error.c
@@ -42,6 +36,7 @@ void	wait_closing_quote(char start_q);
 */
 int		init_info(t_info *info);
 int		set_command_info(t_info *info, char *input);
+char	**init_path(char *envp[]);
 /*
 	using free
 */

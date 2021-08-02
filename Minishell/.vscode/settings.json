@@ -28,6 +28,8 @@
         "tuple": "c",
         "type_traits": "c",
         "utility": "c",
-        "__locale": "c"
+        "__locale": "c",
+        "fcntl.h": "c",
+        "unistd.h": "c"
     }
 }
