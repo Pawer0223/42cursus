@@ -1,5 +1,14 @@
 #include "../includes/minishell.h"
 
+/*
+	이거 open에러일때, 에러출력하고
+	main쪽에서는 에러로 판단해서 프로세스 종료하고 있다.
+	open이 실패해도 뒤에 코드는 돌아가는지한번더 확인
+	일단 안돌아가는 것 같다. f1, f2있을 때
+	cat < f1 < f3나 cat < f3 < f1모두 안됨
+
+	=? 
+*/
 int		file_open_getfd(char *content, int *e)
 {
 	char	*file_nm;
@@ -9,13 +18,16 @@ int		file_open_getfd(char *content, int *e)
 	if (!file_nm)
 		return (0);
 	fd = open(file_nm, O_RDONLY);
-	ft_free(file_nm);
 	if (fd == -1)
-		return (error_occur_perror(INPUT_OPEN_ERR));
+	{
+		printf("%s: %s\n", file_nm, NO_SUCH_FILE);
+		fd = 0;
+	}
+	ft_free(file_nm);
 	return (fd);
 }
 
-int	set_right_fd_in(t_redirect_in *data, char *content, int *e)
+int		set_right_fd_in(t_redirect_in *data, char *content, int *e)
 {
 	int		i;
 	int		s;
@@ -61,29 +73,39 @@ void	set_left_fd_in(t_redirect_in *data, char *content, int *s)
 		*s = i + 1;
 	}
 }
-/*
-	현재 content의 start부터 좌, 우로 입출력 변경 대상을 찾고
-	list에 추가해준다.
-*/
-int	redirect_in_add(t_list **target, char **content, int s, char dir)
-{
-	int				e;
-	t_list			*data;
-	t_redirect_in	*redirect;
 
-	e = s;
+t_redirect_in	*append_in_data(t_info *info)
+{
+	t_redirect_in	*redirect;
+	t_list			*data;
+
 	redirect = (t_redirect_in *)malloc(sizeof(t_redirect_in));
 	if (!redirect)
 		return (0);
 	ft_bzero(redirect, sizeof(t_redirect_in));
 	data = ft_lstnew(redirect);
 	if (!data)
+	{
+		ft_free(redirect);
 		return (0);
+	}
 	redirect->left_fd = 0;
+	ft_lstadd_back(&info->in, data);
+	return (redirect);
+}
+/*
+	현재 content의 start부터 좌, 우로 입출력 변경 대상을 찾고
+	list에 추가해준다.
+*/
+int	redirect_in_add(t_info *info, char **content, int s, char dir)
+{
+	int				e;
+	t_redirect_in	*redirect;
+
+	redirect = append_in_data(info);
+	if (!redirect)
+		return (0);
 	e = s;
-	printf("===== ===== before ===== =====\n");
-	printf("left : %d, right : %d\n", redirect->left_fd, redirect->right_fd);
-	printf("s : [%d], e : [%d]\n", s, e);
 	set_left_fd_in(redirect, *content, &s);
 	if ((*content)[e + 1] && dir == (*content)[e + 1])
 	{
@@ -94,16 +116,5 @@ int	redirect_in_add(t_list **target, char **content, int s, char dir)
 	}
 	else
 		set_right_fd_in(redirect, *content, &e);
-	printf("===== ===== after ===== =====\n");
-	printf("left : %d, right : %d\n", redirect->left_fd, redirect->right_fd);
-	printf("s : [%d], e : [%d]\n", s, e);
-	printf("limiter : [%s]\n", redirect->limiter);
-
-	char *left = ft_substr(*content, 0, s);
-	char *right = ft_substr(*content + e, 0, ft_strlen(*content) - e);
-	char *new_input = ft_strjoin(left, right);
-
-	printf("left : [%s], right : [%s], new : [%s]\n", left, right, new_input);
-	// substr(0, s) + substr(e, len)
-	return (1);
+	return (remove_redirect(s, e, content));
 }

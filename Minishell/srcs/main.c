@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/25 22:00:23 by taesan            #+#    #+#             */
-/*   Updated: 2021/08/07 16:15:57 by taesan           ###   ########.fr       */
+/*   Updated: 2021/08/08 00:56:26 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,20 +17,9 @@ void	clear_data(t_info *info)
 	if (info->commands)
 		ft_lstclear(&info->commands, ft_free);
 	if (info->in)
-		ft_lstclear(&info->in, ft_free);
+		ft_lstclear(&info->in, redirect_in_free);
 	if (info->out)
 		ft_lstclear(&info->out, ft_free);
-}
-
-void	command_string(t_info info)
-{
-	t_list *temp;
-	
-	while (info.commands)
-	{
-		printf("[%s]\n", info.commands->content);
-		info.commands = info.commands->next;
-	}
 }
 
 void	start(t_info *info)
@@ -46,6 +35,8 @@ void	start(t_info *info)
 		// redirect처리
 		if (!redirect_filter(info, (char **)(&temp->content)))
 			return ;
+		// printf("===== ===== after ===== =====\n");
+		// redirect_in_to_string(*info);
 		if (!init_command_info(info, temp->content))
 			return ;
 		if (info->command_cnt > 1)
@@ -55,6 +46,10 @@ void	start(t_info *info)
 		}
 		else
 			exec_command(info);
+		if (info->in)
+			ft_lstclear(&info->in, redirect_in_free);
+		if (info->out)
+			ft_lstclear(&info->out, ft_free);
 		temp = temp->next;
 	}
 }

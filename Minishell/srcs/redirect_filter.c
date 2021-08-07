@@ -107,11 +107,11 @@ int	redirect_filter(t_info *info, char **content)
 		if (is_redirect((*content)[i]))
 		{
 			if ((*content)[i] == REDIRECT_IN)
-				redirect_in_add(&info->in, content, i, REDIRECT_IN);
+				if (!redirect_in_add(info, content, i, REDIRECT_IN))
+					return (0);
 			// else if ((*content)[i] == REDIRECT_OUT)
 			// 	redirect_out_add(&info->out, content, i, REDIRECT_OUT);
 			i = -1;
-			return (0);
 		}
 		i++;
 	}

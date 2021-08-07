@@ -44,6 +44,7 @@ char	**init_path(char *envp[]);
 */
 void	split_free(char **data);
 void	ft_free(void *data);
+void	redirect_in_free(void *data);
 /*
 	exec
 */
@@ -68,10 +69,17 @@ int		replace_env(char **envp, char **ptr, int s, int *next_idx);
 */
 int		get_fd(int s, int e, char *content);
 char	*get_right_str(char *content, int *e);
+int		remove_redirect(int s, int e, char **content);
 
 /*
 	redirect_in_add
 */
-int	redirect_in_add(t_list **target, char **content, int s, char dir);
+int	redirect_in_add(t_info *info, char **content, int s, char dir);
+
+/*
+	test. 지워야 함
+*/
+void	command_to_string(t_info info);
+void	redirect_in_to_string(t_info info);
 
 #endif
