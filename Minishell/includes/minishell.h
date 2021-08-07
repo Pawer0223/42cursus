@@ -75,11 +75,19 @@ int		remove_redirect(int s, int e, char **content);
 	redirect_in_add
 */
 int	redirect_in_add(t_info *info, char **content, int s, char dir);
+int	redirect_out_add(t_info *info, char **content, int s, char dir);
+int	redirect_add(t_info *info, char **content, int s, char dir);
+
+
+/*
+	redirect_add
+*/
 
 /*
 	test. 지워야 함
 */
 void	command_to_string(t_info info);
 void	redirect_in_to_string(t_info info);
+void	redirect_out_to_string(t_info info);
 
 #endif

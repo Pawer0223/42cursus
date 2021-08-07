@@ -106,11 +106,12 @@ int	redirect_filter(t_info *info, char **content)
 	{
 		if (is_redirect((*content)[i]))
 		{
-			if ((*content)[i] == REDIRECT_IN)
-				if (!redirect_in_add(info, content, i, REDIRECT_IN))
+			if ((*content)[i] == REDIRECT_IN && \
+				!redirect_in_add(info, content, i, REDIRECT_IN))
 					return (0);
-			// else if ((*content)[i] == REDIRECT_OUT)
-			// 	redirect_out_add(&info->out, content, i, REDIRECT_OUT);
+			else if ((*content)[i] == REDIRECT_OUT && \
+				!redirect_out_add(info, content, i, REDIRECT_OUT))
+					return (0);
 			i = -1;
 		}
 		i++;

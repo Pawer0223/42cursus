@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/07 21:17:51 by taesan            #+#    #+#             */
-/*   Updated: 2021/08/07 23:57:30 by taesan           ###   ########.fr       */
+/*   Updated: 2021/08/08 01:14:34 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,8 @@ char	*get_right_str(char *content, int *e)
 	while (content[i] && content[i] == ' ')
 		i++;
 	s = i;
-	while (content[i] && content[i] != ' ') // 단순히 스페이스로 넘겨도 되는지.. 예외 문자가 있을라나..
+	// 단순히 스페이스로 넘겨도 되는지.. 예외 문자가 있을라나..
+	while (content[i] && content[i] != ' ')
 		i++;
 	*e = i;
 	return (ft_substr(content + s, 0, i - s));

@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/28 15:05:24 by taesan            #+#    #+#             */
-/*   Updated: 2021/08/08 00:44:02 by taesan           ###   ########.fr       */
+/*   Updated: 2021/08/08 01:12:56 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ typedef struct s_pipe
 # define PARAM_ERR_BONUS "Call [./pipex here_doc LIMITER \"cmd1\" \"cmd2\" file]"
 # define INPUT_OPEN_ERR "input file open"
 # define NO_SUCH_FILE "No such file or directory"
-# define OUTPUT_OPEN_ERR "output file open"
+# define OUTPUT_OPEN_ERR "redirection output file open"
 # define COMMAND_NOT_EXIST "command program not exist"
 # define ENV_PATH_NOT_EXIST "system env PATH not exist"
 # define DUP2_ERR "dup2"

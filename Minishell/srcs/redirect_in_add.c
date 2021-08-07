@@ -9,7 +9,7 @@
 
 	=? 
 */
-int		file_open_getfd(char *content, int *e)
+int		file_open_getfd_in(char *content, int *e)
 {
 	char	*file_nm;
 	int		fd;
@@ -47,7 +47,7 @@ int		set_right_fd_in(t_redirect_in *data, char *content, int *e)
 	}
 	else
 	{
-		data->right_fd = file_open_getfd(content, e);
+		data->right_fd = file_open_getfd_in(content, e);
 		if (!data->right_fd)
 			return (0);
 	}

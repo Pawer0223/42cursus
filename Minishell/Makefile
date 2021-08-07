@@ -13,7 +13,7 @@ LIBFT = libft.a
 SRC 	=	main.c error.c utils.c check.c readline.c init.c \
 			command_filter.c redirect_filter.c exec_cmd.c using_free.c \
 			make_command_list.c replace_env.c redirect_in_add.c redirect_util.c \
-			test_file.c \
+			redirect_out_add.c test_file.c \
 
 SRCS	= $(addprefix $(SRC_DIR), $(SRC))
 
