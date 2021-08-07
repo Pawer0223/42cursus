@@ -22,6 +22,7 @@ int		error_occur_perror(char *msg);
 int		is_quotation(char c);
 int		pass_possible(char c);
 int		is_empty(char *temp);
+int		is_redirect(char c);
 /*
 	check
 */
@@ -62,5 +63,15 @@ int	redirect_filter(t_info *info, char **content);
 */
 int		replace_env(char **envp, char **ptr, int s, int *next_idx);
 
+/*
+	redirect util
+*/
+int		get_fd(int s, int e, char *content);
+char	*get_right_str(char *content, int *e);
+
+/*
+	redirect_in_add
+*/
+int	redirect_in_add(t_list **target, char **content, int s, char dir);
 
 #endif

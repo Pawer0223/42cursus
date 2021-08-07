@@ -6,11 +6,21 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/25 22:00:23 by taesan            #+#    #+#             */
-/*   Updated: 2021/08/06 21:12:56 by taesan           ###   ########.fr       */
+/*   Updated: 2021/08/07 16:15:57 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+void	clear_data(t_info *info)
+{
+	if (info->commands)
+		ft_lstclear(&info->commands, ft_free);
+	if (info->in)
+		ft_lstclear(&info->in, ft_free);
+	if (info->out)
+		ft_lstclear(&info->out, ft_free);
+}
 
 void	command_string(t_info info)
 {
@@ -73,7 +83,7 @@ int main(int argc, char *argv[], char *envp[])
 			if (!make_command_list(&info, input))
 				break ;
 			start(&info);
-			ft_lstclear(&info.commands, ft_free);
+			clear_data(&info);
 		}
 		ft_free(input);
 	}

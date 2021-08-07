@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/28 15:05:24 by taesan            #+#    #+#             */
-/*   Updated: 2021/08/02 17:37:06 by taesan           ###   ########.fr       */
+/*   Updated: 2021/08/07 23:28:46 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,21 @@
 # define DEFINES_H
 
 #include "minishell.h"
+
+typedef struct	s_redirect_in
+{
+	int		left_fd;
+	int		right_fd;
+	char	*limiter; // 여러개 << 들어온경우 here_doc단어가 순서대로 나와야 끝남.
+}				t_redirect_in;
+
+typedef struct	s_redirect_out
+{
+	int		left_fd;
+	int		right_fd;
+	int		is_append; // >> 여부체크하여, open옵션 다르게 주기
+}				t_redirect_out;
+
 
 /*
 	명령어에서 아래 문자들이 존재하는지 ..
@@ -27,6 +42,8 @@ typedef struct s_info
 	int		command_cnt; // 초기화
 	int		is_builtin; // 초기화
 	t_list	*commands; // lstclear함.
+	t_list	*in;
+	t_list	*out;
 }				t_info;
 
 typedef struct s_pipe
