@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/25 22:00:23 by taesan            #+#    #+#             */
-/*   Updated: 2021/08/08 15:00:42 by taesan           ###   ########.fr       */
+/*   Updated: 2021/08/08 17:16:33 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	clear_data(t_info *info)
 	if (info->in)
 		ft_lstclear(&info->in, redirect_in_free);
 	if (info->out)
-		ft_lstclear(&info->out, ft_free);
+		ft_lstclear(&info->out, redirect_out_free);
 }
 
 void	start(t_info *info)

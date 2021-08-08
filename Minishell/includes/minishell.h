@@ -24,6 +24,7 @@ int		is_quotation(char c);
 int		pass_possible(char c);
 int		is_empty(char *temp);
 int		is_redirect(char c);
+void	ft_close(int fd);
 /*
 	check
 */
@@ -46,6 +47,7 @@ char	**init_path(char *envp[]);
 void	split_free(char **data);
 void	ft_free(void *data);
 void	redirect_in_free(void *data);
+void	redirect_out_free(void *data);
 /*
 	exec
 */
@@ -80,14 +82,16 @@ int	redirect_in_add(t_info *info, char **content, int s, char dir);
 	redirect_add
 */
 int	redirect_out_add(t_info *info, char **content, int s, char dir);
-
 /*
 	gnl
 */
 int		get_next_line(int fd, char **line);
 char	*content_null(char *buf);
 char	*check_first(int fd, char **line);
-
+/*
+	redirection_dup
+*/
+int		redirection_dup(t_info *info);
 /*
 	test. 지워야 함
 */
