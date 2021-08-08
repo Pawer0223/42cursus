@@ -8,6 +8,7 @@
 # include <errno.h>
 # include <stdlib.h>
 # include <fcntl.h>
+# include <limits.h>
 # include "../libft/libft.h"
 # include "defines.h"
 
@@ -75,13 +76,17 @@ int		remove_redirect(int s, int e, char **content);
 	redirect_in_add
 */
 int	redirect_in_add(t_info *info, char **content, int s, char dir);
-int	redirect_out_add(t_info *info, char **content, int s, char dir);
-int	redirect_add(t_info *info, char **content, int s, char dir);
-
-
 /*
 	redirect_add
 */
+int	redirect_out_add(t_info *info, char **content, int s, char dir);
+
+/*
+	gnl
+*/
+int		get_next_line(int fd, char **line);
+char	*content_null(char *buf);
+char	*check_first(int fd, char **line);
 
 /*
 	test. 지워야 함

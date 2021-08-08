@@ -31,6 +31,7 @@
         "__locale": "c",
         "fcntl.h": "c",
         "unistd.h": "c",
-        "__functional_03": "c"
+        "__functional_03": "c",
+        "get_next_line.h": "c"
     }
 }
