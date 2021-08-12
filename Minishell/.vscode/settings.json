@@ -32,6 +32,8 @@
         "fcntl.h": "c",
         "unistd.h": "c",
         "__functional_03": "c",
-        "get_next_line.h": "c"
+        "get_next_line.h": "c",
+        "stat.h": "c",
+        "readline.h": "c"
     }
 }

@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/25 22:00:23 by taesan            #+#    #+#             */
-/*   Updated: 2021/08/09 16:14:15 by taesan           ###   ########.fr       */
+/*   Updated: 2021/08/12 14:08:03 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,11 +69,15 @@ int main(int argc, char *argv[], char *envp[])
 	if (!info.paths)
 		return (error_occur_std(SPLIT_ERR));
 	info.envp = envp;
+	// signal(SIGQUIT, (void *)sigquit_handler);
+	// signal(SIGINT, (void *)sigint_handler);
 	while(1)
 	{
 		input = readline(prompt);
-		if (ft_strcmp(input, "") != 0)
+		if (input && ft_strcmp(input, "") != 0)
 		{
+			// if (ft_strcmp(input, "exit") == 0)
+			// 	exit(1);
 			add_history(input);
 			r = make_command_list(&info, input);
 			if (!r)

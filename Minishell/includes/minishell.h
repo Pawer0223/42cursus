@@ -9,6 +9,7 @@
 # include <stdlib.h>
 # include <fcntl.h>
 # include <limits.h>
+# include <signal.h>
 # include "../libft/libft.h"
 # include "defines.h"
 
@@ -97,5 +98,10 @@ int		redirection_dup(t_info *info);
 void	command_to_string(t_info info);
 void	redirect_in_to_string(t_info info);
 void	redirect_out_to_string(t_info info);
+/*
+	sig_handler
+*/
+void	sigquit_handler(int signo);
+void	sigint_handler(int signo);
 
 #endif

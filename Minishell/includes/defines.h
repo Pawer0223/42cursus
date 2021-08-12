@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/28 15:05:24 by taesan            #+#    #+#             */
-/*   Updated: 2021/08/09 16:10:23 by taesan           ###   ########.fr       */
+/*   Updated: 2021/08/12 01:42:23 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ typedef struct s_info
 	t_list	*commands; // lstclear함.
 	t_list	*in;
 	t_list	*out;
+
+	t_list	*redirect_lst;
 }				t_info;
 
 typedef struct s_pipe
