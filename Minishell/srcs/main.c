@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/25 22:00:23 by taesan            #+#    #+#             */
-/*   Updated: 2021/08/12 14:08:03 by taesan           ###   ########.fr       */
+/*   Updated: 2021/08/13 15:23:14 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,13 @@ void	clear_data(t_info *info)
 void	start(t_info *info)
 {
 	t_list *temp;
+	int		seq;
 
 	temp = info->commands;
-	printf("cnt : [%d]\n", info->command_cnt);
+	seq = 0;
 	while (temp && info->command_cnt >= 0)
 	{
+		info->command_cnt--;
 		if (!command_filter(info, (char **)(&temp->content)))
 			return ;
 		// redirect처리
@@ -40,16 +42,9 @@ void	start(t_info *info)
 		// redirect_out_to_string(*info);
 		if (!init_command_info(info, temp->content))
 			return ;
-		if (info->command_cnt > 1 && !info->in && !info->out)
-		{
-			// 파이프가 존재하면서,
-
-			// 해당 명령어에 
-			// pipe code 
-		}
-		else
-			exec_command(info);
-		info->command_cnt--;
+		if (info->command_cnt != 0 && !set_connect_pipe(info, seq))
+		 	return ;
+		exec_call(info, seq++);
 		temp = temp->next;
 	}
 }

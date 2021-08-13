@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/28 15:05:24 by taesan            #+#    #+#             */
-/*   Updated: 2021/08/12 01:42:23 by taesan           ###   ########.fr       */
+/*   Updated: 2021/08/13 13:31:35 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,18 +46,12 @@ typedef struct s_info
 	t_list	*out;
 
 	t_list	*redirect_lst;
-}				t_info;
+	t_list	*sepa_type; // 여러개의 명령어일 때, 구분자 (1 = |, 2 = ||, 3 = &&)
 
-typedef struct s_pipe
-{
-	char		**param;
-	char		**envp;
-	const char	*out_file;
 	int			pipe_in[2];
 	int			pipe_out[2];
 	int			connect_pipe[2];
-	int			result_fd;
-}				t_pipe;
+}				t_info;
 
 # define INPUT_CHANGED 1
 # define NOT_BUILTIN 0

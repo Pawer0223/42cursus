@@ -37,10 +37,16 @@ int		move_end_point(char *line, int *e, char end_c)
 	return (1);
 }
 
-void	init_default(t_info *info)
+int		init_default(t_info *info)
 {
 	info->command_cnt = 0;
 	info->is_builtin = -1;
+	if (pipe(info->pipe_in) == -1)
+		return (error_occur_perror(PIPE_ERR));
+	if (pipe(info->pipe_out) == -1)
+		return (error_occur_perror(PIPE_ERR));
+	close(info->pipe_in[WRITE_FD_IDX]);
+	return (1);
 }
 
 int		make_command_list(t_info *info, char *input)
@@ -52,7 +58,8 @@ int		make_command_list(t_info *info, char *input)
 	s = 0;
 	e = 0;
 	len = ft_strlen(input);
-	init_default(info);
+	if (!init_default(info))
+		return (0);
 	while (e < len && input[e])
 	{
 		if (is_quotation(input[e]) && !move_end_point(input, &e, input[e]))

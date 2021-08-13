@@ -52,7 +52,7 @@ void	redirect_out_free(void *data);
 /*
 	exec
 */
-void	exec_command(t_info *info);
+void		exec_call(t_info *info, int instruct_seq);
 /*
 	make command list
 */
@@ -103,5 +103,10 @@ void	redirect_out_to_string(t_info info);
 */
 void	sigquit_handler(int signo);
 void	sigint_handler(int signo);
+/*
+	set_connect_pipe
+*/
+int		set_connect_pipe(t_info *info, int seq);
+
 
 #endif
