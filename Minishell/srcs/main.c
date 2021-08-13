@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/25 22:00:23 by taesan            #+#    #+#             */
-/*   Updated: 2021/08/13 15:23:14 by taesan           ###   ########.fr       */
+/*   Updated: 2021/08/14 01:06:54 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,19 @@ void	clear_data(t_info *info)
 {
 	if (info->commands)
 		ft_lstclear(&info->commands, ft_free);
-	if (info->in)
-		ft_lstclear(&info->in, redirect_in_free);
-	if (info->out)
-		ft_lstclear(&info->out, redirect_out_free);
+	if (info->redirect_lst)
+		ft_lstclear(&info->redirect_lst, ft_free);
+	// commands_symbol은 안해도 되는지?
 }
 
-void	start(t_info *info)
+void	error_occur_parsing(t_info *info, char *input)
+{
+	printf("%s\n", PARSE_ERR);
+	clear_data(info);
+	ft_free(input);
+}
+
+int	start(t_info *info)
 {
 	t_list *temp;
 	int		seq;
@@ -32,26 +38,25 @@ void	start(t_info *info)
 	while (temp && info->command_cnt >= 0)
 	{
 		info->command_cnt--;
-		if (!command_filter(info, (char **)(&temp->content)))
-			return ;
-		// redirect처리
 		if (!redirect_filter(info, (char **)(&temp->content)))
-			return ;
-		// printf("===== ===== after ===== =====\n");
-		// redirect_in_to_string(*info);
-		// redirect_out_to_string(*info);
+			return (0);
+		if (!command_filter(info, (char **)(&temp->content)))
+			return (0);
 		if (!init_command_info(info, temp->content))
-			return ;
+			return (0);
 		if (info->command_cnt != 0 && !set_connect_pipe(info, seq))
-		 	return ;
+		 	return (0);
 		exec_call(info, seq++);
+		// commands_symbol은 안해도 되는지?
+		if (info->redirect_lst)
+			ft_lstclear(&info->redirect_lst, ft_free);
 		temp = temp->next;
 	}
+	return (1);
 }
 
 int main(int argc, char *argv[], char *envp[])
 {
-	int		r;
 	char	*input;
 	char	*prompt;
 	t_info	info;
@@ -64,21 +69,22 @@ int main(int argc, char *argv[], char *envp[])
 	if (!info.paths)
 		return (error_occur_std(SPLIT_ERR));
 	info.envp = envp;
-	// signal(SIGQUIT, (void *)sigquit_handler);
-	// signal(SIGINT, (void *)sigint_handler);
 	while(1)
 	{
 		input = readline(prompt);
-		if (input && ft_strcmp(input, "") != 0)
+		if (ft_strcmp(input, "") != 0)
 		{
-			// if (ft_strcmp(input, "exit") == 0)
-			// 	exit(1);
 			add_history(input);
-			r = make_command_list(&info, input);
-			if (!r)
-				break ;
-			if (r == 1)
-				start(&info);
+			if (make_command_list(&info, input) != 1)
+			{
+				error_occur_parsing(&info, input);
+				continue ;
+			}
+			if (!start(&info))
+			{
+				error_occur_parsing(&info, input);
+				continue ;
+			}
 			clear_data(&info);
 		}
 		ft_free(input);

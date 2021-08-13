@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/28 15:05:24 by taesan            #+#    #+#             */
-/*   Updated: 2021/08/13 13:31:35 by taesan           ###   ########.fr       */
+/*   Updated: 2021/08/14 00:21:03 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,6 @@
 # define DEFINES_H
 
 #include "minishell.h"
-
-typedef struct	s_redirect_in
-{
-	int		left_fd;
-	int		right_fd;
-	char	*limiter; // 여러개 << 들어온경우 here_doc단어가 순서대로 나와야 끝남.
-}				t_redirect_in;
-
-typedef struct	s_redirect_out
-{
-	int		left_fd;
-	int		right_fd;
-	int		is_append; // >> 여부체크하여, open옵션 다르게 주기
-}				t_redirect_out;
-
 
 /*
 	명령어에서 아래 문자들이 존재하는지 ..
@@ -42,12 +27,8 @@ typedef struct s_info
 	int		command_cnt; // 초기화
 	int		is_builtin; // 초기화
 	t_list	*commands; // lstclear함.
-	t_list	*in;
-	t_list	*out;
-
 	t_list	*redirect_lst;
-	t_list	*sepa_type; // 여러개의 명령어일 때, 구분자 (1 = |, 2 = ||, 3 = &&)
-
+	t_list	*commands_symbol;
 	int			pipe_in[2];
 	int			pipe_out[2];
 	int			connect_pipe[2];
@@ -68,6 +49,9 @@ typedef struct s_info
 # define DOLLAR '$'
 # define REDIRECT_IN '<'
 # define REDIRECT_OUT '>'
+# define SG_PIPE 1
+# define DB_PIPE 2
+# define DB_AMPER 3
 
 
 # define PATH "PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
@@ -88,10 +72,10 @@ typedef struct s_info
 # define STDIN_PIPE 0x1
 # define STDOUT_PIPE 0x2
 # define BUFFER_SIZE 256
+# define FD_MAX 255
 # define PATH "PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+# define PARSE_ERR "PARSING ERROR"
 # define SPLIT_ERR "ft_split Error"
-# define PARAM_ERR "Please Call [./pipex file1 \"cmd1\" \"cmd2\" file2]"
-# define PARAM_ERR_BONUS "Call [./pipex here_doc LIMITER \"cmd1\" \"cmd2\" file]"
 # define INPUT_OPEN_ERR "input file open"
 # define NO_SUCH_FILE "No such file or directory"
 # define OUTPUT_OPEN_ERR "redirection output file open"

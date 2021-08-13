@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/28 14:45:56 by taesan            #+#    #+#             */
-/*   Updated: 2021/08/13 23:02:48 by taesan           ###   ########.fr       */
+/*   Updated: 2021/08/14 00:46:25 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,7 @@
 
 /*
 	pipex는 input데이터가 파일 또는 here_doc에들어왔음. 즉, 파일을 무조건 받음.
-
 	pipex는 out또한 반드시 존재했음.
-
 	그래서 dup2대상이 항상 in, out동일하게 처리해야 했음. 마지막에만 파일로 변경.
 */
 
@@ -90,12 +88,10 @@ void	exec_command(t_info *info, int pipe[2], int flags)
 
 void	exec_call(t_info *info, int seq)
 {
-	//1 개의 명령어만 존재하는 경우, dup를 할필요가 없음 but out파이프의 write fd는 닫아주자.
+	//1 개의 명령어만 존재하는 경우, dup를 할필요가 없음 but int에서 열었던 파이프의 fd는 닫아주자.
 	// 얘 플래그는 close를 위해서.
 	if (info->command_cnt == 0 && seq == 0)
 		exec_command(info, 0, STDIN_PIPE | STDOUT_PIPE);
-	// 아래의 경우는 모두 파이프를 사용함으로, in out을 모두 close해도 됨.
-	
 	// 다중 명령어에서 첫번째 명령어인 경우. => 표준 출력을 파이프로. connect pipe사용
 	else if (info->command_cnt > 0 && seq == 0)
 		exec_command(info, info->connect_pipe, STDOUT_PIPE);

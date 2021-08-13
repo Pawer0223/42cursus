@@ -1,6 +1,7 @@
 NAME	= minishell
 
-CC		= gcc -I/opt/homebrew/include -g -fsanitize=address #arch -x86_64
+# -I/opt/homebrew/include
+CC		= gcc -g -fsanitize=address #arch -x86_64
 #CFLAGS	= -Wall -Wextra -Werror
 
 SRC_DIR		= ./srcs/
@@ -10,11 +11,12 @@ INCDIR		= ./includes/
 
 LIBFT = libft.a
 
-SRC 	=	main.c error.c utils.c check.c readline.c init.c \
-			command_filter.c redirect_filter.c exec_cmd.c using_free.c \
-			make_command_list.c replace_env.c redirect_in_add.c redirect_util.c \
-			redirect_out_add.c get_next_line_utils.c get_next_line.c \
-			redirection_dup.c sig_handler.c set_connect_pipe.c test_file.c \
+SRC 	=	main.c error.c utils.c check.c init.c \
+			command_filter.c exec_cmd.c using_free.c \
+			make_command_list.c replace_env.c redirect_util.c \
+			get_next_line_utils.c get_next_line.c sig_handler.c \
+			set_connect_pipe.c redirect_filter.c \
+			test_file.c
 
 OBJ_FILES = $(SRC:.c=.o)
 OBJS	= $(addprefix $(OBJ_DIR), $(OBJ_FILES))
