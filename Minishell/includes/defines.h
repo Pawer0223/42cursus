@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/28 15:05:24 by taesan            #+#    #+#             */
-/*   Updated: 2021/08/18 01:35:47 by taesan           ###   ########.fr       */
+/*   Updated: 2021/08/18 03:06:10 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ typedef struct s_info
 	int			connect_pipe[2];
 	int			redirect_fd[2];
 	int			std_in;
+	int			exec_result; // exec하고 init
 }				t_info;
 
 # define INPUT_CHANGED 1
@@ -68,15 +69,7 @@ typedef struct s_info
 # define SG_PIPE 1
 # define DB_PIPE 2
 # define DB_AMPER 3
-
-/*
-	test
-*/
-# define IN_SYMBOL 1
-# define HERE_DOC 2
-# define OUT_SYMBOL 3
-# define APPEND 4
-
+# define EXEC_FAIL 42
 
 
 # define PATH "PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"

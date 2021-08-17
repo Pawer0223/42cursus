@@ -8,6 +8,7 @@ t_list	*get_numpoint(int num)
 	ptr = (int *)malloc(sizeof(int));
 	if (!ptr)
 		return (0);
+	*ptr = num;
 	data = ft_lstnew(ptr);
 	return (data);
 }
