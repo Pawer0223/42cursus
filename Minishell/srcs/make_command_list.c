@@ -95,6 +95,9 @@ int		init_default(t_info *info)
 	info->is_builtin = -1;
 	if (pipe(info->pipe_out) == -1)
 		return (error_occur_perror(PIPE_ERR));
+	info->std_in = dup(STDIN_FILENO);
+	if (info->std_in == -1)
+		return (error_occur_perror("dup"));
 	return (1);
 }
 
