@@ -35,6 +35,8 @@
         "get_next_line.h": "c",
         "stat.h": "c",
         "readline.h": "c",
-        "ios": "c"
+        "ios": "c",
+        "signal.h": "c",
+        "string.h": "c"
     }
 }

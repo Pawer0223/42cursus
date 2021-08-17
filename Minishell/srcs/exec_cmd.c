@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/28 14:45:56 by taesan            #+#    #+#             */
-/*   Updated: 2021/08/18 03:06:34 by taesan           ###   ########.fr       */
+/*   Updated: 2021/08/18 03:15:36 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	child_process(t_info *info, int pipe[2], int flags)
 		exit(EXEC_FAIL);
 	}
 }
-#include <string.h>
+
 void	parent_process(t_info *info, int pipe[2], int flags)
 {
 	int	status;
