@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/17 15:34:47 by taesan            #+#    #+#             */
-/*   Updated: 2021/08/18 01:25:25 by taesan           ###   ########.fr       */
+/*   Updated: 2021/08/18 21:07:20 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ int	exec_redirection(t_info *info)
 		else if (content[i] == REDIRECT_OUT && \
 			!(redirect_out_dup(info->redirect_fd, content + i + 1)))
 			return (0);
-		//printf("left : [%d] , right : [%d]\n", info->redirect_fd[0], info->redirect_fd[1]);
 		temp = temp->next;
 	}
 	return (1);

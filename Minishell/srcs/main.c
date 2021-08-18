@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/25 22:00:23 by taesan            #+#    #+#             */
-/*   Updated: 2021/08/18 03:13:44 by taesan           ###   ########.fr       */
+/*   Updated: 2021/08/19 03:53:49 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,11 +73,16 @@ int	check_input(char *input)
 {
 	int	i;
 
+	if (!input)
+		return (0);
 	i = 0;
 	while (input[i] == ' ')
 		i++;
 	if (!input[i])
+	{
+		free(input);
 		return (0);
+	}
 	return (1);
 }
 
@@ -91,14 +96,12 @@ int main(int argc, char *argv[], char *envp[])
 	prompt = "$";
 	// 종료 시그널 받으면 프로그램 끝내야 함.
 	ft_memset(&info, 0, sizeof(t_info));
-	info.paths = init_path(envp);
-	if (!info.paths)
-		return (error_occur_std(SPLIT_ERR));
-	info.envp = envp;
+	if (!init_envp(&info, envp))
+		return (0);
 	while(1)
 	{
 		input = readline(prompt);
-		if (input && check_input(input))
+		if (check_input(input))
 		{
 			add_history(input);
 			if (make_command_list(&info, input) != 1)
@@ -108,8 +111,8 @@ int main(int argc, char *argv[], char *envp[])
 			}
 			start(&info);
 			clear_data(&info);
+			ft_free(input);
 		}
-		ft_free(input);
 	}
 	// need clear pathes
 }

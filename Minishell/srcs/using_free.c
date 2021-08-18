@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 19:56:59 by taesan            #+#    #+#             */
-/*   Updated: 2021/08/14 00:09:55 by taesan           ###   ########.fr       */
+/*   Updated: 2021/08/19 03:49:38 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,28 @@ void	split_free(char **data)
 		ft_free(data[i++]);
 	free(data);
 	data = 0;
+}
+
+void	clear_all_data(t_info *info)
+{
+	char	**temp;
+
+	if (info->paths)
+	{
+		temp = info->paths;
+		while (*temp)
+		{
+			ft_free(*temp);
+			temp++;
+		}
+	}
+	if (info->envp)
+	{
+		temp = info->envp;
+		while (*temp)
+		{
+			ft_free(*temp);
+			temp++;
+		}
+	}
 }
