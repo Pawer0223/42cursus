@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/28 14:45:56 by taesan            #+#    #+#             */
-/*   Updated: 2021/08/18 19:51:02 by taesan           ###   ########.fr       */
+/*   Updated: 2021/08/19 13:49:50 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	child_process(t_info *info, int pipe[2], int flags)
 	dup_r = 1;
 	if (pipe)
 		dup_r = exec_dup2(pipe, flags);
-	if (!exec_redirection(info))
+	if (!redirection_dup(info))
 		return ;
 	// built in 함수 확인하기 , exec_result 확인하기.
 	if (dup_r)

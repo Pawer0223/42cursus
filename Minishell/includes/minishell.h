@@ -49,6 +49,7 @@ int		init_envp(t_info *info, char *envp[]);
 void	split_free(char **data);
 void	ft_free(void *data);
 void	clear_all_data(t_info *info);
+void	clear_data(t_info *info);
 /*
 	exec
 */
@@ -73,7 +74,7 @@ int		replace_env(char **envp, char **ptr, int s, int *next_idx);
 int		remove_redirect(int s, int e, char **content);
 int		get_ampersand_fd(char *content, int i, int fds[2]);
 char	*get_right_str(char *content, int i);
-void	redirection_dup(int fds[2]);
+void	redirection_dup_exec(int fds[2]);
 /*
 	gnl
 */
@@ -96,7 +97,7 @@ int		set_connect_pipe(t_info *info, int seq);
 /*
 	exec_redirection
 */
-int		exec_redirection(t_info *info);
+int		redirection_dup(t_info *info);
 
 /*
 	redirect_in_dup

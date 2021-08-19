@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_redirection.c                                 :+:      :+:    :+:   */
+/*   redirection_dup.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/17 15:34:47 by taesan            #+#    #+#             */
-/*   Updated: 2021/08/18 21:07:20 by taesan           ###   ########.fr       */
+/*   Updated: 2021/08/19 13:50:52 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	set_left_fd(char *content, int *i, int fd[2])
 	return (error_occur_std(PARSE_ERR)); 
 }
 
-int	exec_redirection(t_info *info)
+int	redirection_dup(t_info *info)
 {
 	t_list	*temp;
 	char	*content;

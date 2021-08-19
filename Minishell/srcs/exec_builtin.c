@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/18 14:54:24 by taesan            #+#    #+#             */
-/*   Updated: 2021/08/18 21:50:09 by taesan           ###   ########.fr       */
+/*   Updated: 2021/08/19 15:54:01 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,12 @@
 
 #include "../includes/minishell.h"
 
+/*
+	$해석하도록 해야 함.
+*/
 int		ft_export(t_info *info)
 {
-	printf("ft_export\n");
-	return (0);
+	printf("ft_export.. size : %d\n", info->envp_cnt);
 }
 
 int		ft_unset(t_info *info)

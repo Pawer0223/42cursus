@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 19:49:55 by taesan            #+#    #+#             */
-/*   Updated: 2021/08/19 03:53:38 by taesan           ###   ########.fr       */
+/*   Updated: 2021/08/19 14:51:46 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ int		copy_envp(t_info *info, char *envp[])
 	if (!new_envp)
 		return (0);
 	info->envp = new_envp;
+	info->envp_cnt = idx;
 	new_envp[idx] = 0;
 	idx = 0;
 	while (*envp)
@@ -100,11 +101,12 @@ int		init_envp(t_info *info, char *envp[])
 	info->paths = init_path(envp);
 	if (!info->paths)
 		return (0);
-	if (!copy_envp(info, envp))
-	{
-		clear_all_data(info);
-		return (0);		
-	}
+	info->envp = envp;
+	// if (!copy_envp(info, envp))
+	// {
+	// 	clear_all_data(info);
+	// 	return (0);		
+	// }
 	return (1);
 }
 
