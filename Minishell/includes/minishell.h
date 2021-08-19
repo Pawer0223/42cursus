@@ -109,4 +109,9 @@ int		redirect_out_dup(int fds[2], char *content);
 */
 void	exec_builtin(int cmd, t_info *info);
 
+/*
+	sort
+*/
+void	merge_sort(char **sorted, char **temp, int idx_l, int idx_r);
+
 #endif

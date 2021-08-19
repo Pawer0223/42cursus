@@ -66,9 +66,13 @@ int	filter_input(t_info *info, char **input, int len)
 					return (0);
 			}
 		}
-		else if ((*input)[e] == DOLLAR && \
-			!replace_env(info->envp, input, e, &e))
-			return (0);
+		else if ((*input)[e] == DOLLAR)
+		{
+			if (!replace_env(info->envp, input, e, &e))
+				return (0);
+			len = ft_strlen(*input);
+		}
+
 		e++;
 	}
 	return (1);

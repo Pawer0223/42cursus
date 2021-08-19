@@ -6,31 +6,16 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/18 14:54:24 by taesan            #+#    #+#             */
-/*   Updated: 2021/08/19 15:54:01 by taesan           ###   ########.fr       */
+/*   Updated: 2021/08/20 03:25:52 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 //◦ export with no options
 // ◦ unset with no options
 //◦ env with no options or arguments
-
 #include "../includes/minishell.h"
 
-/*
-	$해석하도록 해야 함.
-*/
-int		ft_export(t_info *info)
-{
-	printf("ft_export.. size : %d\n", info->envp_cnt);
-}
-
-int		ft_unset(t_info *info)
-{
-	printf("ft_unset\n");
-	return (0);
-}
-
-int		ft_env(t_info *info)
+int		builtin_env(t_info *info)
 {
 	char **envp;
 
@@ -40,7 +25,101 @@ int		ft_env(t_info *info)
 		ft_putendl_fd(*envp, 1);
 		envp++;
 	}
+	return (1);
+}
+
+int		builtin_unset(t_info *info)
+{
+	printf("ft_unset\n");
 	return (0);
+}
+/*
+	$해석하도록 해야 함.
+	정렬해야 함..
+	export할 때는, 특정파일에 저장하고, parent에서 append로직
+
+	특수문자 기호처리.. ? *이나, &나 =과 같은경우..
+
+	a=c=b 
+		a="c=b"
+
+	a=c= b
+		a="c="
+		b
+
+	a= =b
+		a=""
+*/
+int		builtin_export(t_info *info)
+{
+	int		i;
+	char	**temp;
+
+	if (!info->param[1])
+	{
+		temp = (char **)malloc(sizeof(char *) * (info->envp_cnt + 1));
+		if (!temp)
+			return (0);
+		merge_sort(info->envp, temp, 0, info->envp_cnt - 1);
+		builtin_env(info);
+	}
+	else
+	{
+		i = 1;
+		while (info->param[i])
+		{
+			// export a=B c=$d taesan
+			// printf("param[%d] : [%s]\n", i, info->param[i]);
+			int j = 0;
+			char *param = info->param[i];
+			char *key;
+			char *value;
+			key = 0;
+			value = 0;
+			while (param[j])
+			{
+				if (param[j] == '=')
+				{
+					key = ft_substr(param, 0, j);
+					j++;
+					int s = j;
+					while (param[j] && param[j] != ' ')
+						j++;
+					value = ft_substr(param + s, 0, j - s);
+					//printf("key : [%s], value : [%s]\n", key, value);
+					break ;
+				}
+				j++;
+			}
+			/*
+				not a valid경우만제외하고, 
+
+				printf에 출력되는 정보를 파일에 write한다.
+
+				but, 변수만 선언된 경우에는 env에서는 출력x export에서는 출력되어야 한다
+
+				env
+				[key=value]
+
+				export
+				[declare -x key="value"]
+			*/
+			if (key && value) // 파라미터에 = 형식이 있는 경우.
+			{
+				// key가 널인경우는 에러임. ex) a=b =c
+				if (ft_strcmp(key, "") == 0 || is_empty(key))
+					printf("`%s: not a valid identifier\n", param);
+				else
+					printf("%s=\"%s\"\n", key, value);
+			}
+			else if (!key && !value) // =이 존재하지 않는 경우. 이 결과는 export에서만 출력되어야 함.
+				printf("%s\n", param);
+			ft_free(key);
+			ft_free(value);
+			i++;
+		}	
+	}
+	return (1);
 }
 
 void	exec_builtin(int cmd, t_info *info)
@@ -48,11 +127,11 @@ void	exec_builtin(int cmd, t_info *info)
 	int r;
 
 	if (cmd == EXPORT)
-		r = ft_export(info);
+		r = builtin_export(info);
 	else if (cmd == UNSET)
-		r = ft_unset(info);
+		r = builtin_unset(info);
 	else if (cmd == ENV)
-		r = ft_env(info);
+		r = builtin_env(info);
 	if (!r)
 		exit(EXEC_FAIL);
 	exit(0);
