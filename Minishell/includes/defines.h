@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/28 15:05:24 by taesan            #+#    #+#             */
-/*   Updated: 2021/08/19 17:24:46 by taesan           ###   ########.fr       */
+/*   Updated: 2021/08/21 03:06:34 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,21 +31,22 @@ typedef	struct	s_sort
 */
 typedef struct s_info
 {
+	t_list	*commands; // 마지막에 clear
+	t_list	*commands_symbol; // 마지막에 clear
+	t_list	*redirect_lst; // exec하고 clear
 	char	**paths; // 계속 씀.
 	char	**param; // parents에서 free됨.
 	char	**envp; // 계속 씀.
 	int		command_cnt; // 유동적.
 	int		is_builtin; // param만들면서 체크 함.
-	t_list	*commands; // 마지막에 clear
-	t_list	*commands_symbol; // 마지막에 clear
-	t_list	*redirect_lst; // exec하고 clear
-	int			envp_cnt;
-	int			pipe_in[2];
-	int			pipe_out[2];
-	int			connect_pipe[2];
-	int			redirect_fd[2];
-	int			std_in;
-	int			exec_result; // exec하고 init
+	int		envp_cnt;
+	int		pipe_in[2];
+	int		pipe_out[2];
+	int		connect_pipe[2];
+	int		redirect_fd[2];
+	int		std_in;
+	int		std_out;
+	int		exec_result; // exec하고 init
 }				t_info;
 
 # define INPUT_CHANGED 1

@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/18 14:54:24 by taesan            #+#    #+#             */
-/*   Updated: 2021/08/20 03:25:52 by taesan           ###   ########.fr       */
+/*   Updated: 2021/08/21 12:52:55 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,39 @@ int		builtin_env(t_info *info)
 	envp = info->envp;
 	while (*envp)
 	{
-		ft_putendl_fd(*envp, 1);
+		ft_putendl_fd(*envp, info->std_out);
 		envp++;
 	}
 	return (1);
+}
+
+int		print_export(t_info *info)
+{
+	char	**envp;
+	int		j;
+	int		visit;
+
+	envp = info->envp;
+	while (*envp)
+	{
+		ft_putstr_fd("declare -x ", info->std_out);
+		j = 0;
+		visit = 0;
+		while ((*envp)[j])
+		{
+			ft_putchar_fd((*envp)[j], info->std_out);
+			if ((*envp)[j] == '=' && !visit)
+			{
+				write(info->std_out, "\"", 1);
+				visit = 1;
+			}
+			j++;
+		}
+		if (visit)
+			ft_putendl_fd("\"", info->std_out);
+		envp++;
+	}
+	return (1);	
 }
 
 int		builtin_unset(t_info *info)
@@ -61,7 +90,10 @@ int		builtin_export(t_info *info)
 		if (!temp)
 			return (0);
 		merge_sort(info->envp, temp, 0, info->envp_cnt - 1);
-		builtin_env(info);
+		//ft_free(temp);
+		print_export(info);
+		// 그냥 출력.
+		// builtin_env(info);
 	}
 	else
 	{
@@ -93,16 +125,23 @@ int		builtin_export(t_info *info)
 			}
 			/*
 				not a valid경우만제외하고, 
-
 				printf에 출력되는 정보를 파일에 write한다.
-
 				but, 변수만 선언된 경우에는 env에서는 출력x export에서는 출력되어야 한다
+				 이거 어떻게 잡냐
 
-				env
-				[key=value]
+				 변수를 따로 관리한다..
 
-				export
-				[declare -x key="value"]
+				 export.
+				  => .export.txt
+
+				 env
+				  => .env.txt
+
+				다 끝나고 parent에서 해당파일을 각각 읽어서 write 해준다.
+				.env.txt는 두 변수 모두 붙인다.
+				.export는 export에만 붙인다.
+				
+
 			*/
 			if (key && value) // 파라미터에 = 형식이 있는 경우.
 			{

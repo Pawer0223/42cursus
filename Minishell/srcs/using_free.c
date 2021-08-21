@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 19:56:59 by taesan            #+#    #+#             */
-/*   Updated: 2021/08/19 13:41:48 by taesan           ###   ########.fr       */
+/*   Updated: 2021/08/21 00:26:09 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	clear_data(t_info *info)
 	if (info->commands_symbol)
 		ft_lstclear(&info->commands_symbol, ft_free);
 	ft_close(info->std_in);
+	ft_close(info->std_out);
 }
 
 void	clear_all_data(t_info *info)
