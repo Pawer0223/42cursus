@@ -37,6 +37,7 @@
         "readline.h": "c",
         "ios": "c",
         "signal.h": "c",
-        "string.h": "c"
+        "string.h": "c",
+        "sstream": "c"
     }
 }

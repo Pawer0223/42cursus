@@ -114,4 +114,10 @@ void	exec_builtin(int cmd, t_info *info);
 */
 void	merge_sort(char **sorted, char **temp, int idx_l, int idx_r);
 
+/*
+	test
+*/
+int		print_export(t_info *info);
+
+
 #endif

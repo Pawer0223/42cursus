@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/28 15:05:24 by taesan            #+#    #+#             */
-/*   Updated: 2021/08/21 03:06:34 by taesan           ###   ########.fr       */
+/*   Updated: 2021/08/22 01:46:23 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ typedef struct s_info
 # define WRITE_FD_IDX 1
 # define STDIN_PIPE 0x1
 # define STDOUT_PIPE 0x2
-# define BUFFER_SIZE 256
+# define BUFFER_SIZE 255
 # define FD_MAX 255
 # define PATH "PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
 # define PARSE_ERR "PARSING ERROR"
@@ -108,8 +108,7 @@ typedef struct s_info
 # define READ_ERR "read result [-1]"
 # define UNLINK_ERR "file remove Error"
 # define TEMP_FILE ".temp.txt"
-
-
-
+# define EXPORT_FILE ".export.txt"
+# define ENV_FILE ".env.txt"
 
 #endif
