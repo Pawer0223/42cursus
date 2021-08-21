@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/28 14:45:56 by taesan            #+#    #+#             */
-/*   Updated: 2021/08/22 02:04:26 by taesan           ###   ########.fr       */
+/*   Updated: 2021/08/22 02:57:27 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,13 +69,6 @@ void	parent_process(t_info *info, int pipe[2], int flags)
 		r = wait(&status);
 	if (r == -1)
 		perror(WAIT_ERR);
-	if (info->is_builtin == EXPORT)
-	{
-		if (!info->param[1])
-		{
-			print_export(info);
-		}
-	}
 	info->exec_result = WEXITSTATUS(status);
 	if (!pipe)
 		pipe = info->pipe_out;
