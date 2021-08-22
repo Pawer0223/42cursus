@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/25 22:00:23 by taesan            #+#    #+#             */
-/*   Updated: 2021/08/19 13:41:32 by taesan           ###   ########.fr       */
+/*   Updated: 2021/08/23 04:32:29 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,16 @@ void	start(t_info *info)
 	while (commands && info->command_cnt >= 0)
 	{
 		info->command_cnt--;
+		printf("org : [%s]\n", commands->content);
 		if (!redirect_filter(info, (char **)(&commands->content)))
 			return ;
+		printf("redirect_filter : [%s]\n", commands->content);
 		if (!command_filter(info, (char **)(&commands->content)))
 			return ;
+		printf("command_filter : [%s]\n", commands->content);	
 		if (!init_command_info(info, commands->content))
 			return ;
+		printf("init_command_info : [%s]\n", commands->content);	
 		if (info->command_cnt != 0 && !set_connect_pipe(info, seq))
 		 	return ;
 		exec_call(info, seq++);

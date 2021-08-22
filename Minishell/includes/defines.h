@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/28 15:05:24 by taesan            #+#    #+#             */
-/*   Updated: 2021/08/22 01:46:23 by taesan           ###   ########.fr       */
+/*   Updated: 2021/08/23 01:47:38 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ typedef struct s_info
 # define BAD_FD "Bad file descriptor"
 # define UNEXPECTED_TOKEN "syntax error near unexpected token `&\'"
 
+# define FILE_OPEN_ERR "file open Error"
 # define OUTPUT_OPEN_ERR "redirection output file open"
 # define COMMAND_NOT_EXIST "command program not exist"
 # define ENV_PATH_NOT_EXIST "system env PATH not exist"
@@ -110,5 +111,7 @@ typedef struct s_info
 # define TEMP_FILE ".temp.txt"
 # define EXPORT_FILE ".export.txt"
 # define ENV_FILE ".env.txt"
+# define ENV_FILE_2 ".env_2.txt"
+
 
 #endif
