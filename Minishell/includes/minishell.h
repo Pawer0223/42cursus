@@ -27,6 +27,8 @@ int		pass_possible(char c);
 int		is_empty(char *temp);
 int		is_redirect(char c);
 void	ft_close(int fd);
+
+void	jump_space(char *input, int *i);
 /*
 	check
 */
@@ -50,6 +52,7 @@ void	split_free(char **data);
 void	ft_free(void *data);
 void	clear_all_data(t_info *info);
 void	clear_data(t_info *info);
+void	content_not_rm(void *param);
 /*
 	exec
 */
@@ -115,9 +118,16 @@ void	exec_builtin(int cmd, t_info *info);
 void	merge_sort(char **sorted, char **temp, int idx_l, int idx_r);
 
 /*
+	make param
+*/
+int	make_param(t_info *info, char *input, int len);
+/*
 	test
 */
 int		print_export(t_info *info);
+
+
+
 
 
 #endif
