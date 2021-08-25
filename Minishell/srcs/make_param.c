@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/24 16:53:36 by taesan            #+#    #+#             */
-/*   Updated: 2021/08/24 19:27:35 by taesan           ###   ########.fr       */
+/*   Updated: 2021/08/24 19:43:02 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int	append_temp_list(t_info *info, char *input, int *i, int *s)
 	return (1);
 }
 
-t_list	*make_param_data(t_info *info, char *input, int *i, int *s)
+int	append_param_list(t_info *info, char *input, int *i, int *s)
 {
 	t_list		*data;
 	t_strjoin	temp;
@@ -111,14 +111,6 @@ t_list	*make_param_data(t_info *info, char *input, int *i, int *s)
 		if (temp.content)
 			data = ft_lstnew(temp.content);
 	}
-	return (data);
-}
-
-int	append_param_list(t_info *info, char *input, int *i, int *s)
-{
-	t_list	*data;
-
-	data = make_param_data(info, input, i, s);
 	if (!data)
 		return (0);
 	ft_lstadd_back(&info->param_list, data);

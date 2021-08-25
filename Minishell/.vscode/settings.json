@@ -38,6 +38,7 @@
         "ios": "c",
         "signal.h": "c",
         "string.h": "c",
-        "sstream": "c"
+        "sstream": "c",
+        "cstddef": "c"
     }
 }

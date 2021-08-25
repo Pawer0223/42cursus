@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/28 15:05:24 by taesan            #+#    #+#             */
-/*   Updated: 2021/08/24 19:00:49 by taesan           ###   ########.fr       */
+/*   Updated: 2021/08/25 04:00:37 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,7 @@ typedef struct s_info
 # define UNLINK_ERR "file remove Error"
 # define TEMP_FILE ".temp.txt"
 # define EXPORT_FILE ".export.txt"
+# define EXPORT_FILE_2 ".export_2.txt"
 # define ENV_FILE ".env.txt"
 # define ENV_FILE_2 ".env_2.txt"
 

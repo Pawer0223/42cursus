@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 19:49:55 by taesan            #+#    #+#             */
-/*   Updated: 2021/08/24 19:29:51 by taesan           ###   ########.fr       */
+/*   Updated: 2021/08/25 01:17:40 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,9 @@ int		copy_envp(t_info *info, char *envp[])
 	return (1);
 }
 
+/*
+		export 명령이 수행 된 후에는, envp 를 rebuild해줌.
+*/
 int		set_envp(t_info *info)
 {
 	char	**new_envp;
@@ -119,6 +122,7 @@ int		set_envp(t_info *info)
 }
 
 /*
+ 맨처음에는 envp읽어서 envp만들기.
 */
 int		init_envp_file(t_info *info, char *envp[])
 {

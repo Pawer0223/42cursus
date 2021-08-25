@@ -121,6 +121,17 @@ void	merge_sort(char **sorted, char **temp, int idx_l, int idx_r);
 	make param
 */
 int	make_param(t_info *info, char *input, int len);
+
+/*
+	write_env_file
+*/
+int	write_env_file(t_info *info, char *key, char *value);
+
+/*
+	write_export_file
+*/
+int		write_export_file(t_info *info, char *var, int remove);
+int		temp_to_datafile(char *read, char *write); // 공통인데 어따 뺄까이거..
 /*
 	test
 */

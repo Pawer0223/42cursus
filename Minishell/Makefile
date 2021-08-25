@@ -17,7 +17,9 @@ SRC 	=	main.c error.c utils.c check.c init.c \
 			get_next_line_utils.c get_next_line.c sig_handler.c \
 			set_connect_pipe.c redirect_filter.c redirection_dup.c\
 			redirection_in_dup.c redirection_out_dup.c exec_builtin.c \
-			merge_sort.c make_param.c utils_2.c test_file.c
+			merge_sort.c make_param.c utils_2.c \
+			write_env_file.c write_export_file.c \
+			test_file.c
 
 OBJ_FILES = $(SRC:.c=.o)
 OBJS	= $(addprefix $(OBJ_DIR), $(OBJ_FILES))
