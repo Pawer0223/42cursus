@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/28 14:45:56 by taesan            #+#    #+#             */
-/*   Updated: 2021/08/24 18:24:05 by taesan           ###   ########.fr       */
+/*   Updated: 2021/08/26 02:07:08 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@ void	child_process(t_info *info, int pipe[2], int flags)
 
 void	parent_process(t_info *info, int pipe[2], int flags)
 {
-	int	status;
-	int	r;
+	int			status;
+	int			r;
 	struct stat sb;
 
 	r = wait(&status);
@@ -76,8 +76,9 @@ void	parent_process(t_info *info, int pipe[2], int flags)
 		close(pipe[READ_FD_IDX]);
 	if (flags & STDOUT_PIPE)
 		close(pipe[WRITE_FD_IDX]);
+	if (info->is_builtin == EXPORT)
+		copy_envp(info);
 	split_free(info->param);
-	// info->param = 0;
 	info->param_cnt = 0;
 	if (info->redirect_lst)
 		ft_lstclear(&info->redirect_lst, ft_free);

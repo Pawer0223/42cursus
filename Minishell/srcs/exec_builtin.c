@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/18 14:54:24 by taesan            #+#    #+#             */
-/*   Updated: 2021/08/25 20:56:14 by taesan           ###   ########.fr       */
+/*   Updated: 2021/08/26 02:04:08 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int	export_add_var(t_info *info, char *param, int j)
 	char	*key;
 	char	*value;
 	int		r;
+
  	key = ft_substr(param, 0, j);
 	value = ft_substr(param + j + 1, 0, ft_strlen(param) - j);
 	r = 1;
@@ -29,9 +30,9 @@ int	export_add_var(t_info *info, char *param, int j)
 		// parent에서하게되면, 그냥 printf써도 무관 함.
 		if (ft_strcmp(key, "") == 0 || is_empty(key))
 		{
-			write(info->std_out, "export: `", 10);
-			ft_putstr_fd(param, info->std_out);
-			ft_putendl_fd(": not a valid identifier", info->std_out);
+			write(STDERR_FILENO, "export: `", 10);
+			ft_putstr_fd(param, STDERR_FILENO);
+			ft_putendl_fd(": not a valid identifier", STDERR_FILENO);
 		}
 		else
 			r = write_env_file(info, key, value);
@@ -75,7 +76,7 @@ int	write_export(t_info *info)
 	return (r);
 }
 
-int	rebuild_envp(t_info *info, t_list **list)
+int	envp_append_vars(t_info *info, t_list **list)
 {
 	t_list	*list_temp;
 	char	**envp;
@@ -105,25 +106,19 @@ int	rebuild_envp(t_info *info, t_list **list)
 
 int	append_export_list(t_info *info, t_list **list, char *line)
 {
-	char	*content;
 	int		len;
 	t_list	*data;
+	char	*content;
 
 	if (!line)
 		return (0);
-	len = ft_strlen(line);
-	if (len <= 1)
-		line = ft_strjoin(line, " ");
-	line[len - 1] = '\n';
-	content = ft_strdup(line);
+	content = ft_strjoin(line, "\n");
+	ft_free(line);
 	if (!content)
 		return (0);
 	data = ft_lstnew(content);
 	if (!data)
-	{
-		ft_free(content);
 		return (0);
-	}
 	ft_lstadd_back(list, data);
 	info->envp_cnt++;
 	return (1);
@@ -147,9 +142,7 @@ int		check_export_file(t_info *info, t_list **list)
 		}
 		if (!append_export_list(info, list, line))
 			return (0);
-		if (line)
-			ft_free(line);
-		if (!rebuild_envp(info, list))
+		if (!envp_append_vars(info, list))
 			return (0);
 		ft_close(fd);
 	}
@@ -163,7 +156,7 @@ int		builtin_env(t_info *info)
 	envp = info->envp;
 	while (*envp)
 	{
-		ft_putendl_fd(*envp, info->std_out);
+		ft_putendl_fd(*envp, STDOUT_FILENO);
 		envp++;
 	}
 	return (1);
@@ -178,21 +171,21 @@ int		print_export(t_info *info)
 	envp = info->envp;
 	while (*envp)
 	{
-		ft_putstr_fd("declare -x ", info->std_out);
+		ft_putstr_fd("declare -x ", STDOUT_FILENO);
 		j = 0;
 		visit = 0;
 		while ((*envp)[j])
 		{
-			ft_putchar_fd((*envp)[j], info->std_out);
+			ft_putchar_fd((*envp)[j], STDOUT_FILENO);
 			if ((*envp)[j] == '=' && !visit)
 			{
-				write(info->std_out, "\"", 1);
+				write(STDOUT_FILENO, "\"", 1);
 				visit = 1;
 			}
 			j++;
 		}
 		if (visit)
-			ft_putendl_fd("\"", info->std_out);
+			ft_putendl_fd("\"", STDOUT_FILENO);
 		envp++;
 	}
 	return (1);	

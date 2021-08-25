@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 19:49:55 by taesan            #+#    #+#             */
-/*   Updated: 2021/08/25 01:17:40 by taesan           ###   ########.fr       */
+/*   Updated: 2021/08/26 02:04:29 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,68 +63,10 @@ char	**init_path(char *envp[])
 	return (paths);
 }
 
-int		copy_envp(t_info *info, char *envp[])
-{
-	char	**new_envp;
-	char	**temp;
-	int		idx;
-
-	temp = envp;
-	idx = 0;
-	while (temp[idx])
-		idx++;
-	new_envp = (char **)malloc(sizeof(char *) * (idx + 1));
-	if (!new_envp)
-		return (0);
-	info->envp = new_envp;
-	info->envp_cnt = idx;
-	new_envp[idx] = 0;
-	idx = 0;
-	while (*envp)
-	{
-		new_envp[idx] = ft_strdup(*envp);
-		if (!new_envp[idx])
-			return (0);
-		idx++;
-		envp++;
-	}
-	return (1);
-}
-
-/*
-		export 명령이 수행 된 후에는, envp 를 rebuild해줌.
-*/
-int		set_envp(t_info *info)
-{
-	char	**new_envp;
-	char	**temp;
-	int		idx;
-
-	// idx = 0;
-	// while (temp[idx])
-	// 	idx++;
-	// new_envp = (char **)malloc(sizeof(char *) * (idx + 1));
-	// if (!new_envp)
-	// 	return (0);
-	// info->envp = new_envp;
-	// info->envp_cnt = idx;
-	// new_envp[idx] = 0;
-	// idx = 0;
-	// while (*envp)
-	// {
-	// 	new_envp[idx] = ft_strdup(*envp);
-	// 	if (!new_envp[idx])
-	// 		return (0);
-	// 	idx++;
-	// 	envp++;
-	// }
-	return (1);
-}
-
 /*
  맨처음에는 envp읽어서 envp만들기.
 */
-int		init_envp_file(t_info *info, char *envp[])
+int		init_envp_file(char *envp[])
 {
 	int	fd;
 	int	idx;
@@ -140,7 +82,6 @@ int		init_envp_file(t_info *info, char *envp[])
 		if (envp[idx])
 			ft_putchar_fd('\n', fd);
 	}
-	info->envp_cnt = idx;
 	ft_close(fd);
 	return (1);
 }
@@ -150,11 +91,11 @@ int		init_envp(t_info *info, char *envp[])
 	info->paths = init_path(envp);
 	if (!info->paths)
 		return (0);
-	if (!init_envp_file(info, envp))
+	if (!init_envp_file(envp))
 		return (0);
 	// info->envp = envp;
 	// copy를 파일 읽어서하는 걸로 바꿔줘야 함.
-	if (!copy_envp(info, envp))
+	if (!copy_envp(info))
 	{
 		clear_all_data(info);
 		return (0);		

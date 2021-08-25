@@ -117,9 +117,6 @@ int		init_default(t_info *info)
 	info->std_in = dup(STDIN_FILENO);
 	if (info->std_in == -1)
 		return (error_occur_perror("dup"));
-	info->std_out = dup(STDOUT_FILENO);
-	if (info->std_out == -1)
-		return (error_occur_perror("dup"));
 	return (1);
 }
 

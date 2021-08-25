@@ -6,11 +6,36 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/25 03:57:34 by taesan            #+#    #+#             */
-/*   Updated: 2021/08/25 21:17:02 by taesan           ###   ########.fr       */
+/*   Updated: 2021/08/26 00:29:47 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+int		exist_env(char *var)
+{
+	int		env_fd;
+	char	*line;
+	int		exist;
+
+	env_fd = open(ENV_FILE, O_RDONLY);
+	if (env_fd == -1)
+		return (0);	
+	exist = 0;
+	while (get_next_line(env_fd, &line) > 0)
+	{
+		if (is_duplicate(line, var))
+		{
+			exist = 1;
+			break ;
+		}
+	}
+	if (!exist && is_duplicate(line, var))
+		exist = 1;
+	ft_free(line);
+	ft_close(env_fd);
+	return (exist);
+}
 
 /*
 	2에서 1으로 보냄
@@ -29,16 +54,18 @@ int temp_to_datafile(char *read, char *write)
 		perror("stat");
 		return (0);
 	}
-	printf("File size: %lld bytes\n", (long long) sb.st_size);
-
 	if (fd_2 != -1)
 	{
 		if (sb.st_size > 0)
 		{
 			fd = open(write, O_WRONLY | O_CREAT | O_TRUNC, S_IRWXU);
 			while (get_next_line(fd_2, &line) > 0)
-				ft_putendl_fd(line, fd);
-			ft_putstr_fd(line, fd);
+			{
+				if (ft_strcmp("", line) != 0)
+					ft_putendl_fd(line, fd);
+			}
+			if (ft_strcmp("", line) != 0)
+				ft_putstr_fd(line, fd);
 			ft_free(line);
 			ft_close(fd);
 			ft_close(fd_2);
@@ -64,7 +91,6 @@ int export_to_export2(char *var, int remove)
 	fd_2 = open(EXPORT_FILE_2, O_WRONLY | O_CREAT | O_TRUNC, S_IRWXU);
 	if (fd_2 == -1)
 		return (error_occur_std(FILE_OPEN_ERR));
-	printf("e->e2 fd : [%d], fd_2 : [%d]\n", fd, fd_2);
 	visited = 0;
 	while (fd > 0 && get_next_line(fd, &line) > 0)
 	{
@@ -77,7 +103,6 @@ int export_to_export2(char *var, int remove)
 		else
 			ft_putendl_fd(line, fd_2);
 	}
-
 	// 1. 마지막 read가 중복인지 체크.
 	// 마지막 문자가 중복인지 체크한다. 중복이면 바꿔주면 끝이다. 
 	// fd < 0은 export파일이 없을 때, 그냥 export2에 현재 내용을 써준다.
@@ -110,7 +135,8 @@ int export_to_export2(char *var, int remove)
 */
 int write_export_file(t_info *info, char *var, int remove)
 {
-	printf("[%s] remove ? : %d\n", var, remove);
+	if (!remove && exist_env(var))
+		return (1);
 	// env파일에 존재하지 않는 key만 add 한다.
 	if (!export_to_export2(var, remove))
 		return (0);

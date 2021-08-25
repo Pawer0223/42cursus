@@ -45,6 +45,7 @@ void	wait_closing_quote(char start_q);
 int		init_info(t_info *info);
 int		init_command_info(t_info *info, char *input);
 int		init_envp(t_info *info, char *envp[]);
+int		copy_envp(t_info *info);
 /*
 	using free
 */
@@ -126,6 +127,7 @@ int	make_param(t_info *info, char *input, int len);
 	write_env_file
 */
 int	write_env_file(t_info *info, char *key, char *value);
+int is_duplicate(char *line, char *key);
 
 /*
 	write_export_file

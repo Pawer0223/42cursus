@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/24 16:53:36 by taesan            #+#    #+#             */
-/*   Updated: 2021/08/24 19:43:02 by taesan           ###   ########.fr       */
+/*   Updated: 2021/08/26 00:05:56 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ int last(t_info *info, char *input, int i, int s)
 {
 	t_list *temp;
 
-	if (!append_param_list(info, input, &i, &s))
+	if (i != s && !append_param_list(info, input, &i, &s))
 		return (0);
 	info->param = (char **)malloc(sizeof(char *) * (info->param_cnt + 1));
 	if (!info->param)

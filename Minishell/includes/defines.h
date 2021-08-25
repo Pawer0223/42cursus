@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/28 15:05:24 by taesan            #+#    #+#             */
-/*   Updated: 2021/08/25 04:00:37 by taesan           ###   ########.fr       */
+/*   Updated: 2021/08/26 02:04:23 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ typedef struct s_info
 	int		connect_pipe[2];
 	int		redirect_fd[2];
 	int		std_in;
-	int		std_out;
 	int		exec_result; // exec하고 init
 }				t_info;
 
