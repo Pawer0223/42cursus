@@ -128,11 +128,12 @@ int	make_param(t_info *info, char *input, int len);
 */
 int	write_env_file(t_info *info, char *key, char *value);
 int is_duplicate(char *line, char *key);
+int remove_env_var(char *var);
 
 /*
 	write_export_file
 */
-int		write_export_file(t_info *info, char *var, int remove);
+int		write_export_file(char *var, int remove);
 int		temp_to_datafile(char *read, char *write); // 공통인데 어따 뺄까이거..
 /*
 	test

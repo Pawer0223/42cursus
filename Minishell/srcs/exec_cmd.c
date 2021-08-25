@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/28 14:45:56 by taesan            #+#    #+#             */
-/*   Updated: 2021/08/26 02:07:08 by taesan           ###   ########.fr       */
+/*   Updated: 2021/08/26 02:47:49 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,9 +82,8 @@ void	parent_process(t_info *info, int pipe[2], int flags)
 	info->param_cnt = 0;
 	if (info->redirect_lst)
 		ft_lstclear(&info->redirect_lst, ft_free);
-	// 그냥 에러만? 시스템 종료되야 하나?, 파일 존재유무 stat으로 충분한가...
 	if (stat(TEMP_FILE, &sb) == 0 && unlink(TEMP_FILE) == -1)
-		printf("%s\n", UNLINK_ERR);
+		printf("[file_nm : %s] %s\n",TEMP_FILE, UNLINK_ERR);
 }
 
 void	exec_command(t_info *info, int pipe[2], int flags)

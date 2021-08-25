@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/25 03:57:34 by taesan            #+#    #+#             */
-/*   Updated: 2021/08/25 23:53:02 by taesan           ###   ########.fr       */
+/*   Updated: 2021/08/26 04:29:01 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	evnp_to_envp2(char *key, char *value)
 	int		fd_2;
 	char	*line;
 
-	fd = open(ENV_FILE, O_RDONLY, S_IRWXU);
+	fd = open(ENV_FILE, O_RDONLY, S_IRWXU); // -1이여도 return (1)되고있음.
 	if (fd != -1)
 	{
 		fd_2 = open(ENV_FILE_2, O_WRONLY | O_CREAT | O_TRUNC, S_IRWXU);
@@ -55,6 +55,8 @@ int	evnp_to_envp2(char *key, char *value)
 		visited = 0;
 		while (get_next_line(fd, &line) > 0)
 		{
+			if (is_empty(line))
+				continue ;
 			if (!visited && is_duplicate(line, key))
 			{
 				visited = 1;
@@ -63,6 +65,7 @@ int	evnp_to_envp2(char *key, char *value)
 			else
 				ft_putstr_fd(line, fd_2);
 			ft_putchar_fd('\n', fd_2);
+			ft_free(line);
 		}
 		// 마지막 문자가 중복인지 체크한다. 중복이면 바꿔주면 끝이다.
 		if (!visited && is_duplicate(line, key))
@@ -77,6 +80,43 @@ int	evnp_to_envp2(char *key, char *value)
 				write_new_line(fd_2, key, value);
 			}
 		}
+		ft_free(line);
+		ft_close(fd);
+		ft_close(fd_2);
+		if (unlink(ENV_FILE) == -1)
+			error_occur_std(UNLINK_ERR);
+	}
+	return (1);
+}
+
+int remove_env_var(char *var)
+{
+	int fd;
+	int visited;
+	int fd_2;
+	char *line;
+
+	line = 0;
+	fd = open(ENV_FILE, O_RDONLY, S_IRWXU); // -1이여도 return (1)되고있음.
+	if (fd != -1)
+	{
+		fd_2 = open(ENV_FILE_2, O_WRONLY | O_CREAT | O_TRUNC, S_IRWXU);
+		if (fd_2 == -1)
+			return (error_occur_std(FILE_OPEN_ERR));
+		visited = 0;
+		while (get_next_line(fd, &line) > 0)
+		{
+			if (!visited && is_duplicate(line, var))
+				visited = 1;
+			else
+				ft_putendl_fd(line, fd_2);
+			ft_free(line);
+		}
+		// 마지막 line이 중복이 아닌 경우에만 add한다.
+		// visited를 보면은.. 중간에 중복찾았을 때는 마지막 문자를 append못해서 빼줘야 함.
+		// 이 때, 마지막이 중복이면 개행 남아있게 됨.
+		if (!is_duplicate(line, var))
+			ft_putstr_fd(line, fd_2);
 		ft_free(line);
 		ft_close(fd);
 		ft_close(fd_2);

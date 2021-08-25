@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/18 14:54:24 by taesan            #+#    #+#             */
-/*   Updated: 2021/08/26 02:04:08 by taesan           ###   ########.fr       */
+/*   Updated: 2021/08/26 04:53:18 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,14 @@
 // ◦ unset with no options
 //◦ env with no options or arguments
 #include "../includes/minishell.h"
+
+int	export_errror(char *param)
+{
+	write(STDERR_FILENO, "export: `", 10);
+	ft_putstr_fd(param, STDERR_FILENO);
+	ft_putendl_fd(": not a valid identifier", STDERR_FILENO);
+	return (0);
+}
 
 int	export_add_var(t_info *info, char *param, int j)
 {
@@ -29,17 +37,13 @@ int	export_add_var(t_info *info, char *param, int j)
 		// key가 널인경우는 에러임. ex) a=b =c
 		// parent에서하게되면, 그냥 printf써도 무관 함.
 		if (ft_strcmp(key, "") == 0 || is_empty(key))
-		{
-			write(STDERR_FILENO, "export: `", 10);
-			ft_putstr_fd(param, STDERR_FILENO);
-			ft_putendl_fd(": not a valid identifier", STDERR_FILENO);
-		}
+			export_errror(param);
 		else
 			r = write_env_file(info, key, value);
 			// printf("%s=\"%s\"\n", key, value);
 		// key가지고 .export 파일도 검사해서 동일한 변수는 값이 생겼으니깐, 지워줘야 함.
 		if (r)
-			r = write_export_file(info, key, 1);
+			r = write_export_file(key, 1);
 	}
 	ft_free(key);
 	ft_free(value);
@@ -69,8 +73,10 @@ int	write_export(t_info *info)
 			j++;
 		if (param[j] == '=')
 			r = export_add_var(info, param, j);
+		else if (is_empty(param))
+			r = export_errror(param);
 		else
-			r = write_export_file(info, param, 0);
+			r = write_export_file(param, 0);
 		i++;
 	}
 	return (r);
@@ -193,7 +199,19 @@ int		print_export(t_info *info)
 
 int		builtin_unset(t_info *info)
 {
-	printf("ft_unset\n");
+	int	i;
+
+	i = 1;
+	while (info->param[i])
+	{
+		if (!remove_env_var(info->param[i]))
+			return (0);
+		if (!temp_to_datafile(ENV_FILE_2, ENV_FILE))
+			return (0);
+		if (!write_export_file(info->param[i], 1))
+			return (0);
+		i++;
+	}
 	return (0);
 }
 /*

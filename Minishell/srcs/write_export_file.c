@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/25 03:57:34 by taesan            #+#    #+#             */
-/*   Updated: 2021/08/26 00:29:47 by taesan           ###   ########.fr       */
+/*   Updated: 2021/08/26 04:16:25 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,7 @@ int export_to_export2(char *var, int remove)
 
 /*
 */
-int write_export_file(t_info *info, char *var, int remove)
+int write_export_file(char *var, int remove)
 {
 	if (!remove && exist_env(var))
 		return (1);
