@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 19:49:55 by taesan            #+#    #+#             */
-/*   Updated: 2021/08/26 02:04:29 by taesan           ###   ########.fr       */
+/*   Updated: 2021/08/26 22:29:31 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,20 +86,20 @@ int		init_envp_file(char *envp[])
 	return (1);
 }
 
-int		init_envp(t_info *info, char *envp[])
+int		init_envp_and_signal(t_info *info, char *envp[])
 {
 	info->paths = init_path(envp);
 	if (!info->paths)
 		return (0);
 	if (!init_envp_file(envp))
 		return (0);
-	// info->envp = envp;
-	// copy를 파일 읽어서하는 걸로 바꿔줘야 함.
 	if (!copy_envp(info))
 	{
 		clear_all_data(info);
 		return (0);		
 	}
+ 	info->sigint = signal(SIGINT, sigint_handler);
+ 	info->sigquit = signal(SIGQUIT, SIG_IGN);
 	return (1);
 }
 

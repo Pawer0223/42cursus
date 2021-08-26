@@ -44,8 +44,10 @@ void	wait_closing_quote(char start_q);
 */
 int		init_info(t_info *info);
 int		init_command_info(t_info *info, char *input);
-int		init_envp(t_info *info, char *envp[]);
+int		init_envp_and_signal(t_info *info, char *envp[]);
 int		copy_envp(t_info *info);
+void	ctrl_d_handler(void);
+void	sigint_handler(int signo);
 /*
 	using free
 */
@@ -136,10 +138,27 @@ int remove_env_var(char *var);
 int		write_export_file(char *var, int remove);
 int		temp_to_datafile(char *read, char *write); // 공통인데 어따 뺄까이거..
 
-void  builtin_exit(int argc, char **argv, char **envp);
-void  builtin_echo(int argc, char **argv, char **envp);
-void  builtin_cd(int argc, char **argv, char **envp);
-void  builtin_pwd(int argc, char **argv, char **envp);
+void	builtin_exit(int argc, char **argv, char **envp);
+void	builtin_echo(int argc, char **argv, char **envp);
+void	builtin_cd(int argc, char **argv, char **envp);
+void	builtin_pwd(int argc, char **argv, char **envp);
+void	builtin_env(t_info *info);
+void	builtin_unset(t_info *info);
+void	builtin_export(t_info *info);
+
+/*
+	export_print.c
+*/
+int		print_export(t_info *info);
+int		export_errror(char *param);
+/*
+	export_file_merge
+*/
+int		export_file_merge(t_info *info, t_list **list);
+/*
+	export_add_var
+*/
+void	export_add_var(t_info *info);
 /*
 	test
 */

@@ -1,27 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sig_handler.c                                      :+:      :+:    :+:   */
+/*   builtin_unset.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/08/10 15:45:29 by taesan            #+#    #+#             */
-/*   Updated: 2021/08/26 14:36:32 by saoh             ###   ########.fr       */
+/*   Created: 2021/08/27 00:23:58 by taesan            #+#    #+#             */
+/*   Updated: 2021/08/27 00:24:14 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	ctrl_d_handler(void)
+void	builtin_unset(t_info *info)
 {
-	printf("exit\n");
-	exit(0);
-}
+	int	i;
 
-void	sigint_handler(int signo)
-{
-	printf("push SIGINT\n");
-	rl_on_new_line();
-	//rl_replace_line("",0);
-	//rl_redisplay();
+	i = 1;
+	while (info->param[i])
+	{
+		if (!remove_env_var(info->param[i]))
+			exit(EXEC_FAIL);
+		if (!temp_to_datafile(ENV_FILE_2, ENV_FILE))
+			exit(EXEC_FAIL);
+		if (!write_export_file(info->param[i], 1))
+			exit(EXEC_FAIL);
+		i++;
+	}
+	exit(0);
 }

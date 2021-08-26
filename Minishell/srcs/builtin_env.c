@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sig_handler.c                                      :+:      :+:    :+:   */
+/*   builtin_env.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/08/10 15:45:29 by taesan            #+#    #+#             */
-/*   Updated: 2021/08/26 14:36:32 by saoh             ###   ########.fr       */
+/*   Created: 2021/08/27 00:21:46 by taesan            #+#    #+#             */
+/*   Updated: 2021/08/27 00:27:00 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	ctrl_d_handler(void)
+void	builtin_env(t_info *info)
 {
-	printf("exit\n");
-	exit(0);
-}
+	char **envp;
 
-void	sigint_handler(int signo)
-{
-	printf("push SIGINT\n");
-	rl_on_new_line();
-	//rl_replace_line("",0);
-	//rl_redisplay();
+	envp = info->envp;
+	while (*envp)
+	{
+		if (!is_empty(*envp))
+			ft_putendl_fd(*envp, STDOUT_FILENO);
+		envp++;
+	}
+	exit(0);
 }
