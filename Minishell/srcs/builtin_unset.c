@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/27 00:23:58 by taesan            #+#    #+#             */
-/*   Updated: 2021/08/27 00:24:14 by taesan           ###   ########.fr       */
+/*   Updated: 2021/08/27 05:47:41 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,10 @@ void	builtin_unset(t_info *info)
 	i = 1;
 	while (info->param[i])
 	{
-		if (!remove_env_var(info->param[i]))
+		// env_file에서 찾아서 지우면서 env_file2에 쓰고
+		if (!remove_var(ENV_FILE, ENV_FILE_2, info->param[i]))
 			exit(EXEC_FAIL);
-		if (!temp_to_datafile(ENV_FILE_2, ENV_FILE))
-			exit(EXEC_FAIL);
-		if (!write_export_file(info->param[i], 1))
+		if (!remove_var(EXPORT_FILE, EXPORT_FILE_2, info->param[i]))
 			exit(EXEC_FAIL);
 		i++;
 	}

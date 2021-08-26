@@ -128,16 +128,13 @@ int	make_param(t_info *info, char *input, int len);
 /*
 	write_env_file
 */
-int	write_env_file(t_info *info, char *key, char *value);
-int is_duplicate(char *line, char *key);
-int remove_env_var(char *var);
+int	write_env_file(char *key, char *param);
+int remove_var(char *r_file, char *w_file, char *key);
 
 /*
 	write_export_file
 */
-int		write_export_file(char *var, int remove);
-int		temp_to_datafile(char *read, char *write); // 공통인데 어따 뺄까이거..
-
+int		write_export_file(char *var);
 void	builtin_exit(int argc, char **argv, char **envp);
 void	builtin_echo(int argc, char **argv, char **envp);
 void	builtin_cd(int argc, char **argv, char **envp);
@@ -150,7 +147,7 @@ void	builtin_export(t_info *info);
 	export_print.c
 */
 int		print_export(t_info *info);
-int		export_errror(char *param);
+void	export_errror(char *param);
 /*
 	export_file_merge
 */
@@ -160,12 +157,19 @@ int		export_file_merge(t_info *info, t_list **list);
 */
 void	export_add_var(t_info *info);
 /*
+	정리하자
+*/
+int		env_file_cmp(const char *line, const char *key);
+/*
+	1 -> 2
+	2 -> 1  함수
+*/
+int		temp_to_datafile(char *read, char *write); // 공통인데 어따 뺄까이거..
+int		datafile_to_temp(char *r_file, char *w_file, char *key, char *param);
+/*
 	test
 */
 int		print_export(t_info *info);
-
-
-
 
 
 #endif
