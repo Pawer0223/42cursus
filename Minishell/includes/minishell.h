@@ -135,6 +135,11 @@ int remove_env_var(char *var);
 */
 int		write_export_file(char *var, int remove);
 int		temp_to_datafile(char *read, char *write); // 공통인데 어따 뺄까이거..
+
+void  builtin_exit(int argc, char **argv, char **envp);
+void  builtin_echo(int argc, char **argv, char **envp);
+void  builtin_cd(int argc, char **argv, char **envp);
+void  builtin_pwd(int argc, char **argv, char **envp);
 /*
 	test
 */

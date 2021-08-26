@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/18 14:54:24 by taesan            #+#    #+#             */
-/*   Updated: 2021/08/26 04:53:18 by taesan           ###   ########.fr       */
+/*   Updated: 2021/08/26 05:03:32 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -249,6 +249,7 @@ void	exec_builtin(int cmd, t_info *info)
 {
 	int r;
 
+	r = 1;
 	if (cmd == EXPORT)
 		r = builtin_export(info);
 	else if (cmd == UNSET)
