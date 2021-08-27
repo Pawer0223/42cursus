@@ -39,6 +39,7 @@
         "signal.h": "c",
         "string.h": "c",
         "sstream": "c",
-        "cstddef": "c"
+        "cstddef": "c",
+        "__string": "c"
     }
 }

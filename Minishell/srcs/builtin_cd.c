@@ -16,7 +16,7 @@ int	find_root(char *envp)
 		return (0);
 }
 
-void	get_root_dir(char **envp)
+void	get_root_dir_sib(char **envp)
 {
 	char *a;
 	int	i;
@@ -34,33 +34,59 @@ void	get_root_dir(char **envp)
 	}
 	a = ft_strdup(*envp + 5);
 	i = chdir(a);
-	free(a);
 	if (i)
 	{
-		printf("does not exist path\n");
+		printf("cd: %s: No such file or directory\n", a);
+		free(a);
 		exit(EXEC_FAIL);
 	}
+	free(a);
 }
 
-void	builtin_cd(int argc, char **argv, char **envp)
+void	builtin_cd_sib(t_info *info)
 {
 	int i;
 
-	if (argc == 1)
-		get_root_dir(envp);
-	else if (argc > 2)
-	{
-		printf("too many arguments\n");
-		exit(EXEC_FAIL);
-	}
+	i = get_argc(info->param);
+	if (i == 1)
+		get_root_dir_sib(info->envp);
 	else
 	{
-		i = chdir(argv[1]);
+		i = chdir(info->param[1]);
 		if (i)
 		{
-			printf("does not exist path\n");
+			printf("cd: %s: No such file or directory\n", info->param[1]);
 			exit(EXEC_FAIL);
 		}
 	}
 	exit(0);
+}
+
+void	get_root_dir_parent(char **envp)
+{
+	char *a;
+	int	i;
+
+	while (*envp)
+	{
+		if (find_root(*envp))
+			break ;
+		envp++;
+	}
+	if (!(*envp))
+		return ;
+	a = ft_strdup(*envp + 5);
+	i = chdir(a);
+	free(a);
+}
+
+void	builtin_cd_parent(t_info *info)
+{
+	int i;
+
+	i = get_argc(info->param);
+	if (i == 1)
+		get_root_dir_parent(info->envp);
+	else
+		i = chdir(info->param[1]);
 }

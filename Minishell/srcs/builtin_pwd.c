@@ -1,9 +1,24 @@
 #include "../includes/minishell.h"
 
-void	builtin_pwd(int argc, char **argv, char **envp)
+int	get_argc(char **argv)
+{
+	int	i;
+
+	i = 0;
+	while(*argv)
+	{
+		argv++;
+		i++;
+	}
+	return (i);
+}
+
+void	builtin_pwd(t_info *info)
 {
 	char *path;
+	int	argc;
 
+	argc = get_argc(info->param);
 	if (argc != 1)
 	{
 		printf("pwd: too many arguments\n");

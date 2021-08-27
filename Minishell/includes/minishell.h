@@ -26,6 +26,7 @@ int		is_quotation(char c);
 int		pass_possible(char c);
 int		is_empty(char *temp);
 int		is_redirect(char c);
+int		is_double_symbol(int symbol);
 void	ft_close(int fd);
 
 void	jump_space(char *input, int *i);
@@ -114,6 +115,7 @@ int		redirect_out_dup(int fds[2], char *content);
 	exec_builtin
 */
 void	exec_builtin(int cmd, t_info *info);
+void	clear_pipe(t_info *info, int pipe[2], int flags);
 
 /*
 	sort
@@ -135,10 +137,11 @@ int remove_var(char *r_file, char *w_file, char *key);
 	write_export_file
 */
 int		write_export_file(char *var);
-void	builtin_exit(int argc, char **argv, char **envp);
-void	builtin_echo(int argc, char **argv, char **envp);
-void	builtin_cd(int argc, char **argv, char **envp);
-void	builtin_pwd(int argc, char **argv, char **envp);
+void	builtin_exit(void);
+void	builtin_echo(t_info *info);
+void	builtin_cd_sib(t_info *info);
+void	builtin_cd_parent(t_info *info);
+void	builtin_pwd(t_info *info);
 void	builtin_env(t_info *info);
 void	builtin_unset(t_info *info);
 void	builtin_export(t_info *info);
@@ -170,6 +173,7 @@ int		datafile_to_temp(char *r_file, char *w_file, char *key, char *param);
 	test
 */
 int		print_export(t_info *info);
+int		get_argc(char **argv);
 
 
 #endif

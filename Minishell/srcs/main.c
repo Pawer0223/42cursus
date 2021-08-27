@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/25 22:00:23 by taesan            #+#    #+#             */
-/*   Updated: 2021/08/26 22:58:56 by taesan           ###   ########.fr       */
+/*   Updated: 2021/08/27 16:23:19 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,10 @@ int	check_finish(t_info *info)
 	if (info->commands_symbol)
 	{
 		symbol = *(int *)info->commands_symbol->content;
-		if ((symbol == DB_PIPE || symbol == DB_AMPER) && info->exec_result == EXEC_FAIL)
-			return (1) ;
+		if (symbol == DB_AMPER && info->exec_result == EXEC_FAIL)
+			return (1);
+		if (symbol == DB_PIPE && info->exec_result == 0)
+			return (1);
 		info->commands_symbol = info->commands_symbol->next;
 	}
 	return (0);
@@ -36,9 +38,11 @@ int	check_finish(t_info *info)
 void	start(t_info *info)
 {
 	t_list	*commands;
+	t_list	*symbols;
 	int		seq;
 
 	commands = info->commands;
+	symbols = info->commands_symbol;
 	seq = 0;
 	while (commands && info->command_cnt >= 0)
 	{
@@ -51,7 +55,13 @@ void	start(t_info *info)
 			return ;
 		if (info->command_cnt != 0 && !set_connect_pipe(info, seq))
 		 	return ;
-		exec_call(info, seq++);
+		if (symbols && is_double_symbol(*(int *)symbols->content))
+		{
+			exec_call(info, -1);
+			symbols = symbols->next;
+		}
+		else
+			exec_call(info, seq++);
 		if (check_finish(info))
 			return ;
 		commands = commands->next;

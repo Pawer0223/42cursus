@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/28 14:45:56 by taesan            #+#    #+#             */
-/*   Updated: 2021/08/26 23:03:18 by taesan           ###   ########.fr       */
+/*   Updated: 2021/08/27 16:20:45 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,12 +70,9 @@ void	parent_process(t_info *info, int pipe[2], int flags)
 	if (r == -1)
 		perror(WAIT_ERR);
 	info->exec_result = WEXITSTATUS(status);
-	if (!pipe)
-		pipe = info->pipe_out;
-	if (flags & STDIN_PIPE)
-		close(pipe[READ_FD_IDX]);
-	if (flags & STDOUT_PIPE)
-		close(pipe[WRITE_FD_IDX]);
+	clear_pipe(info, pipe, flags);
+	if (info->is_builtin == CD && info->exec_result == 0)
+		builtin_cd_parent(info);
 	if (info->is_builtin == EXPORT || info->is_builtin == UNSET)
 		copy_envp(info);
 	split_free(info->param);
@@ -103,7 +100,7 @@ void	exec_call(t_info *info, int seq)
 {
 	//1 개의 명령어만 존재하는 경우, dup를 할필요가 없음 but int에서 열었던 파이프의 fd는 닫아주자.
 	// 얘 플래그는 close를 위해서.
-	if (info->command_cnt == 0 && seq == 0)
+	if ((info->command_cnt == 0 && seq == 0) || seq == -1)
 		exec_command(info, 0, STDIN_PIPE | STDOUT_PIPE);
 	// 다중 명령어에서 첫번째 명령어인 경우. => 표준 출력을 파이프로. connect pipe사용
 	else if (info->command_cnt > 0 && seq == 0)
