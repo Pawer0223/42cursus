@@ -6,11 +6,36 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/29 01:25:08 by taesan            #+#    #+#             */
-/*   Updated: 2021/08/29 19:25:04 by taesan           ###   ########.fr       */
+/*   Updated: 2021/08/30 03:01:50 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+int		rebuild_param(t_info *info, t_list **list)
+{
+	t_list	*temp;
+	char	**new_param;
+	int		i;
+
+	info->param_cnt = ft_lstsize(*list) + 1;
+	new_param = (char **)malloc(sizeof(char *) * (info->param_cnt + 1));
+	if (!new_param)
+		return (0);
+	new_param[0] = info->param[0];
+	new_param[info->param_cnt] = 0;
+	temp = *list;
+	i = 1;
+	while (temp)
+	{
+		new_param[i++] = (char *)temp->content;
+		temp = temp->next;
+	}
+	ft_lstclear(list, content_not_rm);
+	ft_free(info->param);
+	info->param = new_param;
+	return (1);
+}
 
 int		pattern_check(char *pattern, char *line)
 {
@@ -34,75 +59,97 @@ int		pattern_check(char *pattern, char *line)
 			while (line[j] && line[j] != pattern[i])
 				j++;
 		}
-		if (pattern[i] != line[j] || (pattern[i] && !line[j]))
+		if (pattern[i] != line[j])
 			return (0);
 		i++;
 		j++;
 	}
+	if (pattern[i] != line[j])
+		return (0);
 	return (1);
 }
 
-char	*temp(t_list *list)
+int		append_asterisk_name(char *param, t_list **list, DIR *dir_ptr)
 {
-	char *new_content;
+	struct dirent	*file;
+	char			*content;
+	t_list			*data;
+	int				append;
 
-	new_content = 0;
-	return (new_content);
+	file = readdir(dir_ptr);
+	append = -1;
+	while (file)
+	{
+		if (pattern_check(param, file->d_name))
+		{
+			content = ft_strdup(file->d_name);
+			if (!content)
+				return (0);
+			data = ft_lstnew(content);
+			if (!data)
+			{
+				ft_free(content);
+				return (0);
+			}
+			ft_lstadd_back(list, data);
+			append = 1;
+		}
+		file = readdir(dir_ptr);
+	}
+	return (append);
 }
 
-char	*make_asterisk_str(char *content)
+int		append_new_param_list(char **param, t_list **list, int is_asterisk)
 {
-	DIR				*dir_ptr = NULL;
-	struct dirent	*file = NULL;
-	t_list			*list;
-	t_list			*data;
-	int				i;
+	DIR		*dir_ptr;
+	t_list	*data;
+	char	*new_content;
+	int		r;
 
-	printf("asterisk content : [%s]\n", content);
+	r = 1;
 	dir_ptr = opendir(".");
 	if (!dir_ptr)
-		printf("null\n");
-	else
+		r = 0;
+	if (r && is_asterisk)
+		r = append_asterisk_name(*param, list, dir_ptr);
+	if (!is_asterisk || r == -1)
 	{
-		while((file = readdir(dir_ptr)) != NULL) 
-		{
-			if (pattern_check(content, file->d_name))
-			{
-				printf("is pattern : [%s], line :[%s]\n", content, file->d_name);
-			}
-		}
-		closedir(dir_ptr);
+		data = ft_lstnew(*param);
+		if (!data)
+			r = 0;
+		ft_lstadd_back(list, data);
 	}
-	return (temp(list));
+	if (!r)
+		ft_lstclear(list, ft_free);
+	closedir(dir_ptr);
+	return (r);
 }
 
-int	filter_asterisk(t_info *info)
+int	filter_asterisk(t_info *info, int i)
 {
-	char	**temp;
-	char	*new_content;
-	int		i;
+	t_list	*list;
 	int		j;
+	int		is_asterisk;
 
-	temp = info->param;
-	new_content = 0;
-	i = 1;
-	while (temp[i])
+	list = 0;
+	while (info->param[i])
 	{
+		is_asterisk = 0;
 		j = 0;
-		while (temp[i][j])
+		while (info->param[i][j])
 		{
-			if (temp[i][j] == '*')
+			if (info->param[i][j] == '*')
 			{
-				new_content = make_asterisk_str(temp[i]);
-				if (!new_content)
+				is_asterisk = 1;
+				if (!append_new_param_list(&info->param[i], &list, 1))
 					return (0);
-				ft_free(temp[i]);
-				temp[i] = new_content;
 				break ;
 			}
 			j++;
 		}
+		if (!is_asterisk && !append_new_param_list(&info->param[i], &list, 0))
+			return (0);
 		i++;
 	}
-	return (1);
+	return (rebuild_param(info, &list));
 }

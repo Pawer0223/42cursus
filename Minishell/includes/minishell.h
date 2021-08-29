@@ -173,7 +173,7 @@ int		datafile_to_temp(char *r_file, char *w_file, char *key, char *param);
 /*
 	filter_asterisk
 */
-int		filter_asterisk(t_info *info);
+int		filter_asterisk(t_info *info, int i);
 /*
 	test
 */
