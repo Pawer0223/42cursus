@@ -12,7 +12,7 @@
 
 #include "../includes/minishell.h"
 
-int		rebuild_param(t_info *info, t_list **list)
+int	rebuild_param(t_info *info, t_list **list)
 {
 	t_list	*temp;
 	char	**new_param;
@@ -37,7 +37,7 @@ int		rebuild_param(t_info *info, t_list **list)
 	return (1);
 }
 
-int		pattern_check(char *pattern, char *line)
+int	pattern_check(char *pattern, char *line)
 {
 	int	i;
 	int	j;
@@ -50,10 +50,8 @@ int		pattern_check(char *pattern, char *line)
 		{
 			while (pattern[i] && pattern[i] == '*')
 				i++;
-			// *이후에 별다른 문자가 없다면, 가능한 패턴임.
 			if (!pattern[i])
 				return (1);
-			// *다음의 문자가 나오기전까지는 허용 가능.
 			while (line[j] && line[j] != pattern[i])
 				j++;
 		}
@@ -67,7 +65,7 @@ int		pattern_check(char *pattern, char *line)
 	return (1);
 }
 
-int		append_asterisk_name(char *param, t_list **list, DIR *dir_ptr)
+int	append_asterisk_name(char *param, t_list **list, DIR *dir_ptr)
 {
 	struct dirent	*file;
 	char			*content;
@@ -96,7 +94,7 @@ int		append_asterisk_name(char *param, t_list **list, DIR *dir_ptr)
 	return (append);
 }
 
-int		append_new_param_list(t_info *info, char **param, t_list **list, int is_ast)
+int	add_new_p_list(t_info *info, char **param, t_list **list, int is_ast)
 {
 	DIR		*dir_ptr;
 	t_list	*data;
@@ -147,7 +145,7 @@ int	filter_asterisk(t_info *info, int i)
 			}
 			j++;
 		}
-		if (!is_asterisk && !append_new_param_list(info, &info->param[i], &list, 0))
+		if (!is_asterisk && !add_new_p_list(info, &info->param[i], &list, 0))
 			return (0);
 		i++;
 	}

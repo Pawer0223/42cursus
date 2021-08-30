@@ -16,7 +16,7 @@
 	ft_strcmp랑 동일한 방식으로 return 되도록 해야 함.
 	같은 경우 0 return 되도록
 */
-int		env_file_cmp(const char *line, const char *key)
+int	env_file_cmp(const char *line, const char *key)
 {
 	int	i;
 
@@ -44,12 +44,12 @@ void	last_line(t_data_to_temp *info, int visited, char *line)
 	}
 }
 
-void	read_and_write(t_data_to_temp *info,\
+void	read_and_write(t_data_to_temp *info, \
 						int(*cmp_func)(const char *, const char *))
 {
 	int		visited;
 	char	*line;
-		
+
 	visited = 0;
 	line = 0;
 	while (info->read_fd > 0 && get_next_line(info->read_fd, &line) > 0)
@@ -74,7 +74,7 @@ void	read_and_write(t_data_to_temp *info,\
 	ft_close(info->write_fd);
 }
 
-int		call_and_finish(t_data_to_temp *info, char *r_file, int is_env)
+int	call_and_finish(t_data_to_temp *info, char *r_file, int is_env)
 {
 	if (is_env)
 		read_and_write(info, env_file_cmp);
@@ -86,7 +86,7 @@ int		call_and_finish(t_data_to_temp *info, char *r_file, int is_env)
 	return (1);
 }
 
-int		datafile_to_temp(char *r_file, char *w_file, char *key, char *param)
+int	datafile_to_temp(char *r_file, char *w_file, char *key, char *param)
 {
 	t_data_to_temp	info;
 	int				is_env;

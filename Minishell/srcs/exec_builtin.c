@@ -14,7 +14,7 @@
 
 void	exec_builtin(int cmd, t_info *info)
 {
-	int r;
+	int	r;
 
 	if (cmd == EXPORT)
 		builtin_export(info);

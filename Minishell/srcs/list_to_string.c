@@ -12,7 +12,7 @@
 
 #include "../includes/minishell.h"
 
-int		get_list_str_len(t_list *list)
+int	get_list_str_len(t_list *list)
 {
 	t_list	*temp;
 	int		len;

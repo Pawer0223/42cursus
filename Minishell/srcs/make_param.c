@@ -31,7 +31,7 @@ t_list	*front_back_join(char *input, t_strjoin *temp)
 		}
 		ft_free(temp->front);
 	}
-	return (data);	
+	return (data);
 }
 
 int	append_temp_list(t_info *info, char *input, int *i, int *s)
@@ -85,9 +85,9 @@ int	append_param_list(t_info *info, char *input, int *i, int *s)
 	return (1);
 }
 
-int last(t_info *info, char *input, int i, int s)
+int	last(t_info *info, char *input, int i, int s)
 {
-	t_list *temp;
+	t_list	*temp;
 
 	if (!append_param_list(info, input, &i, &s))
 		return (0);
@@ -104,11 +104,7 @@ int last(t_info *info, char *input, int i, int s)
 	}
 	return (1);
 }
-/*
-	실패하면 list2개를 비워줘야한다.
-	temp_list
-	param_list
-*/
+
 int	make_param(t_info *info, char *input, int len)
 {
 	int		i;

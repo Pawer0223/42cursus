@@ -6,12 +6,11 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 19:56:59 by taesan            #+#    #+#             */
-/*   Updated: 2021/08/30 20:47:13 by taesan           ###   ########.fr       */
+/*   Updated: 2021/08/30 20:51:35 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
 
 void	ft_free(void *data)
 {

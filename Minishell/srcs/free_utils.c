@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 20:46:35 by taesan            #+#    #+#             */
-/*   Updated: 2021/08/30 20:48:50 by taesan           ###   ########.fr       */
+/*   Updated: 2021/08/30 20:51:52 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	content_not_rm(void *param)
 
 void	remove_file(void)
 {
-	struct stat sb;
+	struct stat	sb;
 
 	if (stat(ENV_FILE, &sb) == 0 && unlink(ENV_FILE) == -1)
 		write(STDERR_FILENO, UNLINK_ERR, ft_strlen(UNLINK_ERR));

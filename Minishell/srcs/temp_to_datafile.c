@@ -16,14 +16,14 @@ void	write_line(char *line, int fd)
 {
 	if (ft_strcmp("", line) != 0)
 		ft_putendl_fd(line, fd);
-	ft_free(line);	
+	ft_free(line);
 }
 
-int temp_to_datafile(char *read, char *write)
+int	temp_to_datafile(char *read, char *write)
 {
 	int			fd;
 	int			fd_2;
-	char 		*line;
+	char		*line;
 	struct stat	sb;
 
 	fd_2 = open(read, O_RDONLY, S_IRWXU);

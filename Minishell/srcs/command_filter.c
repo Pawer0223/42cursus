@@ -1,6 +1,6 @@
 #include "../includes/minishell.h"
 
-int		quote_filter(t_info *info, char **input, int s, int *e)
+int	quote_filter(t_info *info, char **input, int s, int *e)
 {
 	int		dollar_idx;
 	char	is_db_q;
@@ -11,7 +11,7 @@ int		quote_filter(t_info *info, char **input, int s, int *e)
 		dollar_idx = exist_dollar(*input, s, *e);
 		if (dollar_idx)
 		{
-			if(!replace_env(info->envp, input, dollar_idx, e))
+			if (!replace_env(info->envp, input, dollar_idx, e))
 				return (0);
 		}
 	}
@@ -31,7 +31,7 @@ int	filter_input(t_info *info, char **input, int len)
 			s = e++;
 			while ((*input)[e] && (*input)[e] != (*input)[s])
 				e++;
-			if (e < len && (*input)[s] == (*input)[e] &&\
+			if (e < len && (*input)[s] == (*input)[e] && \
 				!quote_filter(info, input, s, &e))
 				return (0);
 		}
