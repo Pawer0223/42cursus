@@ -31,11 +31,9 @@ int	filter_input(t_info *info, char **input, int len)
 			s = e++;
 			while ((*input)[e] && (*input)[e] != (*input)[s])
 				e++;
-			if (e < len && (*input)[s] == (*input)[e])
-			{
-				if (!quote_filter(info, input, s, &e))
-					return (0);
-			}
+			if (e < len && (*input)[s] == (*input)[e] &&\
+				!quote_filter(info, input, s, &e))
+				return (0);
 		}
 		else if ((*input)[e] == DOLLAR)
 		{
@@ -51,7 +49,6 @@ int	filter_input(t_info *info, char **input, int len)
 int	command_filter(t_info *info, char **content)
 {
 	char	**temp;
-	char	*new_input;
 	int		len;
 	int		r;
 

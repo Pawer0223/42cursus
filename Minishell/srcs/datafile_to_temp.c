@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/27 03:45:01 by taesan            #+#    #+#             */
-/*   Updated: 2021/08/27 05:29:24 by taesan           ###   ########.fr       */
+/*   Updated: 2021/08/30 18:44:09 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ void	last_line(t_data_to_temp *info, int visited, char *line)
 	}
 }
 
-void	read_and_write(t_data_to_temp *info, int(*cmp_func)(const char *, const char *))
+void	read_and_write(t_data_to_temp *info,\
+						int(*cmp_func)(const char *, const char *))
 {
 	int		visited;
 	char	*line;
@@ -73,6 +74,18 @@ void	read_and_write(t_data_to_temp *info, int(*cmp_func)(const char *, const cha
 	ft_close(info->write_fd);
 }
 
+int		call_and_finish(t_data_to_temp *info, char *r_file, int is_env)
+{
+	if (is_env)
+		read_and_write(info, env_file_cmp);
+	else
+		read_and_write(info, ft_strcmp);
+	ft_close(info->read_fd);
+	if (info->read_fd > 0 && unlink(r_file) == -1)
+		error_occur_std(UNLINK_ERR);
+	return (1);
+}
+
 int		datafile_to_temp(char *r_file, char *w_file, char *key, char *param)
 {
 	t_data_to_temp	info;
@@ -93,12 +106,5 @@ int		datafile_to_temp(char *r_file, char *w_file, char *key, char *param)
 	}
 	info.key = key;
 	info.param = param;
-	if (is_env)
-		read_and_write(&info, env_file_cmp);
-	else
-		read_and_write(&info, ft_strcmp);
-	ft_close(info.read_fd);
-	if (info.read_fd > 0 && unlink(r_file) == -1)
-		error_occur_std(UNLINK_ERR);
-	return (1);
+	return (call_and_finish(&info, r_file, is_env));
 }
