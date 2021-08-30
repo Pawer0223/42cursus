@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/29 01:25:08 by taesan            #+#    #+#             */
-/*   Updated: 2021/08/30 14:57:23 by taesan           ###   ########.fr       */
+/*   Updated: 2021/08/30 19:17:56 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,6 @@ int		pattern_check(char *pattern, char *line)
 	int	j;
 
 	i = 0;
-	if (line[i] == '.')
-		return (0);
 	j = 0;
 	while (pattern[i])
 	{
@@ -80,17 +78,16 @@ int		append_asterisk_name(char *param, t_list **list, DIR *dir_ptr)
 	append = -1;
 	while (file)
 	{
-		if (pattern_check(param, file->d_name))
+		if (file->d_name[0] != '.' && pattern_check(param, file->d_name))
 		{
 			content = ft_strdup(file->d_name);
 			if (!content)
 				return (0);
 			data = ft_lstnew(content);
 			if (!data)
-			{
 				ft_free(content);
+			if (!data)
 				return (0);
-			}
 			ft_lstadd_back(list, data);
 			append = 1;
 		}
