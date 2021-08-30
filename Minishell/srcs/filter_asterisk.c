@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/29 01:25:08 by taesan            #+#    #+#             */
-/*   Updated: 2021/08/30 19:17:56 by taesan           ###   ########.fr       */
+/*   Updated: 2021/08/30 21:04:19 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,7 @@ int	filter_asterisk(t_info *info, int i)
 			if (info->param[i][j] == '*')
 			{
 				is_asterisk = 1;
-				if (!append_new_param_list(info, &info->param[i], &list, 1))
+				if (!add_new_p_list(info, &info->param[i], &list, 1))
 					return (0);
 				break ;
 			}
