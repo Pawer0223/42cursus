@@ -1,25 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test_file.c                                        :+:      :+:    :+:   */
+/*   free_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/08/08 00:06:30 by taesan            #+#    #+#             */
-/*   Updated: 2021/08/14 00:18:01 by taesan           ###   ########.fr       */
+/*   Created: 2021/08/30 20:46:35 by taesan            #+#    #+#             */
+/*   Updated: 2021/08/30 20:48:50 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	command_to_string(t_info info)
+void	content_not_rm(void *param)
 {
-	t_list *temp;
+	return ;
+}
 
-    temp = info.commands;
-	while (temp)
-	{
-		printf("[%s]\n", (char *)temp->content);
-		temp = temp->next;
-	}
+void	remove_file(void)
+{
+	struct stat sb;
+
+	if (stat(ENV_FILE, &sb) == 0 && unlink(ENV_FILE) == -1)
+		write(STDERR_FILENO, UNLINK_ERR, ft_strlen(UNLINK_ERR));
+	if (stat(EXPORT_FILE, &sb) == 0 && unlink(EXPORT_FILE) == -1)
+		write(STDERR_FILENO, UNLINK_ERR, ft_strlen(UNLINK_ERR));
 }

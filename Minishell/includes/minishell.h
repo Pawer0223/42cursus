@@ -182,6 +182,11 @@ int		filter_asterisk(t_info *info, int i);
 */
 t_list	*list_to_string(t_info *info, char *input, int *i, int *s);
 t_list	*front_back_join(char *input, t_strjoin *temp);
+
+/*
+	free_utils
+*/
+void	remove_file(void);
 /*
 	test
 */
