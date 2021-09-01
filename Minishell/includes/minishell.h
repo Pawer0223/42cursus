@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/01 15:50:59 by taesan            #+#    #+#             */
-/*   Updated: 2021/09/01 17:22:07 by taekang          ###   ########.fr       */
+/*   Updated: 2021/09/01 19:37:25 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@
 */
 int		error_occur_perror(char *msg);
 int		stderr_print(char *cmd, char *param, char *msg);
-void	no_such_file_error(char *file_nm);
 /*
 	utils
 */
