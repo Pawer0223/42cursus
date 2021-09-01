@@ -40,6 +40,7 @@
         "string.h": "c",
         "sstream": "c",
         "cstddef": "c",
-        "__string": "c"
+        "__string": "c",
+        "cstdio": "c"
     }
 }
