@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/25 03:57:34 by taesan            #+#    #+#             */
-/*   Updated: 2021/09/02 20:24:54 by taesan           ###   ########.fr       */
+/*   Updated: 2021/09/02 20:37:05 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	export_before_check(char *param)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (!ft_isalpha(param[i]))
