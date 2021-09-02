@@ -2,8 +2,6 @@
 
 char	*special_positional_param(t_info *info, char *input)
 {
-	char	*str;
-
 	if (input[0] == '0' && is_empty(input + 1))
 		return (SHELL_NAME);
 	else if (input[0] == '#' && is_empty(input + 1))
