@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/28 14:45:56 by taesan            #+#    #+#             */
-/*   Updated: 2021/09/01 21:07:21 by taesan           ###   ########.fr       */
+/*   Updated: 2021/09/02 19:08:34 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	child_process(t_info *info, int pipe[2], int flags)
 	if (pipe)
 		dup_r = exec_dup2(pipe, flags);
 	if (!redirection_dup(info))
-		exit(EXEC_FAIL);
+		exit(1);
 	if (dup_r)
 	{
 		command = info->param[0];
@@ -44,7 +44,7 @@ void	child_process(t_info *info, int pipe[2], int flags)
 		{
 			execve(command, info->param, info->envp);
 			stderr_print(SHELL_NAME, command, COMMAND_NOT_FOUND);
-			exit(EXEC_FAIL);
+			exit(127);
 		}
 	}
 	exit(0);
@@ -62,6 +62,8 @@ void	parent_process(t_info *info, int pipe[2], int flags)
 	if (r == -1)
 		error_occur_perror(WAIT_ERR);
 	info->exec_result = WEXITSTATUS(status);
+	if (WTERMSIG(status) == SIGINT)
+		printf("\b\b");
 	clear_pipe(info, pipe, flags);
 	if (info->is_builtin)
 		builtin_set(info, pipe);

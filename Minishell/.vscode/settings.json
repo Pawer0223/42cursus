@@ -41,6 +41,8 @@
         "sstream": "c",
         "cstddef": "c",
         "__string": "c",
-        "cstdio": "c"
+        "cstdio": "c",
+        "_useconds_t.h": "c",
+        "_uid_t.h": "c"
     }
 }

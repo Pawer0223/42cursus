@@ -6,15 +6,18 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 15:45:29 by taesan            #+#    #+#             */
-/*   Updated: 2021/09/01 21:09:16 by taesan           ###   ########.fr       */
+/*   Updated: 2021/09/02 19:16:19 by taesan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	ctrl_d_handler(void)
+void	ctrl_d_handler(t_info *info)
 {
+	ft_putstr_fd("\x1b[1A", STDOUT_FILENO);
+	ft_putstr_fd("\033[2C", STDOUT_FILENO);
 	printf("exit\n");
+	clear_all_data(info);
 	exit(0);
 }
 
@@ -22,7 +25,7 @@ void	sigint_handler(int signo)
 {
 	if (signo == SIGINT)
 	{
-		printf("\n");
+		printf("\033[%dC  \n", rl_end + 2);
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();
