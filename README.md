@@ -4,7 +4,7 @@
 <summary>part 1 - libc 함수 직접구현</summary>
 	<ul>
 		<li>함수는 원본과 동일한 프로토타입 및 기능을 수행해야 한다. (man page 참조)</li>
-		<li>직접 재 정의한 함수들은 실제 libc 함수와 성능적인 차이는 많이난다.</li>
+		<li>직접 재 정의한 a함수들은 실제 libc 함수와 성능적인 차이는 많이난다.</li>
 	</ul>
 </details>
 
