@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 19:56:59 by taesan            #+#    #+#             */
-/*   Updated: 2021/09/03 20:04:29 by taesan           ###   ########.fr       */
+/*   Updated: 2021/09/03 20:07:05 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	paths_clear(t_info *info)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (info->paths)

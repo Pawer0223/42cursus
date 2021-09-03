@@ -6,7 +6,7 @@
 /*   By: taesan <taesan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 19:49:55 by taesan            #+#    #+#             */
-/*   Updated: 2021/09/03 19:59:42 by taesan           ###   ########.fr       */
+/*   Updated: 2021/09/03 20:07:48 by taekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ int	init_command_info(t_info *info)
 	split_free(temp);
 	if (info->paths)
 	{
-		cmd = check_command(info->paths, info->param[0], ft_strlen(info->param[0]));
+		cmd = check_command(info->paths, info->param[0], \
+							ft_strlen(info->param[0]));
 		if (cmd)
 		{
 			free(info->param[0]);
