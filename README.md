@@ -134,4 +134,30 @@
 			<li> 세마포가 1이상의 값이 될때까지 기다린다.</li>
 		</ul>
 	</details>
+</details>
+
+# [Minishell]()
+<details>
+	<summary><a href="https://www.gnu.org/savannah-checkouts/gnu/bash/manual/bash.html">Bash</a> 만들기</summary>
+	<details>
+		<summary><a href="https://blog.naver.com/asianchairshot/221383363419">셸 & 콘솔 & 터미널</a></summary>
+		<ul>
+		  <li>셸은 명령어를 OS에 전달하고 결과를 전달받는 프로그램.</li>
+		  <li>Shell은 운영체제 상에서, 다양한 운영체제 기능과 서비스를 사용하기 위한 인터페이스이다.</li>
+		  <li>셸(껍데기)는 [ 사용자 <-> 운영 체제의 내부(커널) ] 사이의 인터페이스를 감싸는 층이기 때문에 이러한 이름이 붙었다.</li>
+		</ul>
+	</details>
+	<details>
+	<summary>구현 기능</summary>
+		<ul>
+		  <li>콘솔에 입력받기. (readline, add_history 함수 사용)</li>		
+		  <li>입력 문자를 파싱 (1) => [|, &&, ||] 단위로 현재 line이 총 몇개의 명령어 실행을 의미하는지 ?</li>
+		  <li>입력 문자를 파싱 (2) => special characters를 처리한다, [', ", $] quotation이 닫혀있는지, $의경우는 환경변수를 확인하여 변환해 준다. 환경변수는 main함수의 3번째 인자로 char *envp[]를 받아서 처리한다. </li>
+		  <li>입력 문자를 파싱 (3) => [<, >, <<, >> ] redirection 및 heredoc 기호를 구분하여, 입 출력 파이프를 변경해주어야 할게 있는지 ?</li>
+		  <li>입력 문자를 파싱 (4) =>입력 된 명령어의 프로그램이 존재하는지 ?, 환경변수 PATH를 활용하여 확인.</li>	
+		  <li>리다이렉션 처리 및, 명령어 수행. fork -> dup2 -> execve </li>
+		  <li>호출 실행결과의 종료 상태를 exit함수로 전달 함.</li>
+		  <li>builtin함수 [echo, cd, pwd, env, export, unset, exit] 구현 </li>
+		</ul>
+	</details>
 </details> 
