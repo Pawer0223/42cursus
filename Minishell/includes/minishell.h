@@ -39,6 +39,7 @@ int		export_errror(char *param);
 */
 int		is_quotation(char c);
 int		pass_possible(char c);
+int		pass_possible_2(char c, int *e);
 int		is_empty(char *temp);
 int		is_redirect(char c);
 int		is_double_symbol(int symbol);
@@ -64,6 +65,7 @@ char	**init_path(char *envp[]);
 */
 void	ctrl_d_handler(t_info *info);
 void	sigint_handler(int signo);
+void	sigint_occur(t_info *info);
 /*
 	using free
 */
