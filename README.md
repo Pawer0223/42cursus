@@ -136,7 +136,7 @@
 	</details>
 </details>
 
-# [Minishell]()
+# [Minishell](linke need)
 <details>
 	<summary><a href="https://www.gnu.org/savannah-checkouts/gnu/bash/manual/bash.html">Bash</a> 만들기</summary>
 	<details>
