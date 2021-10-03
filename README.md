@@ -136,7 +136,7 @@
 	</details>
 </details>
 
-# [Minishell]()
+# Minishell
 <details>
 	<summary><a href="https://www.gnu.org/savannah-checkouts/gnu/bash/manual/bash.html">Bash</a> 만들기</summary>
 	<details>
@@ -157,7 +157,7 @@
 		  <li>입력 문자를 파싱 (4) =>입력 된 명령어의 프로그램이 존재하는지 ?, 환경변수 PATH를 활용하여 확인.</li>	
 		  <li>리다이렉션 처리 및, 명령어 수행. fork -> dup2 -> execve </li>
 		  <li>호출 실행결과의 종료 상태를 exit함수로 전달 함.</li>
-		  <li>builtin함수 [echo, cd, pwd, env, export, unset, exit] 구현 </li>
+		  <li>builtin함수[echo, cd, pwd, env, export, unset, exit] 구현 </li>
 		</ul>
 	</details>
 </details> 
